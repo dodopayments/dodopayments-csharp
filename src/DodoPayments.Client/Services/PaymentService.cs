@@ -106,6 +106,60 @@ public sealed class PaymentService : IPaymentService
 
         return this.RetrieveLineItems(parameters with { PaymentID = paymentID }, cancellationToken);
     }
+
+    /// <inheritdoc/>
+    public async Task<ManualRetryState> RetrieveRetryState(
+        PaymentRetrieveRetryStateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveRetryState(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<ManualRetryState> RetrieveRetryState(
+        string paymentID,
+        PaymentRetrieveRetryStateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveRetryState(
+            parameters with
+            {
+                PaymentID = paymentID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<ManualRetry> Retry(
+        PaymentRetryParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Retry(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<ManualRetry> Retry(
+        string paymentID,
+        PaymentRetryParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retry(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
 }
 
 /// <inheritdoc/>
@@ -269,5 +323,101 @@ public sealed class PaymentServiceWithRawResponse : IPaymentServiceWithRawRespon
         parameters ??= new();
 
         return this.RetrieveLineItems(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<ManualRetryState>> RetrieveRetryState(
+        PaymentRetrieveRetryStateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.PaymentID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PaymentID' cannot be null");
+        }
+
+        HttpRequest<PaymentRetrieveRetryStateParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var manualRetryState = await response
+                    .Deserialize<ManualRetryState>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    manualRetryState.Validate();
+                }
+                return manualRetryState;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<ManualRetryState>> RetrieveRetryState(
+        string paymentID,
+        PaymentRetrieveRetryStateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveRetryState(
+            parameters with
+            {
+                PaymentID = paymentID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<ManualRetry>> Retry(
+        PaymentRetryParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.PaymentID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PaymentID' cannot be null");
+        }
+
+        HttpRequest<PaymentRetryParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var manualRetry = await response
+                    .Deserialize<ManualRetry>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    manualRetry.Validate();
+                }
+                return manualRetry;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<ManualRetry>> Retry(
+        string paymentID,
+        PaymentRetryParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retry(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 }

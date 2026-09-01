@@ -7,6 +7,7 @@ using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 using DodoPayments.Client.Models.Webhooks;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -156,12 +157,13 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 },
                 TaxID = "tax_id",
                 TrialAmount = 0,
+                PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedBusinessID = "business_id";
-        Subscription expectedData = new()
+        SubscriptionCancelledWebhookEventData expectedData = new()
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -299,6 +301,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.cancelled");
@@ -453,6 +456,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 },
                 TaxID = "tax_id",
                 TrialAmount = 0,
+                PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -610,6 +614,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 },
                 TaxID = "tax_id",
                 TrialAmount = 0,
+                PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -622,7 +627,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        Subscription expectedData = new()
+        SubscriptionCancelledWebhookEventData expectedData = new()
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -760,6 +765,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.cancelled");
@@ -914,6 +920,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 },
                 TaxID = "tax_id",
                 TrialAmount = 0,
+                PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1065,11 +1072,2378 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 },
                 TaxID = "tax_id",
                 TrialAmount = 0,
+                PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         SubscriptionCancelledWebhookEvent copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCancelledWebhookEventDataTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        Payments::BillingAddress expectedBilling = new()
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+        string expectedBrandID = "brand_id";
+        bool expectedCancelAtNextBillingDate = true;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<CreditEntitlementCartResponse> expectedCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditsAmount = "credits_amount",
+                OverageBalance = "overage_balance",
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                OverageEnabled = true,
+                ProductID = "product_id",
+                RemainingBalance = "remaining_balance",
+                RolloverEnabled = true,
+                Unit = "unit",
+                ExpiresAfterDays = 0,
+                LowBalanceThresholdPercent = 0,
+                MaxRolloverCount = 0,
+                OverageLimit = "overage_limit",
+                RolloverPercentage = 0,
+                RolloverTimeframeCount = 0,
+                RolloverTimeframeInterval = TimeInterval.Day,
+            },
+        ];
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        Payments::CustomerLimitedDetails expectedCustomer = new()
+        {
+            CustomerID = "customer_id",
+            Email = "email",
+            Name = "name",
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PhoneNumber = "phone_number",
+        };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
+        List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                MeterID = "meter_id",
+                MeterName = "meter_name",
+                MeterUnitsPerCredit = "meter_units_per_credit",
+                ProductID = "product_id",
+            },
+        ];
+        List<MeterCartResponseItem> expectedMeters =
+        [
+            new()
+            {
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                MeasurementUnit = "measurement_unit",
+                MeterID = "meter_id",
+                Name = "name",
+                Description = "description",
+                PricePerUnit = "10.50",
+            },
+        ];
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        bool expectedOnDemand = true;
+        int expectedPaymentFrequencyCount = 0;
+        ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
+        DateTimeOffset expectedPreviousBillingDate = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+        int expectedRecurringPreTaxAmount = 0;
+        ApiEnum<string, SubscriptionStatus> expectedStatus = SubscriptionStatus.Pending;
+        string expectedSubscriptionID = "subscription_id";
+        int expectedSubscriptionPeriodCount = 0;
+        ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
+        bool expectedTaxInclusive = true;
+        int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
+            CancellationFeedback.TooExpensive;
+        DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
+        string expectedCustomerBusinessName = "customer_business_name";
+        int expectedDiscountCyclesRemaining = 0;
+        string expectedDiscountID = "discount_id";
+        List<DiscountDetail> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Flat,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentMethodID = "payment_method_id";
+        ScheduledPlanChange expectedScheduledChange = new()
+        {
+            ID = "id",
+            Addons =
+            [
+                new()
+                {
+                    AddonID = "addon_id",
+                    Name = "name",
+                    Quantity = 0,
+                },
+            ],
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            ProductDescription = "product_description",
+            ProductName = "product_name",
+        };
+        string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedAddons.Count, model.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], model.Addons[i]);
+        }
+        Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBrandID, model.BrandID);
+        Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementCart.Count, model.CreditEntitlementCart.Count);
+        for (int i = 0; i < expectedCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlementCart[i], model.CreditEntitlementCart[i]);
+        }
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedCustomer, model.Customer);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
+        Assert.Equal(
+            expectedMeterCreditEntitlementCart.Count,
+            model.MeterCreditEntitlementCart.Count
+        );
+        for (int i = 0; i < expectedMeterCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(
+                expectedMeterCreditEntitlementCart[i],
+                model.MeterCreditEntitlementCart[i]
+            );
+        }
+        Assert.Equal(expectedMeters.Count, model.Meters.Count);
+        for (int i = 0; i < expectedMeters.Count; i++)
+        {
+            Assert.Equal(expectedMeters[i], model.Meters[i]);
+        }
+        Assert.Equal(expectedNextBillingDate, model.NextBillingDate);
+        Assert.Equal(expectedOnDemand, model.OnDemand);
+        Assert.Equal(expectedPaymentFrequencyCount, model.PaymentFrequencyCount);
+        Assert.Equal(expectedPaymentFrequencyInterval, model.PaymentFrequencyInterval);
+        Assert.Equal(expectedPreviousBillingDate, model.PreviousBillingDate);
+        Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.Equal(expectedRecurringPreTaxAmount, model.RecurringPreTaxAmount);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+        Assert.Equal(expectedSubscriptionPeriodCount, model.SubscriptionPeriodCount);
+        Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
+        Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
+        Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, model.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
+        Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.NotNull(model.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
+        }
+        Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
+        Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
+        Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.Discounts);
+        Assert.Equal(expectedDiscounts.Count, model.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
+        }
+        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedPausedAt, model.PausedAt);
+        Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedScheduledChange, model.ScheduledChange);
+        Assert.Equal(expectedTaxID, model.TaxID);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
+        Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCancelledWebhookEventData>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCancelledWebhookEventData>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        Payments::BillingAddress expectedBilling = new()
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+        string expectedBrandID = "brand_id";
+        bool expectedCancelAtNextBillingDate = true;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<CreditEntitlementCartResponse> expectedCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditsAmount = "credits_amount",
+                OverageBalance = "overage_balance",
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                OverageEnabled = true,
+                ProductID = "product_id",
+                RemainingBalance = "remaining_balance",
+                RolloverEnabled = true,
+                Unit = "unit",
+                ExpiresAfterDays = 0,
+                LowBalanceThresholdPercent = 0,
+                MaxRolloverCount = 0,
+                OverageLimit = "overage_limit",
+                RolloverPercentage = 0,
+                RolloverTimeframeCount = 0,
+                RolloverTimeframeInterval = TimeInterval.Day,
+            },
+        ];
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        Payments::CustomerLimitedDetails expectedCustomer = new()
+        {
+            CustomerID = "customer_id",
+            Email = "email",
+            Name = "name",
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PhoneNumber = "phone_number",
+        };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
+        List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                MeterID = "meter_id",
+                MeterName = "meter_name",
+                MeterUnitsPerCredit = "meter_units_per_credit",
+                ProductID = "product_id",
+            },
+        ];
+        List<MeterCartResponseItem> expectedMeters =
+        [
+            new()
+            {
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                MeasurementUnit = "measurement_unit",
+                MeterID = "meter_id",
+                Name = "name",
+                Description = "description",
+                PricePerUnit = "10.50",
+            },
+        ];
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        bool expectedOnDemand = true;
+        int expectedPaymentFrequencyCount = 0;
+        ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
+        DateTimeOffset expectedPreviousBillingDate = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+        int expectedRecurringPreTaxAmount = 0;
+        ApiEnum<string, SubscriptionStatus> expectedStatus = SubscriptionStatus.Pending;
+        string expectedSubscriptionID = "subscription_id";
+        int expectedSubscriptionPeriodCount = 0;
+        ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
+        bool expectedTaxInclusive = true;
+        int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
+            CancellationFeedback.TooExpensive;
+        DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
+        string expectedCustomerBusinessName = "customer_business_name";
+        int expectedDiscountCyclesRemaining = 0;
+        string expectedDiscountID = "discount_id";
+        List<DiscountDetail> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Flat,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentMethodID = "payment_method_id";
+        ScheduledPlanChange expectedScheduledChange = new()
+        {
+            ID = "id",
+            Addons =
+            [
+                new()
+                {
+                    AddonID = "addon_id",
+                    Name = "name",
+                    Quantity = 0,
+                },
+            ],
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            ProductDescription = "product_description",
+            ProductName = "product_name",
+        };
+        string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
+        }
+        Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
+        Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementCart.Count, deserialized.CreditEntitlementCart.Count);
+        for (int i = 0; i < expectedCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlementCart[i], deserialized.CreditEntitlementCart[i]);
+        }
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
+        Assert.Equal(
+            expectedMeterCreditEntitlementCart.Count,
+            deserialized.MeterCreditEntitlementCart.Count
+        );
+        for (int i = 0; i < expectedMeterCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(
+                expectedMeterCreditEntitlementCart[i],
+                deserialized.MeterCreditEntitlementCart[i]
+            );
+        }
+        Assert.Equal(expectedMeters.Count, deserialized.Meters.Count);
+        for (int i = 0; i < expectedMeters.Count; i++)
+        {
+            Assert.Equal(expectedMeters[i], deserialized.Meters[i]);
+        }
+        Assert.Equal(expectedNextBillingDate, deserialized.NextBillingDate);
+        Assert.Equal(expectedOnDemand, deserialized.OnDemand);
+        Assert.Equal(expectedPaymentFrequencyCount, deserialized.PaymentFrequencyCount);
+        Assert.Equal(expectedPaymentFrequencyInterval, deserialized.PaymentFrequencyInterval);
+        Assert.Equal(expectedPreviousBillingDate, deserialized.PreviousBillingDate);
+        Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.Equal(expectedRecurringPreTaxAmount, deserialized.RecurringPreTaxAmount);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+        Assert.Equal(expectedSubscriptionPeriodCount, deserialized.SubscriptionPeriodCount);
+        Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
+        Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
+        Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
+        Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.NotNull(deserialized.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
+        }
+        Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
+        Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
+        Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.Discounts);
+        Assert.Equal(expectedDiscounts.Count, deserialized.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
+        }
+        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedPausedAt, deserialized.PausedAt);
+        Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
+        Assert.Equal(expectedTaxID, deserialized.TaxID);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
+        Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.ScheduledChange);
+        Assert.False(model.RawData.ContainsKey("scheduled_change"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            CancellationFeedback = null,
+            ScheduledChange = null,
+        };
+
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.ScheduledChange);
+        Assert.False(model.RawData.ContainsKey("scheduled_change"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            CancellationFeedback = null,
+            ScheduledChange = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+        };
+
+        Assert.Null(model.CancellationComment);
+        Assert.False(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancelledAt);
+        Assert.False(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.False(model.RawData.ContainsKey("custom_field_responses"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.False(model.RawData.ContainsKey("customer_business_name"));
+        Assert.Null(model.DiscountCyclesRemaining);
+        Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
+        Assert.Null(model.DiscountID);
+        Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.False(model.RawData.ContainsKey("discounts"));
+        Assert.Null(model.ExpiresAt);
+        Assert.False(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PausedAt);
+        Assert.False(model.RawData.ContainsKey("paused_at"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.TaxID);
+        Assert.False(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.PastDueEndsAt);
+        Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+
+            CancellationComment = null,
+            CancelledAt = null,
+            CustomFieldResponses = null,
+            CustomerBusinessName = null,
+            DiscountCyclesRemaining = null,
+            DiscountID = null,
+            Discounts = null,
+            ExpiresAt = null,
+            PausedAt = null,
+            PaymentMethodID = null,
+            TaxID = null,
+            TrialAmount = null,
+            PastDueEndsAt = null,
+        };
+
+        Assert.Null(model.CancellationComment);
+        Assert.True(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancelledAt);
+        Assert.True(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.True(model.RawData.ContainsKey("custom_field_responses"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.True(model.RawData.ContainsKey("customer_business_name"));
+        Assert.Null(model.DiscountCyclesRemaining);
+        Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
+        Assert.Null(model.DiscountID);
+        Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.True(model.RawData.ContainsKey("discounts"));
+        Assert.Null(model.ExpiresAt);
+        Assert.True(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PausedAt);
+        Assert.True(model.RawData.ContainsKey("paused_at"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.TaxID);
+        Assert.True(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.PastDueEndsAt);
+        Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+
+            CancellationComment = null,
+            CancelledAt = null,
+            CustomFieldResponses = null,
+            CustomerBusinessName = null,
+            DiscountCyclesRemaining = null,
+            DiscountID = null,
+            Discounts = null,
+            ExpiresAt = null,
+            PausedAt = null,
+            PaymentMethodID = null,
+            TaxID = null,
+            TrialAmount = null,
+            PastDueEndsAt = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventData
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Flat,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
+            TaxID = "tax_id",
+            TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionCancelledWebhookEventData copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCancelledWebhookEventDataIntersectionMember1Test : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionCancelledWebhookEventDataIntersectionMember1>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionCancelledWebhookEventDataIntersectionMember1>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1 { };
+
+        Assert.Null(model.PastDueEndsAt);
+        Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1 { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = null,
+        };
+
+        Assert.Null(model.PastDueEndsAt);
+        Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionCancelledWebhookEventDataIntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionCancelledWebhookEventDataIntersectionMember1 copied = new(model);
 
         Assert.Equal(model, copied);
     }

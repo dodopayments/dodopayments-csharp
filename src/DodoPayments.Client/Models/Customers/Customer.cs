@@ -63,6 +63,34 @@ public sealed record class Customer : JsonModel
     }
 
     /// <summary>
+    /// When the merchant blocked this customer. The dashboard shows the "Blocked"
+    /// badge and the unblock action from it. The list route leaves it empty; only
+    /// the single-customer route resolves it.
+    /// </summary>
+    public DateTimeOffset? BlockedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("blocked_at");
+        }
+        init { this._rawData.Set("blocked_at", value); }
+    }
+
+    /// <summary>
+    /// Blocklist entry behind `blocked_at`, so the dashboard can link to it.
+    /// </summary>
+    public string? BlocklistEntryID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("blocklist_entry_id");
+        }
+        init { this._rawData.Set("blocklist_entry_id", value); }
+    }
+
+    /// <summary>
     /// Additional metadata for the customer
     /// </summary>
     public IReadOnlyDictionary<string, MetadataItem>? Metadata
@@ -106,6 +134,8 @@ public sealed record class Customer : JsonModel
         _ = this.CustomerID;
         _ = this.Email;
         _ = this.Name;
+        _ = this.BlockedAt;
+        _ = this.BlocklistEntryID;
         if (this.Metadata != null)
         {
             foreach (var item in this.Metadata.Values)
