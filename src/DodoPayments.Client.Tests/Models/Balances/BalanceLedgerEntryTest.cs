@@ -25,6 +25,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = 0,
             BeforeBalance = 0,
             Description = "description",
+            PayoutID = "payout_id",
             ReferenceObjectID = "reference_object_id",
         };
 
@@ -40,6 +41,7 @@ public class BalanceLedgerEntryTest : TestBase
         long expectedAfterBalance = 0;
         long expectedBeforeBalance = 0;
         string expectedDescription = "description";
+        string expectedPayoutID = "payout_id";
         string expectedReferenceObjectID = "reference_object_id";
 
         Assert.Equal(expectedID, model.ID);
@@ -53,6 +55,7 @@ public class BalanceLedgerEntryTest : TestBase
         Assert.Equal(expectedAfterBalance, model.AfterBalance);
         Assert.Equal(expectedBeforeBalance, model.BeforeBalance);
         Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedPayoutID, model.PayoutID);
         Assert.Equal(expectedReferenceObjectID, model.ReferenceObjectID);
     }
 
@@ -72,6 +75,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = 0,
             BeforeBalance = 0,
             Description = "description",
+            PayoutID = "payout_id",
             ReferenceObjectID = "reference_object_id",
         };
 
@@ -100,6 +104,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = 0,
             BeforeBalance = 0,
             Description = "description",
+            PayoutID = "payout_id",
             ReferenceObjectID = "reference_object_id",
         };
 
@@ -122,6 +127,7 @@ public class BalanceLedgerEntryTest : TestBase
         long expectedAfterBalance = 0;
         long expectedBeforeBalance = 0;
         string expectedDescription = "description";
+        string expectedPayoutID = "payout_id";
         string expectedReferenceObjectID = "reference_object_id";
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -135,6 +141,7 @@ public class BalanceLedgerEntryTest : TestBase
         Assert.Equal(expectedAfterBalance, deserialized.AfterBalance);
         Assert.Equal(expectedBeforeBalance, deserialized.BeforeBalance);
         Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedPayoutID, deserialized.PayoutID);
         Assert.Equal(expectedReferenceObjectID, deserialized.ReferenceObjectID);
     }
 
@@ -154,6 +161,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = 0,
             BeforeBalance = 0,
             Description = "description",
+            PayoutID = "payout_id",
             ReferenceObjectID = "reference_object_id",
         };
 
@@ -181,6 +189,8 @@ public class BalanceLedgerEntryTest : TestBase
         Assert.False(model.RawData.ContainsKey("before_balance"));
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.PayoutID);
+        Assert.False(model.RawData.ContainsKey("payout_id"));
         Assert.Null(model.ReferenceObjectID);
         Assert.False(model.RawData.ContainsKey("reference_object_id"));
     }
@@ -220,6 +230,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = null,
             BeforeBalance = null,
             Description = null,
+            PayoutID = null,
             ReferenceObjectID = null,
         };
 
@@ -229,6 +240,8 @@ public class BalanceLedgerEntryTest : TestBase
         Assert.True(model.RawData.ContainsKey("before_balance"));
         Assert.Null(model.Description);
         Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.PayoutID);
+        Assert.True(model.RawData.ContainsKey("payout_id"));
         Assert.Null(model.ReferenceObjectID);
         Assert.True(model.RawData.ContainsKey("reference_object_id"));
     }
@@ -250,6 +263,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = null,
             BeforeBalance = null,
             Description = null,
+            PayoutID = null,
             ReferenceObjectID = null,
         };
 
@@ -272,6 +286,7 @@ public class BalanceLedgerEntryTest : TestBase
             AfterBalance = 0,
             BeforeBalance = 0,
             Description = "description",
+            PayoutID = "payout_id",
             ReferenceObjectID = "reference_object_id",
         };
 

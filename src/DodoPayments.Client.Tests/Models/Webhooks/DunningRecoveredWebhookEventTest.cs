@@ -432,6 +432,7 @@ public class TriggerStateTest : TestBase
     [Theory]
     [InlineData(TriggerState.OnHold)]
     [InlineData(TriggerState.Cancelled)]
+    [InlineData(TriggerState.PastDue)]
     public void Validation_Works(TriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -454,6 +455,7 @@ public class TriggerStateTest : TestBase
     [Theory]
     [InlineData(TriggerState.OnHold)]
     [InlineData(TriggerState.Cancelled)]
+    [InlineData(TriggerState.PastDue)]
     public void SerializationRoundtrip_Works(TriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us

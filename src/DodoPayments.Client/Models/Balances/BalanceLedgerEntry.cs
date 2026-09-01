@@ -125,6 +125,16 @@ public sealed record class BalanceLedgerEntry : JsonModel
         init { this._rawData.Set("description", value); }
     }
 
+    public string? PayoutID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payout_id");
+        }
+        init { this._rawData.Set("payout_id", value); }
+    }
+
     public string? ReferenceObjectID
     {
         get
@@ -149,6 +159,7 @@ public sealed record class BalanceLedgerEntry : JsonModel
         _ = this.AfterBalance;
         _ = this.BeforeBalance;
         _ = this.Description;
+        _ = this.PayoutID;
         _ = this.ReferenceObjectID;
     }
 
