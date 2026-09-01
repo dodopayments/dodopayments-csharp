@@ -15,6 +15,7 @@ public enum SubscriptionStatus
     Cancelled,
     Failed,
     Expired,
+    PastDue,
 }
 
 sealed class SubscriptionStatusConverter : JsonConverter<SubscriptionStatus>
@@ -34,6 +35,7 @@ sealed class SubscriptionStatusConverter : JsonConverter<SubscriptionStatus>
             "cancelled" => SubscriptionStatus.Cancelled,
             "failed" => SubscriptionStatus.Failed,
             "expired" => SubscriptionStatus.Expired,
+            "past_due" => SubscriptionStatus.PastDue,
             _ => (SubscriptionStatus)(-1),
         };
     }
@@ -55,6 +57,7 @@ sealed class SubscriptionStatusConverter : JsonConverter<SubscriptionStatus>
                 SubscriptionStatus.Cancelled => "cancelled",
                 SubscriptionStatus.Failed => "failed",
                 SubscriptionStatus.Expired => "expired",
+                SubscriptionStatus.PastDue => "past_due",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

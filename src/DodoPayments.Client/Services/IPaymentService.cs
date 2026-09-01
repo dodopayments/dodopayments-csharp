@@ -72,6 +72,36 @@ public interface IPaymentService
         PaymentRetrieveLineItemsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Sends a request to <c>get /payments/{payment_id}/retry</c>.
+    /// </summary>
+    Task<ManualRetryState> RetrieveRetryState(
+        PaymentRetrieveRetryStateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveRetryState(PaymentRetrieveRetryStateParams, CancellationToken)"/>
+    Task<ManualRetryState> RetrieveRetryState(
+        string paymentID,
+        PaymentRetrieveRetryStateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Sends a request to <c>post /payments/{payment_id}/retry</c>.
+    /// </summary>
+    Task<ManualRetry> Retry(
+        PaymentRetryParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retry(PaymentRetryParams, CancellationToken)"/>
+    Task<ManualRetry> Retry(
+        string paymentID,
+        PaymentRetryParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -135,6 +165,38 @@ public interface IPaymentServiceWithRawResponse
     Task<HttpResponse<PaymentRetrieveLineItemsResponse>> RetrieveLineItems(
         string paymentID,
         PaymentRetrieveLineItemsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /payments/{payment_id}/retry</c>, but is otherwise the
+    /// same as <see cref="IPaymentService.RetrieveRetryState(PaymentRetrieveRetryStateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ManualRetryState>> RetrieveRetryState(
+        PaymentRetrieveRetryStateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveRetryState(PaymentRetrieveRetryStateParams, CancellationToken)"/>
+    Task<HttpResponse<ManualRetryState>> RetrieveRetryState(
+        string paymentID,
+        PaymentRetrieveRetryStateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /payments/{payment_id}/retry</c>, but is otherwise the
+    /// same as <see cref="IPaymentService.Retry(PaymentRetryParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ManualRetry>> Retry(
+        PaymentRetryParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retry(PaymentRetryParams, CancellationToken)"/>
+    Task<HttpResponse<ManualRetry>> Retry(
+        string paymentID,
+        PaymentRetryParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }
