@@ -311,6 +311,7 @@ public class CancelReasonTest : TestBase
     [InlineData(CancelReason.CancelledByCustomer)]
     [InlineData(CancelReason.CancelledByMerchant)]
     [InlineData(CancelReason.CancelledByMerchantSendDunning)]
+    [InlineData(CancelReason.CancelledByMerchantGracePeriodExpired)]
     [InlineData(CancelReason.DodoTeam)]
     public void Validation_Works(CancelReason rawValue)
     {
@@ -335,6 +336,7 @@ public class CancelReasonTest : TestBase
     [InlineData(CancelReason.CancelledByCustomer)]
     [InlineData(CancelReason.CancelledByMerchant)]
     [InlineData(CancelReason.CancelledByMerchantSendDunning)]
+    [InlineData(CancelReason.CancelledByMerchantGracePeriodExpired)]
     [InlineData(CancelReason.DodoTeam)]
     public void SerializationRoundtrip_Works(CancelReason rawValue)
     {

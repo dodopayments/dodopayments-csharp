@@ -15,6 +15,7 @@ public class SubscriptionStatusTest : TestBase
     [InlineData(SubscriptionStatus.Cancelled)]
     [InlineData(SubscriptionStatus.Failed)]
     [InlineData(SubscriptionStatus.Expired)]
+    [InlineData(SubscriptionStatus.PastDue)]
     public void Validation_Works(SubscriptionStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -42,6 +43,7 @@ public class SubscriptionStatusTest : TestBase
     [InlineData(SubscriptionStatus.Cancelled)]
     [InlineData(SubscriptionStatus.Failed)]
     [InlineData(SubscriptionStatus.Expired)]
+    [InlineData(SubscriptionStatus.PastDue)]
     public void SerializationRoundtrip_Works(SubscriptionStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us

@@ -434,6 +434,7 @@ public class DunningStartedWebhookEventDataTriggerStateTest : TestBase
     [Theory]
     [InlineData(DunningStartedWebhookEventDataTriggerState.OnHold)]
     [InlineData(DunningStartedWebhookEventDataTriggerState.Cancelled)]
+    [InlineData(DunningStartedWebhookEventDataTriggerState.PastDue)]
     public void Validation_Works(DunningStartedWebhookEventDataTriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -455,6 +456,7 @@ public class DunningStartedWebhookEventDataTriggerStateTest : TestBase
     [Theory]
     [InlineData(DunningStartedWebhookEventDataTriggerState.OnHold)]
     [InlineData(DunningStartedWebhookEventDataTriggerState.Cancelled)]
+    [InlineData(DunningStartedWebhookEventDataTriggerState.PastDue)]
     public void SerializationRoundtrip_Works(DunningStartedWebhookEventDataTriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us

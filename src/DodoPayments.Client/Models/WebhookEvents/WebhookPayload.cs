@@ -2713,6 +2713,25 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("payload_type", value); }
     }
 
+    /// <summary>
+    /// Time when the grace period ends. The subscription moves to `on_hold` or to
+    /// `cancelled` at this time.
+    ///
+    /// <para>Read in the same query as the rest of the payload, so it always comes
+    /// from the row snapshot that produced `status`. It is set whenever the subscription
+    /// sits in a window at that moment. A delayed event of another type therefore
+    /// carries the deadline too, next to a `past_due` status.</para>
+    /// </summary>
+    public DateTimeOffset? PastDueEndsAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("past_due_ends_at");
+        }
+        init { this._rawData.Set("past_due_ends_at", value); }
+    }
+
     public static implicit operator Subscriptions::Subscription(Subscription subscription) =>
         new()
         {
@@ -2829,6 +2848,7 @@ public sealed record class Subscription : JsonModel
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
+        _ = this.PastDueEndsAt;
     }
 
     public Subscription()
@@ -2869,6 +2889,95 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(JsonModelConverter<IntersectionMember1, IntersectionMember1FromRaw>))]
+public sealed record class IntersectionMember1 : JsonModel
+{
+    public JsonElement PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    /// <summary>
+    /// Time when the grace period ends. The subscription moves to `on_hold` or to
+    /// `cancelled` at this time.
+    ///
+    /// <para>Read in the same query as the rest of the payload, so it always comes
+    /// from the row snapshot that produced `status`. It is set whenever the subscription
+    /// sits in a window at that moment. A delayed event of another type therefore
+    /// carries the deadline too, next to a `past_due` status.</para>
+    /// </summary>
+    public DateTimeOffset? PastDueEndsAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("past_due_ends_at");
+        }
+        init { this._rawData.Set("past_due_ends_at", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("Subscription")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+        _ = this.PastDueEndsAt;
+    }
+
+    public IntersectionMember1()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Subscription");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public IntersectionMember1(IntersectionMember1 intersectionMember1)
+        : base(intersectionMember1) { }
+#pragma warning restore CS8618
+
+    public IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Subscription");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="IntersectionMember1FromRaw.FromRawUnchecked"/>
+    public static IntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class IntersectionMember1FromRaw : IFromRawJson<IntersectionMember1>
+{
+    /// <inheritdoc/>
+    public IntersectionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        IntersectionMember1.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<Refund, RefundFromRaw>))]
@@ -4954,6 +5063,7 @@ public enum TriggerState
 {
     OnHold,
     Cancelled,
+    PastDue,
 }
 
 sealed class TriggerStateConverter : JsonConverter<TriggerState>
@@ -4968,6 +5078,7 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
         {
             "on_hold" => TriggerState.OnHold,
             "cancelled" => TriggerState.Cancelled,
+            "past_due" => TriggerState.PastDue,
             _ => (TriggerState)(-1),
         };
     }
@@ -4984,6 +5095,7 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
             {
                 TriggerState.OnHold => "on_hold",
                 TriggerState.Cancelled => "cancelled",
+                TriggerState.PastDue => "past_due",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
