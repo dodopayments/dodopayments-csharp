@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.33.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.32.0...v6.33.0) (2026-09-01)
+
+
+### Features
+
+* **api:** add customer blocklist and manual payment retry ([231d2c3](https://github.com/dodopayments/dodopayments-csharp/commit/231d2c39de0427e9f9bcc73928986dfb9e85a705))
+* **api:** add customer blocklist and manual payment retry ([8de61d6](https://github.com/dodopayments/dodopayments-csharp/commit/8de61d69594d3dc2014b07150a9bb884c7138a2e))
+
 ## [6.32.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.31.0...v6.32.0) (2026-08-24)
 
 
