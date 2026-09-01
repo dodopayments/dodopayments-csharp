@@ -1129,6 +1129,7 @@ public class DataTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         value.Validate();
     }
@@ -1628,6 +1629,7 @@ public class DataTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -3889,6 +3891,7 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         List<Subscriptions::AddonCartResponseItem> expectedAddons =
@@ -4040,6 +4043,7 @@ public class SubscriptionTest : TestBase
         string expectedTaxID = "tax_id";
         int expectedTrialAmount = 0;
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -4119,6 +4123,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxID, model.TaxID);
         Assert.Equal(expectedTrialAmount, model.TrialAmount);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
+        Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
     }
 
     [Fact]
@@ -4262,6 +4267,7 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4414,6 +4420,7 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4572,6 +4579,7 @@ public class SubscriptionTest : TestBase
         string expectedTaxID = "tax_id";
         int expectedTrialAmount = 0;
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -4651,6 +4659,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxID, deserialized.TaxID);
         Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
+        Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
     }
 
     [Fact]
@@ -4794,6 +4803,7 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         model.Validate();
@@ -4920,6 +4930,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Assert.Null(model.CancellationFeedback);
@@ -5049,6 +5060,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         model.Validate();
@@ -5175,6 +5187,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5308,6 +5321,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5451,6 +5465,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
         Assert.False(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.PastDueEndsAt);
+        Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
     }
 
     [Fact]
@@ -5687,6 +5703,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = null,
             TaxID = null,
             TrialAmount = null,
+            PastDueEndsAt = null,
         };
 
         Assert.Null(model.CancellationComment);
@@ -5713,6 +5730,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
         Assert.True(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.PastDueEndsAt);
+        Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
     }
 
     [Fact]
@@ -5836,6 +5855,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = null,
             TaxID = null,
             TrialAmount = null,
+            PastDueEndsAt = null,
         };
 
         model.Validate();
@@ -5982,9 +6002,125 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             TrialAmount = 0,
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Subscription copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class IntersectionMember1Test : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new IntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
+        Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new IntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new IntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
+        DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
+        Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new IntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new IntersectionMember1 { };
+
+        Assert.Null(model.PastDueEndsAt);
+        Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new IntersectionMember1 { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new IntersectionMember1 { PastDueEndsAt = null };
+
+        Assert.Null(model.PastDueEndsAt);
+        Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new IntersectionMember1 { PastDueEndsAt = null };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new IntersectionMember1
+        {
+            PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        IntersectionMember1 copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -8642,6 +8778,7 @@ public class TriggerStateTest : TestBase
     [Theory]
     [InlineData(TriggerState.OnHold)]
     [InlineData(TriggerState.Cancelled)]
+    [InlineData(TriggerState.PastDue)]
     public void Validation_Works(TriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -8664,6 +8801,7 @@ public class TriggerStateTest : TestBase
     [Theory]
     [InlineData(TriggerState.OnHold)]
     [InlineData(TriggerState.Cancelled)]
+    [InlineData(TriggerState.PastDue)]
     public void SerializationRoundtrip_Works(TriggerState rawValue)
     {
         // force implicit conversion because Theory can't do that for us

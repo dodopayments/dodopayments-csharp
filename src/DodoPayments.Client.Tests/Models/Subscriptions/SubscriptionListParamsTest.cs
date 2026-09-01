@@ -167,6 +167,7 @@ public class StatusTest : TestBase
     [InlineData(Status.Cancelled)]
     [InlineData(Status.Failed)]
     [InlineData(Status.Expired)]
+    [InlineData(Status.PastDue)]
     public void Validation_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -194,6 +195,7 @@ public class StatusTest : TestBase
     [InlineData(Status.Cancelled)]
     [InlineData(Status.Failed)]
     [InlineData(Status.Expired)]
+    [InlineData(Status.PastDue)]
     public void SerializationRoundtrip_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
