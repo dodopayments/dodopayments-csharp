@@ -72,6 +72,8 @@ public interface IDodoPaymentsClient : IDisposable
 
     ICustomerService Customers { get; }
 
+    IBlocklistService Blocklist { get; }
+
     IRefundService Refunds { get; }
 
     IDisputeService Disputes { get; }
@@ -154,6 +156,8 @@ public interface IDodoPaymentsClientWithRawResponse : IDisposable
     ILicenseKeyInstanceServiceWithRawResponse LicenseKeyInstances { get; }
 
     ICustomerServiceWithRawResponse Customers { get; }
+
+    IBlocklistServiceWithRawResponse Blocklist { get; }
 
     IRefundServiceWithRawResponse Refunds { get; }
 

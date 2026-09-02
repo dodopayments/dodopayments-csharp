@@ -317,6 +317,7 @@ public enum TriggerState
 {
     OnHold,
     Cancelled,
+    PastDue,
 }
 
 sealed class TriggerStateConverter : JsonConverter<TriggerState>
@@ -331,6 +332,7 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
         {
             "on_hold" => TriggerState.OnHold,
             "cancelled" => TriggerState.Cancelled,
+            "past_due" => TriggerState.PastDue,
             _ => (TriggerState)(-1),
         };
     }
@@ -347,6 +349,7 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
             {
                 TriggerState.OnHold => "on_hold",
                 TriggerState.Cancelled => "cancelled",
+                TriggerState.PastDue => "past_due",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

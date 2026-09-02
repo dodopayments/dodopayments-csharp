@@ -127,6 +127,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _customers.Value; }
     }
 
+    readonly Lazy<IBlocklistService> _blocklist;
+    public IBlocklistService Blocklist
+    {
+        get { return _blocklist.Value; }
+    }
+
     readonly Lazy<IRefundService> _refunds;
     public IRefundService Refunds
     {
@@ -238,6 +244,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _licenseKeys = new(() => new LicenseKeyService(this));
         _licenseKeyInstances = new(() => new LicenseKeyInstanceService(this));
         _customers = new(() => new CustomerService(this));
+        _blocklist = new(() => new BlocklistService(this));
         _refunds = new(() => new RefundService(this));
         _disputes = new(() => new DisputeService(this));
         _payouts = new(() => new PayoutService(this));
@@ -384,6 +391,12 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     public ICustomerServiceWithRawResponse Customers
     {
         get { return _customers.Value; }
+    }
+
+    readonly Lazy<IBlocklistServiceWithRawResponse> _blocklist;
+    public IBlocklistServiceWithRawResponse Blocklist
+    {
+        get { return _blocklist.Value; }
     }
 
     readonly Lazy<IRefundServiceWithRawResponse> _refunds;
@@ -688,6 +701,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
         _licenseKeys = new(() => new LicenseKeyServiceWithRawResponse(this));
         _licenseKeyInstances = new(() => new LicenseKeyInstanceServiceWithRawResponse(this));
         _customers = new(() => new CustomerServiceWithRawResponse(this));
+        _blocklist = new(() => new BlocklistServiceWithRawResponse(this));
         _refunds = new(() => new RefundServiceWithRawResponse(this));
         _disputes = new(() => new DisputeServiceWithRawResponse(this));
         _payouts = new(() => new PayoutServiceWithRawResponse(this));

@@ -64,4 +64,26 @@ public class PaymentServiceTest : TestBase
         );
         response.Validate();
     }
+
+    [Fact]
+    public async Task RetrieveRetryState_Works()
+    {
+        var manualRetryState = await this.client.Payments.RetrieveRetryState(
+            "payment_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        manualRetryState.Validate();
+    }
+
+    [Fact]
+    public async Task Retry_Works()
+    {
+        var manualRetry = await this.client.Payments.Retry(
+            "payment_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        manualRetry.Validate();
+    }
 }

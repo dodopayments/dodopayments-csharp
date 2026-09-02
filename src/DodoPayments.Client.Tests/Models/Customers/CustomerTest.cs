@@ -19,6 +19,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
@@ -28,6 +30,8 @@ public class CustomerTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEmail = "email";
         string expectedName = "name";
+        DateTimeOffset expectedBlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedBlocklistEntryID = "blocklist_entry_id";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
 
@@ -36,6 +40,8 @@ public class CustomerTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEmail, model.Email);
         Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedBlockedAt, model.BlockedAt);
+        Assert.Equal(expectedBlocklistEntryID, model.BlocklistEntryID);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -57,6 +63,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
@@ -77,6 +85,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
@@ -93,6 +103,8 @@ public class CustomerTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEmail = "email";
         string expectedName = "name";
+        DateTimeOffset expectedBlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedBlocklistEntryID = "blocklist_entry_id";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
 
@@ -101,6 +113,8 @@ public class CustomerTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedBlockedAt, deserialized.BlockedAt);
+        Assert.Equal(expectedBlocklistEntryID, deserialized.BlocklistEntryID);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -122,6 +136,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
@@ -139,6 +155,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
         };
 
@@ -156,6 +174,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
         };
 
@@ -172,6 +192,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
 
             // Null should be interpreted as omitted for these properties
@@ -192,6 +214,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
 
             // Null should be interpreted as omitted for these properties
@@ -214,6 +238,10 @@ public class CustomerTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
+        Assert.Null(model.BlockedAt);
+        Assert.False(model.RawData.ContainsKey("blocked_at"));
+        Assert.Null(model.BlocklistEntryID);
+        Assert.False(model.RawData.ContainsKey("blocklist_entry_id"));
         Assert.Null(model.PhoneNumber);
         Assert.False(model.RawData.ContainsKey("phone_number"));
     }
@@ -246,9 +274,15 @@ public class CustomerTest : TestBase
             Name = "name",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
+            BlockedAt = null,
+            BlocklistEntryID = null,
             PhoneNumber = null,
         };
 
+        Assert.Null(model.BlockedAt);
+        Assert.True(model.RawData.ContainsKey("blocked_at"));
+        Assert.Null(model.BlocklistEntryID);
+        Assert.True(model.RawData.ContainsKey("blocklist_entry_id"));
         Assert.Null(model.PhoneNumber);
         Assert.True(model.RawData.ContainsKey("phone_number"));
     }
@@ -265,6 +299,8 @@ public class CustomerTest : TestBase
             Name = "name",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
+            BlockedAt = null,
+            BlocklistEntryID = null,
             PhoneNumber = null,
         };
 
@@ -281,6 +317,8 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
+            BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
