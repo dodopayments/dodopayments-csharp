@@ -35,6 +35,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -103,6 +104,7 @@ public class SubscriptionListResponseTest : TestBase
         [
             new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
         ];
+        bool expectedHasPaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedOnDemand = true;
@@ -159,6 +161,7 @@ public class SubscriptionListResponseTest : TestBase
         {
             Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
         }
+        Assert.Equal(expectedHasPaymentMethod, model.HasPaymentMethod);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -217,6 +220,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -296,6 +300,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -371,6 +376,7 @@ public class SubscriptionListResponseTest : TestBase
         [
             new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
         ];
+        bool expectedHasPaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedOnDemand = true;
@@ -427,6 +433,7 @@ public class SubscriptionListResponseTest : TestBase
         {
             Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
         }
+        Assert.Equal(expectedHasPaymentMethod, deserialized.HasPaymentMethod);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -485,6 +492,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -558,6 +566,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -622,6 +631,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -667,6 +677,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -742,6 +753,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -798,6 +810,7 @@ public class SubscriptionListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,

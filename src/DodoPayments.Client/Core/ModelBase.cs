@@ -2,6 +2,7 @@ using System.Text.Json;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Blocklist.Customers;
 using DodoPayments.Client.Models.CreditEntitlements;
+using DodoPayments.Client.Models.Customers.Emails;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
@@ -63,6 +64,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Customers::IntegrationType>(),
             new ApiEnumConverter<string, Customers::Status>(),
             new ApiEnumConverter<string, EntryType>(),
+            new ApiEnumConverter<string, EmailFailureCode>(),
+            new ApiEnumConverter<string, EmailLogStatus>(),
             new ApiEnumConverter<string, BlockedCustomerSource>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),
             new ApiEnumConverter<string, Refunds::Status>(),

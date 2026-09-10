@@ -15,8 +15,9 @@ public class PriceTest : TestBase
         Price value = new OneTimePrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -31,17 +32,20 @@ public class PriceTest : TestBase
         Price value = new RecurringPrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
         value.Validate();
     }
@@ -52,12 +56,13 @@ public class PriceTest : TestBase
         Price value = new UsageBasedPrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -84,8 +89,9 @@ public class PriceTest : TestBase
         Price value = new OneTimePrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -103,17 +109,20 @@ public class PriceTest : TestBase
         Price value = new RecurringPrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions);
@@ -127,12 +136,13 @@ public class PriceTest : TestBase
         Price value = new UsageBasedPrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -165,8 +175,9 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -174,18 +185,20 @@ public class OneTimePriceTest : TestBase
         };
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedPriceValue = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("one_time_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         bool expectedPayWhatYouWant = true;
         bool expectedPurchasingPowerParity = true;
         int expectedSuggestedPrice = 0;
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedCurrency, model.Currency);
-        Assert.Equal(expectedDiscount, model.Discount);
         Assert.Equal(expectedPriceValue, model.PriceValue);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedDiscount, model.Discount);
+        Assert.Equal(expectedDiscountBps, model.DiscountBps);
         Assert.Equal(expectedPayWhatYouWant, model.PayWhatYouWant);
         Assert.Equal(expectedPurchasingPowerParity, model.PurchasingPowerParity);
         Assert.Equal(expectedSuggestedPrice, model.SuggestedPrice);
@@ -198,8 +211,9 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -221,8 +235,9 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -237,18 +252,20 @@ public class OneTimePriceTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedPriceValue = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("one_time_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         bool expectedPayWhatYouWant = true;
         bool expectedPurchasingPowerParity = true;
         int expectedSuggestedPrice = 0;
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
-        Assert.Equal(expectedDiscount, deserialized.Discount);
         Assert.Equal(expectedPriceValue, deserialized.PriceValue);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedDiscount, deserialized.Discount);
+        Assert.Equal(expectedDiscountBps, deserialized.DiscountBps);
         Assert.Equal(expectedPayWhatYouWant, deserialized.PayWhatYouWant);
         Assert.Equal(expectedPurchasingPowerParity, deserialized.PurchasingPowerParity);
         Assert.Equal(expectedSuggestedPrice, deserialized.SuggestedPrice);
@@ -261,8 +278,9 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -278,12 +296,14 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            DiscountBps = 0,
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PayWhatYouWant);
         Assert.False(model.RawData.ContainsKey("pay_what_you_want"));
         Assert.Null(model.PurchasingPowerParity);
@@ -296,8 +316,8 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            DiscountBps = 0,
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
@@ -311,16 +331,19 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            DiscountBps = 0,
             SuggestedPrice = 0,
             TaxInclusive = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PayWhatYouWant = null,
             PurchasingPowerParity = null,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PayWhatYouWant);
         Assert.False(model.RawData.ContainsKey("pay_what_you_want"));
         Assert.Null(model.PurchasingPowerParity);
@@ -333,12 +356,13 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            DiscountBps = 0,
             SuggestedPrice = 0,
             TaxInclusive = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PayWhatYouWant = null,
             PurchasingPowerParity = null,
         };
@@ -352,12 +376,14 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.False(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.SuggestedPrice);
         Assert.False(model.RawData.ContainsKey("suggested_price"));
         Assert.Null(model.TaxInclusive);
@@ -370,8 +396,8 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
         };
@@ -385,15 +411,18 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
 
+            DiscountBps = null,
             SuggestedPrice = null,
             TaxInclusive = null,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.True(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.SuggestedPrice);
         Assert.True(model.RawData.ContainsKey("suggested_price"));
         Assert.Null(model.TaxInclusive);
@@ -406,11 +435,12 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
 
+            DiscountBps = null,
             SuggestedPrice = null,
             TaxInclusive = null,
         };
@@ -424,8 +454,9 @@ public class OneTimePriceTest : TestBase
         var model = new OneTimePrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -446,46 +477,58 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedPaymentFrequencyCount = 0;
         ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
         int expectedPrice = 0;
         int expectedSubscriptionPeriodCount = 0;
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         bool expectedPurchasingPowerParity = true;
         bool expectedTaxInclusive = true;
         int expectedTrialAmount = 0;
         bool expectedTrialApplyDiscounts = true;
+        bool expectedTrialPaymentMethodOptional = true;
         int expectedTrialPeriodDays = 0;
+        bool expectedZeroAmountPaymentMethodOptional = true;
 
         Assert.Equal(expectedCurrency, model.Currency);
-        Assert.Equal(expectedDiscount, model.Discount);
         Assert.Equal(expectedPaymentFrequencyCount, model.PaymentFrequencyCount);
         Assert.Equal(expectedPaymentFrequencyInterval, model.PaymentFrequencyInterval);
         Assert.Equal(expectedPrice, model.Price);
         Assert.Equal(expectedSubscriptionPeriodCount, model.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedDiscount, model.Discount);
+        Assert.Equal(expectedDiscountBps, model.DiscountBps);
         Assert.Equal(expectedPurchasingPowerParity, model.PurchasingPowerParity);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialAmount, model.TrialAmount);
         Assert.Equal(expectedTrialApplyDiscounts, model.TrialApplyDiscounts);
+        Assert.Equal(expectedTrialPaymentMethodOptional, model.TrialPaymentMethodOptional);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
+        Assert.Equal(
+            expectedZeroAmountPaymentMethodOptional,
+            model.ZeroAmountPaymentMethodOptional
+        );
     }
 
     [Fact]
@@ -494,17 +537,20 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -522,17 +568,20 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -543,32 +592,41 @@ public class RecurringPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedPaymentFrequencyCount = 0;
         ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
         int expectedPrice = 0;
         int expectedSubscriptionPeriodCount = 0;
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         bool expectedPurchasingPowerParity = true;
         bool expectedTaxInclusive = true;
         int expectedTrialAmount = 0;
         bool expectedTrialApplyDiscounts = true;
+        bool expectedTrialPaymentMethodOptional = true;
         int expectedTrialPeriodDays = 0;
+        bool expectedZeroAmountPaymentMethodOptional = true;
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
-        Assert.Equal(expectedDiscount, deserialized.Discount);
         Assert.Equal(expectedPaymentFrequencyCount, deserialized.PaymentFrequencyCount);
         Assert.Equal(expectedPaymentFrequencyInterval, deserialized.PaymentFrequencyInterval);
         Assert.Equal(expectedPrice, deserialized.Price);
         Assert.Equal(expectedSubscriptionPeriodCount, deserialized.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedDiscount, deserialized.Discount);
+        Assert.Equal(expectedDiscountBps, deserialized.DiscountBps);
         Assert.Equal(expectedPurchasingPowerParity, deserialized.PurchasingPowerParity);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
         Assert.Equal(expectedTrialApplyDiscounts, deserialized.TrialApplyDiscounts);
+        Assert.Equal(expectedTrialPaymentMethodOptional, deserialized.TrialPaymentMethodOptional);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
+        Assert.Equal(
+            expectedZeroAmountPaymentMethodOptional,
+            deserialized.ZeroAmountPaymentMethodOptional
+        );
     }
 
     [Fact]
@@ -577,17 +635,20 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         model.Validate();
@@ -599,21 +660,27 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PurchasingPowerParity);
         Assert.False(model.RawData.ContainsKey("purchasing_power_parity"));
+        Assert.Null(model.TrialPaymentMethodOptional);
+        Assert.False(model.RawData.ContainsKey("trial_payment_method_optional"));
         Assert.Null(model.TrialPeriodDays);
         Assert.False(model.RawData.ContainsKey("trial_period_days"));
+        Assert.Null(model.ZeroAmountPaymentMethodOptional);
+        Assert.False(model.RawData.ContainsKey("zero_amount_payment_method_optional"));
     }
 
     [Fact]
@@ -622,12 +689,12 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
@@ -642,25 +709,34 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PurchasingPowerParity = null,
+            TrialPaymentMethodOptional = null,
             TrialPeriodDays = null,
+            ZeroAmountPaymentMethodOptional = null,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PurchasingPowerParity);
         Assert.False(model.RawData.ContainsKey("purchasing_power_parity"));
+        Assert.Null(model.TrialPaymentMethodOptional);
+        Assert.False(model.RawData.ContainsKey("trial_payment_method_optional"));
         Assert.Null(model.TrialPeriodDays);
         Assert.False(model.RawData.ContainsKey("trial_period_days"));
+        Assert.Null(model.ZeroAmountPaymentMethodOptional);
+        Assert.False(model.RawData.ContainsKey("zero_amount_payment_method_optional"));
     }
 
     [Fact]
@@ -669,19 +745,22 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PurchasingPowerParity = null,
+            TrialPaymentMethodOptional = null,
             TrialPeriodDays = null,
+            ZeroAmountPaymentMethodOptional = null,
         };
 
         model.Validate();
@@ -693,16 +772,20 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.False(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.TaxInclusive);
         Assert.False(model.RawData.ContainsKey("tax_inclusive"));
         Assert.Null(model.TrialAmount);
@@ -717,14 +800,16 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         model.Validate();
@@ -736,20 +821,25 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
 
+            DiscountBps = null,
             TaxInclusive = null,
             TrialAmount = null,
             TrialApplyDiscounts = null,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.True(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.TaxInclusive);
         Assert.True(model.RawData.ContainsKey("tax_inclusive"));
         Assert.Null(model.TrialAmount);
@@ -764,15 +854,18 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
 
+            DiscountBps = null,
             TaxInclusive = null,
             TrialAmount = null,
             TrialApplyDiscounts = null,
@@ -787,17 +880,20 @@ public class RecurringPriceTest : TestBase
         var model = new RecurringPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             Price = 0,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             PurchasingPowerParity = true,
             TaxInclusive = true,
             TrialAmount = 0,
             TrialApplyDiscounts = true,
+            TrialPaymentMethodOptional = true,
             TrialPeriodDays = 0,
+            ZeroAmountPaymentMethodOptional = true,
         };
 
         RecurringPrice copied = new(model);
@@ -814,12 +910,13 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -839,13 +936,14 @@ public class UsageBasedPriceTest : TestBase
         };
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedFixedPrice = 0;
         int expectedPaymentFrequencyCount = 0;
         ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
         int expectedSubscriptionPeriodCount = 0;
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("usage_based_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         List<AddMeterToPrice> expectedMeters =
         [
             new()
@@ -864,13 +962,14 @@ public class UsageBasedPriceTest : TestBase
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedCurrency, model.Currency);
-        Assert.Equal(expectedDiscount, model.Discount);
         Assert.Equal(expectedFixedPrice, model.FixedPrice);
         Assert.Equal(expectedPaymentFrequencyCount, model.PaymentFrequencyCount);
         Assert.Equal(expectedPaymentFrequencyInterval, model.PaymentFrequencyInterval);
         Assert.Equal(expectedSubscriptionPeriodCount, model.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedDiscount, model.Discount);
+        Assert.Equal(expectedDiscountBps, model.DiscountBps);
         Assert.NotNull(model.Meters);
         Assert.Equal(expectedMeters.Count, model.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
@@ -887,12 +986,13 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -926,12 +1026,13 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -958,13 +1059,14 @@ public class UsageBasedPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        long expectedDiscount = 0;
         int expectedFixedPrice = 0;
         int expectedPaymentFrequencyCount = 0;
         ApiEnum<string, TimeInterval> expectedPaymentFrequencyInterval = TimeInterval.Day;
         int expectedSubscriptionPeriodCount = 0;
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("usage_based_price");
+        long expectedDiscount = 0;
+        int expectedDiscountBps = 0;
         List<AddMeterToPrice> expectedMeters =
         [
             new()
@@ -983,13 +1085,14 @@ public class UsageBasedPriceTest : TestBase
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
-        Assert.Equal(expectedDiscount, deserialized.Discount);
         Assert.Equal(expectedFixedPrice, deserialized.FixedPrice);
         Assert.Equal(expectedPaymentFrequencyCount, deserialized.PaymentFrequencyCount);
         Assert.Equal(expectedPaymentFrequencyInterval, deserialized.PaymentFrequencyInterval);
         Assert.Equal(expectedSubscriptionPeriodCount, deserialized.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedDiscount, deserialized.Discount);
+        Assert.Equal(expectedDiscountBps, deserialized.DiscountBps);
         Assert.NotNull(deserialized.Meters);
         Assert.Equal(expectedMeters.Count, deserialized.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
@@ -1006,12 +1109,13 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -1039,12 +1143,12 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -1062,6 +1166,8 @@ public class UsageBasedPriceTest : TestBase
             TaxInclusive = true,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PurchasingPowerParity);
         Assert.False(model.RawData.ContainsKey("purchasing_power_parity"));
     }
@@ -1072,12 +1178,12 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -1104,12 +1210,12 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -1127,9 +1233,12 @@ public class UsageBasedPriceTest : TestBase
             TaxInclusive = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PurchasingPowerParity = null,
         };
 
+        Assert.Null(model.Discount);
+        Assert.False(model.RawData.ContainsKey("discount"));
         Assert.Null(model.PurchasingPowerParity);
         Assert.False(model.RawData.ContainsKey("purchasing_power_parity"));
     }
@@ -1140,12 +1249,12 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            DiscountBps = 0,
             Meters =
             [
                 new()
@@ -1163,6 +1272,7 @@ public class UsageBasedPriceTest : TestBase
             TaxInclusive = true,
 
             // Null should be interpreted as omitted for these properties
+            Discount = null,
             PurchasingPowerParity = null,
         };
 
@@ -1175,15 +1285,17 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.False(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.Meters);
         Assert.False(model.RawData.ContainsKey("meters"));
         Assert.Null(model.TaxInclusive);
@@ -1196,12 +1308,12 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
         };
 
@@ -1214,18 +1326,21 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
 
+            DiscountBps = null,
             Meters = null,
             TaxInclusive = null,
         };
 
+        Assert.Null(model.DiscountBps);
+        Assert.True(model.RawData.ContainsKey("discount_bps"));
         Assert.Null(model.Meters);
         Assert.True(model.RawData.ContainsKey("meters"));
         Assert.Null(model.TaxInclusive);
@@ -1238,14 +1353,15 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
             PurchasingPowerParity = true,
 
+            DiscountBps = null,
             Meters = null,
             TaxInclusive = null,
         };
@@ -1259,12 +1375,13 @@ public class UsageBasedPriceTest : TestBase
         var model = new UsageBasedPrice
         {
             Currency = Currency.Aed,
-            Discount = 0,
             FixedPrice = 0,
             PaymentFrequencyCount = 0,
             PaymentFrequencyInterval = TimeInterval.Day,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
+            Discount = 0,
+            DiscountBps = 0,
             Meters =
             [
                 new()

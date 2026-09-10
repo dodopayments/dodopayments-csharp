@@ -65,6 +65,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -209,6 +210,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -366,6 +368,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -524,6 +527,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -675,6 +679,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -832,6 +837,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -984,6 +990,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -1138,6 +1145,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -1277,6 +1285,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
+        bool expectedHasPaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
@@ -1393,6 +1402,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         }
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCustomer, model.Customer);
+        Assert.Equal(expectedHasPaymentMethod, model.HasPaymentMethod);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -1506,6 +1516,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -1660,6 +1671,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -1807,6 +1819,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
+        bool expectedHasPaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
@@ -1923,6 +1936,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         }
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedHasPaymentMethod, deserialized.HasPaymentMethod);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -2036,6 +2050,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2183,6 +2198,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2313,6 +2329,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2440,6 +2457,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2574,6 +2592,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2705,6 +2724,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2843,6 +2863,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -2956,6 +2977,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -3108,6 +3130,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -3235,6 +3258,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
