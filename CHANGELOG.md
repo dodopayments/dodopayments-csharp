@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.34.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.33.0...v6.34.0) (2026-09-10)
+
+
+### Features
+
+* **api:** add customer email logs ([6f5df88](https://github.com/dodopayments/dodopayments-csharp/commit/6f5df88a6729e796ec3c6c9056665c3172e473aa))
+* **api:** add customer email logs ([9b1dcd4](https://github.com/dodopayments/dodopayments-csharp/commit/9b1dcd4663f92cbe286b0d73b5226aa8717afcd2))
+
 ## [6.32.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.31.0...v6.32.0) (2026-08-24)
 
 
