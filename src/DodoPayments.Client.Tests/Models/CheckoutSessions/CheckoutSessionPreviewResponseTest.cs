@@ -24,6 +24,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -114,6 +115,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             Tax = 0,
         };
         bool expectedIsByop = true;
+        bool expectedPaymentMethodRequired = true;
         List<ProductCart> expectedProductCart =
         [
             new()
@@ -197,6 +199,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCurrentBreakup, model.CurrentBreakup);
         Assert.Equal(expectedIsByop, model.IsByop);
+        Assert.Equal(expectedPaymentMethodRequired, model.PaymentMethodRequired);
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -228,6 +231,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -332,6 +336,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -429,6 +434,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             Tax = 0,
         };
         bool expectedIsByop = true;
+        bool expectedPaymentMethodRequired = true;
         List<ProductCart> expectedProductCart =
         [
             new()
@@ -512,6 +518,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCurrentBreakup, deserialized.CurrentBreakup);
         Assert.Equal(expectedIsByop, deserialized.IsByop);
+        Assert.Equal(expectedPaymentMethodRequired, deserialized.PaymentMethodRequired);
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -543,6 +550,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -641,6 +649,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -740,6 +749,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -824,6 +834,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -932,6 +943,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()
@@ -1025,6 +1037,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Tax = 0,
             },
             IsByop = true,
+            PaymentMethodRequired = true,
             ProductCart =
             [
                 new()

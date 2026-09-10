@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.CreditEntitlements.Balances;
 
@@ -109,6 +110,27 @@ public sealed record class BalanceCreateLedgerEntryResponse : JsonModel
         init { this._rawData.Set("is_credit", value); }
     }
 
+    /// <summary>
+    /// Metadata stored on this entry.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     public required string OverageAfter
     {
         get
@@ -161,6 +183,10 @@ public sealed record class BalanceCreateLedgerEntryResponse : JsonModel
         _ = this.CustomerID;
         this.EntryType.Validate();
         _ = this.IsCredit;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.OverageAfter;
         _ = this.OverageBefore;
         _ = this.GrantID;

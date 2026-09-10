@@ -93,6 +93,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -265,6 +266,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -445,6 +447,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -631,6 +634,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -810,6 +814,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            HasPaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
@@ -990,6 +995,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [
@@ -1170,6 +1176,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
+                HasPaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 MeterCreditEntitlementCart =
                 [

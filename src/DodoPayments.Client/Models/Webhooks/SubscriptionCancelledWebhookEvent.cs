@@ -259,6 +259,20 @@ public sealed record class SubscriptionCancelledWebhookEventData : JsonModel
     }
 
     /// <summary>
+    /// Whether a payment method is on file. False while a card-optional subscription
+    /// waits for the customer to add one.
+    /// </summary>
+    public required bool HasPaymentMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("has_payment_method");
+        }
+        init { this._rawData.Set("has_payment_method", value); }
+    }
+
+    /// <summary>
     /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
     /// </summary>
     public required IReadOnlyDictionary<string, MetadataItem> Metadata
@@ -747,6 +761,7 @@ public sealed record class SubscriptionCancelledWebhookEventData : JsonModel
             CreditEntitlementCart = subscriptionCancelledWebhookEventData.CreditEntitlementCart,
             Currency = subscriptionCancelledWebhookEventData.Currency,
             Customer = subscriptionCancelledWebhookEventData.Customer,
+            HasPaymentMethod = subscriptionCancelledWebhookEventData.HasPaymentMethod,
             Metadata = subscriptionCancelledWebhookEventData.Metadata,
             MeterCreditEntitlementCart =
                 subscriptionCancelledWebhookEventData.MeterCreditEntitlementCart,
@@ -800,6 +815,7 @@ public sealed record class SubscriptionCancelledWebhookEventData : JsonModel
         }
         this.Currency.Validate();
         this.Customer.Validate();
+        _ = this.HasPaymentMethod;
         foreach (var item in this.Metadata.Values)
         {
             item.Validate();

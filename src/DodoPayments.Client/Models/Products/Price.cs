@@ -45,18 +45,6 @@ public record class Price : ModelBase
         }
     }
 
-    public long Discount
-    {
-        get
-        {
-            return Match(
-                oneTime: (x) => x.Discount,
-                recurring: (x) => x.Discount,
-                usageBased: (x) => x.Discount
-            );
-        }
-    }
-
     public int? PriceValue
     {
         get
@@ -77,6 +65,30 @@ public record class Price : ModelBase
                 oneTime: (x) => x.Type,
                 recurring: (x) => x.Type,
                 usageBased: (x) => x.Type
+            );
+        }
+    }
+
+    public long? Discount
+    {
+        get
+        {
+            return Match<long?>(
+                oneTime: (x) => x.Discount,
+                recurring: (x) => x.Discount,
+                usageBased: (x) => x.Discount
+            );
+        }
+    }
+
+    public int? DiscountBps
+    {
+        get
+        {
+            return Match<int?>(
+                oneTime: (x) => x.DiscountBps,
+                recurring: (x) => x.DiscountBps,
+                usageBased: (x) => x.DiscountBps
             );
         }
     }
@@ -488,19 +500,6 @@ public sealed record class OneTimePrice : JsonModel
     }
 
     /// <summary>
-    /// Discount applied to the price, represented as a percentage (0 to 100).
-    /// </summary>
-    public required long Discount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<long>("discount");
-        }
-        init { this._rawData.Set("discount", value); }
-    }
-
-    /// <summary>
     /// The payment amount, in the smallest denomination of the currency (e.g., cents
     /// for USD). For example, to charge $1.00, pass `100`.
     ///
@@ -525,6 +524,48 @@ public sealed record class OneTimePrice : JsonModel
             return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
+    }
+
+    /// <summary>
+    /// Deprecated: use `discount_bps` instead.
+    ///
+    /// <para>Discount applied to the price, represented as a percentage (0 to 100).
+    /// A response rounds this value to the nearest whole percent. Defaults to `0`.</para>
+    /// </summary>
+    [Obsolete("deprecated")]
+    public long? Discount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("discount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("discount", value);
+        }
+    }
+
+    /// <summary>
+    /// Discount applied to the price, in basis points. 100 basis points make one
+    /// percent, so `1250` is a discount of 12.5%.
+    ///
+    /// <para>Use this field for a discount with a fraction of a percent. A request
+    /// that sends this field ignores `discount`. A value of `0` gives no discount.</para>
+    /// </summary>
+    public int? DiscountBps
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_bps");
+        }
+        init { this._rawData.Set("discount_bps", value); }
     }
 
     /// <summary>
@@ -603,12 +644,13 @@ public sealed record class OneTimePrice : JsonModel
     public override void Validate()
     {
         this.Currency.Validate();
-        _ = this.Discount;
         _ = this.PriceValue;
         if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("one_time_price")))
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
+        _ = this.Discount;
+        _ = this.DiscountBps;
         _ = this.PayWhatYouWant;
         _ = this.PurchasingPowerParity;
         _ = this.SuggestedPrice;
@@ -672,19 +714,6 @@ public sealed record class RecurringPrice : JsonModel
             return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
         }
         init { this._rawData.Set("currency", value); }
-    }
-
-    /// <summary>
-    /// Discount applied to the price, represented as a percentage (0 to 100).
-    /// </summary>
-    public required long Discount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<long>("discount");
-        }
-        init { this._rawData.Set("discount", value); }
     }
 
     /// <summary>
@@ -770,6 +799,48 @@ public sealed record class RecurringPrice : JsonModel
     }
 
     /// <summary>
+    /// Deprecated: use `discount_bps` instead.
+    ///
+    /// <para>Discount applied to the price, represented as a percentage (0 to 100).
+    /// A response rounds this value to the nearest whole percent. Defaults to `0`.</para>
+    /// </summary>
+    [Obsolete("deprecated")]
+    public long? Discount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("discount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("discount", value);
+        }
+    }
+
+    /// <summary>
+    /// Discount applied to the price, in basis points. 100 basis points make one
+    /// percent, so `1250` is a discount of 12.5%.
+    ///
+    /// <para>Use this field for a discount with a fraction of a percent. A request
+    /// that sends this field ignores `discount`. A value of `0` gives no discount.</para>
+    /// </summary>
+    public int? DiscountBps
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_bps");
+        }
+        init { this._rawData.Set("discount_bps", value); }
+    }
+
+    /// <summary>
     /// Opts this price in to purchasing power parity. The business must also enable
     /// purchasing power parity. The discount percentage per country is always business-wide.
     /// Defaults to `false`.
@@ -834,6 +905,27 @@ public sealed record class RecurringPrice : JsonModel
     }
 
     /// <summary>
+    /// Let a customer start a free trial with no card. Defaults to false.
+    /// </summary>
+    public bool? TrialPaymentMethodOptional
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("trial_payment_method_optional");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("trial_payment_method_optional", value);
+        }
+    }
+
+    /// <summary>
     /// Number of days for the trial period. A value of `0` indicates no trial period.
     /// </summary>
     public int? TrialPeriodDays
@@ -854,11 +946,32 @@ public sealed record class RecurringPrice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Let a customer start a subscription with no card, when the amount due today
+    /// is `0` (a native `0` price, or a 100% discount). Defaults to false.
+    /// </summary>
+    public bool? ZeroAmountPaymentMethodOptional
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("zero_amount_payment_method_optional");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("zero_amount_payment_method_optional", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         this.Currency.Validate();
-        _ = this.Discount;
         _ = this.PaymentFrequencyCount;
         this.PaymentFrequencyInterval.Validate();
         _ = this.Price;
@@ -870,11 +983,15 @@ public sealed record class RecurringPrice : JsonModel
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
+        _ = this.Discount;
+        _ = this.DiscountBps;
         _ = this.PurchasingPowerParity;
         _ = this.TaxInclusive;
         _ = this.TrialAmount;
         _ = this.TrialApplyDiscounts;
+        _ = this.TrialPaymentMethodOptional;
         _ = this.TrialPeriodDays;
+        _ = this.ZeroAmountPaymentMethodOptional;
     }
 
     public RecurringPrice()
@@ -934,19 +1051,6 @@ public sealed record class UsageBasedPrice : JsonModel
             return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
         }
         init { this._rawData.Set("currency", value); }
-    }
-
-    /// <summary>
-    /// Discount applied to the price, represented as a percentage (0 to 100).
-    /// </summary>
-    public required long Discount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<long>("discount");
-        }
-        init { this._rawData.Set("discount", value); }
     }
 
     /// <summary>
@@ -1031,6 +1135,48 @@ public sealed record class UsageBasedPrice : JsonModel
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// Deprecated: use `discount_bps` instead.
+    ///
+    /// <para>Discount applied to the price, represented as a percentage (0 to 100).
+    /// A response rounds this value to the nearest whole percent. Defaults to `0`.</para>
+    /// </summary>
+    [Obsolete("deprecated")]
+    public long? Discount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("discount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("discount", value);
+        }
+    }
+
+    /// <summary>
+    /// Discount applied to the price, in basis points. 100 basis points make one
+    /// percent, so `1250` is a discount of 12.5%.
+    ///
+    /// <para>Use this field for a discount with a fraction of a percent. A request
+    /// that sends this field ignores `discount`. A value of `0` gives no discount.</para>
+    /// </summary>
+    public int? DiscountBps
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_bps");
+        }
+        init { this._rawData.Set("discount_bps", value); }
+    }
+
     public IReadOnlyList<AddMeterToPrice>? Meters
     {
         get
@@ -1087,7 +1233,6 @@ public sealed record class UsageBasedPrice : JsonModel
     public override void Validate()
     {
         this.Currency.Validate();
-        _ = this.Discount;
         _ = this.FixedPrice;
         _ = this.PaymentFrequencyCount;
         this.PaymentFrequencyInterval.Validate();
@@ -1102,6 +1247,8 @@ public sealed record class UsageBasedPrice : JsonModel
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
+        _ = this.Discount;
+        _ = this.DiscountBps;
         foreach (var item in this.Meters ?? [])
         {
             item.Validate();

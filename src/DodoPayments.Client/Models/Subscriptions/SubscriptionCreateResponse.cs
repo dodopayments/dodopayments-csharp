@@ -83,6 +83,20 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     }
 
     /// <summary>
+    /// False when the customer can start this subscription with no card. True for
+    /// every other subscription.
+    /// </summary>
+    public required bool PaymentMethodRequired
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("payment_method_required");
+        }
+        init { this._rawData.Set("payment_method_required", value); }
+    }
+
+    /// <summary>
     /// Tax will be added to the amount and charged to the customer on each billing cycle
     /// </summary>
     public required int RecurringPreTaxAmount
@@ -229,6 +243,7 @@ public sealed record class SubscriptionCreateResponse : JsonModel
             item.Validate();
         }
         _ = this.PaymentID;
+        _ = this.PaymentMethodRequired;
         _ = this.RecurringPreTaxAmount;
         _ = this.SubscriptionID;
         _ = this.ClientSecret;
