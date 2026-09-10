@@ -77,6 +77,20 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     }
 
     /// <summary>
+    /// False when the customer can confirm this session with no card. True for every
+    /// other cart, including a one-time cart.
+    /// </summary>
+    public required bool PaymentMethodRequired
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("payment_method_required");
+        }
+        init { this._rawData.Set("payment_method_required", value); }
+    }
+
+    /// <summary>
     /// The total product cart
     /// </summary>
     public required IReadOnlyList<ProductCart> ProductCart
@@ -225,6 +239,7 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         this.Currency.Validate();
         this.CurrentBreakup.Validate();
         _ = this.IsByop;
+        _ = this.PaymentMethodRequired;
         foreach (var item in this.ProductCart)
         {
             item.Validate();

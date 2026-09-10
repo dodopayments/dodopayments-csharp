@@ -92,7 +92,8 @@ public interface IBalanceService
     /// <para># Request Body - `entry_type` - "credit" or "debit" - `amount` - Amount to
     /// credit or debit - `reason` - Optional human-readable reason - `expires_at` -
     /// Optional expiration for credited amount (only for credit type) -
-    /// `idempotency_key` - Optional key to prevent duplicate entries</para>
+    /// `idempotency_key` - Optional key to prevent duplicate entries - `metadata` -
+    /// Optional key-value pairs</para>
     ///
     /// <para># Responses - `201 Created` - Ledger entry created successfully - `400 Bad
     /// Request` - Invalid request (e.g., debit with insufficient balance) - `404 Not
