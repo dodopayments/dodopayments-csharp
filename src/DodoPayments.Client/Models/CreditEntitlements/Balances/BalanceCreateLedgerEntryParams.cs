@@ -22,7 +22,7 @@ namespace DodoPayments.Client.Models.CreditEntitlements.Balances;
 /// <para># Request Body - `entry_type` - "credit" or "debit" - `amount` - Amount
 /// to credit or debit - `reason` - Optional human-readable reason - `expires_at`
 /// - Optional expiration for credited amount (only for credit type) - `idempotency_key`
-/// - Optional key to prevent duplicate entries</para>
+/// - Optional key to prevent duplicate entries - `metadata` - Optional key-value pairs</para>
 ///
 /// <para># Responses - `201 Created` - Ledger entry created successfully - `400
 /// Bad Request` - Invalid request (e.g., debit with insufficient balance) - `404
@@ -102,7 +102,7 @@ public record class BalanceCreateLedgerEntryParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500 chars)
+    /// Optional metadata (max 50 key-value pairs, key max 40 chars, value max 500 chars).
     /// </summary>
     public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {

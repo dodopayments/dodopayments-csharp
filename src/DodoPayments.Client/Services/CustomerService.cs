@@ -35,6 +35,7 @@ public sealed class CustomerService : ICustomerService
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _customerPortal = new(() => new CustomerPortalService(client));
         _wallets = new(() => new WalletService(client));
+        _emails = new(() => new EmailService(client));
     }
 
     readonly Lazy<ICustomerPortalService> _customerPortal;
@@ -47,6 +48,12 @@ public sealed class CustomerService : ICustomerService
     public IWalletService Wallets
     {
         get { return _wallets.Value; }
+    }
+
+    readonly Lazy<IEmailService> _emails;
+    public IEmailService Emails
+    {
+        get { return _emails.Value; }
     }
 
     /// <inheritdoc/>
@@ -285,6 +292,7 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
 
         _customerPortal = new(() => new CustomerPortalServiceWithRawResponse(client));
         _wallets = new(() => new WalletServiceWithRawResponse(client));
+        _emails = new(() => new EmailServiceWithRawResponse(client));
     }
 
     readonly Lazy<ICustomerPortalServiceWithRawResponse> _customerPortal;
@@ -297,6 +305,12 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public IWalletServiceWithRawResponse Wallets
     {
         get { return _wallets.Value; }
+    }
+
+    readonly Lazy<IEmailServiceWithRawResponse> _emails;
+    public IEmailServiceWithRawResponse Emails
+    {
+        get { return _emails.Value; }
     }
 
     /// <inheritdoc/>

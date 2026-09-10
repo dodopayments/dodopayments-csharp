@@ -26,6 +26,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
@@ -48,6 +49,7 @@ public class SubscriptionCreateResponseTest : TestBase
         };
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        bool expectedPaymentMethodRequired = true;
         int expectedRecurringPreTaxAmount = 0;
         string expectedSubscriptionID = "subscription_id";
         string expectedClientSecret = "client_secret";
@@ -75,6 +77,7 @@ public class SubscriptionCreateResponseTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentMethodRequired, model.PaymentMethodRequired);
         Assert.Equal(expectedRecurringPreTaxAmount, model.RecurringPreTaxAmount);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedClientSecret, model.ClientSecret);
@@ -112,6 +115,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
@@ -148,6 +152,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
@@ -177,6 +182,7 @@ public class SubscriptionCreateResponseTest : TestBase
         };
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        bool expectedPaymentMethodRequired = true;
         int expectedRecurringPreTaxAmount = 0;
         string expectedSubscriptionID = "subscription_id";
         string expectedClientSecret = "client_secret";
@@ -204,6 +210,7 @@ public class SubscriptionCreateResponseTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentMethodRequired, deserialized.PaymentMethodRequired);
         Assert.Equal(expectedRecurringPreTaxAmount, deserialized.RecurringPreTaxAmount);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedClientSecret, deserialized.ClientSecret);
@@ -241,6 +248,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
@@ -271,6 +279,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
         };
@@ -307,6 +316,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
         };
@@ -330,6 +340,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
 
@@ -374,6 +385,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
 
@@ -405,6 +417,7 @@ public class SubscriptionCreateResponseTest : TestBase
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentMethodRequired = true,
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",

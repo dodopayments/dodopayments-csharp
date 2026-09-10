@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.CreditEntitlements.Balances;
 
@@ -21,6 +23,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             GrantID = "grant_id",
@@ -36,6 +39,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
         string expectedCustomerID = "customer_id";
         ApiEnum<string, LedgerEntryType> expectedEntryType = LedgerEntryType.Credit;
         bool expectedIsCredit = true;
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         string expectedGrantID = "grant_id";
@@ -50,6 +54,13 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEntryType, model.EntryType);
         Assert.Equal(expectedIsCredit, model.IsCredit);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedOverageAfter, model.OverageAfter);
         Assert.Equal(expectedOverageBefore, model.OverageBefore);
         Assert.Equal(expectedGrantID, model.GrantID);
@@ -70,6 +81,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             GrantID = "grant_id",
@@ -99,6 +111,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             GrantID = "grant_id",
@@ -121,6 +134,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
         string expectedCustomerID = "customer_id";
         ApiEnum<string, LedgerEntryType> expectedEntryType = LedgerEntryType.Credit;
         bool expectedIsCredit = true;
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         string expectedGrantID = "grant_id";
@@ -135,6 +149,13 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEntryType, deserialized.EntryType);
         Assert.Equal(expectedIsCredit, deserialized.IsCredit);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedOverageAfter, deserialized.OverageAfter);
         Assert.Equal(expectedOverageBefore, deserialized.OverageBefore);
         Assert.Equal(expectedGrantID, deserialized.GrantID);
@@ -155,6 +176,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             GrantID = "grant_id",
@@ -178,6 +200,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
         };
@@ -202,6 +225,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
         };
@@ -223,6 +247,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
 
@@ -250,6 +275,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
 
@@ -274,6 +300,7 @@ public class BalanceCreateLedgerEntryResponseTest : TestBase
             CustomerID = "customer_id",
             EntryType = LedgerEntryType.Credit,
             IsCredit = true,
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             GrantID = "grant_id",

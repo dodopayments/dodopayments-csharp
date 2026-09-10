@@ -46,8 +46,9 @@ public class ProductListResponseTest : TestBase
             PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
-                Discount = 0,
                 PriceValue = 0,
+                Discount = 0,
+                DiscountBps = 0,
                 PayWhatYouWant = true,
                 PurchasingPowerParity = true,
                 SuggestedPrice = 0,
@@ -87,8 +88,9 @@ public class ProductListResponseTest : TestBase
         Price expectedPriceDetail = new OneTimePrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -160,8 +162,9 @@ public class ProductListResponseTest : TestBase
             PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
-                Discount = 0,
                 PriceValue = 0,
+                Discount = 0,
+                DiscountBps = 0,
                 PayWhatYouWant = true,
                 PurchasingPowerParity = true,
                 SuggestedPrice = 0,
@@ -215,8 +218,9 @@ public class ProductListResponseTest : TestBase
             PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
-                Discount = 0,
                 PriceValue = 0,
+                Discount = 0,
+                DiscountBps = 0,
                 PayWhatYouWant = true,
                 PurchasingPowerParity = true,
                 SuggestedPrice = 0,
@@ -263,8 +267,9 @@ public class ProductListResponseTest : TestBase
         Price expectedPriceDetail = new OneTimePrice()
         {
             Currency = Currency.Aed,
-            Discount = 0,
             PriceValue = 0,
+            Discount = 0,
+            DiscountBps = 0,
             PayWhatYouWant = true,
             PurchasingPowerParity = true,
             SuggestedPrice = 0,
@@ -336,8 +341,9 @@ public class ProductListResponseTest : TestBase
             PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
-                Discount = 0,
                 PriceValue = 0,
+                Discount = 0,
+                DiscountBps = 0,
                 PayWhatYouWant = true,
                 PurchasingPowerParity = true,
                 SuggestedPrice = 0,
@@ -561,8 +567,9 @@ public class ProductListResponseTest : TestBase
             PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
-                Discount = 0,
                 PriceValue = 0,
+                Discount = 0,
+                DiscountBps = 0,
                 PayWhatYouWant = true,
                 PurchasingPowerParity = true,
                 SuggestedPrice = 0,

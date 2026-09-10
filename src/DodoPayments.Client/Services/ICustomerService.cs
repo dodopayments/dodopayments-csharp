@@ -31,6 +31,8 @@ public interface ICustomerService
 
     IWalletService Wallets { get; }
 
+    IEmailService Emails { get; }
+
     /// <summary>
     /// Sends a request to <c>post /customers</c>.
     /// </summary>
@@ -170,6 +172,8 @@ public interface ICustomerServiceWithRawResponse
     ICustomerPortalServiceWithRawResponse CustomerPortal { get; }
 
     IWalletServiceWithRawResponse Wallets { get; }
+
+    IEmailServiceWithRawResponse Emails { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /customers</c>, but is otherwise the
