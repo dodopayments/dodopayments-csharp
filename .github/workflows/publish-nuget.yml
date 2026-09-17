@@ -10,6 +10,12 @@ jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
+    permissions:
+      # checkout only needs to read the tagged tree.
+      contents: read
+      # Required for NuGet Trusted Publishing (OIDC) — this is the identity that
+      # nuget.org validates against the trust policy before it will mint a key.
+      id-token: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -24,10 +30,32 @@ jobs:
           --configuration Release
           --output "${{github.workspace}}/artifacts/packages"
 
+      # NuGet Trusted Publishing (OIDC), 2026-09-15: replaces the long-lived
+      # NUGET_API_KEY, which silently expired after its 365-day maximum lifetime
+      # (issued 2025-09-17) and would have failed the next release at the push
+      # step only — after release-please had already cut the tag and the GitHub
+      # Release, leaving a version that exists on GitHub but not on nuget.org.
+      #
+      # The key this mints lasts ~1 hour, so it is requested immediately before
+      # the push and never stored. `user` is the nuget.org account name (NOT an
+      # email) and is public information — it is the package owner shown on
+      # nuget.org/packages/DodoPayments.Client — so it is inlined rather than
+      # kept as a secret, which would reintroduce the secret this change exists
+      # to remove.
+      #
+      # nuget.org matches the OIDC token against a trust policy keyed on
+      # repository owner + repository + THIS FILE'S NAME, so renaming this file
+      # breaks publishing until the policy is updated to match.
+      - name: NuGet login (OIDC -> short-lived API key)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        id: login
+        with:
+          user: dodopayments
+
       - name: Publish package to nuget.org
         run: dotnet nuget push
           $(find ${{ github.workspace }}/artifacts/packages/*.nupkg ! -name "*.symbols.nupkg")
           --source https://api.nuget.org/v3/index.json
           --api-key $NUGET_API_KEY
         env:
-          NUGET_API_KEY: ${{ secrets.DODO_PAYMENTS_NUGET_API_KEY || secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
