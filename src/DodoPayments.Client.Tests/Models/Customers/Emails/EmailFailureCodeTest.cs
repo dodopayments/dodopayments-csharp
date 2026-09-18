@@ -16,6 +16,7 @@ public class EmailFailureCodeTest : TestBase
     [InlineData(EmailFailureCode.MessageTooLarge)]
     [InlineData(EmailFailureCode.MarkedAsSpam)]
     [InlineData(EmailFailureCode.SendFailed)]
+    [InlineData(EmailFailureCode.TestModeQuotaSpent)]
     public void Validation_Works(EmailFailureCode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -44,6 +45,7 @@ public class EmailFailureCodeTest : TestBase
     [InlineData(EmailFailureCode.MessageTooLarge)]
     [InlineData(EmailFailureCode.MarkedAsSpam)]
     [InlineData(EmailFailureCode.SendFailed)]
+    [InlineData(EmailFailureCode.TestModeQuotaSpent)]
     public void SerializationRoundtrip_Works(EmailFailureCode rawValue)
     {
         // force implicit conversion because Theory can't do that for us

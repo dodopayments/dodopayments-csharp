@@ -146,19 +146,6 @@ public sealed record class EmailLogItem : JsonModel
     }
 
     /// <summary>
-    /// What the merchant typed, when test mode redirected the send to the business owner.
-    /// </summary>
-    public string? IntendedRecipient
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("intended_recipient");
-        }
-        init { this._rawData.Set("intended_recipient", value); }
-    }
-
-    /// <summary>
     /// The address the email reached.
     /// </summary>
     public string? Recipient
@@ -197,7 +184,6 @@ public sealed record class EmailLogItem : JsonModel
         this.FailureCode?.Validate();
         _ = this.FailureReason;
         _ = this.From;
-        _ = this.IntendedRecipient;
         _ = this.Recipient;
         _ = this.Subject;
     }
