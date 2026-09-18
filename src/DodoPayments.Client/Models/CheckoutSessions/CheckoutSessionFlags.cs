@@ -367,6 +367,37 @@ public sealed record class CheckoutSessionFlags : JsonModel
     }
 
     /// <summary>
+    /// If true, the customer must give a tax id to check out as a business. A tax
+    /// id is the GST number in India, or the VAT number in the EU. You must also
+    /// set `allow_tax_id` to true.
+    ///
+    /// <para>On the checkout page, this field does not change checkout for a customer
+    /// who buys as an individual.</para>
+    ///
+    /// <para>A `confirm: true` request skips the checkout page. The request must
+    /// contain `tax_id`.</para>
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? RequireTaxID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("require_tax_id");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("require_tax_id", value);
+        }
+    }
+
+    /// <summary>
     /// If true, the session uses the single-page checkout flow: the page initializes
     /// the payment at load time and confirms it in place, with no separate payment page.
     ///
@@ -410,6 +441,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AlwaysCreateNewCustomer;
         _ = this.RedirectImmediately;
         _ = this.RequirePhoneNumber;
+        _ = this.RequireTaxID;
         _ = this.SinglePage;
     }
 

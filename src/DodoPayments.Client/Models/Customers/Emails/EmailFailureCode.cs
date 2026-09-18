@@ -22,6 +22,7 @@ public enum EmailFailureCode
     MessageTooLarge,
     MarkedAsSpam,
     SendFailed,
+    TestModeQuotaSpent,
 }
 
 sealed class EmailFailureCodeConverter : JsonConverter<EmailFailureCode>
@@ -42,6 +43,7 @@ sealed class EmailFailureCodeConverter : JsonConverter<EmailFailureCode>
             "message_too_large" => EmailFailureCode.MessageTooLarge,
             "marked_as_spam" => EmailFailureCode.MarkedAsSpam,
             "send_failed" => EmailFailureCode.SendFailed,
+            "test_mode_quota_spent" => EmailFailureCode.TestModeQuotaSpent,
             _ => (EmailFailureCode)(-1),
         };
     }
@@ -64,6 +66,7 @@ sealed class EmailFailureCodeConverter : JsonConverter<EmailFailureCode>
                 EmailFailureCode.MessageTooLarge => "message_too_large",
                 EmailFailureCode.MarkedAsSpam => "marked_as_spam",
                 EmailFailureCode.SendFailed => "send_failed",
+                EmailFailureCode.TestModeQuotaSpent => "test_mode_quota_spent",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

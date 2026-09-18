@@ -66,6 +66,20 @@ public sealed record class EmailPolicies : JsonModel
         init { this._rawData.Set("retry_allowed", value); }
     }
 
+    /// <summary>
+    /// A later send of this email reached the provider, so this row is history.
+    /// To send it again would deliver a second copy.
+    /// </summary>
+    public required bool Superseded
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("superseded");
+        }
+        init { this._rawData.Set("superseded", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -73,6 +87,7 @@ public sealed record class EmailPolicies : JsonModel
         _ = this.ResendAllowed;
         _ = this.ResendsRemaining;
         _ = this.RetryAllowed;
+        _ = this.Superseded;
     }
 
     public EmailPolicies() { }

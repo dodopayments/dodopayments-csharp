@@ -15,17 +15,20 @@ public class EmailPoliciesTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
 
         bool expectedRequiresDifferentAddress = true;
         bool expectedResendAllowed = true;
         long expectedResendsRemaining = 0;
         bool expectedRetryAllowed = true;
+        bool expectedSuperseded = true;
 
         Assert.Equal(expectedRequiresDifferentAddress, model.RequiresDifferentAddress);
         Assert.Equal(expectedResendAllowed, model.ResendAllowed);
         Assert.Equal(expectedResendsRemaining, model.ResendsRemaining);
         Assert.Equal(expectedRetryAllowed, model.RetryAllowed);
+        Assert.Equal(expectedSuperseded, model.Superseded);
     }
 
     [Fact]
@@ -37,6 +40,7 @@ public class EmailPoliciesTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -57,6 +61,7 @@ public class EmailPoliciesTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -70,11 +75,13 @@ public class EmailPoliciesTest : TestBase
         bool expectedResendAllowed = true;
         long expectedResendsRemaining = 0;
         bool expectedRetryAllowed = true;
+        bool expectedSuperseded = true;
 
         Assert.Equal(expectedRequiresDifferentAddress, deserialized.RequiresDifferentAddress);
         Assert.Equal(expectedResendAllowed, deserialized.ResendAllowed);
         Assert.Equal(expectedResendsRemaining, deserialized.ResendsRemaining);
         Assert.Equal(expectedRetryAllowed, deserialized.RetryAllowed);
+        Assert.Equal(expectedSuperseded, deserialized.Superseded);
     }
 
     [Fact]
@@ -86,6 +93,7 @@ public class EmailPoliciesTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
 
         model.Validate();
@@ -100,6 +108,7 @@ public class EmailPoliciesTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
 
         EmailPolicies copied = new(model);
