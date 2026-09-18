@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.35.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.34.0...v6.35.0) (2026-09-18)
+
+
+### Features
+
+* **api:** tax id checkout flag, ledger event types, email policy fields ([78b7ed5](https://github.com/dodopayments/dodopayments-csharp/commit/78b7ed5375be719c186ac76c079a9605e6c6615d))
+* **api:** tax id checkout flag, ledger event types, email policy fields ([64d7cbe](https://github.com/dodopayments/dodopayments-csharp/commit/64d7cbe2c5de22fc05301b0d2cce7778574e09ef))
+
+
+### Chores
+
+* add Dependabot config for GitHub Actions ([#107](https://github.com/dodopayments/dodopayments-csharp/issues/107)) ([b120756](https://github.com/dodopayments/dodopayments-csharp/commit/b120756c8a02659f21a3b2f059967f6b6595951d))
+
 ## [6.34.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.33.0...v6.34.0) (2026-09-10)
 
 
