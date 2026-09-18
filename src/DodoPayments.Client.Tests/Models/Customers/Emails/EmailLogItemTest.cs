@@ -23,12 +23,12 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
             FailureCode = EmailFailureCode.MailboxNotFound,
             FailureReason = "failure_reason",
             From = "from",
-            IntendedRecipient = "intended_recipient",
             Recipient = "recipient",
             Subject = "subject",
         };
@@ -44,12 +44,12 @@ public class EmailLogItemTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
         ApiEnum<string, EmailLogStatus> expectedStatus = EmailLogStatus.Sent;
         ApiEnum<string, EmailFailureCode> expectedFailureCode = EmailFailureCode.MailboxNotFound;
         string expectedFailureReason = "failure_reason";
         string expectedFrom = "from";
-        string expectedIntendedRecipient = "intended_recipient";
         string expectedRecipient = "recipient";
         string expectedSubject = "subject";
 
@@ -63,7 +63,6 @@ public class EmailLogItemTest : TestBase
         Assert.Equal(expectedFailureCode, model.FailureCode);
         Assert.Equal(expectedFailureReason, model.FailureReason);
         Assert.Equal(expectedFrom, model.From);
-        Assert.Equal(expectedIntendedRecipient, model.IntendedRecipient);
         Assert.Equal(expectedRecipient, model.Recipient);
         Assert.Equal(expectedSubject, model.Subject);
     }
@@ -84,12 +83,12 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
             FailureCode = EmailFailureCode.MailboxNotFound,
             FailureReason = "failure_reason",
             From = "from",
-            IntendedRecipient = "intended_recipient",
             Recipient = "recipient",
             Subject = "subject",
         };
@@ -119,12 +118,12 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
             FailureCode = EmailFailureCode.MailboxNotFound,
             FailureReason = "failure_reason",
             From = "from",
-            IntendedRecipient = "intended_recipient",
             Recipient = "recipient",
             Subject = "subject",
         };
@@ -147,12 +146,12 @@ public class EmailLogItemTest : TestBase
             ResendAllowed = true,
             ResendsRemaining = 0,
             RetryAllowed = true,
+            Superseded = true,
         };
         ApiEnum<string, EmailLogStatus> expectedStatus = EmailLogStatus.Sent;
         ApiEnum<string, EmailFailureCode> expectedFailureCode = EmailFailureCode.MailboxNotFound;
         string expectedFailureReason = "failure_reason";
         string expectedFrom = "from";
-        string expectedIntendedRecipient = "intended_recipient";
         string expectedRecipient = "recipient";
         string expectedSubject = "subject";
 
@@ -166,7 +165,6 @@ public class EmailLogItemTest : TestBase
         Assert.Equal(expectedFailureCode, deserialized.FailureCode);
         Assert.Equal(expectedFailureReason, deserialized.FailureReason);
         Assert.Equal(expectedFrom, deserialized.From);
-        Assert.Equal(expectedIntendedRecipient, deserialized.IntendedRecipient);
         Assert.Equal(expectedRecipient, deserialized.Recipient);
         Assert.Equal(expectedSubject, deserialized.Subject);
     }
@@ -187,12 +185,12 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
             FailureCode = EmailFailureCode.MailboxNotFound,
             FailureReason = "failure_reason",
             From = "from",
-            IntendedRecipient = "intended_recipient",
             Recipient = "recipient",
             Subject = "subject",
         };
@@ -216,6 +214,7 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
         };
@@ -226,8 +225,6 @@ public class EmailLogItemTest : TestBase
         Assert.False(model.RawData.ContainsKey("failure_reason"));
         Assert.Null(model.From);
         Assert.False(model.RawData.ContainsKey("from"));
-        Assert.Null(model.IntendedRecipient);
-        Assert.False(model.RawData.ContainsKey("intended_recipient"));
         Assert.Null(model.Recipient);
         Assert.False(model.RawData.ContainsKey("recipient"));
         Assert.Null(model.Subject);
@@ -250,6 +247,7 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
         };
@@ -273,13 +271,13 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
 
             FailureCode = null,
             FailureReason = null,
             From = null,
-            IntendedRecipient = null,
             Recipient = null,
             Subject = null,
         };
@@ -290,8 +288,6 @@ public class EmailLogItemTest : TestBase
         Assert.True(model.RawData.ContainsKey("failure_reason"));
         Assert.Null(model.From);
         Assert.True(model.RawData.ContainsKey("from"));
-        Assert.Null(model.IntendedRecipient);
-        Assert.True(model.RawData.ContainsKey("intended_recipient"));
         Assert.Null(model.Recipient);
         Assert.True(model.RawData.ContainsKey("recipient"));
         Assert.Null(model.Subject);
@@ -314,13 +310,13 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
 
             FailureCode = null,
             FailureReason = null,
             From = null,
-            IntendedRecipient = null,
             Recipient = null,
             Subject = null,
         };
@@ -344,12 +340,12 @@ public class EmailLogItemTest : TestBase
                 ResendAllowed = true,
                 ResendsRemaining = 0,
                 RetryAllowed = true,
+                Superseded = true,
             },
             Status = EmailLogStatus.Sent,
             FailureCode = EmailFailureCode.MailboxNotFound,
             FailureReason = "failure_reason",
             From = "from",
-            IntendedRecipient = "intended_recipient",
             Recipient = "recipient",
             Subject = "subject",
         };
