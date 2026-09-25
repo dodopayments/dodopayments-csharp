@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.36.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.35.0...v6.36.0) (2026-09-25)
+
+
+### Features
+
+* **api:** add moderation API and multi-subscription payments ([8983836](https://github.com/dodopayments/dodopayments-csharp/commit/8983836bccd12f810b90a6a432e91836c48c2225))
+* **api:** add moderation API and multi-subscription payments ([0ecee58](https://github.com/dodopayments/dodopayments-csharp/commit/0ecee5827e56db9561823208f7127b1ba080d9af))
+
 ## [6.34.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.33.0...v6.34.0) (2026-09-10)
 
 
