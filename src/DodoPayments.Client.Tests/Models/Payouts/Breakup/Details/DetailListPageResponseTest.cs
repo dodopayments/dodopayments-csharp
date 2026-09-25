@@ -28,6 +28,7 @@ public class DetailListPageResponseTest : TestBase
                     ReferenceObjectID = "reference_object_id",
                 },
             ],
+            Unattributed = 0,
         };
 
         List<DetailListResponse> expectedItems =
@@ -45,12 +46,14 @@ public class DetailListPageResponseTest : TestBase
                 ReferenceObjectID = "reference_object_id",
             },
         ];
+        long expectedUnattributed = 0;
 
         Assert.Equal(expectedItems.Count, model.Items.Count);
         for (int i = 0; i < expectedItems.Count; i++)
         {
             Assert.Equal(expectedItems[i], model.Items[i]);
         }
+        Assert.Equal(expectedUnattributed, model.Unattributed);
     }
 
     [Fact]
@@ -73,6 +76,7 @@ public class DetailListPageResponseTest : TestBase
                     ReferenceObjectID = "reference_object_id",
                 },
             ],
+            Unattributed = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -104,6 +108,7 @@ public class DetailListPageResponseTest : TestBase
                     ReferenceObjectID = "reference_object_id",
                 },
             ],
+            Unattributed = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -128,12 +133,14 @@ public class DetailListPageResponseTest : TestBase
                 ReferenceObjectID = "reference_object_id",
             },
         ];
+        long expectedUnattributed = 0;
 
         Assert.Equal(expectedItems.Count, deserialized.Items.Count);
         for (int i = 0; i < expectedItems.Count; i++)
         {
             Assert.Equal(expectedItems[i], deserialized.Items[i]);
         }
+        Assert.Equal(expectedUnattributed, deserialized.Unattributed);
     }
 
     [Fact]
@@ -156,6 +163,7 @@ public class DetailListPageResponseTest : TestBase
                     ReferenceObjectID = "reference_object_id",
                 },
             ],
+            Unattributed = 0,
         };
 
         model.Validate();
@@ -181,6 +189,7 @@ public class DetailListPageResponseTest : TestBase
                     ReferenceObjectID = "reference_object_id",
                 },
             ],
+            Unattributed = 0,
         };
 
         DetailListPageResponse copied = new(model);
