@@ -97,6 +97,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            Subscriptions =
+            [
+                new()
+                {
+                    AmountDueNow = 0,
+                    ProductID = "product_id",
+                    RecurringAmount = 0,
+                    NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RecurringTax = 0,
+                    TaxDueNow = 0,
+                    TrialPeriodDays = 0,
+                },
+            ],
             TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
@@ -188,6 +201,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        List<Subscription> expectedSubscriptions =
+        [
+            new()
+            {
+                AmountDueNow = 0,
+                ProductID = "product_id",
+                RecurringAmount = 0,
+                NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RecurringTax = 0,
+                TaxDueNow = 0,
+                TrialPeriodDays = 0,
+            },
+        ];
         string expectedTaxIDBusinessName = "tax_id_business_name";
         string expectedTaxIDErrMsg = "tax_id_err_msg";
         string expectedTaxIDFormatName = "tax_id_format_name";
@@ -208,6 +234,12 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedTotalPrice, model.TotalPrice);
         Assert.Equal(expectedNextBillingDate, model.NextBillingDate);
         Assert.Equal(expectedRecurringBreakup, model.RecurringBreakup);
+        Assert.NotNull(model.Subscriptions);
+        Assert.Equal(expectedSubscriptions.Count, model.Subscriptions.Count);
+        for (int i = 0; i < expectedSubscriptions.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptions[i], model.Subscriptions[i]);
+        }
         Assert.Equal(expectedTaxIDBusinessName, model.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, model.TaxIDErrMsg);
         Assert.Equal(expectedTaxIDFormatName, model.TaxIDFormatName);
@@ -304,6 +336,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            Subscriptions =
+            [
+                new()
+                {
+                    AmountDueNow = 0,
+                    ProductID = "product_id",
+                    RecurringAmount = 0,
+                    NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RecurringTax = 0,
+                    TaxDueNow = 0,
+                    TrialPeriodDays = 0,
+                },
+            ],
             TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
@@ -409,6 +454,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            Subscriptions =
+            [
+                new()
+                {
+                    AmountDueNow = 0,
+                    ProductID = "product_id",
+                    RecurringAmount = 0,
+                    NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RecurringTax = 0,
+                    TaxDueNow = 0,
+                    TrialPeriodDays = 0,
+                },
+            ],
             TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
@@ -507,6 +565,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        List<Subscription> expectedSubscriptions =
+        [
+            new()
+            {
+                AmountDueNow = 0,
+                ProductID = "product_id",
+                RecurringAmount = 0,
+                NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RecurringTax = 0,
+                TaxDueNow = 0,
+                TrialPeriodDays = 0,
+            },
+        ];
         string expectedTaxIDBusinessName = "tax_id_business_name";
         string expectedTaxIDErrMsg = "tax_id_err_msg";
         string expectedTaxIDFormatName = "tax_id_format_name";
@@ -527,6 +598,12 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedTotalPrice, deserialized.TotalPrice);
         Assert.Equal(expectedNextBillingDate, deserialized.NextBillingDate);
         Assert.Equal(expectedRecurringBreakup, deserialized.RecurringBreakup);
+        Assert.NotNull(deserialized.Subscriptions);
+        Assert.Equal(expectedSubscriptions.Count, deserialized.Subscriptions.Count);
+        for (int i = 0; i < expectedSubscriptions.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptions[i], deserialized.Subscriptions[i]);
+        }
         Assert.Equal(expectedTaxIDBusinessName, deserialized.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, deserialized.TaxIDErrMsg);
         Assert.Equal(expectedTaxIDFormatName, deserialized.TaxIDFormatName);
@@ -623,6 +700,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            Subscriptions =
+            [
+                new()
+                {
+                    AmountDueNow = 0,
+                    ProductID = "product_id",
+                    RecurringAmount = 0,
+                    NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RecurringTax = 0,
+                    TaxDueNow = 0,
+                    TrialPeriodDays = 0,
+                },
+            ],
             TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
@@ -720,6 +810,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("next_billing_date"));
         Assert.Null(model.RecurringBreakup);
         Assert.False(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.Subscriptions);
+        Assert.False(model.RawData.ContainsKey("subscriptions"));
         Assert.Null(model.TaxIDBusinessName);
         Assert.False(model.RawData.ContainsKey("tax_id_business_name"));
         Assert.Null(model.TaxIDErrMsg);
@@ -902,6 +994,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
 
             NextBillingDate = null,
             RecurringBreakup = null,
+            Subscriptions = null,
             TaxIDBusinessName = null,
             TaxIDErrMsg = null,
             TaxIDFormatName = null,
@@ -914,6 +1007,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("next_billing_date"));
         Assert.Null(model.RecurringBreakup);
         Assert.True(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.Subscriptions);
+        Assert.True(model.RawData.ContainsKey("subscriptions"));
         Assert.Null(model.TaxIDBusinessName);
         Assert.True(model.RawData.ContainsKey("tax_id_business_name"));
         Assert.Null(model.TaxIDErrMsg);
@@ -1011,6 +1106,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
 
             NextBillingDate = null,
             RecurringBreakup = null,
+            Subscriptions = null,
             TaxIDBusinessName = null,
             TaxIDErrMsg = null,
             TaxIDFormatName = null,
@@ -1110,6 +1206,19 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            Subscriptions =
+            [
+                new()
+                {
+                    AmountDueNow = 0,
+                    ProductID = "product_id",
+                    RecurringAmount = 0,
+                    NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RecurringTax = 0,
+                    TaxDueNow = 0,
+                    TrialPeriodDays = 0,
+                },
+            ],
             TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
@@ -2743,6 +2852,213 @@ public class RecurringBreakupTest : TestBase
         };
 
         RecurringBreakup copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RecurringTax = 0,
+            TaxDueNow = 0,
+            TrialPeriodDays = 0,
+        };
+
+        int expectedAmountDueNow = 0;
+        string expectedProductID = "product_id";
+        int expectedRecurringAmount = 0;
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        int expectedRecurringTax = 0;
+        int expectedTaxDueNow = 0;
+        int expectedTrialPeriodDays = 0;
+
+        Assert.Equal(expectedAmountDueNow, model.AmountDueNow);
+        Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedRecurringAmount, model.RecurringAmount);
+        Assert.Equal(expectedNextBillingDate, model.NextBillingDate);
+        Assert.Equal(expectedRecurringTax, model.RecurringTax);
+        Assert.Equal(expectedTaxDueNow, model.TaxDueNow);
+        Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RecurringTax = 0,
+            TaxDueNow = 0,
+            TrialPeriodDays = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscription>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RecurringTax = 0,
+            TaxDueNow = 0,
+            TrialPeriodDays = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscription>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        int expectedAmountDueNow = 0;
+        string expectedProductID = "product_id";
+        int expectedRecurringAmount = 0;
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        int expectedRecurringTax = 0;
+        int expectedTaxDueNow = 0;
+        int expectedTrialPeriodDays = 0;
+
+        Assert.Equal(expectedAmountDueNow, deserialized.AmountDueNow);
+        Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedRecurringAmount, deserialized.RecurringAmount);
+        Assert.Equal(expectedNextBillingDate, deserialized.NextBillingDate);
+        Assert.Equal(expectedRecurringTax, deserialized.RecurringTax);
+        Assert.Equal(expectedTaxDueNow, deserialized.TaxDueNow);
+        Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RecurringTax = 0,
+            TaxDueNow = 0,
+            TrialPeriodDays = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+        };
+
+        Assert.Null(model.NextBillingDate);
+        Assert.False(model.RawData.ContainsKey("next_billing_date"));
+        Assert.Null(model.RecurringTax);
+        Assert.False(model.RawData.ContainsKey("recurring_tax"));
+        Assert.Null(model.TaxDueNow);
+        Assert.False(model.RawData.ContainsKey("tax_due_now"));
+        Assert.Null(model.TrialPeriodDays);
+        Assert.False(model.RawData.ContainsKey("trial_period_days"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+
+            NextBillingDate = null,
+            RecurringTax = null,
+            TaxDueNow = null,
+            TrialPeriodDays = null,
+        };
+
+        Assert.Null(model.NextBillingDate);
+        Assert.True(model.RawData.ContainsKey("next_billing_date"));
+        Assert.Null(model.RecurringTax);
+        Assert.True(model.RawData.ContainsKey("recurring_tax"));
+        Assert.Null(model.TaxDueNow);
+        Assert.True(model.RawData.ContainsKey("tax_due_now"));
+        Assert.Null(model.TrialPeriodDays);
+        Assert.True(model.RawData.ContainsKey("trial_period_days"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+
+            NextBillingDate = null,
+            RecurringTax = null,
+            TaxDueNow = null,
+            TrialPeriodDays = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscription
+        {
+            AmountDueNow = 0,
+            ProductID = "product_id",
+            RecurringAmount = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RecurringTax = 0,
+            TaxDueNow = 0,
+            TrialPeriodDays = 0,
+        };
+
+        Subscription copied = new(model);
 
         Assert.Equal(model, copied);
     }

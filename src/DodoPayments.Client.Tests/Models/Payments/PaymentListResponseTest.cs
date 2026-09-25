@@ -29,9 +29,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -58,10 +60,12 @@ public class PaymentListResponseTest : TestBase
         };
         bool expectedDigitalProductsDelivered = true;
         bool expectedHasLicenseKey = true;
+        bool expectedIsMultiSubscription = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
             Payments::PaymentListResponsePaymentProvider.Stripe;
+        List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -82,6 +86,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCustomer, model.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, model.DigitalProductsDelivered);
         Assert.Equal(expectedHasLicenseKey, model.HasLicenseKey);
+        Assert.Equal(expectedIsMultiSubscription, model.IsMultiSubscription);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -91,6 +96,11 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
+        Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], model.SubscriptionIds[i]);
+        }
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
         Assert.Equal(expectedCardLastFour, model.CardLastFour);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
@@ -122,9 +132,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -165,9 +177,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -201,10 +215,12 @@ public class PaymentListResponseTest : TestBase
         };
         bool expectedDigitalProductsDelivered = true;
         bool expectedHasLicenseKey = true;
+        bool expectedIsMultiSubscription = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
             Payments::PaymentListResponsePaymentProvider.Stripe;
+        List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -225,6 +241,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCustomer, deserialized.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, deserialized.DigitalProductsDelivered);
         Assert.Equal(expectedHasLicenseKey, deserialized.HasLicenseKey);
+        Assert.Equal(expectedIsMultiSubscription, deserialized.IsMultiSubscription);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -234,6 +251,11 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
+        Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], deserialized.SubscriptionIds[i]);
+        }
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
         Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
@@ -265,9 +287,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -302,9 +326,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
 
@@ -348,9 +374,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
 
@@ -375,9 +403,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardLastFour = null,
@@ -432,9 +462,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardLastFour = null,
@@ -470,9 +502,11 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",

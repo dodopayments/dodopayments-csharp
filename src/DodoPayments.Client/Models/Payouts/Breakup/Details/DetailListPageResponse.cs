@@ -33,6 +33,24 @@ public sealed record class DetailListPageResponse : JsonModel
         }
     }
 
+    /// <summary>
+    /// The payout amount less every entry, in the payout's currency and its smallest unit.
+    ///
+    /// <para>The entries alone do not sum to the payout. This field holds the difference,
+    /// so the entries and this field together reconcile against the payout. It takes
+    /// either sign; see `PayoutBreakupV3Row` for what each sign means. The value
+    /// covers the whole payout, not the page.</para>
+    /// </summary>
+    public required long Unattributed
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("unattributed");
+        }
+        init { this._rawData.Set("unattributed", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -40,6 +58,7 @@ public sealed record class DetailListPageResponse : JsonModel
         {
             item.Validate();
         }
+        _ = this.Unattributed;
     }
 
     public DetailListPageResponse() { }
@@ -69,13 +88,6 @@ public sealed record class DetailListPageResponse : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public DetailListPageResponse(IReadOnlyList<DetailListResponse> items)
-        : this()
-    {
-        this.Items = items;
     }
 }
 
