@@ -522,6 +522,9 @@ public class EventTypeTest : TestBase
     [InlineData(EventType.DisputeFeesReversal)]
     [InlineData(EventType.DeflectionFees)]
     [InlineData(EventType.DeflectionFeesReversal)]
+    [InlineData(EventType.ReserveHold)]
+    [InlineData(EventType.ReserveRelease)]
+    [InlineData(EventType.ModerationFees)]
     public void Validation_Works(EventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -570,6 +573,9 @@ public class EventTypeTest : TestBase
     [InlineData(EventType.DisputeFeesReversal)]
     [InlineData(EventType.DeflectionFees)]
     [InlineData(EventType.DeflectionFeesReversal)]
+    [InlineData(EventType.ReserveHold)]
+    [InlineData(EventType.ReserveRelease)]
+    [InlineData(EventType.ModerationFees)]
     public void SerializationRoundtrip_Works(EventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

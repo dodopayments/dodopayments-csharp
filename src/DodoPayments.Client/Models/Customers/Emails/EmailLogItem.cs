@@ -146,7 +146,8 @@ public sealed record class EmailLogItem : JsonModel
     }
 
     /// <summary>
-    /// The address the email reached.
+    /// The address the email went to. On a failed email this is the address the provider
+    /// reports as bounced.
     /// </summary>
     public string? Recipient
     {

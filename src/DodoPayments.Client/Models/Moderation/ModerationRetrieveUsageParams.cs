@@ -6,76 +6,34 @@ using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 
-namespace DodoPayments.Client.Models.Payouts.Breakup.Details;
+namespace DodoPayments.Client.Models.Moderation;
 
 /// <summary>
-/// Returns paginated individual balance ledger entries for a payout. Each entry is
-/// converted into the payout's currency at the rate the payout settled at. Supports
-/// pagination via `page_size` (default 10, max 100) and `page_number` (default 0)
-/// query parameters.
+/// Shows how many billable screens you made and how close you are to your next charge.
+///
+/// <para>**Billing.** A billable screen is a live-mode screen that returns a verdict.
+/// Dodo Payments charges $0.30 for each full block of 1000 billable screens and debits
+/// the fee from your balance. Each full block is charged within one hour. Screens
+/// that do not fill a block stay unbilled until they do. Errors and test-mode screens
+/// are free and are not counted.</para>
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class DetailListParams : ParamsBase
+public record class ModerationRetrieveUsageParams : ParamsBase
 {
-    public string? PayoutID { get; init; }
-
-    /// <summary>
-    /// Page number (0-indexed). Default: 0.
-    /// </summary>
-    public int? PageNumber
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<int>("page_number");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("page_number", value);
-        }
-    }
-
-    /// <summary>
-    /// Number of items per page. Default: 10, Max: 100.
-    /// </summary>
-    public int? PageSize
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<int>("page_size");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("page_size", value);
-        }
-    }
-
-    public DetailListParams() { }
+    public ModerationRetrieveUsageParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DetailListParams(DetailListParams detailListParams)
-        : base(detailListParams)
-    {
-        this.PayoutID = detailListParams.PayoutID;
-    }
+    public ModerationRetrieveUsageParams(
+        ModerationRetrieveUsageParams moderationRetrieveUsageParams
+    )
+        : base(moderationRetrieveUsageParams) { }
 #pragma warning restore CS8618
 
-    public DetailListParams(
+    public ModerationRetrieveUsageParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
@@ -86,29 +44,25 @@ public record class DetailListParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DetailListParams(
+    ModerationRetrieveUsageParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
-        FrozenDictionary<string, JsonElement> rawQueryData,
-        string payoutID
+        FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this.PayoutID = payoutID;
     }
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static DetailListParams FromRawUnchecked(
+    public static ModerationRetrieveUsageParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
-        IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        string payoutID
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
-            FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            payoutID
+            FrozenDictionary.ToFrozenDictionary(rawQueryData)
         );
     }
 
@@ -117,7 +71,6 @@ public record class DetailListParams : ParamsBase
             FriendlyJsonPrinter.PrintValue(
                 new Dictionary<string, JsonElement>()
                 {
-                    ["PayoutID"] = JsonSerializer.SerializeToElement(this.PayoutID),
                     ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
                     ),
@@ -129,23 +82,19 @@ public record class DetailListParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(DetailListParams? other)
+    public virtual bool Equals(ModerationRetrieveUsageParams? other)
     {
         if (other == null)
         {
             return false;
         }
-        return (this.PayoutID?.Equals(other.PayoutID) ?? other.PayoutID == null)
-            && this._rawHeaderData.Equals(other._rawHeaderData)
+        return this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
     public override Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
-            options.BaseUrl.ToString().TrimEnd('/')
-                + string.Format("/payouts/{0}/breakup/details", this.PayoutID)
-        )
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/moderation/usage")
         {
             Query = this.QueryString(options),
         }.Uri;

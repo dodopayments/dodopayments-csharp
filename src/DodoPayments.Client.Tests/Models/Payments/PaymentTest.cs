@@ -55,6 +55,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -77,6 +78,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
@@ -162,6 +164,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIsMultiSubscription = true;
         bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
@@ -185,6 +188,7 @@ public class PaymentTest : TestBase
         int expectedRetryAttempt = 0;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
+        List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
@@ -251,6 +255,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], model.Disputes[i]);
         }
+        Assert.Equal(expectedIsMultiSubscription, model.IsMultiSubscription);
         Assert.Equal(expectedIsUpdatePaymentMethod, model.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -269,6 +274,11 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedRetryAttempt, model.RetryAttempt);
         Assert.Equal(expectedSettlementAmount, model.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, model.SettlementCurrency);
+        Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], model.SubscriptionIds[i]);
+        }
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
         Assert.Equal(expectedCardHolderName, model.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, model.CardIssuingCountry);
@@ -353,6 +363,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -375,6 +386,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
@@ -474,6 +486,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -496,6 +509,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
@@ -588,6 +602,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIsMultiSubscription = true;
         bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
@@ -611,6 +626,7 @@ public class PaymentTest : TestBase
         int expectedRetryAttempt = 0;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
+        List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
@@ -677,6 +693,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], deserialized.Disputes[i]);
         }
+        Assert.Equal(expectedIsMultiSubscription, deserialized.IsMultiSubscription);
         Assert.Equal(expectedIsUpdatePaymentMethod, deserialized.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -695,6 +712,11 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedRetryAttempt, deserialized.RetryAttempt);
         Assert.Equal(expectedSettlementAmount, deserialized.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, deserialized.SettlementCurrency);
+        Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], deserialized.SubscriptionIds[i]);
+        }
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
         Assert.Equal(expectedCardHolderName, deserialized.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, deserialized.CardIssuingCountry);
@@ -779,6 +801,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -801,6 +824,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
@@ -894,6 +918,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -916,6 +941,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
 
@@ -1011,6 +1037,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -1033,6 +1060,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
 
@@ -1081,6 +1109,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -1103,6 +1132,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardHolderName = null,
@@ -1223,6 +1253,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -1245,6 +1276,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardHolderName = null,
@@ -1318,6 +1350,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -1340,6 +1373,7 @@ public class PaymentTest : TestBase
             RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
+            SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,

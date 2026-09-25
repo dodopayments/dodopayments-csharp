@@ -1456,6 +1456,21 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// True when one payment starts more than one subscription. Read this field
+    /// to find the payment type. Do not read the length of `subscription_ids`. Do
+    /// not read `subscription_id` for null.
+    /// </summary>
+    public required bool IsMultiSubscription
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_multi_subscription");
+        }
+        init { this._rawData.Set("is_multi_subscription", value); }
+    }
+
+    /// <summary>
     /// Whether this payment was created solely to update a subscription's payment
     /// method (a zero-/setup-amount charge). `false` for normal charges.
     /// </summary>
@@ -1578,6 +1593,27 @@ public sealed record class Payment : JsonModel
             return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("settlement_currency");
         }
         init { this._rawData.Set("settlement_currency", value); }
+    }
+
+    /// <summary>
+    /// Every subscription that this payment starts or charges, in a stable order.
+    /// It is empty for a one-time payment. It holds the value of `subscription_id`
+    /// when the payment names one subscription.
+    /// </summary>
+    public required IReadOnlyList<string> SubscriptionIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("subscription_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "subscription_ids",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -1920,7 +1956,9 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Identifier of the subscription if payment is part of a subscription
+    /// Identifier of the subscription if payment is part of a subscription. A multi-subscription
+    /// payment leaves this null, because no single subscription owns the payment.
+    /// Read `subscription_ids` for those.
     /// </summary>
     public string? SubscriptionID
     {
@@ -1980,6 +2018,7 @@ public sealed record class Payment : JsonModel
             Customer = payment.Customer,
             DigitalProductsDelivered = payment.DigitalProductsDelivered,
             Disputes = payment.Disputes,
+            IsMultiSubscription = payment.IsMultiSubscription,
             IsUpdatePaymentMethod = payment.IsUpdatePaymentMethod,
             Metadata = payment.Metadata,
             PaymentID = payment.PaymentID,
@@ -1988,6 +2027,7 @@ public sealed record class Payment : JsonModel
             RetryAttempt = payment.RetryAttempt,
             SettlementAmount = payment.SettlementAmount,
             SettlementCurrency = payment.SettlementCurrency,
+            SubscriptionIds = payment.SubscriptionIds,
             TotalAmount = payment.TotalAmount,
             CardHolderName = payment.CardHolderName,
             CardIssuingCountry = payment.CardIssuingCountry,
@@ -2029,6 +2069,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        _ = this.IsMultiSubscription;
         _ = this.IsUpdatePaymentMethod;
         foreach (var item in this.Metadata.Values)
         {
@@ -2043,6 +2084,7 @@ public sealed record class Payment : JsonModel
         _ = this.RetryAttempt;
         _ = this.SettlementAmount;
         this.SettlementCurrency.Validate();
+        _ = this.SubscriptionIds;
         _ = this.TotalAmount;
         _ = this.CardHolderName;
         this.CardIssuingCountry?.Validate();
