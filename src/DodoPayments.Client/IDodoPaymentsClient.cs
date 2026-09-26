@@ -105,6 +105,8 @@ public interface IDodoPaymentsClient : IDisposable
     IEntitlementService Entitlements { get; }
 
     IProductCollectionService ProductCollections { get; }
+
+    IModerationService Moderation { get; }
 }
 
 /// <summary>
@@ -190,6 +192,8 @@ public interface IDodoPaymentsClientWithRawResponse : IDisposable
     IEntitlementServiceWithRawResponse Entitlements { get; }
 
     IProductCollectionServiceWithRawResponse ProductCollections { get; }
+
+    IModerationServiceWithRawResponse Moderation { get; }
 
     /// <summary>
     /// Sends a request to the Dodo Payments REST API.

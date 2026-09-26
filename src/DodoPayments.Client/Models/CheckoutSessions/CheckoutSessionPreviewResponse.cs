@@ -126,7 +126,9 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     /// The upcoming billing date for subscriptions, computed relative to now: with
     /// a trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
     /// `None` for one-time-only carts. This is a preview estimate; the authoritative
-    /// value is set when the subscription activates.
+    /// value is set when the subscription activates. For a cart of more than one
+    /// subscription, this is the earliest date of the cart. `subscriptions` gives
+    /// the date of each subscription.
     /// </summary>
     public DateTimeOffset? NextBillingDate
     {
@@ -149,6 +151,26 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
             return this._rawData.GetNullableClass<RecurringBreakup>("recurring_breakup");
         }
         init { this._rawData.Set("recurring_breakup", value); }
+    }
+
+    /// <summary>
+    /// One entry for each subscription of a cart that holds more than one. Each
+    /// subscription renews on its own schedule, so the checkout shows each one here.
+    /// </summary>
+    public IReadOnlyList<Subscription>? Subscriptions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Subscription>>("subscriptions");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscription>?>(
+                "subscriptions",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -206,7 +228,8 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     /// <summary>
     /// Per-unit trial amount after discounts, in the price currency's minor units
     /// (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
-    /// Only present for a paid trial; `None` for a free trial or no trial.
+    /// Only present for a paid trial; `None` for a free trial or no trial. Always
+    /// `None` for a cart of more than one subscription.
     /// </summary>
     public int? TrialAmount
     {
@@ -220,7 +243,9 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
 
     /// <summary>
     /// Effective trial duration in days for the subscription line, when there's a
-    /// trial (free or paid). `None` if no subscription or no trial.
+    /// trial (free or paid). `None` if no subscription or no trial. Always `None`
+    /// for a cart of more than one subscription. Read the trial of each subscription
+    /// from `subscriptions`.
     /// </summary>
     public int? TrialPeriodDays
     {
@@ -247,6 +272,10 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         _ = this.TotalPrice;
         _ = this.NextBillingDate;
         this.RecurringBreakup?.Validate();
+        foreach (var item in this.Subscriptions ?? [])
+        {
+            item.Validate();
+        }
         _ = this.TaxIDBusinessName;
         _ = this.TaxIDErrMsg;
         _ = this.TaxIDFormatName;
@@ -1243,4 +1272,148 @@ class RecurringBreakupFromRaw : IFromRawJson<RecurringBreakup>
     /// <inheritdoc/>
     public RecurringBreakup FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         RecurringBreakup.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The quote of one subscription in a cart of several.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Subscription, SubscriptionFromRaw>))]
+public sealed record class Subscription : JsonModel
+{
+    /// <summary>
+    /// The amount this subscription charges today, including tax.
+    /// </summary>
+    public required int AmountDueNow
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("amount_due_now");
+        }
+        init { this._rawData.Set("amount_due_now", value); }
+    }
+
+    /// <summary>
+    /// The subscription product.
+    /// </summary>
+    public required string ProductID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
+        init { this._rawData.Set("product_id", value); }
+    }
+
+    /// <summary>
+    /// The amount of each renewal, including tax.
+    /// </summary>
+    public required int RecurringAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("recurring_amount");
+        }
+        init { this._rawData.Set("recurring_amount", value); }
+    }
+
+    /// <summary>
+    /// A preview of the first renewal date. The date is set when the subscription activates.
+    /// </summary>
+    public DateTimeOffset? NextBillingDate
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("next_billing_date");
+        }
+        init { this._rawData.Set("next_billing_date", value); }
+    }
+
+    /// <summary>
+    /// The tax in `recurring_amount`.
+    /// </summary>
+    public int? RecurringTax
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("recurring_tax");
+        }
+        init { this._rawData.Set("recurring_tax", value); }
+    }
+
+    /// <summary>
+    /// The tax in `amount_due_now`.
+    /// </summary>
+    public int? TaxDueNow
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax_due_now");
+        }
+        init { this._rawData.Set("tax_due_now", value); }
+    }
+
+    /// <summary>
+    /// The trial duration in days. `None` when the subscription has no trial.
+    /// </summary>
+    public int? TrialPeriodDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_period_days");
+        }
+        init { this._rawData.Set("trial_period_days", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.AmountDueNow;
+        _ = this.ProductID;
+        _ = this.RecurringAmount;
+        _ = this.NextBillingDate;
+        _ = this.RecurringTax;
+        _ = this.TaxDueNow;
+        _ = this.TrialPeriodDays;
+    }
+
+    public Subscription() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Subscription(Subscription subscription)
+        : base(subscription) { }
+#pragma warning restore CS8618
+
+    public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Subscription(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionFromRaw.FromRawUnchecked"/>
+    public static Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionFromRaw : IFromRawJson<Subscription>
+{
+    /// <inheritdoc/>
+    public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Subscription.FromRawUnchecked(rawData);
 }

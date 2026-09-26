@@ -74,9 +74,10 @@ public record class DiscountCreateParams : ParamsBase
 
     /// <summary>
     /// Per-currency options (flat deduction / percentage cap + minimum subtotal).
-    /// Required for `flat` codes (must include a resolvable default); optional per-currency
-    /// caps for `percentage` codes. Per-row invariants are checked in `normalize_currency_options`,
-    /// not via `#[validate(nested)]`.
+    /// Checkout uses the row for the currency the buyer pays in. For any other currency
+    /// it converts the default row. Required for `flat` codes (must include a resolvable
+    /// default); optional per-currency caps for `percentage` codes. Per-row invariants
+    /// are checked in `normalize_currency_options`, not via `#[validate(nested)]`.
     /// </summary>
     public IReadOnlyList<CurrencyOption>? CurrencyOptions
     {
@@ -380,7 +381,8 @@ public record class DiscountCreateParams : ParamsBase
 public sealed record class CurrencyOption : JsonModel
 {
     /// <summary>
-    /// The currency this option applies to.
+    /// The currency this option applies to. The row applies when the buyer pays in
+    /// this currency.
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
@@ -393,8 +395,8 @@ public sealed record class CurrencyOption : JsonModel
     }
 
     /// <summary>
-    /// Whether this row is the default to convert from for unconfigured currencies.
-    /// At most one row per discount may be default.
+    /// Whether this row is the default to convert from when the buyer pays in a currency
+    /// that has no row. At most one row per discount may be default.
     /// </summary>
     public bool? IsDefault
     {

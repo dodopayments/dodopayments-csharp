@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -75,6 +76,21 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
+    /// True when one payment starts more than one subscription. Read this field
+    /// to find the payment type. Do not read the length of `subscription_ids`. Do
+    /// not read `subscription_id` for null.
+    /// </summary>
+    public required bool IsMultiSubscription
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_multi_subscription");
+        }
+        init { this._rawData.Set("is_multi_subscription", value); }
+    }
+
+    /// <summary>
     /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
     /// </summary>
     public required IReadOnlyDictionary<string, Misc::MetadataItem> Metadata
@@ -119,6 +135,27 @@ public sealed record class PaymentListResponse : JsonModel
             >("payment_provider");
         }
         init { this._rawData.Set("payment_provider", value); }
+    }
+
+    /// <summary>
+    /// Every subscription that this payment starts or charges, in a stable order.
+    /// It is empty for a one-time payment. It holds the value of `subscription_id`
+    /// when the payment names one subscription.
+    /// </summary>
+    public required IReadOnlyList<string> SubscriptionIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("subscription_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "subscription_ids",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public required int TotalAmount
@@ -262,12 +299,14 @@ public sealed record class PaymentListResponse : JsonModel
         this.Customer.Validate();
         _ = this.DigitalProductsDelivered;
         _ = this.HasLicenseKey;
+        _ = this.IsMultiSubscription;
         foreach (var item in this.Metadata.Values)
         {
             item.Validate();
         }
         _ = this.PaymentID;
         this.PaymentProvider.Validate();
+        _ = this.SubscriptionIds;
         _ = this.TotalAmount;
         _ = this.CardLastFour;
         _ = this.CardNetwork;

@@ -343,6 +343,30 @@ public sealed record class CheckoutSessionFlags : JsonModel
     }
 
     /// <summary>
+    /// If true, the customer must give the name on the card to pay by card. The
+    /// checkout page enforces this. Other payment methods ignore it.
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? RequireCardholderName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("require_cardholder_name");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("require_cardholder_name", value);
+        }
+    }
+
+    /// <summary>
     /// If true, the customer must provide a phone number to complete checkout. Requires
     /// `allow_phone_number_collection` to also be true.
     ///
@@ -440,6 +464,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AllowTaxID;
         _ = this.AlwaysCreateNewCustomer;
         _ = this.RedirectImmediately;
+        _ = this.RequireCardholderName;
         _ = this.RequirePhoneNumber;
         _ = this.RequireTaxID;
         _ = this.SinglePage;

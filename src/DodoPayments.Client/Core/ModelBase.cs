@@ -9,6 +9,7 @@ using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Meters;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Moderation;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.Products.LocalizedPrices;
 using DodoPayments.Client.Models.Subscriptions;
@@ -118,6 +119,9 @@ public abstract record class ModelBase
                 string,
                 ProductCollections::ProductCollectionUpdateParamsProrationBillingModeOnUpgrade
             >(),
+            new ApiEnumConverter<string, ModerationCategory>(),
+            new ApiEnumConverter<string, ModerationDecision>(),
+            new ApiEnumConverter<string, ModerationProvenance>(),
         },
     };
 
