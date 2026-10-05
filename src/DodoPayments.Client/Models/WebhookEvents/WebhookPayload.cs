@@ -2592,6 +2592,29 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// The caller that cancelled a subscription or scheduled its cancel.
+    /// </summary>
+    public Subscriptions::SubscriptionCancelledBy? CancelledBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Subscriptions::SubscriptionCancelledBy>(
+                "cancelled_by"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("cancelled_by", value);
+        }
+    }
+
+    /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
     public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
@@ -2820,6 +2843,7 @@ public sealed record class Subscription : JsonModel
             CancellationComment = subscription.CancellationComment,
             CancellationFeedback = subscription.CancellationFeedback,
             CancelledAt = subscription.CancelledAt,
+            CancelledBy = subscription.CancelledBy,
             CustomFieldResponses = subscription.CustomFieldResponses,
             CustomerBusinessName = subscription.CustomerBusinessName,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
@@ -2880,6 +2904,7 @@ public sealed record class Subscription : JsonModel
         _ = this.CancellationComment;
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
+        this.CancelledBy?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
@@ -3192,6 +3217,44 @@ public sealed record class Refund : JsonModel
     }
 
     /// <summary>
+    /// The reference number that the card network or the bank gives to the refund.
+    /// The customer can give this number to their bank to trace the refund. It is
+    /// null until the payment processor sends it.
+    /// </summary>
+    public string? NetworkReference
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("network_reference");
+        }
+        init { this._rawData.Set("network_reference", value); }
+    }
+
+    /// <summary>
+    /// The kind of reference number that the card network or the bank gives to a refund.
+    /// </summary>
+    public ApiEnum<string, Refunds::RefundNetworkReferenceType>? NetworkReferenceType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Refunds::RefundNetworkReferenceType>
+            >("network_reference_type");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("network_reference_type", value);
+        }
+    }
+
+    /// <summary>
     /// The reason provided for the refund, if any. Optional.
     /// </summary>
     public string? Reason
@@ -3228,6 +3291,8 @@ public sealed record class Refund : JsonModel
             Status = refund.Status,
             Amount = refund.Amount,
             Currency = refund.Currency,
+            NetworkReference = refund.NetworkReference,
+            NetworkReferenceType = refund.NetworkReferenceType,
             Reason = refund.Reason,
         };
 
@@ -3248,6 +3313,8 @@ public sealed record class Refund : JsonModel
         this.Status.Validate();
         _ = this.Amount;
         this.Currency?.Validate();
+        _ = this.NetworkReference;
+        this.NetworkReferenceType?.Validate();
         _ = this.Reason;
         if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Refund")))
         {

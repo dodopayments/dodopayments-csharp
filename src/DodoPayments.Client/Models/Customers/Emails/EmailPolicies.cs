@@ -15,7 +15,8 @@ namespace DodoPayments.Client.Models.Customers.Emails;
 public sealed record class EmailPolicies : JsonModel
 {
     /// <summary>
-    /// A permanent failure was recorded, so the same address would be a no-op.
+    /// A permanent failure was recorded, so a send to the same address delivers nothing.
+    /// It is false for a suppressed address that a resend can clear.
     /// </summary>
     public required bool RequiresDifferentAddress
     {

@@ -1104,6 +1104,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -1128,8 +1129,6 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("customization"));
         Assert.Null(model.FeatureFlags);
         Assert.False(model.RawData.ContainsKey("feature_flags"));
-        Assert.Null(model.MinimalAddress);
-        Assert.False(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.ShortLink);
         Assert.False(model.RawData.ContainsKey("short_link"));
         Assert.Null(model.ShowSavedPaymentMethods);
@@ -1189,6 +1188,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -1263,6 +1263,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -1284,7 +1285,6 @@ public class CheckoutSessionRequestTest : TestBase
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
-            MinimalAddress = null,
             ShortLink = null,
             ShowSavedPaymentMethods = null,
         };
@@ -1295,8 +1295,6 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("customization"));
         Assert.Null(model.FeatureFlags);
         Assert.False(model.RawData.ContainsKey("feature_flags"));
-        Assert.Null(model.MinimalAddress);
-        Assert.False(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.ShortLink);
         Assert.False(model.RawData.ContainsKey("short_link"));
         Assert.Null(model.ShowSavedPaymentMethods);
@@ -1356,6 +1354,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -1377,7 +1376,6 @@ public class CheckoutSessionRequestTest : TestBase
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
-            MinimalAddress = null,
             ShortLink = null,
             ShowSavedPaymentMethods = null,
         };
@@ -1486,7 +1484,6 @@ public class CheckoutSessionRequestTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
         };
@@ -1515,6 +1512,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.MinimalAddress);
+        Assert.False(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ProductCollectionID);
@@ -1628,7 +1627,6 @@ public class CheckoutSessionRequestTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
         };
@@ -1737,7 +1735,6 @@ public class CheckoutSessionRequestTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
 
@@ -1753,6 +1750,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = null,
             MandateMinAmountInrPaise = null,
             Metadata = null,
+            MinimalAddress = null,
             PaymentMethodID = null,
             ProductCollectionID = null,
             ReturnUrl = null,
@@ -1784,6 +1782,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(model.Metadata);
         Assert.True(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.MinimalAddress);
+        Assert.True(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ProductCollectionID);
@@ -1897,7 +1897,6 @@ public class CheckoutSessionRequestTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
 
@@ -1913,6 +1912,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = null,
             MandateMinAmountInrPaise = null,
             Metadata = null,
+            MinimalAddress = null,
             PaymentMethodID = null,
             ProductCollectionID = null,
             ReturnUrl = null,
