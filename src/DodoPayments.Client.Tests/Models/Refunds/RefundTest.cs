@@ -33,6 +33,8 @@ public class RefundTest : TestBase
             Status = RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -54,6 +56,9 @@ public class RefundTest : TestBase
         ApiEnum<string, RefundStatus> expectedStatus = RefundStatus.Succeeded;
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        string expectedNetworkReference = "network_reference";
+        ApiEnum<string, RefundNetworkReferenceType> expectedNetworkReferenceType =
+            RefundNetworkReferenceType.AcquirerReferenceNumber;
         string expectedReason = "reason";
 
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -73,6 +78,8 @@ public class RefundTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedNetworkReference, model.NetworkReference);
+        Assert.Equal(expectedNetworkReferenceType, model.NetworkReferenceType);
         Assert.Equal(expectedReason, model.Reason);
     }
 
@@ -99,6 +106,8 @@ public class RefundTest : TestBase
             Status = RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -131,6 +140,8 @@ public class RefundTest : TestBase
             Status = RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -156,6 +167,9 @@ public class RefundTest : TestBase
         ApiEnum<string, RefundStatus> expectedStatus = RefundStatus.Succeeded;
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        string expectedNetworkReference = "network_reference";
+        ApiEnum<string, RefundNetworkReferenceType> expectedNetworkReferenceType =
+            RefundNetworkReferenceType.AcquirerReferenceNumber;
         string expectedReason = "reason";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -175,6 +189,8 @@ public class RefundTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedNetworkReference, deserialized.NetworkReference);
+        Assert.Equal(expectedNetworkReferenceType, deserialized.NetworkReferenceType);
         Assert.Equal(expectedReason, deserialized.Reason);
     }
 
@@ -201,6 +217,8 @@ public class RefundTest : TestBase
             Status = RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -234,6 +252,10 @@ public class RefundTest : TestBase
         Assert.False(model.RawData.ContainsKey("amount"));
         Assert.Null(model.Currency);
         Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.NetworkReference);
+        Assert.False(model.RawData.ContainsKey("network_reference"));
+        Assert.Null(model.NetworkReferenceType);
+        Assert.False(model.RawData.ContainsKey("network_reference_type"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
     }
@@ -288,6 +310,8 @@ public class RefundTest : TestBase
 
             Amount = null,
             Currency = null,
+            NetworkReference = null,
+            NetworkReferenceType = null,
             Reason = null,
         };
 
@@ -295,6 +319,10 @@ public class RefundTest : TestBase
         Assert.True(model.RawData.ContainsKey("amount"));
         Assert.Null(model.Currency);
         Assert.True(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.NetworkReference);
+        Assert.True(model.RawData.ContainsKey("network_reference"));
+        Assert.Null(model.NetworkReferenceType);
+        Assert.True(model.RawData.ContainsKey("network_reference_type"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
     }
@@ -323,6 +351,8 @@ public class RefundTest : TestBase
 
             Amount = null,
             Currency = null,
+            NetworkReference = null,
+            NetworkReferenceType = null,
             Reason = null,
         };
 
@@ -352,6 +382,8 @@ public class RefundTest : TestBase
             Status = RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 

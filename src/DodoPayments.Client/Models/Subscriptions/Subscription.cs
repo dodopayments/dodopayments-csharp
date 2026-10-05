@@ -440,6 +440,20 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// The caller that cancelled the subscription or scheduled its cancel. `null`
+    /// when no caller is known, for example when the system cancelled the subscription.
+    /// </summary>
+    public SubscriptionCancelledBy? CancelledBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionCancelledBy>("cancelled_by");
+        }
+        init { this._rawData.Set("cancelled_by", value); }
+    }
+
+    /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
     public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
@@ -647,6 +661,7 @@ public sealed record class Subscription : JsonModel
         _ = this.CancellationComment;
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
+        this.CancelledBy?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();

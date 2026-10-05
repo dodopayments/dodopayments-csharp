@@ -68,6 +68,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, EmailFailureCode>(),
             new ApiEnumConverter<string, EmailLogStatus>(),
             new ApiEnumConverter<string, BlockedCustomerSource>(),
+            new ApiEnumConverter<string, Refunds::RefundNetworkReferenceType>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),
             new ApiEnumConverter<string, Refunds::Status>(),
             new ApiEnumConverter<string, DisputeDisputeStage>(),

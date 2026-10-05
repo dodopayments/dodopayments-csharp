@@ -118,6 +118,36 @@ public sealed record class RefundListItem : JsonModel
     }
 
     /// <summary>
+    /// The reference number that the card network or the bank gives to the refund.
+    /// The customer can give this number to their bank to trace the refund. It is
+    /// null until the payment processor sends it.
+    /// </summary>
+    public string? NetworkReference
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("network_reference");
+        }
+        init { this._rawData.Set("network_reference", value); }
+    }
+
+    /// <summary>
+    /// The kind of `network_reference`: ARN, STAN or RRN.
+    /// </summary>
+    public ApiEnum<string, RefundNetworkReferenceType>? NetworkReferenceType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, RefundNetworkReferenceType>>(
+                "network_reference_type"
+            );
+        }
+        init { this._rawData.Set("network_reference_type", value); }
+    }
+
+    /// <summary>
     /// The reason provided for the refund, if any. Optional.
     /// </summary>
     public string? Reason
@@ -141,6 +171,8 @@ public sealed record class RefundListItem : JsonModel
         this.Status.Validate();
         _ = this.Amount;
         this.Currency?.Validate();
+        _ = this.NetworkReference;
+        this.NetworkReferenceType?.Validate();
         _ = this.Reason;
     }
 

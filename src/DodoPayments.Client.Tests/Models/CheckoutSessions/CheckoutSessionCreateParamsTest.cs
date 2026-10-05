@@ -423,6 +423,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -447,8 +448,6 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("customization"));
         Assert.Null(parameters.FeatureFlags);
         Assert.False(parameters.RawBodyData.ContainsKey("feature_flags"));
-        Assert.Null(parameters.MinimalAddress);
-        Assert.False(parameters.RawBodyData.ContainsKey("minimal_address"));
         Assert.Null(parameters.ShortLink);
         Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
@@ -508,6 +507,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -529,7 +529,6 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
-            MinimalAddress = null,
             ShortLink = null,
             ShowSavedPaymentMethods = null,
         };
@@ -540,8 +539,6 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("customization"));
         Assert.Null(parameters.FeatureFlags);
         Assert.False(parameters.RawBodyData.ContainsKey("feature_flags"));
-        Assert.Null(parameters.MinimalAddress);
-        Assert.False(parameters.RawBodyData.ContainsKey("minimal_address"));
         Assert.Null(parameters.ShortLink);
         Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
@@ -649,7 +646,6 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
         };
@@ -678,6 +674,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.MinimalAddress);
+        Assert.False(parameters.RawBodyData.ContainsKey("minimal_address"));
         Assert.Null(parameters.PaymentMethodID);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ProductCollectionID);
@@ -791,7 +789,6 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 RequireTaxID = true,
                 SinglePage = true,
             },
-            MinimalAddress = true,
             ShortLink = true,
             ShowSavedPaymentMethods = true,
 
@@ -807,6 +804,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Force3ds = null,
             MandateMinAmountInrPaise = null,
             Metadata = null,
+            MinimalAddress = null,
             PaymentMethodID = null,
             ProductCollectionID = null,
             ReturnUrl = null,
@@ -838,6 +836,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.MinimalAddress);
+        Assert.True(parameters.RawBodyData.ContainsKey("minimal_address"));
         Assert.Null(parameters.PaymentMethodID);
         Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ProductCollectionID);
