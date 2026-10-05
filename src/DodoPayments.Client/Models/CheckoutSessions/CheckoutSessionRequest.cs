@@ -75,7 +75,14 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
-    /// This field is ingored if adaptive pricing is disabled
+    /// The currency to charge the customer in.
+    ///
+    /// <para>Adaptive pricing must be enabled for the business. The customer then
+    /// pays in this currency. If you do not set it, the currency comes from the
+    /// billing country.</para>
+    ///
+    /// <para>If adaptive pricing is disabled, the API discards this field. The currency
+    /// then comes from the product price, or from the billing country.</para>
     /// </summary>
     public ApiEnum<string, Currency>? BillingCurrency
     {
@@ -297,6 +304,9 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// <summary>
     /// If true, only zipcode is required when confirm is true; other address fields
     /// remain optional
+    ///
+    /// <para>Default is true when `feature_flags.single_page` is true. Otherwise,
+    /// default is false.</para>
     /// </summary>
     public bool? MinimalAddress
     {
@@ -305,15 +315,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
             this._rawData.Freeze();
             return this._rawData.GetNullableStruct<bool>("minimal_address");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("minimal_address", value);
-        }
+        init { this._rawData.Set("minimal_address", value); }
     }
 
     /// <summary>

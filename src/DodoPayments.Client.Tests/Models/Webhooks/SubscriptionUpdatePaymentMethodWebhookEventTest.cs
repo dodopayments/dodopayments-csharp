@@ -108,6 +108,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -253,6 +259,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -411,6 +423,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -570,6 +588,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -722,6 +746,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -880,6 +910,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1033,6 +1069,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1188,6 +1230,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1331,6 +1379,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -1443,6 +1497,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         Assert.Equal(expectedCancellationComment, model.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.Equal(expectedCancelledBy, model.CancelledBy);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -1559,6 +1614,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1714,6 +1775,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1865,6 +1932,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -1977,6 +2050,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
         Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -2093,6 +2167,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -2276,6 +2356,8 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
 
         Assert.Null(model.CancellationFeedback);
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.CancelledBy);
+        Assert.False(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -2534,11 +2616,14 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
+            CancelledBy = null,
             ScheduledChange = null,
         };
 
         Assert.Null(model.CancellationFeedback);
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.CancelledBy);
+        Assert.False(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -2669,6 +2754,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
+            CancelledBy = null,
             ScheduledChange = null,
         };
 
@@ -2765,6 +2851,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -2904,6 +2996,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3018,6 +3116,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3171,6 +3275,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3301,6 +3411,12 @@ public class SubscriptionUpdatePaymentMethodWebhookEventDataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,

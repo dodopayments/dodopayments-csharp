@@ -564,6 +564,27 @@ public sealed record class SubscriptionPlanChangedWebhookEventData : JsonModel
     }
 
     /// <summary>
+    /// The caller that cancelled a subscription or scheduled its cancel.
+    /// </summary>
+    public SubscriptionCancelledBy? CancelledBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionCancelledBy>("cancelled_by");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("cancelled_by", value);
+        }
+    }
+
+    /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
     public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
@@ -787,6 +808,7 @@ public sealed record class SubscriptionPlanChangedWebhookEventData : JsonModel
             CancellationComment = subscriptionPlanChangedWebhookEventData.CancellationComment,
             CancellationFeedback = subscriptionPlanChangedWebhookEventData.CancellationFeedback,
             CancelledAt = subscriptionPlanChangedWebhookEventData.CancelledAt,
+            CancelledBy = subscriptionPlanChangedWebhookEventData.CancelledBy,
             CustomFieldResponses = subscriptionPlanChangedWebhookEventData.CustomFieldResponses,
             CustomerBusinessName = subscriptionPlanChangedWebhookEventData.CustomerBusinessName,
             DiscountCyclesRemaining =
@@ -848,6 +870,7 @@ public sealed record class SubscriptionPlanChangedWebhookEventData : JsonModel
         _ = this.CancellationComment;
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
+        this.CancelledBy?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
