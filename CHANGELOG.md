@@ -1,13 +1,5 @@
 # Changelog
 
-## [6.37.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.36.0...v6.37.0) (2026-10-05)
-
-
-### Features
-
-* **api:** refund network references and subscription cancelled_by ([4371a64](https://github.com/dodopayments/dodopayments-csharp/commit/4371a6412222b8576a02771b908ce3bfa3c667a8))
-* **api:** refund network references and subscription cancelled_by ([6211fc5](https://github.com/dodopayments/dodopayments-csharp/commit/6211fc5aba02b9783ee2555e22549fec7f16e4d6))
-
 ## [6.36.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.35.0...v6.36.0) (2026-09-25)
 
 
