@@ -104,6 +104,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -246,6 +252,12 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -357,6 +369,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationComment, model.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.Equal(expectedCancelledBy, model.CancelledBy);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -472,6 +485,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -625,6 +644,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -774,6 +799,12 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -885,6 +916,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -1000,6 +1032,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1152,6 +1190,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CancelledBy);
+        Assert.False(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.CustomFieldResponses);
         Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.CustomerBusinessName);
@@ -1363,6 +1403,7 @@ public class SubscriptionTest : TestBase
             CancellationComment = null,
             CancellationFeedback = null,
             CancelledAt = null,
+            CancelledBy = null,
             CustomFieldResponses = null,
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
@@ -1382,6 +1423,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CancelledBy);
+        Assert.True(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.CustomFieldResponses);
         Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.CustomerBusinessName);
@@ -1499,6 +1542,7 @@ public class SubscriptionTest : TestBase
             CancellationComment = null,
             CancellationFeedback = null,
             CancelledAt = null,
+            CancelledBy = null,
             CustomFieldResponses = null,
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
@@ -1607,6 +1651,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,

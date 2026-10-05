@@ -339,6 +339,20 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
+    /// The caller that cancelled the subscription or scheduled its cancel. `null`
+    /// when no caller is known, for example when the system cancelled the subscription.
+    /// </summary>
+    public SubscriptionCancelledBy? CancelledBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionCancelledBy>("cancelled_by");
+        }
+        init { this._rawData.Set("cancelled_by", value); }
+    }
+
+    /// <summary>
     /// Business / legal name associated with the tax id (B2B). When set this is
     /// used on the invoice in place of the customer's personal name.
     /// </summary>
@@ -491,6 +505,7 @@ public sealed record class SubscriptionListResponse : JsonModel
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
         _ = this.CancelledAt;
+        this.CancelledBy?.Validate();
         _ = this.CustomerBusinessName;
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;

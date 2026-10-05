@@ -40,6 +40,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 {
                     Currency = Currency.Aed,
                     CustomerCredits = 0,
+                    CustomerCreditsCurrency = Currency.Aed,
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
@@ -136,6 +137,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -213,6 +220,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -309,6 +317,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -394,6 +408,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 {
                     Currency = Currency.Aed,
                     CustomerCredits = 0,
+                    CustomerCreditsCurrency = Currency.Aed,
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
@@ -490,6 +505,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -581,6 +602,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 {
                     Currency = Currency.Aed,
                     CustomerCredits = 0,
+                    CustomerCreditsCurrency = Currency.Aed,
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
@@ -677,6 +699,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -761,6 +789,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -857,6 +886,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -942,6 +977,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 {
                     Currency = Currency.Aed,
                     CustomerCredits = 0,
+                    CustomerCreditsCurrency = Currency.Aed,
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
@@ -1038,6 +1074,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1123,6 +1165,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 {
                     Currency = Currency.Aed,
                     CustomerCredits = 0,
+                    CustomerCreditsCurrency = Currency.Aed,
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
@@ -1219,6 +1262,12 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationComment = "cancellation_comment",
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1307,6 +1356,7 @@ public class ImmediateChargeTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -1337,6 +1387,7 @@ public class ImmediateChargeTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -1380,6 +1431,7 @@ public class ImmediateChargeTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -1424,6 +1476,7 @@ public class ImmediateChargeTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -1461,6 +1514,7 @@ public class ImmediateChargeTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -1504,6 +1558,7 @@ public class ImmediateChargeTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -1542,6 +1597,7 @@ public class ImmediateChargeTest : TestBase
             {
                 Currency = Currency.Aed,
                 CustomerCredits = 0,
+                CustomerCreditsCurrency = Currency.Aed,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -2496,6 +2552,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2505,6 +2562,7 @@ public class SummaryTest : TestBase
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         long expectedCustomerCredits = 0;
+        ApiEnum<string, Currency> expectedCustomerCreditsCurrency = Currency.Aed;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
@@ -2513,6 +2571,7 @@ public class SummaryTest : TestBase
 
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCustomerCredits, model.CustomerCredits);
+        Assert.Equal(expectedCustomerCreditsCurrency, model.CustomerCreditsCurrency);
         Assert.Equal(expectedSettlementAmount, model.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, model.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
@@ -2527,6 +2586,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2547,6 +2607,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2563,6 +2624,7 @@ public class SummaryTest : TestBase
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         long expectedCustomerCredits = 0;
+        ApiEnum<string, Currency> expectedCustomerCreditsCurrency = Currency.Aed;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
@@ -2571,6 +2633,7 @@ public class SummaryTest : TestBase
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCustomerCredits, deserialized.CustomerCredits);
+        Assert.Equal(expectedCustomerCreditsCurrency, deserialized.CustomerCreditsCurrency);
         Assert.Equal(expectedSettlementAmount, deserialized.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, deserialized.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
@@ -2585,6 +2648,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2602,6 +2666,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2620,6 +2685,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2635,6 +2701,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2656,6 +2723,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2674,6 +2742,7 @@ public class SummaryTest : TestBase
         {
             Currency = Currency.Aed,
             CustomerCredits = 0,
+            CustomerCreditsCurrency = Currency.Aed,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,

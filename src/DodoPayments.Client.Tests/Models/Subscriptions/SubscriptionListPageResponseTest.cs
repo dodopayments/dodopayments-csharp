@@ -55,6 +55,12 @@ public class SubscriptionListPageResponseTest : TestBase
                     TaxInclusive = true,
                     TrialPeriodDays = 0,
                     CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelledBy = new()
+                    {
+                        ActorType = ActorType.Customer,
+                        Email = "email",
+                        Name = "name",
+                    },
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
@@ -127,6 +133,12 @@ public class SubscriptionListPageResponseTest : TestBase
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
@@ -210,6 +222,12 @@ public class SubscriptionListPageResponseTest : TestBase
                     TaxInclusive = true,
                     TrialPeriodDays = 0,
                     CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelledBy = new()
+                    {
+                        ActorType = ActorType.Customer,
+                        Email = "email",
+                        Name = "name",
+                    },
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
@@ -296,6 +314,12 @@ public class SubscriptionListPageResponseTest : TestBase
                     TaxInclusive = true,
                     TrialPeriodDays = 0,
                     CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelledBy = new()
+                    {
+                        ActorType = ActorType.Customer,
+                        Email = "email",
+                        Name = "name",
+                    },
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
@@ -375,6 +399,12 @@ public class SubscriptionListPageResponseTest : TestBase
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelledBy = new()
+                {
+                    ActorType = ActorType.Customer,
+                    Email = "email",
+                    Name = "name",
+                },
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
@@ -458,6 +488,12 @@ public class SubscriptionListPageResponseTest : TestBase
                     TaxInclusive = true,
                     TrialPeriodDays = 0,
                     CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelledBy = new()
+                    {
+                        ActorType = ActorType.Customer,
+                        Email = "email",
+                        Name = "name",
+                    },
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
@@ -538,6 +574,12 @@ public class SubscriptionListPageResponseTest : TestBase
                     TaxInclusive = true,
                     TrialPeriodDays = 0,
                     CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelledBy = new()
+                    {
+                        ActorType = ActorType.Customer,
+                        Email = "email",
+                        Name = "name",
+                    },
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",

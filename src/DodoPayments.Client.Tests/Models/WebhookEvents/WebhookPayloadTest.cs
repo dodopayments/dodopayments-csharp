@@ -83,6 +83,9 @@ public class WebhookPayloadTest : TestBase
                         Status = Refunds::RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
+                        NetworkReference = "network_reference",
+                        NetworkReferenceType =
+                            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                         Reason = "reason",
                     },
                 ],
@@ -198,6 +201,9 @@ public class WebhookPayloadTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -323,6 +329,9 @@ public class WebhookPayloadTest : TestBase
                         Status = Refunds::RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
+                        NetworkReference = "network_reference",
+                        NetworkReferenceType =
+                            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                         Reason = "reason",
                     },
                 ],
@@ -452,6 +461,9 @@ public class WebhookPayloadTest : TestBase
                         Status = Refunds::RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
+                        NetworkReference = "network_reference",
+                        NetworkReferenceType =
+                            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                         Reason = "reason",
                     },
                 ],
@@ -574,6 +586,9 @@ public class WebhookPayloadTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -699,6 +714,9 @@ public class WebhookPayloadTest : TestBase
                         Status = Refunds::RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
+                        NetworkReference = "network_reference",
+                        NetworkReferenceType =
+                            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                         Reason = "reason",
                     },
                 ],
@@ -822,6 +840,9 @@ public class WebhookPayloadTest : TestBase
                         Status = Refunds::RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
+                        NetworkReference = "network_reference",
+                        NetworkReferenceType =
+                            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                         Reason = "reason",
                     },
                 ],
@@ -947,6 +968,9 @@ public class DataTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -1096,6 +1120,12 @@ public class DataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1174,6 +1204,8 @@ public class DataTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
         value.Validate();
@@ -1447,6 +1479,9 @@ public class DataTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -1599,6 +1634,12 @@ public class DataTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1680,6 +1721,8 @@ public class DataTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -1983,6 +2026,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -2093,6 +2139,8 @@ public class PaymentTest : TestBase
                 Status = Refunds::RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
+                NetworkReference = "network_reference",
+                NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                 Reason = "reason",
             },
         ];
@@ -2293,6 +2341,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -2413,6 +2464,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -2530,6 +2584,8 @@ public class PaymentTest : TestBase
                 Status = Refunds::RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
+                NetworkReference = "network_reference",
+                NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                 Reason = "reason",
             },
         ];
@@ -2730,6 +2786,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -2847,6 +2906,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -2966,6 +3028,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3080,6 +3145,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3204,6 +3272,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3323,6 +3394,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3439,6 +3513,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3514,6 +3591,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3652,6 +3732,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3749,6 +3832,9 @@ public class PaymentTest : TestBase
                     Status = Refunds::RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
+                    NetworkReference = "network_reference",
+                    NetworkReferenceType =
+                        Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
                     Reason = "reason",
                 },
             ],
@@ -3904,6 +3990,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -4053,6 +4145,12 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, Subscriptions::CancellationFeedback> expectedCancellationFeedback =
             Subscriptions::CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        Subscriptions::SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = Subscriptions::ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -4166,6 +4264,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationComment, model.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.Equal(expectedCancelledBy, model.CancelledBy);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -4283,6 +4382,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -4437,6 +4542,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -4593,6 +4704,12 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, Subscriptions::CancellationFeedback> expectedCancellationFeedback =
             Subscriptions::CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        Subscriptions::SubscriptionCancelledBy expectedCancelledBy = new()
+        {
+            ActorType = Subscriptions::ActorType.Customer,
+            Email = "email",
+            Name = "name",
+        };
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -4706,6 +4823,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
         Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -4823,6 +4941,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -5006,6 +5130,8 @@ public class SubscriptionTest : TestBase
 
         Assert.Null(model.CancellationFeedback);
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.CancelledBy);
+        Assert.False(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -5264,11 +5390,14 @@ public class SubscriptionTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
+            CancelledBy = null,
             ScheduledChange = null,
         };
 
         Assert.Null(model.CancellationFeedback);
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.CancelledBy);
+        Assert.False(model.RawData.ContainsKey("cancelled_by"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -5399,6 +5528,7 @@ public class SubscriptionTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
+            CancelledBy = null,
             ScheduledChange = null,
         };
 
@@ -5495,6 +5625,12 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -5634,6 +5770,12 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -5748,6 +5890,12 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -5901,6 +6049,12 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             ScheduledChange = new()
             {
                 ID = "id",
@@ -6031,6 +6185,12 @@ public class SubscriptionTest : TestBase
             CancellationComment = "cancellation_comment",
             CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelledBy = new()
+            {
+                ActorType = Subscriptions::ActorType.Customer,
+                Email = "email",
+                Name = "name",
+            },
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -6230,6 +6390,8 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -6251,6 +6413,9 @@ public class RefundTest : TestBase
         ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        string expectedNetworkReference = "network_reference";
+        ApiEnum<string, Refunds::RefundNetworkReferenceType> expectedNetworkReferenceType =
+            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber;
         string expectedReason = "reason";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
@@ -6271,6 +6436,8 @@ public class RefundTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedNetworkReference, model.NetworkReference);
+        Assert.Equal(expectedNetworkReferenceType, model.NetworkReferenceType);
         Assert.Equal(expectedReason, model.Reason);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
@@ -6298,6 +6465,8 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -6330,6 +6499,8 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -6355,6 +6526,9 @@ public class RefundTest : TestBase
         ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        string expectedNetworkReference = "network_reference";
+        ApiEnum<string, Refunds::RefundNetworkReferenceType> expectedNetworkReferenceType =
+            Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber;
         string expectedReason = "reason";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
@@ -6375,6 +6549,8 @@ public class RefundTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedNetworkReference, deserialized.NetworkReference);
+        Assert.Equal(expectedNetworkReferenceType, deserialized.NetworkReferenceType);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
@@ -6402,6 +6578,8 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
@@ -6430,11 +6608,14 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
+            NetworkReference = "network_reference",
             Reason = "reason",
         };
 
         Assert.Null(model.Currency);
         Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.NetworkReferenceType);
+        Assert.False(model.RawData.ContainsKey("network_reference_type"));
     }
 
     [Fact]
@@ -6459,6 +6640,7 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
+            NetworkReference = "network_reference",
             Reason = "reason",
         };
 
@@ -6487,14 +6669,18 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
+            NetworkReference = "network_reference",
             Reason = "reason",
 
             // Null should be interpreted as omitted for these properties
             Currency = null,
+            NetworkReferenceType = null,
         };
 
         Assert.Null(model.Currency);
         Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.NetworkReferenceType);
+        Assert.False(model.RawData.ContainsKey("network_reference_type"));
     }
 
     [Fact]
@@ -6519,10 +6705,12 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
+            NetworkReference = "network_reference",
             Reason = "reason",
 
             // Null should be interpreted as omitted for these properties
             Currency = null,
+            NetworkReferenceType = null,
         };
 
         model.Validate();
@@ -6550,10 +6738,13 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
         };
 
         Assert.Null(model.Amount);
         Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.NetworkReference);
+        Assert.False(model.RawData.ContainsKey("network_reference"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
     }
@@ -6580,6 +6771,7 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
         };
 
         model.Validate();
@@ -6607,13 +6799,17 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
 
             Amount = null,
+            NetworkReference = null,
             Reason = null,
         };
 
         Assert.Null(model.Amount);
         Assert.True(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.NetworkReference);
+        Assert.True(model.RawData.ContainsKey("network_reference"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
     }
@@ -6640,8 +6836,10 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
 
             Amount = null,
+            NetworkReference = null,
             Reason = null,
         };
 
@@ -6671,6 +6869,8 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Currency = Currency.Aed,
+            NetworkReference = "network_reference",
+            NetworkReferenceType = Refunds::RefundNetworkReferenceType.AcquirerReferenceNumber,
             Reason = "reason",
         };
 
