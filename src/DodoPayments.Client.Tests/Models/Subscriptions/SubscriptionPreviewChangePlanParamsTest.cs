@@ -22,6 +22,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -29,6 +30,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
@@ -41,6 +43,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelOlderPaymentLink = true;
         bool expectedCancelScheduledChangePlan = true;
         bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
@@ -53,6 +56,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             SubscriptionPreviewChangePlanParamsOnPaymentFailure
         > expectedOnPaymentFailure =
             SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange;
+        string expectedReturnUrl = "return_url";
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedProductID, parameters.ProductID);
@@ -68,6 +72,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         {
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
+        Assert.Equal(expectedCancelOlderPaymentLink, parameters.CancelOlderPaymentLink);
         Assert.Equal(expectedCancelScheduledChangePlan, parameters.CancelScheduledChangePlan);
         Assert.Equal(expectedCollectViaPaymentLink, parameters.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
@@ -87,6 +92,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedOnPaymentFailure, parameters.OnPaymentFailure);
+        Assert.Equal(expectedReturnUrl, parameters.ReturnUrl);
     }
 
     [Fact]
@@ -105,8 +111,11 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
+        Assert.Null(parameters.CancelOlderPaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancel_older_payment_link"));
         Assert.Null(parameters.CancelScheduledChangePlan);
         Assert.False(parameters.RawBodyData.ContainsKey("cancel_scheduled_change_plan"));
         Assert.Null(parameters.CollectViaPaymentLink);
@@ -131,13 +140,17 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
 
             // Null should be interpreted as omitted for these properties
+            CancelOlderPaymentLink = null,
             CancelScheduledChangePlan = null,
             CollectViaPaymentLink = null,
             EffectiveAt = null,
         };
 
+        Assert.Null(parameters.CancelOlderPaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancel_older_payment_link"));
         Assert.Null(parameters.CancelScheduledChangePlan);
         Assert.False(parameters.RawBodyData.ContainsKey("cancel_scheduled_change_plan"));
         Assert.Null(parameters.CollectViaPaymentLink);
@@ -156,6 +169,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
@@ -173,6 +187,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
         Assert.False(parameters.RawBodyData.ContainsKey("on_payment_failure"));
+        Assert.Null(parameters.ReturnUrl);
+        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
     }
 
     [Fact]
@@ -185,6 +201,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
@@ -195,6 +212,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
+            ReturnUrl = null,
         };
 
         Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
@@ -209,6 +227,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
         Assert.True(parameters.RawBodyData.ContainsKey("on_payment_failure"));
+        Assert.Null(parameters.ReturnUrl);
+        Assert.True(parameters.RawBodyData.ContainsKey("return_url"));
     }
 
     [Fact]
@@ -247,6 +267,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -254,6 +275,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         SubscriptionPreviewChangePlanParams copied = new(parameters);
