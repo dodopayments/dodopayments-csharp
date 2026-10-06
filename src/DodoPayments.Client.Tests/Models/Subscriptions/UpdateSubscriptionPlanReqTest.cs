@@ -20,6 +20,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -27,6 +28,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         string expectedProductID = "product_id";
@@ -38,6 +40,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelOlderPaymentLink = true;
         bool expectedCancelScheduledChangePlan = true;
         bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
@@ -47,6 +50,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
+        string expectedReturnUrl = "return_url";
 
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedProrationBillingMode, model.ProrationBillingMode);
@@ -58,6 +62,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
+        Assert.Equal(expectedCancelOlderPaymentLink, model.CancelOlderPaymentLink);
         Assert.Equal(expectedCancelScheduledChangePlan, model.CancelScheduledChangePlan);
         Assert.Equal(expectedCollectViaPaymentLink, model.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, model.DiscountCode);
@@ -77,6 +82,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedOnPaymentFailure, model.OnPaymentFailure);
+        Assert.Equal(expectedReturnUrl, model.ReturnUrl);
     }
 
     [Fact]
@@ -90,6 +96,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -97,6 +104,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -119,6 +127,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -126,6 +135,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -144,6 +154,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelOlderPaymentLink = true;
         bool expectedCancelScheduledChangePlan = true;
         bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
@@ -153,6 +164,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
+        string expectedReturnUrl = "return_url";
 
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedProrationBillingMode, deserialized.ProrationBillingMode);
@@ -167,6 +179,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
+        Assert.Equal(expectedCancelOlderPaymentLink, deserialized.CancelOlderPaymentLink);
         Assert.Equal(expectedCancelScheduledChangePlan, deserialized.CancelScheduledChangePlan);
         Assert.Equal(expectedCollectViaPaymentLink, deserialized.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
@@ -186,6 +199,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedOnPaymentFailure, deserialized.OnPaymentFailure);
+        Assert.Equal(expectedReturnUrl, deserialized.ReturnUrl);
     }
 
     [Fact]
@@ -199,6 +213,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -206,6 +221,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         model.Validate();
@@ -226,8 +242,11 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
+        Assert.Null(model.CancelOlderPaymentLink);
+        Assert.False(model.RawData.ContainsKey("cancel_older_payment_link"));
         Assert.Null(model.CancelScheduledChangePlan);
         Assert.False(model.RawData.ContainsKey("cancel_scheduled_change_plan"));
         Assert.Null(model.CollectViaPaymentLink);
@@ -251,6 +270,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         model.Validate();
@@ -271,13 +291,17 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
 
             // Null should be interpreted as omitted for these properties
+            CancelOlderPaymentLink = null,
             CancelScheduledChangePlan = null,
             CollectViaPaymentLink = null,
             EffectiveAt = null,
         };
 
+        Assert.Null(model.CancelOlderPaymentLink);
+        Assert.False(model.RawData.ContainsKey("cancel_older_payment_link"));
         Assert.Null(model.CancelScheduledChangePlan);
         Assert.False(model.RawData.ContainsKey("cancel_scheduled_change_plan"));
         Assert.Null(model.CollectViaPaymentLink);
@@ -301,8 +325,10 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = ["string"],
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
 
             // Null should be interpreted as omitted for these properties
+            CancelOlderPaymentLink = null,
             CancelScheduledChangePlan = null,
             CollectViaPaymentLink = null,
             EffectiveAt = null,
@@ -320,6 +346,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -337,6 +364,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
         Assert.False(model.RawData.ContainsKey("on_payment_failure"));
+        Assert.Null(model.ReturnUrl);
+        Assert.False(model.RawData.ContainsKey("return_url"));
     }
 
     [Fact]
@@ -348,6 +377,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -365,6 +395,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -375,6 +406,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
+            ReturnUrl = null,
         };
 
         Assert.Null(model.AdaptiveCurrencyFeesInclusive);
@@ -389,6 +421,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.True(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
         Assert.True(model.RawData.ContainsKey("on_payment_failure"));
+        Assert.Null(model.ReturnUrl);
+        Assert.True(model.RawData.ContainsKey("return_url"));
     }
 
     [Fact]
@@ -400,6 +434,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -410,6 +445,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
+            ReturnUrl = null,
         };
 
         model.Validate();
@@ -426,6 +462,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelOlderPaymentLink = true,
             CancelScheduledChangePlan = true,
             CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
@@ -433,6 +470,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
+            ReturnUrl = "return_url",
         };
 
         UpdateSubscriptionPlanReq copied = new(model);
