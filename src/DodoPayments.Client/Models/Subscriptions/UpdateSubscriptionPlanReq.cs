@@ -94,6 +94,38 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     }
 
     /// <summary>
+    /// Cancel the payment link of a pending plan change, so that this change can
+    /// replace it.
+    ///
+    /// <para>The link is cancelled only if the customer has not started to pay. A
+    /// paid or in-progress payment gives a `409`. A failed cancel gives a `503`,
+    /// and a retry is safe.</para>
+    ///
+    /// <para>The request is validated before the cancel. A later failure, for example
+    /// an amount below the minimum, leaves the subscription on its current plan
+    /// with no open link. A retry is safe.</para>
+    ///
+    /// <para>The preview route shares this request body and ignores this field.</para>
+    /// </summary>
+    public bool? CancelOlderPaymentLink
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("cancel_older_payment_link");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("cancel_older_payment_link", value);
+        }
+    }
+
+    /// <summary>
     /// Replace a scheduled plan change with this one.
     ///
     /// <para>The scheduled change is cancelled by the transaction that applies this
@@ -254,6 +286,28 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
         init { this._rawData.Set("on_payment_failure", value); }
     }
 
+    /// <summary>
+    /// The URL that receives the customer after they pay the payment link. Needs
+    /// `collect_via_payment_link: true`. Without it, the request gets a `422`. A
+    /// change that collects no money issues no link and does not use the URL. The
+    /// preview route validates this field but does not use it.
+    ///
+    /// <para>The redirect adds `subscription_id`, `payment_id` and `status`. The
+    /// `status` value is the status of the plan-change payment. It is not the status
+    /// of the subscription. When that payment fails, the subscription stays active
+    /// on its current plan. To try again, call this endpoint again to get a new
+    /// link. The new plan can apply after the redirect, when the payment webhook arrives.</para>
+    /// </summary>
+    public string? ReturnUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("return_url");
+        }
+        init { this._rawData.Set("return_url", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -265,6 +319,7 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
         {
             item.Validate();
         }
+        _ = this.CancelOlderPaymentLink;
         _ = this.CancelScheduledChangePlan;
         _ = this.CollectViaPaymentLink;
         _ = this.DiscountCode;
@@ -278,6 +333,7 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
             }
         }
         this.OnPaymentFailure?.Validate();
+        _ = this.ReturnUrl;
     }
 
     public UpdateSubscriptionPlanReq() { }
