@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.38.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.37.0...v6.38.0) (2026-10-06)
+
+
+### Features
+
+* **api:** change-plan cancel_older_payment_link and return_url ([2e053e0](https://github.com/dodopayments/dodopayments-csharp/commit/2e053e025ffe329d1eb28dd292a8fb7cf742eb88))
+* **api:** change-plan cancel_older_payment_link and return_url ([d6ed103](https://github.com/dodopayments/dodopayments-csharp/commit/d6ed103dd725acf70c3df68e10ebe2f6d722e097))
+
 ## [6.37.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.36.0...v6.37.0) (2026-10-05)
 
 
