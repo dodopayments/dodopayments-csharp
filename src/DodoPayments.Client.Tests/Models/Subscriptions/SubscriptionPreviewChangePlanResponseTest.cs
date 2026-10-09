@@ -1786,7 +1786,7 @@ public class LineItemSubscriptionTest : TestBase
         string expectedDescription = "description";
         string expectedName = "name";
         int expectedTax = 0;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -1865,7 +1865,7 @@ public class LineItemSubscriptionTest : TestBase
         string expectedDescription = "description";
         string expectedName = "name";
         int expectedTax = 0;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -2045,7 +2045,7 @@ public class LineItemAddonTest : TestBase
         int expectedQuantity = 0;
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("addon");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
@@ -2124,7 +2124,7 @@ public class LineItemAddonTest : TestBase
         int expectedQuantity = 0;
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("addon");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
@@ -2306,7 +2306,7 @@ public class MeterTest : TestBase
         string expectedPricePerUnit = "price_per_unit";
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("meter");
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
@@ -2383,7 +2383,7 @@ public class MeterTest : TestBase
         string expectedPricePerUnit = "price_per_unit";
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
-        double expectedTaxRate = 0;
+        float expectedTaxRate = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("meter");
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
