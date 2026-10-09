@@ -30,7 +30,7 @@ public sealed class WebhookListPage(
     {
         try
         {
-            return this.Items.Count > 0 && response.Iterator != null;
+            return (response.Done != true) && this.Items.Count > 0 && response.Iterator != null;
         }
         catch (DodoPaymentsInvalidDataException)
         {
