@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.38.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.38.0...v6.38.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* **deps:** upgrade SDK toolchains (pnpm, uv, TypeScript 7, Gradle 9, okhttp 5, zod 4) and stop cursor pagination on done ([62e5481](https://github.com/dodopayments/dodopayments-csharp/commit/62e54818319b986cc65637fa06b52895c97bd8a7))
+* **deps:** upgrade SDK toolchains (pnpm, uv, TypeScript 7, Gradle 9, okhttp 5, zod 4) and stop cursor pagination on done ([fc9c0e9](https://github.com/dodopayments/dodopayments-csharp/commit/fc9c0e9c149837b93aacabe3ce9484b8f606094f))
+
 ## [6.38.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.37.0...v6.38.0) (2026-10-06)
 
 
