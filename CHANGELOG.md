@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.39.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.38.1...v6.39.0) (2026-10-14)
+
+
+### Features
+
+* **api:** payment service periods, retry attempts and subscription renewal payment_id ([8fe9605](https://github.com/dodopayments/dodopayments-csharp/commit/8fe9605a8b2bb025304b847c195f7377534f1828))
+* **api:** payment service periods, retry attempts and subscription renewal payment_id ([543729c](https://github.com/dodopayments/dodopayments-csharp/commit/543729cebdb11ce0ad7e9eb8c4cf6977558d1428))
+
 ## [6.38.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.38.0...v6.38.1) (2026-10-09)
 
 
