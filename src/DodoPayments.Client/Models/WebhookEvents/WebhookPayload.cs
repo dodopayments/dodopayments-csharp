@@ -265,7 +265,7 @@ public record class Data : ModelBase
         {
             return Match<string?>(
                 payment: (x) => x.PaymentID,
-                subscription: (_) => null,
+                subscription: (x) => x.PaymentID,
                 refund: (x) => x.PaymentID,
                 dispute: (x) => x.PaymentID,
                 licenseKey: (x) => x.PaymentID,
@@ -1571,6 +1571,31 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// The service period of each subscription that this payment pays for. The order
+    /// is the same as `subscription_ids`. For a plan change charge, the period starts
+    /// at the plan change and ends at the next billing date. The list is empty unless
+    /// the payment status is `succeeded`. The list is also empty for a one-time payment,
+    /// an on-demand charge, or a payment method update.
+    /// </summary>
+    public required IReadOnlyList<Payments::SubscriptionServicePeriod> ServicePeriods
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<Payments::SubscriptionServicePeriod>
+            >("service_periods");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Payments::SubscriptionServicePeriod>>(
+                "service_periods",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// The amount that will be credited to your Dodo balance after currency conversion
     /// and processing. Especially relevant for adaptive pricing where the customer's
     /// payment currency differs from your settlement currency.
@@ -2025,6 +2050,7 @@ public sealed record class Payment : JsonModel
             PaymentProvider = payment.PaymentProvider,
             Refunds = payment.Refunds,
             RetryAttempt = payment.RetryAttempt,
+            ServicePeriods = payment.ServicePeriods,
             SettlementAmount = payment.SettlementAmount,
             SettlementCurrency = payment.SettlementCurrency,
             SubscriptionIds = payment.SubscriptionIds,
@@ -2082,6 +2108,10 @@ public sealed record class Payment : JsonModel
             item.Validate();
         }
         _ = this.RetryAttempt;
+        foreach (var item in this.ServicePeriods)
+        {
+            item.Validate();
+        }
         _ = this.SettlementAmount;
         this.SettlementCurrency.Validate();
         _ = this.SubscriptionIds;
@@ -2811,6 +2841,20 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("past_due_ends_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the payment that caused this event. It is set only for `subscription.renewed`.
+    /// It is null for all other subscription events.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
     public static implicit operator Subscriptions::Subscription(Subscription subscription) =>
         new()
         {
@@ -2932,6 +2976,7 @@ public sealed record class Subscription : JsonModel
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
         _ = this.PastDueEndsAt;
+        _ = this.PaymentID;
     }
 
     public Subscription()
@@ -3006,6 +3051,20 @@ public sealed record class IntersectionMember1 : JsonModel
         init { this._rawData.Set("past_due_ends_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the payment that caused this event. It is set only for `subscription.renewed`.
+    /// It is null for all other subscription events.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -3019,6 +3078,7 @@ public sealed record class IntersectionMember1 : JsonModel
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
         _ = this.PastDueEndsAt;
+        _ = this.PaymentID;
     }
 
     public IntersectionMember1()
@@ -3255,6 +3315,20 @@ public sealed record class Refund : JsonModel
     }
 
     /// <summary>
+    /// The time in UTC when `network_reference` became available. It is null when
+    /// the reference is not available, or when it became available before this field existed.
+    /// </summary>
+    public DateTimeOffset? NetworkReferenceUpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("network_reference_updated_at");
+        }
+        init { this._rawData.Set("network_reference_updated_at", value); }
+    }
+
+    /// <summary>
     /// The reason provided for the refund, if any. Optional.
     /// </summary>
     public string? Reason
@@ -3293,6 +3367,7 @@ public sealed record class Refund : JsonModel
             Currency = refund.Currency,
             NetworkReference = refund.NetworkReference,
             NetworkReferenceType = refund.NetworkReferenceType,
+            NetworkReferenceUpdatedAt = refund.NetworkReferenceUpdatedAt,
             Reason = refund.Reason,
         };
 
@@ -3315,6 +3390,7 @@ public sealed record class Refund : JsonModel
         this.Currency?.Validate();
         _ = this.NetworkReference;
         this.NetworkReferenceType?.Validate();
+        _ = this.NetworkReferenceUpdatedAt;
         _ = this.Reason;
         if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Refund")))
         {

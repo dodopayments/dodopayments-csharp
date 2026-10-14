@@ -42,6 +42,47 @@ public sealed record class ManualRetryState : JsonModel
     }
 
     /// <summary>
+    /// The number of the queued automatic retry, starting at 1.
+    /// </summary>
+    public int? AutomaticRetryNumber
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("automatic_retry_number");
+        }
+        init { this._rawData.Set("automatic_retry_number", value); }
+    }
+
+    /// <summary>
+    /// The number of automatic retries that the current configuration plans for this
+    /// invoice. It is never less than `automatic_retry_number`.
+    /// </summary>
+    public int? AutomaticRetryTotal
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("automatic_retry_total");
+        }
+        init { this._rawData.Set("automatic_retry_total", value); }
+    }
+
+    /// <summary>
+    /// When the next automatic retry on this invoice is scheduled. Null when no automatic
+    /// retry is queued or automatic retries are disabled.
+    /// </summary>
+    public DateTimeOffset? NextAutomaticRetryAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("next_automatic_retry_at");
+        }
+        init { this._rawData.Set("next_automatic_retry_at", value); }
+    }
+
+    /// <summary>
     /// The code `POST` would fail with. Null when `can_retry` is true.
     /// </summary>
     public string? Reason
@@ -74,6 +115,9 @@ public sealed record class ManualRetryState : JsonModel
         _ = this.CanRetry;
         _ = this.SendsAllowed;
         _ = this.SendsUsed;
+        _ = this.AutomaticRetryNumber;
+        _ = this.AutomaticRetryTotal;
+        _ = this.NextAutomaticRetryAt;
         _ = this.Reason;
         _ = this.RetryAvailableAt;
     }

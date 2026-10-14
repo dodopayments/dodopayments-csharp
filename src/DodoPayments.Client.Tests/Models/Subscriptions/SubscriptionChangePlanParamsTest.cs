@@ -276,6 +276,7 @@ public class ProrationBillingModeTest : TestBase
     [InlineData(ProrationBillingMode.FullImmediately)]
     [InlineData(ProrationBillingMode.DifferenceImmediately)]
     [InlineData(ProrationBillingMode.DoNotBill)]
+    [InlineData(ProrationBillingMode.ProratedImmediatelyKeepCycle)]
     public void Validation_Works(ProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -300,6 +301,7 @@ public class ProrationBillingModeTest : TestBase
     [InlineData(ProrationBillingMode.FullImmediately)]
     [InlineData(ProrationBillingMode.DifferenceImmediately)]
     [InlineData(ProrationBillingMode.DoNotBill)]
+    [InlineData(ProrationBillingMode.ProratedImmediatelyKeepCycle)]
     public void SerializationRoundtrip_Works(ProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us

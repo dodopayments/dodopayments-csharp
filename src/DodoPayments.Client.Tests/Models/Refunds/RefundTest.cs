@@ -35,6 +35,7 @@ public class RefundTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
 
@@ -59,6 +60,9 @@ public class RefundTest : TestBase
         string expectedNetworkReference = "network_reference";
         ApiEnum<string, RefundNetworkReferenceType> expectedNetworkReferenceType =
             RefundNetworkReferenceType.AcquirerReferenceNumber;
+        DateTimeOffset expectedNetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
         string expectedReason = "reason";
 
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -80,6 +84,7 @@ public class RefundTest : TestBase
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedNetworkReference, model.NetworkReference);
         Assert.Equal(expectedNetworkReferenceType, model.NetworkReferenceType);
+        Assert.Equal(expectedNetworkReferenceUpdatedAt, model.NetworkReferenceUpdatedAt);
         Assert.Equal(expectedReason, model.Reason);
     }
 
@@ -108,6 +113,7 @@ public class RefundTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
 
@@ -142,6 +148,7 @@ public class RefundTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
 
@@ -170,6 +177,9 @@ public class RefundTest : TestBase
         string expectedNetworkReference = "network_reference";
         ApiEnum<string, RefundNetworkReferenceType> expectedNetworkReferenceType =
             RefundNetworkReferenceType.AcquirerReferenceNumber;
+        DateTimeOffset expectedNetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
         string expectedReason = "reason";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -191,6 +201,7 @@ public class RefundTest : TestBase
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedNetworkReference, deserialized.NetworkReference);
         Assert.Equal(expectedNetworkReferenceType, deserialized.NetworkReferenceType);
+        Assert.Equal(expectedNetworkReferenceUpdatedAt, deserialized.NetworkReferenceUpdatedAt);
         Assert.Equal(expectedReason, deserialized.Reason);
     }
 
@@ -219,6 +230,7 @@ public class RefundTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
 
@@ -256,6 +268,8 @@ public class RefundTest : TestBase
         Assert.False(model.RawData.ContainsKey("network_reference"));
         Assert.Null(model.NetworkReferenceType);
         Assert.False(model.RawData.ContainsKey("network_reference_type"));
+        Assert.Null(model.NetworkReferenceUpdatedAt);
+        Assert.False(model.RawData.ContainsKey("network_reference_updated_at"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
     }
@@ -312,6 +326,7 @@ public class RefundTest : TestBase
             Currency = null,
             NetworkReference = null,
             NetworkReferenceType = null,
+            NetworkReferenceUpdatedAt = null,
             Reason = null,
         };
 
@@ -323,6 +338,8 @@ public class RefundTest : TestBase
         Assert.True(model.RawData.ContainsKey("network_reference"));
         Assert.Null(model.NetworkReferenceType);
         Assert.True(model.RawData.ContainsKey("network_reference_type"));
+        Assert.Null(model.NetworkReferenceUpdatedAt);
+        Assert.True(model.RawData.ContainsKey("network_reference_updated_at"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
     }
@@ -353,6 +370,7 @@ public class RefundTest : TestBase
             Currency = null,
             NetworkReference = null,
             NetworkReferenceType = null,
+            NetworkReferenceUpdatedAt = null,
             Reason = null,
         };
 
@@ -384,6 +402,7 @@ public class RefundTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
 
