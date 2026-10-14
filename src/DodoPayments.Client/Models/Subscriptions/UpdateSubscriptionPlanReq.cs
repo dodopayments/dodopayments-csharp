@@ -384,6 +384,7 @@ public enum UpdateSubscriptionPlanReqProrationBillingMode
     FullImmediately,
     DifferenceImmediately,
     DoNotBill,
+    ProratedImmediatelyKeepCycle,
 }
 
 sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
@@ -403,6 +404,8 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
             "difference_immediately" =>
                 UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately,
             "do_not_bill" => UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill,
+            "prorated_immediately_keep_cycle" =>
+                UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediatelyKeepCycle,
             _ => (UpdateSubscriptionPlanReqProrationBillingMode)(-1),
         };
     }
@@ -423,6 +426,8 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
                 UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately =>
                     "difference_immediately",
                 UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill => "do_not_bill",
+                UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediatelyKeepCycle =>
+                    "prorated_immediately_keep_cycle",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -769,6 +769,20 @@ public sealed record class SubscriptionPlanChangedWebhookEventData : JsonModel
         init { this._rawData.Set("past_due_ends_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the payment that caused this event. It is set only for `subscription.renewed`.
+    /// It is null for all other subscription events.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
     public static implicit operator Subscription(
         SubscriptionPlanChangedWebhookEventData subscriptionPlanChangedWebhookEventData
     ) =>
@@ -889,6 +903,7 @@ public sealed record class SubscriptionPlanChangedWebhookEventData : JsonModel
         _ = this.TaxID;
         _ = this.TrialAmount;
         _ = this.PastDueEndsAt;
+        _ = this.PaymentID;
     }
 
     public SubscriptionPlanChangedWebhookEventData() { }
@@ -959,10 +974,25 @@ public sealed record class SubscriptionPlanChangedWebhookEventDataIntersectionMe
         init { this._rawData.Set("past_due_ends_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the payment that caused this event. It is set only for `subscription.renewed`.
+    /// It is null for all other subscription events.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.PastDueEndsAt;
+        _ = this.PaymentID;
     }
 
     public SubscriptionPlanChangedWebhookEventDataIntersectionMember1() { }

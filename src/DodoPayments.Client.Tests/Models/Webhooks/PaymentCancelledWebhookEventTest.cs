@@ -77,10 +77,22 @@ public class PaymentCancelledWebhookEventTest : TestBase
                         Currency = Currency.Aed,
                         NetworkReference = "network_reference",
                         NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                        NetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+                            "2019-12-27T18:11:19.117Z"
+                        ),
                         Reason = "reason",
                     },
                 ],
                 RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
@@ -193,10 +205,20 @@ public class PaymentCancelledWebhookEventTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -320,10 +342,22 @@ public class PaymentCancelledWebhookEventTest : TestBase
                         Currency = Currency.Aed,
                         NetworkReference = "network_reference",
                         NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                        NetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+                            "2019-12-27T18:11:19.117Z"
+                        ),
                         Reason = "reason",
                     },
                 ],
                 RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
@@ -450,10 +484,22 @@ public class PaymentCancelledWebhookEventTest : TestBase
                         Currency = Currency.Aed,
                         NetworkReference = "network_reference",
                         NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                        NetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+                            "2019-12-27T18:11:19.117Z"
+                        ),
                         Reason = "reason",
                     },
                 ],
                 RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
@@ -573,10 +619,20 @@ public class PaymentCancelledWebhookEventTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -700,10 +756,22 @@ public class PaymentCancelledWebhookEventTest : TestBase
                         Currency = Currency.Aed,
                         NetworkReference = "network_reference",
                         NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                        NetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+                            "2019-12-27T18:11:19.117Z"
+                        ),
                         Reason = "reason",
                     },
                 ],
                 RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
@@ -824,10 +892,22 @@ public class PaymentCancelledWebhookEventTest : TestBase
                         Currency = Currency.Aed,
                         NetworkReference = "network_reference",
                         NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                        NetworkReferenceUpdatedAt = DateTimeOffset.Parse(
+                            "2019-12-27T18:11:19.117Z"
+                        ),
                         Reason = "reason",
                     },
                 ],
                 RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],

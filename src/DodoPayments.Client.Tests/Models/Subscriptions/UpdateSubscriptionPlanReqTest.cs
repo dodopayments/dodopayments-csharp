@@ -486,6 +486,7 @@ public class UpdateSubscriptionPlanReqProrationBillingModeTest : TestBase
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.FullImmediately)]
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately)]
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill)]
+    [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediatelyKeepCycle)]
     public void Validation_Works(UpdateSubscriptionPlanReqProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -509,6 +510,7 @@ public class UpdateSubscriptionPlanReqProrationBillingModeTest : TestBase
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.FullImmediately)]
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately)]
     [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill)]
+    [InlineData(UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediatelyKeepCycle)]
     public void SerializationRoundtrip_Works(UpdateSubscriptionPlanReqProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us

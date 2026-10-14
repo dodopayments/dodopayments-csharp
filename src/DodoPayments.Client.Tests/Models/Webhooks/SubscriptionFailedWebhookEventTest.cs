@@ -165,6 +165,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
                 TaxID = "tax_id",
                 TrialAmount = 0,
                 PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -316,6 +317,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.failed");
@@ -478,6 +480,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
                 TaxID = "tax_id",
                 TrialAmount = 0,
                 PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -643,6 +646,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
                 TaxID = "tax_id",
                 TrialAmount = 0,
                 PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -801,6 +805,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.failed");
@@ -963,6 +968,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
                 TaxID = "tax_id",
                 TrialAmount = 0,
                 PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1122,6 +1128,7 @@ public class SubscriptionFailedWebhookEventTest : TestBase
                 TaxID = "tax_id",
                 TrialAmount = 0,
                 PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1283,6 +1290,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -1435,6 +1443,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         string expectedTaxID = "tax_id";
         int expectedTrialAmount = 0;
         DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentID = "payment_id";
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -1516,6 +1525,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         Assert.Equal(expectedTaxID, model.TaxID);
         Assert.Equal(expectedTrialAmount, model.TrialAmount);
         Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
     }
 
     [Fact]
@@ -1667,6 +1677,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1827,6 +1838,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1986,6 +1998,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         string expectedTaxID = "tax_id";
         int expectedTrialAmount = 0;
         DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentID = "payment_id";
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -2067,6 +2080,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         Assert.Equal(expectedTaxID, deserialized.TaxID);
         Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
         Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
     }
 
     [Fact]
@@ -2218,6 +2232,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         model.Validate();
@@ -2346,6 +2361,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         Assert.Null(model.CancellationFeedback);
@@ -2479,6 +2495,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         model.Validate();
@@ -2607,6 +2624,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -2745,6 +2763,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -2898,6 +2917,8 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("trial_amount"));
         Assert.Null(model.PastDueEndsAt);
         Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
     }
 
     [Fact]
@@ -3149,6 +3170,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
+            PaymentID = null,
         };
 
         Assert.Null(model.CancellationComment);
@@ -3177,6 +3199,8 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
         Assert.True(model.RawData.ContainsKey("trial_amount"));
         Assert.Null(model.PastDueEndsAt);
         Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
     }
 
     [Fact]
@@ -3308,6 +3332,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
+            PaymentID = null,
         };
 
         model.Validate();
@@ -3462,6 +3487,7 @@ public class SubscriptionFailedWebhookEventDataTest : TestBase
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         SubscriptionFailedWebhookEventData copied = new(model);
@@ -3478,11 +3504,14 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentID = "payment_id";
 
         Assert.Equal(expectedPastDueEndsAt, model.PastDueEndsAt);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
     }
 
     [Fact]
@@ -3491,6 +3520,7 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3509,6 +3539,7 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3520,8 +3551,10 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedPastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentID = "payment_id";
 
         Assert.Equal(expectedPastDueEndsAt, deserialized.PastDueEndsAt);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
     }
 
     [Fact]
@@ -3530,6 +3563,7 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         model.Validate();
@@ -3542,6 +3576,8 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
 
         Assert.Null(model.PastDueEndsAt);
         Assert.False(model.RawData.ContainsKey("past_due_ends_at"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
     }
 
     [Fact]
@@ -3558,10 +3594,13 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = null,
+            PaymentID = null,
         };
 
         Assert.Null(model.PastDueEndsAt);
         Assert.True(model.RawData.ContainsKey("past_due_ends_at"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
     }
 
     [Fact]
@@ -3570,6 +3609,7 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = null,
+            PaymentID = null,
         };
 
         model.Validate();
@@ -3581,6 +3621,7 @@ public class SubscriptionFailedWebhookEventDataIntersectionMember1Test : TestBas
         var model = new SubscriptionFailedWebhookEventDataIntersectionMember1
         {
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
         };
 
         SubscriptionFailedWebhookEventDataIntersectionMember1 copied = new(model);

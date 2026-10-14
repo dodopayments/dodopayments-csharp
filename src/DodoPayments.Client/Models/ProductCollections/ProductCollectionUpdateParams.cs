@@ -472,6 +472,7 @@ public enum ProductCollectionUpdateParamsProrationBillingModeOnDowngrade
     FullImmediately,
     DifferenceImmediately,
     DoNotBill,
+    ProratedImmediatelyKeepCycle,
 }
 
 sealed class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeConverter
@@ -492,6 +493,8 @@ sealed class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeConvert
             "difference_immediately" =>
                 ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DifferenceImmediately,
             "do_not_bill" => ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill,
+            "prorated_immediately_keep_cycle" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle,
             _ => (ProductCollectionUpdateParamsProrationBillingModeOnDowngrade)(-1),
         };
     }
@@ -514,6 +517,8 @@ sealed class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeConvert
                     "difference_immediately",
                 ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill =>
                     "do_not_bill",
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle =>
+                    "prorated_immediately_keep_cycle",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -534,6 +539,7 @@ public enum ProductCollectionUpdateParamsProrationBillingModeOnUpgrade
     FullImmediately,
     DifferenceImmediately,
     DoNotBill,
+    ProratedImmediatelyKeepCycle,
 }
 
 sealed class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeConverter
@@ -554,6 +560,8 @@ sealed class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeConverter
             "difference_immediately" =>
                 ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DifferenceImmediately,
             "do_not_bill" => ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill,
+            "prorated_immediately_keep_cycle" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle,
             _ => (ProductCollectionUpdateParamsProrationBillingModeOnUpgrade)(-1),
         };
     }
@@ -576,6 +584,8 @@ sealed class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeConverter
                     "difference_immediately",
                 ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill =>
                     "do_not_bill",
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle =>
+                    "prorated_immediately_keep_cycle",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

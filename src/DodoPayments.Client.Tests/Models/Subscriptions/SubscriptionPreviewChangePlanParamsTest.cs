@@ -291,6 +291,9 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.FullImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill)]
+    [InlineData(
+        SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediatelyKeepCycle
+    )]
     public void Validation_Works(SubscriptionPreviewChangePlanParamsProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -314,6 +317,9 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.FullImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill)]
+    [InlineData(
+        SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediatelyKeepCycle
+    )]
     public void SerializationRoundtrip_Works(
         SubscriptionPreviewChangePlanParamsProrationBillingMode rawValue
     )

@@ -33,10 +33,21 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -65,10 +76,21 @@ public class PaymentListResponseTest : TestBase
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
             Payments::PaymentListResponsePaymentProvider.Stripe;
+        int expectedRetryAttempt = 0;
+        List<Payments::SubscriptionServicePeriod> expectedServicePeriods =
+        [
+            new()
+            {
+                EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+        ];
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
+        string expectedCheckoutSessionID = "checkout_session_id";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedInvoiceID = "invoice_id";
@@ -96,6 +118,12 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
+        Assert.Equal(expectedRetryAttempt, model.RetryAttempt);
+        Assert.Equal(expectedServicePeriods.Count, model.ServicePeriods.Count);
+        for (int i = 0; i < expectedServicePeriods.Count; i++)
+        {
+            Assert.Equal(expectedServicePeriods[i], model.ServicePeriods[i]);
+        }
         Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
         for (int i = 0; i < expectedSubscriptionIds.Count; i++)
         {
@@ -104,6 +132,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
         Assert.Equal(expectedCardLastFour, model.CardLastFour);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
+        Assert.Equal(expectedCheckoutSessionID, model.CheckoutSessionID);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
@@ -136,10 +165,21 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -181,10 +221,21 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -220,10 +271,21 @@ public class PaymentListResponseTest : TestBase
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
             Payments::PaymentListResponsePaymentProvider.Stripe;
+        int expectedRetryAttempt = 0;
+        List<Payments::SubscriptionServicePeriod> expectedServicePeriods =
+        [
+            new()
+            {
+                EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+        ];
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
+        string expectedCheckoutSessionID = "checkout_session_id";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedInvoiceID = "invoice_id";
@@ -251,6 +313,12 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
+        Assert.Equal(expectedRetryAttempt, deserialized.RetryAttempt);
+        Assert.Equal(expectedServicePeriods.Count, deserialized.ServicePeriods.Count);
+        for (int i = 0; i < expectedServicePeriods.Count; i++)
+        {
+            Assert.Equal(expectedServicePeriods[i], deserialized.ServicePeriods[i]);
+        }
         Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
         for (int i = 0; i < expectedSubscriptionIds.Count; i++)
         {
@@ -259,6 +327,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
         Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
+        Assert.Equal(expectedCheckoutSessionID, deserialized.CheckoutSessionID);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
@@ -291,10 +360,21 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -330,6 +410,16 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
@@ -338,6 +428,8 @@ public class PaymentListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("card_last_four"));
         Assert.Null(model.CardNetwork);
         Assert.False(model.RawData.ContainsKey("card_network"));
+        Assert.Null(model.CheckoutSessionID);
+        Assert.False(model.RawData.ContainsKey("checkout_session_id"));
         Assert.Null(model.DisputeStatus);
         Assert.False(model.RawData.ContainsKey("dispute_status"));
         Assert.Null(model.InvoiceID);
@@ -378,6 +470,16 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
         };
@@ -407,11 +509,22 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardLastFour = null,
             CardNetwork = null,
+            CheckoutSessionID = null,
             DisputeStatus = null,
             InvoiceID = null,
             InvoiceUrl = null,
@@ -426,6 +539,8 @@ public class PaymentListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("card_last_four"));
         Assert.Null(model.CardNetwork);
         Assert.True(model.RawData.ContainsKey("card_network"));
+        Assert.Null(model.CheckoutSessionID);
+        Assert.True(model.RawData.ContainsKey("checkout_session_id"));
         Assert.Null(model.DisputeStatus);
         Assert.True(model.RawData.ContainsKey("dispute_status"));
         Assert.Null(model.InvoiceID);
@@ -466,11 +581,22 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
 
             CardLastFour = null,
             CardNetwork = null,
+            CheckoutSessionID = null,
             DisputeStatus = null,
             InvoiceID = null,
             InvoiceUrl = null,
@@ -506,10 +632,21 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+            RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
