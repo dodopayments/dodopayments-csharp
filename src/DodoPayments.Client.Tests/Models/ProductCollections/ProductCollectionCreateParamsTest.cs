@@ -386,6 +386,7 @@ public class ProrationBillingModeOnDowngradeTest : TestBase
     [InlineData(ProrationBillingModeOnDowngrade.FullImmediately)]
     [InlineData(ProrationBillingModeOnDowngrade.DifferenceImmediately)]
     [InlineData(ProrationBillingModeOnDowngrade.DoNotBill)]
+    [InlineData(ProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle)]
     public void Validation_Works(ProrationBillingModeOnDowngrade rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -410,6 +411,7 @@ public class ProrationBillingModeOnDowngradeTest : TestBase
     [InlineData(ProrationBillingModeOnDowngrade.FullImmediately)]
     [InlineData(ProrationBillingModeOnDowngrade.DifferenceImmediately)]
     [InlineData(ProrationBillingModeOnDowngrade.DoNotBill)]
+    [InlineData(ProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle)]
     public void SerializationRoundtrip_Works(ProrationBillingModeOnDowngrade rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -446,6 +448,7 @@ public class ProrationBillingModeOnUpgradeTest : TestBase
     [InlineData(ProrationBillingModeOnUpgrade.FullImmediately)]
     [InlineData(ProrationBillingModeOnUpgrade.DifferenceImmediately)]
     [InlineData(ProrationBillingModeOnUpgrade.DoNotBill)]
+    [InlineData(ProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle)]
     public void Validation_Works(ProrationBillingModeOnUpgrade rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -470,6 +473,7 @@ public class ProrationBillingModeOnUpgradeTest : TestBase
     [InlineData(ProrationBillingModeOnUpgrade.FullImmediately)]
     [InlineData(ProrationBillingModeOnUpgrade.DifferenceImmediately)]
     [InlineData(ProrationBillingModeOnUpgrade.DoNotBill)]
+    [InlineData(ProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle)]
     public void SerializationRoundtrip_Works(ProrationBillingModeOnUpgrade rawValue)
     {
         // force implicit conversion because Theory can't do that for us

@@ -243,6 +243,31 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// The service period of each subscription that this payment pays for. The order
+    /// is the same as `subscription_ids`. For a plan change charge, the period starts
+    /// at the plan change and ends at the next billing date. The list is empty unless
+    /// the payment status is `succeeded`. The list is also empty for a one-time payment,
+    /// an on-demand charge, or a payment method update.
+    /// </summary>
+    public required IReadOnlyList<SubscriptionServicePeriod> ServicePeriods
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionServicePeriod>>(
+                "service_periods"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionServicePeriod>>(
+                "service_periods",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// The amount that will be credited to your Dodo balance after currency conversion
     /// and processing. Especially relevant for adaptive pricing where the customer's
     /// payment currency differs from your settlement currency.
@@ -681,6 +706,10 @@ public sealed record class Payment : JsonModel
             item.Validate();
         }
         _ = this.RetryAttempt;
+        foreach (var item in this.ServicePeriods)
+        {
+            item.Validate();
+        }
         _ = this.SettlementAmount;
         this.SettlementCurrency.Validate();
         _ = this.SubscriptionIds;

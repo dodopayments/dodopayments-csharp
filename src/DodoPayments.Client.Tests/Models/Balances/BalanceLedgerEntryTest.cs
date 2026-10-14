@@ -330,6 +330,9 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.ReserveHold)]
     [InlineData(BalanceLedgerEntryEventType.ReserveRelease)]
     [InlineData(BalanceLedgerEntryEventType.ModerationFees)]
+    [InlineData(BalanceLedgerEntryEventType.DodoFixedFee)]
+    [InlineData(BalanceLedgerEntryEventType.InterchangeFee)]
+    [InlineData(BalanceLedgerEntryEventType.SchemeFee)]
     public void Validation_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -381,6 +384,9 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.ReserveHold)]
     [InlineData(BalanceLedgerEntryEventType.ReserveRelease)]
     [InlineData(BalanceLedgerEntryEventType.ModerationFees)]
+    [InlineData(BalanceLedgerEntryEventType.DodoFixedFee)]
+    [InlineData(BalanceLedgerEntryEventType.InterchangeFee)]
+    [InlineData(BalanceLedgerEntryEventType.SchemeFee)]
     public void SerializationRoundtrip_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
