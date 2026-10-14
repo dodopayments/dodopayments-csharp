@@ -36,10 +36,21 @@ public class PaymentListPageResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
                     PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                    RetryAttempt = 0,
+                    ServicePeriods =
+                    [
+                        new()
+                        {
+                            EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            SubscriptionID = "subscription_id",
+                        },
+                    ],
                     SubscriptionIds = ["string"],
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
+                    CheckoutSessionID = "checkout_session_id",
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     InvoiceID = "invoice_id",
                     InvoiceUrl = "invoice_url",
@@ -73,10 +84,21 @@ public class PaymentListPageResponseTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
+                CheckoutSessionID = "checkout_session_id",
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
@@ -121,10 +143,21 @@ public class PaymentListPageResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
                     PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                    RetryAttempt = 0,
+                    ServicePeriods =
+                    [
+                        new()
+                        {
+                            EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            SubscriptionID = "subscription_id",
+                        },
+                    ],
                     SubscriptionIds = ["string"],
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
+                    CheckoutSessionID = "checkout_session_id",
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     InvoiceID = "invoice_id",
                     InvoiceUrl = "invoice_url",
@@ -172,10 +205,21 @@ public class PaymentListPageResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
                     PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                    RetryAttempt = 0,
+                    ServicePeriods =
+                    [
+                        new()
+                        {
+                            EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            SubscriptionID = "subscription_id",
+                        },
+                    ],
                     SubscriptionIds = ["string"],
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
+                    CheckoutSessionID = "checkout_session_id",
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     InvoiceID = "invoice_id",
                     InvoiceUrl = "invoice_url",
@@ -216,10 +260,21 @@ public class PaymentListPageResponseTest : TestBase
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                RetryAttempt = 0,
+                ServicePeriods =
+                [
+                    new()
+                    {
+                        EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        SubscriptionID = "subscription_id",
+                    },
+                ],
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
+                CheckoutSessionID = "checkout_session_id",
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
@@ -264,10 +319,21 @@ public class PaymentListPageResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
                     PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                    RetryAttempt = 0,
+                    ServicePeriods =
+                    [
+                        new()
+                        {
+                            EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            SubscriptionID = "subscription_id",
+                        },
+                    ],
                     SubscriptionIds = ["string"],
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
+                    CheckoutSessionID = "checkout_session_id",
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     InvoiceID = "invoice_id",
                     InvoiceUrl = "invoice_url",
@@ -309,10 +375,21 @@ public class PaymentListPageResponseTest : TestBase
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
                     PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
+                    RetryAttempt = 0,
+                    ServicePeriods =
+                    [
+                        new()
+                        {
+                            EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            SubscriptionID = "subscription_id",
+                        },
+                    ],
                     SubscriptionIds = ["string"],
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
+                    CheckoutSessionID = "checkout_session_id",
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     InvoiceID = "invoice_id",
                     InvoiceUrl = "invoice_url",

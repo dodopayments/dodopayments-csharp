@@ -432,6 +432,7 @@ public enum ProrationBillingModeOnDowngrade
     FullImmediately,
     DifferenceImmediately,
     DoNotBill,
+    ProratedImmediatelyKeepCycle,
 }
 
 sealed class ProrationBillingModeOnDowngradeConverter
@@ -449,6 +450,8 @@ sealed class ProrationBillingModeOnDowngradeConverter
             "full_immediately" => ProrationBillingModeOnDowngrade.FullImmediately,
             "difference_immediately" => ProrationBillingModeOnDowngrade.DifferenceImmediately,
             "do_not_bill" => ProrationBillingModeOnDowngrade.DoNotBill,
+            "prorated_immediately_keep_cycle" =>
+                ProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle,
             _ => (ProrationBillingModeOnDowngrade)(-1),
         };
     }
@@ -467,6 +470,8 @@ sealed class ProrationBillingModeOnDowngradeConverter
                 ProrationBillingModeOnDowngrade.FullImmediately => "full_immediately",
                 ProrationBillingModeOnDowngrade.DifferenceImmediately => "difference_immediately",
                 ProrationBillingModeOnDowngrade.DoNotBill => "do_not_bill",
+                ProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle =>
+                    "prorated_immediately_keep_cycle",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -487,6 +492,7 @@ public enum ProrationBillingModeOnUpgrade
     FullImmediately,
     DifferenceImmediately,
     DoNotBill,
+    ProratedImmediatelyKeepCycle,
 }
 
 sealed class ProrationBillingModeOnUpgradeConverter : JsonConverter<ProrationBillingModeOnUpgrade>
@@ -503,6 +509,8 @@ sealed class ProrationBillingModeOnUpgradeConverter : JsonConverter<ProrationBil
             "full_immediately" => ProrationBillingModeOnUpgrade.FullImmediately,
             "difference_immediately" => ProrationBillingModeOnUpgrade.DifferenceImmediately,
             "do_not_bill" => ProrationBillingModeOnUpgrade.DoNotBill,
+            "prorated_immediately_keep_cycle" =>
+                ProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle,
             _ => (ProrationBillingModeOnUpgrade)(-1),
         };
     }
@@ -521,6 +529,8 @@ sealed class ProrationBillingModeOnUpgradeConverter : JsonConverter<ProrationBil
                 ProrationBillingModeOnUpgrade.FullImmediately => "full_immediately",
                 ProrationBillingModeOnUpgrade.DifferenceImmediately => "difference_immediately",
                 ProrationBillingModeOnUpgrade.DoNotBill => "do_not_bill",
+                ProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle =>
+                    "prorated_immediately_keep_cycle",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

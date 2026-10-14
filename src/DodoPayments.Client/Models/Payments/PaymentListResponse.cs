@@ -138,6 +138,46 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
+    /// The retry attempt number of this payment. The value is `0` for the original
+    /// payment. Each retry after a failed subscription renewal adds `1`. The value
+    /// is always `0` for a payment that is not for a subscription.
+    /// </summary>
+    public required int RetryAttempt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("retry_attempt");
+        }
+        init { this._rawData.Set("retry_attempt", value); }
+    }
+
+    /// <summary>
+    /// The service period of each subscription that this payment pays for. The order
+    /// is the same as `subscription_ids`. For a plan change charge, the period starts
+    /// at the plan change and ends at the next billing date. The list is empty unless
+    /// the payment status is `succeeded`. The list is also empty for a one-time payment,
+    /// an on-demand charge, or a payment method update.
+    /// </summary>
+    public required IReadOnlyList<SubscriptionServicePeriod> ServicePeriods
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionServicePeriod>>(
+                "service_periods"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionServicePeriod>>(
+                "service_periods",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Every subscription that this payment starts or charges, in a stable order.
     /// It is empty for a one-time payment. It holds the value of `subscription_id`
     /// when the payment names one subscription.
@@ -192,6 +232,20 @@ public sealed record class PaymentListResponse : JsonModel
             return this._rawData.GetNullableClass<string>("card_network");
         }
         init { this._rawData.Set("card_network", value); }
+    }
+
+    /// <summary>
+    /// The ID of the checkout session for this payment. The value is null when the
+    /// payment does not use a checkout session.
+    /// </summary>
+    public string? CheckoutSessionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("checkout_session_id");
+        }
+        init { this._rawData.Set("checkout_session_id", value); }
     }
 
     /// <summary>
@@ -306,10 +360,16 @@ public sealed record class PaymentListResponse : JsonModel
         }
         _ = this.PaymentID;
         this.PaymentProvider.Validate();
+        _ = this.RetryAttempt;
+        foreach (var item in this.ServicePeriods)
+        {
+            item.Validate();
+        }
         _ = this.SubscriptionIds;
         _ = this.TotalAmount;
         _ = this.CardLastFour;
         _ = this.CardNetwork;
+        _ = this.CheckoutSessionID;
         this.DisputeStatus?.Validate();
         _ = this.InvoiceID;
         _ = this.InvoiceUrl;

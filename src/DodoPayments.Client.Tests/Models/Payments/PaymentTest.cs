@@ -74,10 +74,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -186,10 +196,20 @@ public class PaymentTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
         ];
         int expectedRetryAttempt = 0;
+        List<Payments::SubscriptionServicePeriod> expectedServicePeriods =
+        [
+            new()
+            {
+                EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+        ];
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         List<string> expectedSubscriptionIds = ["string"];
@@ -276,6 +296,11 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedRefunds[i], model.Refunds[i]);
         }
         Assert.Equal(expectedRetryAttempt, model.RetryAttempt);
+        Assert.Equal(expectedServicePeriods.Count, model.ServicePeriods.Count);
+        for (int i = 0; i < expectedServicePeriods.Count; i++)
+        {
+            Assert.Equal(expectedServicePeriods[i], model.ServicePeriods[i]);
+        }
         Assert.Equal(expectedSettlementAmount, model.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, model.SettlementCurrency);
         Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
@@ -386,10 +411,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -511,10 +546,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -630,10 +675,20 @@ public class PaymentTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
         ];
         int expectedRetryAttempt = 0;
+        List<Payments::SubscriptionServicePeriod> expectedServicePeriods =
+        [
+            new()
+            {
+                EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+        ];
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         List<string> expectedSubscriptionIds = ["string"];
@@ -720,6 +775,11 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedRefunds[i], deserialized.Refunds[i]);
         }
         Assert.Equal(expectedRetryAttempt, deserialized.RetryAttempt);
+        Assert.Equal(expectedServicePeriods.Count, deserialized.ServicePeriods.Count);
+        for (int i = 0; i < expectedServicePeriods.Count; i++)
+        {
+            Assert.Equal(expectedServicePeriods[i], deserialized.ServicePeriods[i]);
+        }
         Assert.Equal(expectedSettlementAmount, deserialized.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, deserialized.SettlementCurrency);
         Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
@@ -830,10 +890,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -949,10 +1019,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -1070,10 +1150,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -1144,10 +1234,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -1290,10 +1390,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
@@ -1389,10 +1499,20 @@ public class PaymentTest : TestBase
                     Currency = Currency.Aed,
                     NetworkReference = "network_reference",
                     NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                    NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Reason = "reason",
                 },
             ],
             RetryAttempt = 0,
+            ServicePeriods =
+            [
+                new()
+                {
+                    EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    SubscriptionID = "subscription_id",
+                },
+            ],
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
