@@ -368,6 +368,9 @@ public class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeTest : 
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.FullImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DifferenceImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill)]
+    [InlineData(
+        ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle
+    )]
     public void Validation_Works(
         ProductCollectionUpdateParamsProrationBillingModeOnDowngrade rawValue
     )
@@ -394,6 +397,9 @@ public class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeTest : 
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.FullImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DifferenceImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill)]
+    [InlineData(
+        ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediatelyKeepCycle
+    )]
     public void SerializationRoundtrip_Works(
         ProductCollectionUpdateParamsProrationBillingModeOnDowngrade rawValue
     )
@@ -432,6 +438,9 @@ public class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeTest : Te
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.FullImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DifferenceImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill)]
+    [InlineData(
+        ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle
+    )]
     public void Validation_Works(
         ProductCollectionUpdateParamsProrationBillingModeOnUpgrade rawValue
     )
@@ -458,6 +467,9 @@ public class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeTest : Te
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.FullImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DifferenceImmediately)]
     [InlineData(ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill)]
+    [InlineData(
+        ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediatelyKeepCycle
+    )]
     public void SerializationRoundtrip_Works(
         ProductCollectionUpdateParamsProrationBillingModeOnUpgrade rawValue
     )

@@ -38,6 +38,7 @@ public class RefundFailedWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -66,6 +67,7 @@ public class RefundFailedWebhookEventTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -105,6 +107,7 @@ public class RefundFailedWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -147,6 +150,7 @@ public class RefundFailedWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -182,6 +186,7 @@ public class RefundFailedWebhookEventTest : TestBase
             Currency = Currency.Aed,
             NetworkReference = "network_reference",
             NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+            NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -221,6 +226,7 @@ public class RefundFailedWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -257,6 +263,7 @@ public class RefundFailedWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 NetworkReference = "network_reference",
                 NetworkReferenceType = RefundNetworkReferenceType.AcquirerReferenceNumber,
+                NetworkReferenceUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

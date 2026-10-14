@@ -15,6 +15,9 @@ public class ManualRetryStateTest : TestBase
             CanRetry = true,
             SendsAllowed = 0,
             SendsUsed = 0,
+            AutomaticRetryNumber = 0,
+            AutomaticRetryTotal = 0,
+            NextAutomaticRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
             RetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -22,12 +25,20 @@ public class ManualRetryStateTest : TestBase
         bool expectedCanRetry = true;
         long expectedSendsAllowed = 0;
         long expectedSendsUsed = 0;
+        int expectedAutomaticRetryNumber = 0;
+        int expectedAutomaticRetryTotal = 0;
+        DateTimeOffset expectedNextAutomaticRetryAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
         string expectedReason = "reason";
         DateTimeOffset expectedRetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCanRetry, model.CanRetry);
         Assert.Equal(expectedSendsAllowed, model.SendsAllowed);
         Assert.Equal(expectedSendsUsed, model.SendsUsed);
+        Assert.Equal(expectedAutomaticRetryNumber, model.AutomaticRetryNumber);
+        Assert.Equal(expectedAutomaticRetryTotal, model.AutomaticRetryTotal);
+        Assert.Equal(expectedNextAutomaticRetryAt, model.NextAutomaticRetryAt);
         Assert.Equal(expectedReason, model.Reason);
         Assert.Equal(expectedRetryAvailableAt, model.RetryAvailableAt);
     }
@@ -40,6 +51,9 @@ public class ManualRetryStateTest : TestBase
             CanRetry = true,
             SendsAllowed = 0,
             SendsUsed = 0,
+            AutomaticRetryNumber = 0,
+            AutomaticRetryTotal = 0,
+            NextAutomaticRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
             RetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -61,6 +75,9 @@ public class ManualRetryStateTest : TestBase
             CanRetry = true,
             SendsAllowed = 0,
             SendsUsed = 0,
+            AutomaticRetryNumber = 0,
+            AutomaticRetryTotal = 0,
+            NextAutomaticRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
             RetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -75,12 +92,20 @@ public class ManualRetryStateTest : TestBase
         bool expectedCanRetry = true;
         long expectedSendsAllowed = 0;
         long expectedSendsUsed = 0;
+        int expectedAutomaticRetryNumber = 0;
+        int expectedAutomaticRetryTotal = 0;
+        DateTimeOffset expectedNextAutomaticRetryAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
         string expectedReason = "reason";
         DateTimeOffset expectedRetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCanRetry, deserialized.CanRetry);
         Assert.Equal(expectedSendsAllowed, deserialized.SendsAllowed);
         Assert.Equal(expectedSendsUsed, deserialized.SendsUsed);
+        Assert.Equal(expectedAutomaticRetryNumber, deserialized.AutomaticRetryNumber);
+        Assert.Equal(expectedAutomaticRetryTotal, deserialized.AutomaticRetryTotal);
+        Assert.Equal(expectedNextAutomaticRetryAt, deserialized.NextAutomaticRetryAt);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.Equal(expectedRetryAvailableAt, deserialized.RetryAvailableAt);
     }
@@ -93,6 +118,9 @@ public class ManualRetryStateTest : TestBase
             CanRetry = true,
             SendsAllowed = 0,
             SendsUsed = 0,
+            AutomaticRetryNumber = 0,
+            AutomaticRetryTotal = 0,
+            NextAutomaticRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
             RetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -110,6 +138,12 @@ public class ManualRetryStateTest : TestBase
             SendsUsed = 0,
         };
 
+        Assert.Null(model.AutomaticRetryNumber);
+        Assert.False(model.RawData.ContainsKey("automatic_retry_number"));
+        Assert.Null(model.AutomaticRetryTotal);
+        Assert.False(model.RawData.ContainsKey("automatic_retry_total"));
+        Assert.Null(model.NextAutomaticRetryAt);
+        Assert.False(model.RawData.ContainsKey("next_automatic_retry_at"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
         Assert.Null(model.RetryAvailableAt);
@@ -138,10 +172,19 @@ public class ManualRetryStateTest : TestBase
             SendsAllowed = 0,
             SendsUsed = 0,
 
+            AutomaticRetryNumber = null,
+            AutomaticRetryTotal = null,
+            NextAutomaticRetryAt = null,
             Reason = null,
             RetryAvailableAt = null,
         };
 
+        Assert.Null(model.AutomaticRetryNumber);
+        Assert.True(model.RawData.ContainsKey("automatic_retry_number"));
+        Assert.Null(model.AutomaticRetryTotal);
+        Assert.True(model.RawData.ContainsKey("automatic_retry_total"));
+        Assert.Null(model.NextAutomaticRetryAt);
+        Assert.True(model.RawData.ContainsKey("next_automatic_retry_at"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
         Assert.Null(model.RetryAvailableAt);
@@ -157,6 +200,9 @@ public class ManualRetryStateTest : TestBase
             SendsAllowed = 0,
             SendsUsed = 0,
 
+            AutomaticRetryNumber = null,
+            AutomaticRetryTotal = null,
+            NextAutomaticRetryAt = null,
             Reason = null,
             RetryAvailableAt = null,
         };
@@ -172,6 +218,9 @@ public class ManualRetryStateTest : TestBase
             CanRetry = true,
             SendsAllowed = 0,
             SendsUsed = 0,
+            AutomaticRetryNumber = 0,
+            AutomaticRetryTotal = 0,
+            NextAutomaticRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reason = "reason",
             RetryAvailableAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };

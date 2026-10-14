@@ -195,6 +195,20 @@ public sealed record class Refund : JsonModel
     }
 
     /// <summary>
+    /// The time in UTC when `network_reference` became available. It is null when
+    /// the reference is not available, or when it became available before this field existed.
+    /// </summary>
+    public DateTimeOffset? NetworkReferenceUpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("network_reference_updated_at");
+        }
+        init { this._rawData.Set("network_reference_updated_at", value); }
+    }
+
+    /// <summary>
     /// The reason provided for the refund, if any. Optional.
     /// </summary>
     public string? Reason
@@ -226,6 +240,7 @@ public sealed record class Refund : JsonModel
         this.Currency?.Validate();
         _ = this.NetworkReference;
         this.NetworkReferenceType?.Validate();
+        _ = this.NetworkReferenceUpdatedAt;
         _ = this.Reason;
     }
 
