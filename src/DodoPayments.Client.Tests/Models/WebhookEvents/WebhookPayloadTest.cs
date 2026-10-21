@@ -66,6 +66,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
+                IncludesUsage = true,
                 IsMultiSubscription = true,
                 IsUpdatePaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -98,6 +99,7 @@ public class WebhookPayloadTest : TestBase
                     new()
                     {
                         EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProrationFactor = "1",
                         StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         SubscriptionID = "subscription_id",
                     },
@@ -106,11 +108,14 @@ public class WebhookPayloadTest : TestBase
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
+                CardExpMonth = "card_exp_month",
+                CardExpYear = "card_exp_year",
                 CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
                 CardType = "card_type",
+                ChargeType = Payments::ChargeType.New,
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
@@ -196,6 +201,7 @@ public class WebhookPayloadTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -226,6 +232,7 @@ public class WebhookPayloadTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -234,11 +241,14 @@ public class WebhookPayloadTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -334,6 +344,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
+                IncludesUsage = true,
                 IsMultiSubscription = true,
                 IsUpdatePaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -366,6 +377,7 @@ public class WebhookPayloadTest : TestBase
                     new()
                     {
                         EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProrationFactor = "1",
                         StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         SubscriptionID = "subscription_id",
                     },
@@ -374,11 +386,14 @@ public class WebhookPayloadTest : TestBase
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
+                CardExpMonth = "card_exp_month",
+                CardExpYear = "card_exp_year",
                 CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
                 CardType = "card_type",
+                ChargeType = Payments::ChargeType.New,
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
@@ -478,6 +493,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
+                IncludesUsage = true,
                 IsMultiSubscription = true,
                 IsUpdatePaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -510,6 +526,7 @@ public class WebhookPayloadTest : TestBase
                     new()
                     {
                         EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProrationFactor = "1",
                         StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         SubscriptionID = "subscription_id",
                     },
@@ -518,11 +535,14 @@ public class WebhookPayloadTest : TestBase
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
+                CardExpMonth = "card_exp_month",
+                CardExpYear = "card_exp_year",
                 CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
                 CardType = "card_type",
+                ChargeType = Payments::ChargeType.New,
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
@@ -615,6 +635,7 @@ public class WebhookPayloadTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -645,6 +666,7 @@ public class WebhookPayloadTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -653,11 +675,14 @@ public class WebhookPayloadTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -753,6 +778,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
+                IncludesUsage = true,
                 IsMultiSubscription = true,
                 IsUpdatePaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -785,6 +811,7 @@ public class WebhookPayloadTest : TestBase
                     new()
                     {
                         EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProrationFactor = "1",
                         StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         SubscriptionID = "subscription_id",
                     },
@@ -793,11 +820,14 @@ public class WebhookPayloadTest : TestBase
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
+                CardExpMonth = "card_exp_month",
+                CardExpYear = "card_exp_year",
                 CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
                 CardType = "card_type",
+                ChargeType = Payments::ChargeType.New,
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
@@ -891,6 +921,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
+                IncludesUsage = true,
                 IsMultiSubscription = true,
                 IsUpdatePaymentMethod = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -923,6 +954,7 @@ public class WebhookPayloadTest : TestBase
                     new()
                     {
                         EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProrationFactor = "1",
                         StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         SubscriptionID = "subscription_id",
                     },
@@ -931,11 +963,14 @@ public class WebhookPayloadTest : TestBase
                 SettlementCurrency = Currency.Aed,
                 SubscriptionIds = ["string"],
                 TotalAmount = 0,
+                CardExpMonth = "card_exp_month",
+                CardExpYear = "card_exp_year",
                 CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
                 CardType = "card_type",
+                ChargeType = Payments::ChargeType.New,
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
@@ -1031,6 +1066,7 @@ public class DataTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -1061,6 +1097,7 @@ public class DataTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -1069,11 +1106,14 @@ public class DataTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -1554,6 +1594,7 @@ public class DataTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -1584,6 +1625,7 @@ public class DataTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -1592,11 +1634,14 @@ public class DataTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -2113,6 +2158,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -2143,6 +2189,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -2151,11 +2198,14 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -2235,6 +2285,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIncludesUsage = true;
         bool expectedIsMultiSubscription = true;
         bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
@@ -2265,6 +2316,7 @@ public class PaymentTest : TestBase
             new()
             {
                 EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProrationFactor = "1",
                 StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 SubscriptionID = "subscription_id",
             },
@@ -2273,11 +2325,14 @@ public class PaymentTest : TestBase
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
+        string expectedCardExpMonth = "card_exp_month";
+        string expectedCardExpYear = "card_exp_year";
         string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
+        ApiEnum<string, Payments::ChargeType> expectedChargeType = Payments::ChargeType.New;
         string expectedCheckoutSessionID = "checkout_session_id";
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -2339,6 +2394,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], model.Disputes[i]);
         }
+        Assert.Equal(expectedIncludesUsage, model.IncludesUsage);
         Assert.Equal(expectedIsMultiSubscription, model.IsMultiSubscription);
         Assert.Equal(expectedIsUpdatePaymentMethod, model.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
@@ -2369,11 +2425,14 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedSubscriptionIds[i], model.SubscriptionIds[i]);
         }
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedCardExpMonth, model.CardExpMonth);
+        Assert.Equal(expectedCardExpYear, model.CardExpYear);
         Assert.Equal(expectedCardHolderName, model.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, model.CardIssuingCountry);
         Assert.Equal(expectedCardLastFour, model.CardLastFour);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
         Assert.Equal(expectedCardType, model.CardType);
+        Assert.Equal(expectedChargeType, model.ChargeType);
         Assert.Equal(expectedCheckoutSessionID, model.CheckoutSessionID);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
@@ -2453,6 +2512,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -2483,6 +2543,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -2491,11 +2552,14 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -2586,6 +2650,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -2616,6 +2681,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -2624,11 +2690,14 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -2715,6 +2784,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIncludesUsage = true;
         bool expectedIsMultiSubscription = true;
         bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
@@ -2745,6 +2815,7 @@ public class PaymentTest : TestBase
             new()
             {
                 EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProrationFactor = "1",
                 StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 SubscriptionID = "subscription_id",
             },
@@ -2753,11 +2824,14 @@ public class PaymentTest : TestBase
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
+        string expectedCardExpMonth = "card_exp_month";
+        string expectedCardExpYear = "card_exp_year";
         string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
+        ApiEnum<string, Payments::ChargeType> expectedChargeType = Payments::ChargeType.New;
         string expectedCheckoutSessionID = "checkout_session_id";
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -2819,6 +2893,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], deserialized.Disputes[i]);
         }
+        Assert.Equal(expectedIncludesUsage, deserialized.IncludesUsage);
         Assert.Equal(expectedIsMultiSubscription, deserialized.IsMultiSubscription);
         Assert.Equal(expectedIsUpdatePaymentMethod, deserialized.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
@@ -2849,11 +2924,14 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedSubscriptionIds[i], deserialized.SubscriptionIds[i]);
         }
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedCardExpMonth, deserialized.CardExpMonth);
+        Assert.Equal(expectedCardExpYear, deserialized.CardExpYear);
         Assert.Equal(expectedCardHolderName, deserialized.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, deserialized.CardIssuingCountry);
         Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
         Assert.Equal(expectedCardType, deserialized.CardType);
+        Assert.Equal(expectedChargeType, deserialized.ChargeType);
         Assert.Equal(expectedCheckoutSessionID, deserialized.CheckoutSessionID);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
@@ -2933,6 +3011,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -2963,6 +3042,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -2971,11 +3051,14 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
@@ -3063,6 +3146,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3093,6 +3177,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3101,6 +3186,8 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -3147,6 +3234,8 @@ public class PaymentTest : TestBase
 
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
+        Assert.Null(model.ChargeType);
+        Assert.False(model.RawData.ContainsKey("charge_type"));
         Assert.Null(model.RefundStatus);
         Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
@@ -3195,6 +3284,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3225,6 +3315,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3233,6 +3324,8 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -3322,6 +3415,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3352,6 +3446,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3360,6 +3455,8 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -3405,12 +3502,15 @@ public class PaymentTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
+            ChargeType = null,
             RefundStatus = null,
             Status = null,
         };
 
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
+        Assert.Null(model.ChargeType);
+        Assert.False(model.RawData.ContainsKey("charge_type"));
         Assert.Null(model.RefundStatus);
         Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
@@ -3459,6 +3559,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3489,6 +3590,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3497,6 +3599,8 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -3542,6 +3646,7 @@ public class PaymentTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
+            ChargeType = null,
             RefundStatus = null,
             Status = null,
         };
@@ -3591,6 +3696,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3621,6 +3727,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3630,10 +3737,15 @@ public class PaymentTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
         };
 
+        Assert.Null(model.CardExpMonth);
+        Assert.False(model.RawData.ContainsKey("card_exp_month"));
+        Assert.Null(model.CardExpYear);
+        Assert.False(model.RawData.ContainsKey("card_exp_year"));
         Assert.Null(model.CardHolderName);
         Assert.False(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardLastFour);
@@ -3720,6 +3832,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3750,6 +3863,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3759,6 +3873,7 @@ public class PaymentTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
         };
@@ -3808,6 +3923,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3838,6 +3954,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3847,9 +3964,12 @@ public class PaymentTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
 
+            CardExpMonth = null,
+            CardExpYear = null,
             CardHolderName = null,
             CardLastFour = null,
             CardNetwork = null,
@@ -3873,6 +3993,10 @@ public class PaymentTest : TestBase
             UpdatedAt = null,
         };
 
+        Assert.Null(model.CardExpMonth);
+        Assert.True(model.RawData.ContainsKey("card_exp_month"));
+        Assert.Null(model.CardExpYear);
+        Assert.True(model.RawData.ContainsKey("card_exp_year"));
         Assert.Null(model.CardHolderName);
         Assert.True(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardLastFour);
@@ -3959,6 +4083,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -3989,6 +4114,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -3998,9 +4124,12 @@ public class PaymentTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
 
+            CardExpMonth = null,
+            CardExpYear = null,
             CardHolderName = null,
             CardLastFour = null,
             CardNetwork = null,
@@ -4069,6 +4198,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IncludesUsage = true,
             IsMultiSubscription = true,
             IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -4099,6 +4229,7 @@ public class PaymentTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -4107,11 +4238,14 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
             CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",

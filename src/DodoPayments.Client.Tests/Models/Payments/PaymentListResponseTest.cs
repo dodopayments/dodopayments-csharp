@@ -29,6 +29,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -39,14 +40,19 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
             ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
@@ -71,6 +77,7 @@ public class PaymentListResponseTest : TestBase
         };
         bool expectedDigitalProductsDelivered = true;
         bool expectedHasLicenseKey = true;
+        bool expectedIncludesUsage = true;
         bool expectedIsMultiSubscription = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
@@ -82,14 +89,19 @@ public class PaymentListResponseTest : TestBase
             new()
             {
                 EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProrationFactor = "1",
                 StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 SubscriptionID = "subscription_id",
             },
         ];
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
+        string expectedCardExpMonth = "card_exp_month";
+        string expectedCardExpYear = "card_exp_year";
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
+        string expectedCardType = "card_type";
+        ApiEnum<string, Payments::ChargeType> expectedChargeType = Payments::ChargeType.New;
         string expectedCheckoutSessionID = "checkout_session_id";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
@@ -108,6 +120,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCustomer, model.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, model.DigitalProductsDelivered);
         Assert.Equal(expectedHasLicenseKey, model.HasLicenseKey);
+        Assert.Equal(expectedIncludesUsage, model.IncludesUsage);
         Assert.Equal(expectedIsMultiSubscription, model.IsMultiSubscription);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -130,8 +143,12 @@ public class PaymentListResponseTest : TestBase
             Assert.Equal(expectedSubscriptionIds[i], model.SubscriptionIds[i]);
         }
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedCardExpMonth, model.CardExpMonth);
+        Assert.Equal(expectedCardExpYear, model.CardExpYear);
         Assert.Equal(expectedCardLastFour, model.CardLastFour);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
+        Assert.Equal(expectedCardType, model.CardType);
+        Assert.Equal(expectedChargeType, model.ChargeType);
         Assert.Equal(expectedCheckoutSessionID, model.CheckoutSessionID);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
@@ -161,6 +178,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -171,14 +189,19 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
             ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
@@ -217,6 +240,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -227,14 +251,19 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
             ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
@@ -266,6 +295,7 @@ public class PaymentListResponseTest : TestBase
         };
         bool expectedDigitalProductsDelivered = true;
         bool expectedHasLicenseKey = true;
+        bool expectedIncludesUsage = true;
         bool expectedIsMultiSubscription = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
@@ -277,14 +307,19 @@ public class PaymentListResponseTest : TestBase
             new()
             {
                 EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProrationFactor = "1",
                 StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 SubscriptionID = "subscription_id",
             },
         ];
         List<string> expectedSubscriptionIds = ["string"];
         int expectedTotalAmount = 0;
+        string expectedCardExpMonth = "card_exp_month";
+        string expectedCardExpYear = "card_exp_year";
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
+        string expectedCardType = "card_type";
+        ApiEnum<string, Payments::ChargeType> expectedChargeType = Payments::ChargeType.New;
         string expectedCheckoutSessionID = "checkout_session_id";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
@@ -303,6 +338,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCustomer, deserialized.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, deserialized.DigitalProductsDelivered);
         Assert.Equal(expectedHasLicenseKey, deserialized.HasLicenseKey);
+        Assert.Equal(expectedIncludesUsage, deserialized.IncludesUsage);
         Assert.Equal(expectedIsMultiSubscription, deserialized.IsMultiSubscription);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -325,8 +361,12 @@ public class PaymentListResponseTest : TestBase
             Assert.Equal(expectedSubscriptionIds[i], deserialized.SubscriptionIds[i]);
         }
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedCardExpMonth, deserialized.CardExpMonth);
+        Assert.Equal(expectedCardExpYear, deserialized.CardExpYear);
         Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
+        Assert.Equal(expectedCardType, deserialized.CardType);
+        Assert.Equal(expectedChargeType, deserialized.ChargeType);
         Assert.Equal(expectedCheckoutSessionID, deserialized.CheckoutSessionID);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
@@ -356,6 +396,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -366,14 +407,19 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
             ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
@@ -406,6 +452,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -416,6 +463,7 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -424,10 +472,18 @@ public class PaymentListResponseTest : TestBase
             TotalAmount = 0,
         };
 
+        Assert.Null(model.CardExpMonth);
+        Assert.False(model.RawData.ContainsKey("card_exp_month"));
+        Assert.Null(model.CardExpYear);
+        Assert.False(model.RawData.ContainsKey("card_exp_year"));
         Assert.Null(model.CardLastFour);
         Assert.False(model.RawData.ContainsKey("card_last_four"));
         Assert.Null(model.CardNetwork);
         Assert.False(model.RawData.ContainsKey("card_network"));
+        Assert.Null(model.CardType);
+        Assert.False(model.RawData.ContainsKey("card_type"));
+        Assert.Null(model.ChargeType);
+        Assert.False(model.RawData.ContainsKey("charge_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.False(model.RawData.ContainsKey("checkout_session_id"));
         Assert.Null(model.DisputeStatus);
@@ -466,6 +522,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -476,6 +533,7 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -505,6 +563,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -515,6 +574,7 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -522,8 +582,12 @@ public class PaymentListResponseTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
 
+            CardExpMonth = null,
+            CardExpYear = null,
             CardLastFour = null,
             CardNetwork = null,
+            CardType = null,
+            ChargeType = null,
             CheckoutSessionID = null,
             DisputeStatus = null,
             InvoiceID = null,
@@ -535,10 +599,18 @@ public class PaymentListResponseTest : TestBase
             SubscriptionID = null,
         };
 
+        Assert.Null(model.CardExpMonth);
+        Assert.True(model.RawData.ContainsKey("card_exp_month"));
+        Assert.Null(model.CardExpYear);
+        Assert.True(model.RawData.ContainsKey("card_exp_year"));
         Assert.Null(model.CardLastFour);
         Assert.True(model.RawData.ContainsKey("card_last_four"));
         Assert.Null(model.CardNetwork);
         Assert.True(model.RawData.ContainsKey("card_network"));
+        Assert.Null(model.CardType);
+        Assert.True(model.RawData.ContainsKey("card_type"));
+        Assert.Null(model.ChargeType);
+        Assert.True(model.RawData.ContainsKey("charge_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.True(model.RawData.ContainsKey("checkout_session_id"));
         Assert.Null(model.DisputeStatus);
@@ -577,6 +649,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -587,6 +660,7 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
@@ -594,8 +668,12 @@ public class PaymentListResponseTest : TestBase
             SubscriptionIds = ["string"],
             TotalAmount = 0,
 
+            CardExpMonth = null,
+            CardExpYear = null,
             CardLastFour = null,
             CardNetwork = null,
+            CardType = null,
+            ChargeType = null,
             CheckoutSessionID = null,
             DisputeStatus = null,
             InvoiceID = null,
@@ -628,6 +706,7 @@ public class PaymentListResponseTest : TestBase
             },
             DigitalProductsDelivered = true,
             HasLicenseKey = true,
+            IncludesUsage = true,
             IsMultiSubscription = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
@@ -638,14 +717,19 @@ public class PaymentListResponseTest : TestBase
                 new()
                 {
                     EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProrationFactor = "1",
                     StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     SubscriptionID = "subscription_id",
                 },
             ],
             SubscriptionIds = ["string"],
             TotalAmount = 0,
+            CardExpMonth = "card_exp_month",
+            CardExpYear = "card_exp_year",
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
+            CardType = "card_type",
+            ChargeType = Payments::ChargeType.New,
             CheckoutSessionID = "checkout_session_id",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",

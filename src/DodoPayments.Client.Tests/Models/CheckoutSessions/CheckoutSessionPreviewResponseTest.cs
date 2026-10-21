@@ -84,6 +84,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -188,6 +189,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Description = "description",
                 DiscountAmount = 0,
                 DiscountCycle = 0,
+                MonthlyEquivalent = 0,
                 Name = "name",
                 Tax = 0,
             },
@@ -323,6 +325,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -441,6 +444,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -552,6 +556,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 Description = "description",
                 DiscountAmount = 0,
                 DiscountCycle = 0,
+                MonthlyEquivalent = 0,
                 Name = "name",
                 Tax = 0,
             },
@@ -687,6 +692,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -799,6 +805,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -901,6 +908,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -986,6 +994,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -1098,6 +1107,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -1193,6 +1203,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                     Description = "description",
                     DiscountAmount = 0,
                     DiscountCycle = 0,
+                    MonthlyEquivalent = 0,
                     Name = "name",
                     Tax = 0,
                 },
@@ -1457,6 +1468,7 @@ public class ProductCartTest : TestBase
             Description = "description",
             DiscountAmount = 0,
             DiscountCycle = 0,
+            MonthlyEquivalent = 0,
             Name = "name",
             Tax = 0,
         };
@@ -1516,6 +1528,7 @@ public class ProductCartTest : TestBase
         string expectedDescription = "description";
         int expectedDiscountAmount = 0;
         int expectedDiscountCycle = 0;
+        int expectedMonthlyEquivalent = 0;
         string expectedName = "name";
         int expectedTax = 0;
 
@@ -1549,6 +1562,7 @@ public class ProductCartTest : TestBase
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDiscountAmount, model.DiscountAmount);
         Assert.Equal(expectedDiscountCycle, model.DiscountCycle);
+        Assert.Equal(expectedMonthlyEquivalent, model.MonthlyEquivalent);
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedTax, model.Tax);
     }
@@ -1613,6 +1627,7 @@ public class ProductCartTest : TestBase
             Description = "description",
             DiscountAmount = 0,
             DiscountCycle = 0,
+            MonthlyEquivalent = 0,
             Name = "name",
             Tax = 0,
         };
@@ -1686,6 +1701,7 @@ public class ProductCartTest : TestBase
             Description = "description",
             DiscountAmount = 0,
             DiscountCycle = 0,
+            MonthlyEquivalent = 0,
             Name = "name",
             Tax = 0,
         };
@@ -1752,6 +1768,7 @@ public class ProductCartTest : TestBase
         string expectedDescription = "description";
         int expectedDiscountAmount = 0;
         int expectedDiscountCycle = 0;
+        int expectedMonthlyEquivalent = 0;
         string expectedName = "name";
         int expectedTax = 0;
 
@@ -1785,6 +1802,7 @@ public class ProductCartTest : TestBase
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDiscountAmount, deserialized.DiscountAmount);
         Assert.Equal(expectedDiscountCycle, deserialized.DiscountCycle);
+        Assert.Equal(expectedMonthlyEquivalent, deserialized.MonthlyEquivalent);
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedTax, deserialized.Tax);
     }
@@ -1849,6 +1867,7 @@ public class ProductCartTest : TestBase
             Description = "description",
             DiscountAmount = 0,
             DiscountCycle = 0,
+            MonthlyEquivalent = 0,
             Name = "name",
             Tax = 0,
         };
@@ -1903,6 +1922,8 @@ public class ProductCartTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_amount"));
         Assert.Null(model.DiscountCycle);
         Assert.False(model.RawData.ContainsKey("discount_cycle"));
+        Assert.Null(model.MonthlyEquivalent);
+        Assert.False(model.RawData.ContainsKey("monthly_equivalent"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
         Assert.Null(model.Tax);
@@ -1993,6 +2014,7 @@ public class ProductCartTest : TestBase
             Description = null,
             DiscountAmount = null,
             DiscountCycle = null,
+            MonthlyEquivalent = null,
             Name = null,
             Tax = null,
         };
@@ -2005,6 +2027,8 @@ public class ProductCartTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_amount"));
         Assert.Null(model.DiscountCycle);
         Assert.True(model.RawData.ContainsKey("discount_cycle"));
+        Assert.Null(model.MonthlyEquivalent);
+        Assert.True(model.RawData.ContainsKey("monthly_equivalent"));
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
         Assert.Null(model.Tax);
@@ -2053,6 +2077,7 @@ public class ProductCartTest : TestBase
             Description = null,
             DiscountAmount = null,
             DiscountCycle = null,
+            MonthlyEquivalent = null,
             Name = null,
             Tax = null,
         };
@@ -2120,6 +2145,7 @@ public class ProductCartTest : TestBase
             Description = "description",
             DiscountAmount = 0,
             DiscountCycle = 0,
+            MonthlyEquivalent = 0,
             Name = "name",
             Tax = 0,
         };
