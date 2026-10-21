@@ -43,6 +43,7 @@ public abstract record class ModelBase
         {
             new FrozenDictionaryConverterFactory(),
             new ApiEnumConverter<string, Currency>(),
+            new ApiEnumConverter<string, Payments::ChargeType>(),
             new ApiEnumConverter<string, Payments::IntentStatus>(),
             new ApiEnumConverter<string, Payments::PaymentMethodTypes>(),
             new ApiEnumConverter<string, Payments::PaymentRefundStatus>(),

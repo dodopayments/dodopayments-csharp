@@ -13,15 +13,18 @@ public class SubscriptionServicePeriodTest : TestBase
         var model = new SubscriptionServicePeriod
         {
             EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProrationFactor = "1",
             StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
         };
 
         DateTimeOffset expectedEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedProrationFactor = "1";
         DateTimeOffset expectedStartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedEndsAt, model.EndsAt);
+        Assert.Equal(expectedProrationFactor, model.ProrationFactor);
         Assert.Equal(expectedStartsAt, model.StartsAt);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
     }
@@ -32,6 +35,7 @@ public class SubscriptionServicePeriodTest : TestBase
         var model = new SubscriptionServicePeriod
         {
             EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProrationFactor = "1",
             StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
         };
@@ -51,6 +55,7 @@ public class SubscriptionServicePeriodTest : TestBase
         var model = new SubscriptionServicePeriod
         {
             EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProrationFactor = "1",
             StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
         };
@@ -63,10 +68,12 @@ public class SubscriptionServicePeriodTest : TestBase
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedProrationFactor = "1";
         DateTimeOffset expectedStartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedEndsAt, deserialized.EndsAt);
+        Assert.Equal(expectedProrationFactor, deserialized.ProrationFactor);
         Assert.Equal(expectedStartsAt, deserialized.StartsAt);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
     }
@@ -77,6 +84,7 @@ public class SubscriptionServicePeriodTest : TestBase
         var model = new SubscriptionServicePeriod
         {
             EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProrationFactor = "1",
             StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
         };
@@ -90,6 +98,7 @@ public class SubscriptionServicePeriodTest : TestBase
         var model = new SubscriptionServicePeriod
         {
             EndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProrationFactor = "1",
             StartsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
         };

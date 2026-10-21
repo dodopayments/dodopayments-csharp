@@ -1456,6 +1456,22 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// True when this payment also bills metered usage or credit overage. The usage
+    /// is for the billing cycle before the service period, not for the service period.
+    /// The value is set for each payment status. It is false when `charge_type`
+    /// is null.
+    /// </summary>
+    public required bool IncludesUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("includes_usage");
+        }
+        init { this._rawData.Set("includes_usage", value); }
+    }
+
+    /// <summary>
     /// True when one payment starts more than one subscription. Read this field
     /// to find the payment type. Do not read the length of `subscription_ids`. Do
     /// not read `subscription_id` for null.
@@ -1575,7 +1591,10 @@ public sealed record class Payment : JsonModel
     /// is the same as `subscription_ids`. For a plan change charge, the period starts
     /// at the plan change and ends at the next billing date. The list is empty unless
     /// the payment status is `succeeded`. The list is also empty for a one-time payment,
-    /// an on-demand charge, or a payment method update.
+    /// an on-demand charge, or a payment method update. The list is set for `new`,
+    /// `renewal` and `plan_change` charges that succeeded. It can be empty for some
+    /// zero-amount payments. A `renewal` with no entry for its subscription bills
+    /// usage only. That payment does not extend the service period.
     /// </summary>
     public required IReadOnlyList<Payments::SubscriptionServicePeriod> ServicePeriods
     {
@@ -1656,6 +1675,36 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+    /// Google Pay, this is the expiry of the wallet token, which can differ from
+    /// the expiry of the physical card.
+    /// </summary>
+    public string? CardExpMonth
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_exp_month");
+        }
+        init { this._rawData.Set("card_exp_month", value); }
+    }
+
+    /// <summary>
+    /// Expiry year of the card, as four digits, for example `2029`. For Apple Pay
+    /// and Google Pay, this is the expiry of the wallet token, which can differ
+    /// from the expiry of the physical card.
+    /// </summary>
+    public string? CardExpYear
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_exp_year");
+        }
+        init { this._rawData.Set("card_exp_year", value); }
+    }
+
+    /// <summary>
     /// Cardholder name
     /// </summary>
     public string? CardHolderName
@@ -1705,7 +1754,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Card network like VISA, MASTERCARD etc.
+    /// Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older
+    /// payments can carry other casing.
     /// </summary>
     public string? CardNetwork
     {
@@ -1718,7 +1768,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// The type of card DEBIT or CREDIT
+    /// The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments
+    /// can carry other casing.
     /// </summary>
     public string? CardType
     {
@@ -1728,6 +1779,43 @@ public sealed record class Payment : JsonModel
             return this._rawData.GetNullableClass<string>("card_type");
         }
         init { this._rawData.Set("card_type", value); }
+    }
+
+    /// <summary>
+    /// The type of subscription charge that a payment is for.
+    ///
+    /// <para>A payment has one invoice, and the invoice has one type. Thus each payment
+    /// has one charge type. A payment that charges no subscription has no charge type.</para>
+    ///
+    /// <para>- `new`: the first payment of one or more subscriptions. A retry of
+    /// that payment   is also `new`. A cart with new subscriptions and one-time products
+    /// is `new`.   Read the one-time products from `product_cart`. - `renewal`:
+    /// a charge at the billing date. A dunning retry and a manual retry of   that
+    /// charge are also `renewal`. A `renewal` does not always extend the service
+    ///   period. For example, the usage settlement of a paused subscription is a
+    /// `renewal`   with `includes_usage` true and no entry in `service_periods`.
+    /// Examine   `service_periods` before you extend access. - `plan_change`: a charge
+    /// for a plan change. The change applies now or at the next billing date. - `on_demand`:
+    /// an on-demand charge of an on-demand subscription.</para>
+    /// </summary>
+    public ApiEnum<string, Payments::ChargeType>? ChargeType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::ChargeType>>(
+                "charge_type"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("charge_type", value);
+        }
     }
 
     /// <summary>
@@ -1840,8 +1928,12 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// URL to download the invoice PDF for this payment.
+    /// DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key. URL
+    /// to download the invoice PDF for this payment. The URL has no signed token.
+    /// If the business asks for a credential on its invoice links, the URL needs
+    /// an API key.
     /// </summary>
+    [Obsolete("Use `GET /invoices/payments/{payment_id}` with an API key.")]
     public string? InvoiceUrl
     {
         get
@@ -2043,6 +2135,7 @@ public sealed record class Payment : JsonModel
             Customer = payment.Customer,
             DigitalProductsDelivered = payment.DigitalProductsDelivered,
             Disputes = payment.Disputes,
+            IncludesUsage = payment.IncludesUsage,
             IsMultiSubscription = payment.IsMultiSubscription,
             IsUpdatePaymentMethod = payment.IsUpdatePaymentMethod,
             Metadata = payment.Metadata,
@@ -2055,11 +2148,14 @@ public sealed record class Payment : JsonModel
             SettlementCurrency = payment.SettlementCurrency,
             SubscriptionIds = payment.SubscriptionIds,
             TotalAmount = payment.TotalAmount,
+            CardExpMonth = payment.CardExpMonth,
+            CardExpYear = payment.CardExpYear,
             CardHolderName = payment.CardHolderName,
             CardIssuingCountry = payment.CardIssuingCountry,
             CardLastFour = payment.CardLastFour,
             CardNetwork = payment.CardNetwork,
             CardType = payment.CardType,
+            ChargeType = payment.ChargeType,
             CheckoutSessionID = payment.CheckoutSessionID,
             CustomFieldResponses = payment.CustomFieldResponses,
             DiscountID = payment.DiscountID,
@@ -2095,6 +2191,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        _ = this.IncludesUsage;
         _ = this.IsMultiSubscription;
         _ = this.IsUpdatePaymentMethod;
         foreach (var item in this.Metadata.Values)
@@ -2116,11 +2213,14 @@ public sealed record class Payment : JsonModel
         this.SettlementCurrency.Validate();
         _ = this.SubscriptionIds;
         _ = this.TotalAmount;
+        _ = this.CardExpMonth;
+        _ = this.CardExpYear;
         _ = this.CardHolderName;
         this.CardIssuingCountry?.Validate();
         _ = this.CardLastFour;
         _ = this.CardNetwork;
         _ = this.CardType;
+        this.ChargeType?.Validate();
         _ = this.CheckoutSessionID;
         foreach (var item in this.CustomFieldResponses ?? [])
         {
