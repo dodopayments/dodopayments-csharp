@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.40.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.39.0...v6.40.0) (2026-10-21)
+
+
+### Features
+
+* **api:** payment charge type, usage flag and card details, signed invoice link tokens ([93ef48f](https://github.com/dodopayments/dodopayments-csharp/commit/93ef48fc86f38e6cf4c88f1de5fdc11a1018e997))
+* **api:** payment charge type, usage flag and card details, signed invoice link tokens ([d526df3](https://github.com/dodopayments/dodopayments-csharp/commit/d526df31b4b705d6c3508ab04cec6dae0d8db2be))
+
 ## [6.39.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.38.1...v6.39.0) (2026-10-14)
 
 
