@@ -29,7 +29,8 @@ public record class GroupUpdateParams : ParamsBase
 
     /// <summary>
     /// Optional group name update: Some(Some(name)) = set name, Some(None) = clear
-    /// name, None = no change
+    /// name, None = no change The API returns 422 if another group in the collection
+    /// has no name.
     /// </summary>
     public string? GroupName
     {

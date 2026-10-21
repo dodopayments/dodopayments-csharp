@@ -17,6 +17,28 @@ public record class PaymentRetrieveRefundParams : ParamsBase
 {
     public string? RefundID { get; init; }
 
+    /// <summary>
+    /// The signed link token. If the business asks for a credential on its invoice
+    /// links, a valid token for this record replaces the credential.
+    /// </summary>
+    public string? Token
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("token");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("token", value);
+        }
+    }
+
     public PaymentRetrieveRefundParams() { }
 
 #pragma warning disable CS8618
