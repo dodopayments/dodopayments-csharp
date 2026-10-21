@@ -76,6 +76,22 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
+    /// True when this payment also bills metered usage or credit overage. The usage
+    /// is for the billing cycle before the service period, not for the service period.
+    /// The value is set for each payment status. It is false when `charge_type`
+    /// is null.
+    /// </summary>
+    public required bool IncludesUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("includes_usage");
+        }
+        init { this._rawData.Set("includes_usage", value); }
+    }
+
+    /// <summary>
     /// True when one payment starts more than one subscription. Read this field
     /// to find the payment type. Do not read the length of `subscription_ids`. Do
     /// not read `subscription_id` for null.
@@ -157,7 +173,10 @@ public sealed record class PaymentListResponse : JsonModel
     /// is the same as `subscription_ids`. For a plan change charge, the period starts
     /// at the plan change and ends at the next billing date. The list is empty unless
     /// the payment status is `succeeded`. The list is also empty for a one-time payment,
-    /// an on-demand charge, or a payment method update.
+    /// an on-demand charge, or a payment method update. The list is set for `new`,
+    /// `renewal` and `plan_change` charges that succeeded. It can be empty for some
+    /// zero-amount payments. A `renewal` with no entry for its subscription bills
+    /// usage only. That payment does not extend the service period.
     /// </summary>
     public required IReadOnlyList<SubscriptionServicePeriod> ServicePeriods
     {
@@ -209,6 +228,36 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
+    /// Expiry month of the card, as two digits from `01` to `12`. For Apple Pay and
+    /// Google Pay, this is the expiry of the wallet token, which can differ from
+    /// the expiry of the physical card.
+    /// </summary>
+    public string? CardExpMonth
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_exp_month");
+        }
+        init { this._rawData.Set("card_exp_month", value); }
+    }
+
+    /// <summary>
+    /// Expiry year of the card, as four digits, for example `2029`. For Apple Pay
+    /// and Google Pay, this is the expiry of the wallet token, which can differ
+    /// from the expiry of the physical card.
+    /// </summary>
+    public string? CardExpYear
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_exp_year");
+        }
+        init { this._rawData.Set("card_exp_year", value); }
+    }
+
+    /// <summary>
     /// The last four digits of the card
     /// </summary>
     public string? CardLastFour
@@ -222,7 +271,8 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
-    /// Card network like VISA, MASTERCARD etc.
+    /// Card network, in lowercase, for example `visa`, `mastercard` or `amex`. Older
+    /// payments can carry other casing.
     /// </summary>
     public string? CardNetwork
     {
@@ -232,6 +282,35 @@ public sealed record class PaymentListResponse : JsonModel
             return this._rawData.GetNullableClass<string>("card_network");
         }
         init { this._rawData.Set("card_network", value); }
+    }
+
+    /// <summary>
+    /// The type of card, in lowercase: `credit`, `debit` or `prepaid`. Older payments
+    /// can carry other casing.
+    /// </summary>
+    public string? CardType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_type");
+        }
+        init { this._rawData.Set("card_type", value); }
+    }
+
+    /// <summary>
+    /// The type of subscription charge that this payment is for. Refer to `ChargeType`.
+    /// The value is set for each payment status, not only for `succeeded`. The value
+    /// is null when this payment charges no subscription.
+    /// </summary>
+    public ApiEnum<string, ChargeType>? ChargeType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, ChargeType>>("charge_type");
+        }
+        init { this._rawData.Set("charge_type", value); }
     }
 
     /// <summary>
@@ -277,8 +356,12 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
-    /// URL to download the invoice PDF for this payment.
+    /// DEPRECATED: Use `GET /invoices/payments/{payment_id}` with an API key. URL
+    /// to download the invoice PDF for this payment. The URL has no signed token.
+    /// If the business asks for a credential on its invoice links, the URL needs
+    /// an API key.
     /// </summary>
+    [Obsolete("Use `GET /invoices/payments/{payment_id}` with an API key.")]
     public string? InvoiceUrl
     {
         get
@@ -353,6 +436,7 @@ public sealed record class PaymentListResponse : JsonModel
         this.Customer.Validate();
         _ = this.DigitalProductsDelivered;
         _ = this.HasLicenseKey;
+        _ = this.IncludesUsage;
         _ = this.IsMultiSubscription;
         foreach (var item in this.Metadata.Values)
         {
@@ -367,8 +451,12 @@ public sealed record class PaymentListResponse : JsonModel
         }
         _ = this.SubscriptionIds;
         _ = this.TotalAmount;
+        _ = this.CardExpMonth;
+        _ = this.CardExpYear;
         _ = this.CardLastFour;
         _ = this.CardNetwork;
+        _ = this.CardType;
+        this.ChargeType?.Validate();
         _ = this.CheckoutSessionID;
         this.DisputeStatus?.Validate();
         _ = this.InvoiceID;

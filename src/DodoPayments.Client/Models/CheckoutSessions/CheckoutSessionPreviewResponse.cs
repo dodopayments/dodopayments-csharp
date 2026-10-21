@@ -660,6 +660,22 @@ public sealed record class ProductCart : JsonModel
     }
 
     /// <summary>
+    /// The monthly equivalent of the yearly unit price after discounts, in minor
+    /// units of `currency`. Only the hosted checkout sets it, when the business
+    /// shows yearly plans as monthly. The value is only for display. The order summary
+    /// shows the amounts that we charge.
+    /// </summary>
+    public int? MonthlyEquivalent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("monthly_equivalent");
+        }
+        init { this._rawData.Set("monthly_equivalent", value); }
+    }
+
+    /// <summary>
     /// name of the product
     /// </summary>
     public string? Name
@@ -714,6 +730,7 @@ public sealed record class ProductCart : JsonModel
         _ = this.Description;
         _ = this.DiscountAmount;
         _ = this.DiscountCycle;
+        _ = this.MonthlyEquivalent;
         _ = this.Name;
         _ = this.Tax;
     }
