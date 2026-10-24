@@ -11,15 +11,18 @@ public class CreditEntitlementListParamsTest : TestBase
         var parameters = new CreditEntitlementListParams
         {
             Deleted = true,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
 
         bool expectedDeleted = true;
+        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
         Assert.Equal(expectedDeleted, parameters.Deleted);
+        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
     }
@@ -31,6 +34,8 @@ public class CreditEntitlementListParamsTest : TestBase
 
         Assert.Null(parameters.Deleted);
         Assert.False(parameters.RawQueryData.ContainsKey("deleted"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -44,12 +49,15 @@ public class CreditEntitlementListParamsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             Deleted = null,
+            Locale = null,
             PageNumber = null,
             PageSize = null,
         };
 
         Assert.Null(parameters.Deleted);
         Assert.False(parameters.RawQueryData.ContainsKey("deleted"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -62,6 +70,7 @@ public class CreditEntitlementListParamsTest : TestBase
         CreditEntitlementListParams parameters = new()
         {
             Deleted = true,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
@@ -71,7 +80,7 @@ public class CreditEntitlementListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/credit-entitlements?deleted=true&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/credit-entitlements?deleted=true&locale=locale&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -84,6 +93,7 @@ public class CreditEntitlementListParamsTest : TestBase
         var parameters = new CreditEntitlementListParams
         {
             Deleted = true,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -16,6 +17,28 @@ namespace DodoPayments.Client.Models.Payments;
 public record class PaymentRetrieveLineItemsParams : ParamsBase
 {
     public string? PaymentID { get; init; }
+
+    /// <summary>
+    /// The currency of the amounts. It must be the currency that the customer paid
+    /// in. Without it, the amounts are in the settlement currency.
+    /// </summary>
+    public ApiEnum<string, Misc::Currency>? Currency
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Misc::Currency>>("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("currency", value);
+        }
+    }
 
     public PaymentRetrieveLineItemsParams() { }
 

@@ -126,6 +126,19 @@ public sealed record class Customer : JsonModel
         init { this._rawData.Set("phone_number", value); }
     }
 
+    /// <summary>
+    /// The language of the customer emails. `null` gives English.
+    /// </summary>
+    public ApiEnum<string, Locale>? PreferredLocale
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Locale>>("preferred_locale");
+        }
+        init { this._rawData.Set("preferred_locale", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -144,6 +157,7 @@ public sealed record class Customer : JsonModel
             }
         }
         _ = this.PhoneNumber;
+        this.PreferredLocale?.Validate();
     }
 
     public Customer() { }

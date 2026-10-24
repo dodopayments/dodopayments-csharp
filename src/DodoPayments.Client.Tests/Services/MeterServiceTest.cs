@@ -33,6 +33,17 @@ public class MeterServiceTest : TestBase
     }
 
     [Fact]
+    public async Task Update_Works()
+    {
+        var meter = await this.client.Meters.Update(
+            "mtr_h5tgTWL55OyMO0L2Q9w9v",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        meter.Validate();
+    }
+
+    [Fact]
     public async Task List_Works()
     {
         var page = await this.client.Meters.List(new(), TestContext.Current.CancellationToken);

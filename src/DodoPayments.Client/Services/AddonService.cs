@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Addons;
+using DodoPayments.Client.Services.Addons;
 
 namespace DodoPayments.Client.Services;
 
@@ -32,6 +33,13 @@ public sealed class AddonService : IAddonService
         _client = client;
 
         _withRawResponse = new(() => new AddonServiceWithRawResponse(client.WithRawResponse));
+        _translations = new(() => new TranslationService(client));
+    }
+
+    readonly Lazy<ITranslationService> _translations;
+    public ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -107,6 +115,45 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
+    public Task Delete(AddonDeleteParams parameters, CancellationToken cancellationToken = default)
+    {
+        return this.WithRawResponse.Delete(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task Delete(
+        string id,
+        AddonDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Delete(parameters with { ID = id }, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task Unarchive(
+        AddonUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.Unarchive(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task Unarchive(
+        string id,
+        AddonUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Unarchive(parameters with { ID = id }, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<AddonUpdateImagesResponse> UpdateImages(
         AddonUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
@@ -145,6 +192,14 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
     public AddonServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
+
+        _translations = new(() => new TranslationServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
+    public ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -293,6 +348,68 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
                 return new AddonListPage(this, parameters, page);
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Delete(
+        AddonDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<AddonDeleteParams> request = new()
+        {
+            Method = HttpMethod.Delete,
+            Params = parameters,
+        };
+        return this._client.Execute(request, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Delete(
+        string id,
+        AddonDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Delete(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Unarchive(
+        AddonUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<AddonUnarchiveParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        return this._client.Execute(request, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Unarchive(
+        string id,
+        AddonUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Unarchive(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

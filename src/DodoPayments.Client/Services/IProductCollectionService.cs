@@ -27,6 +27,8 @@ public interface IProductCollectionService
     /// </summary>
     IProductCollectionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ITranslationService Translations { get; }
+
     IGroupService Groups { get; }
 
     /// <summary>
@@ -135,6 +137,8 @@ public interface IProductCollectionServiceWithRawResponse
     IProductCollectionServiceWithRawResponse WithOptions(
         Func<ClientOptions, ClientOptions> modifier
     );
+
+    ITranslationServiceWithRawResponse Translations { get; }
 
     IGroupServiceWithRawResponse Groups { get; }
 

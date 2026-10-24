@@ -62,6 +62,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
         };
 
         string expectedBrandID = "brand_id";
@@ -113,6 +116,11 @@ public class PaymentListResponseTest : TestBase
             Payments::PaymentRefundStatus.Partial;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
+        ApiEnum<string, Payments::ThreeDSFlow> expectedThreeDSFlow =
+            Payments::ThreeDSFlow.Challenge;
+        ApiEnum<string, Payments::ThreeDSStatus> expectedThreeDSStatus =
+            Payments::ThreeDSStatus.Authenticated;
+        string expectedThreeDSVersion = "three_ds_version";
 
         Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -158,6 +166,9 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedRefundStatus, model.RefundStatus);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+        Assert.Equal(expectedThreeDSFlow, model.ThreeDSFlow);
+        Assert.Equal(expectedThreeDSStatus, model.ThreeDSStatus);
+        Assert.Equal(expectedThreeDSVersion, model.ThreeDSVersion);
     }
 
     [Fact]
@@ -211,6 +222,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -273,6 +287,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -331,6 +348,11 @@ public class PaymentListResponseTest : TestBase
             Payments::PaymentRefundStatus.Partial;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
+        ApiEnum<string, Payments::ThreeDSFlow> expectedThreeDSFlow =
+            Payments::ThreeDSFlow.Challenge;
+        ApiEnum<string, Payments::ThreeDSStatus> expectedThreeDSStatus =
+            Payments::ThreeDSStatus.Authenticated;
+        string expectedThreeDSVersion = "three_ds_version";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -376,6 +398,9 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedRefundStatus, deserialized.RefundStatus);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+        Assert.Equal(expectedThreeDSFlow, deserialized.ThreeDSFlow);
+        Assert.Equal(expectedThreeDSStatus, deserialized.ThreeDSStatus);
+        Assert.Equal(expectedThreeDSVersion, deserialized.ThreeDSVersion);
     }
 
     [Fact]
@@ -429,6 +454,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
         };
 
         model.Validate();
@@ -502,6 +530,12 @@ public class PaymentListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("status"));
         Assert.Null(model.SubscriptionID);
         Assert.False(model.RawData.ContainsKey("subscription_id"));
+        Assert.Null(model.ThreeDSFlow);
+        Assert.False(model.RawData.ContainsKey("three_ds_flow"));
+        Assert.Null(model.ThreeDSStatus);
+        Assert.False(model.RawData.ContainsKey("three_ds_status"));
+        Assert.Null(model.ThreeDSVersion);
+        Assert.False(model.RawData.ContainsKey("three_ds_version"));
     }
 
     [Fact]
@@ -597,6 +631,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = null,
             Status = null,
             SubscriptionID = null,
+            ThreeDSFlow = null,
+            ThreeDSStatus = null,
+            ThreeDSVersion = null,
         };
 
         Assert.Null(model.CardExpMonth);
@@ -629,6 +666,12 @@ public class PaymentListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("status"));
         Assert.Null(model.SubscriptionID);
         Assert.True(model.RawData.ContainsKey("subscription_id"));
+        Assert.Null(model.ThreeDSFlow);
+        Assert.True(model.RawData.ContainsKey("three_ds_flow"));
+        Assert.Null(model.ThreeDSStatus);
+        Assert.True(model.RawData.ContainsKey("three_ds_status"));
+        Assert.Null(model.ThreeDSVersion);
+        Assert.True(model.RawData.ContainsKey("three_ds_version"));
     }
 
     [Fact]
@@ -683,6 +726,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = null,
             Status = null,
             SubscriptionID = null,
+            ThreeDSFlow = null,
+            ThreeDSStatus = null,
+            ThreeDSVersion = null,
         };
 
         model.Validate();
@@ -739,6 +785,9 @@ public class PaymentListResponseTest : TestBase
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
         };
 
         Payments::PaymentListResponse copied = new(model);

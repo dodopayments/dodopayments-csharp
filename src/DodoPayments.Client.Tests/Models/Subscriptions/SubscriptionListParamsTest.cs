@@ -18,6 +18,7 @@ public class SubscriptionListParamsTest : TestBase
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
@@ -29,6 +30,7 @@ public class SubscriptionListParamsTest : TestBase
         DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
+        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         string expectedProductID = "product_id";
@@ -39,6 +41,7 @@ public class SubscriptionListParamsTest : TestBase
         Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
         Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
         Assert.Equal(expectedProductID, parameters.ProductID);
@@ -60,6 +63,8 @@ public class SubscriptionListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -81,6 +86,7 @@ public class SubscriptionListParamsTest : TestBase
             CreatedAtGte = null,
             CreatedAtLte = null,
             CustomerID = null,
+            Locale = null,
             PageNumber = null,
             PageSize = null,
             ProductID = null,
@@ -97,6 +103,8 @@ public class SubscriptionListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -117,6 +125,7 @@ public class SubscriptionListParamsTest : TestBase
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             CustomerID = "customer_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
@@ -128,7 +137,7 @@ public class SubscriptionListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions?brand_id=brand_id&cancel_at_next_billing_date=true&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=pending"
+                    "https://live.dodopayments.com/subscriptions?brand_id=brand_id&cancel_at_next_billing_date=true&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&locale=locale&page_number=0&page_size=0&product_id=product_id&status=pending"
                 ),
                 url
             )
@@ -145,6 +154,7 @@ public class SubscriptionListParamsTest : TestBase
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",

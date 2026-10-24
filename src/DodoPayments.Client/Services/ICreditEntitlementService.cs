@@ -27,6 +27,8 @@ public interface ICreditEntitlementService
     /// </summary>
     ICreditEntitlementService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    CreditEntitlements::ITranslationService Translations { get; }
+
     CreditEntitlements::IBalanceService Balances { get; }
 
     /// <summary>
@@ -248,6 +250,8 @@ public interface ICreditEntitlementServiceWithRawResponse
     ICreditEntitlementServiceWithRawResponse WithOptions(
         Func<ClientOptions, ClientOptions> modifier
     );
+
+    CreditEntitlements::ITranslationServiceWithRawResponse Translations { get; }
 
     CreditEntitlements::IBalanceServiceWithRawResponse Balances { get; }
 

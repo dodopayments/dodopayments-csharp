@@ -12,7 +12,8 @@ namespace DodoPayments.Client.Models.Payouts.Breakup.Details;
 /// Returns paginated individual balance ledger entries for a payout. Each entry is
 /// converted into the payout's currency at the rate the payout settled at. Supports
 /// pagination via `page_size` (default 10, max 100) and `page_number` (default 0)
-/// query parameters.
+/// query parameters. A settlement batch payout shows its rows in native amounts.
+/// `unattributed` is the payout amount less the sum of its rows in the payout currency.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

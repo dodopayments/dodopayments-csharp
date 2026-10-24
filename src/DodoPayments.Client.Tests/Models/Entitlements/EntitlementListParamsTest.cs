@@ -14,15 +14,18 @@ public class EntitlementListParamsTest : TestBase
         var parameters = new EntitlementListParams
         {
             IntegrationType = IntegrationType.Discord,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
 
         ApiEnum<string, IntegrationType> expectedIntegrationType = IntegrationType.Discord;
+        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
         Assert.Equal(expectedIntegrationType, parameters.IntegrationType);
+        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
     }
@@ -34,6 +37,8 @@ public class EntitlementListParamsTest : TestBase
 
         Assert.Null(parameters.IntegrationType);
         Assert.False(parameters.RawQueryData.ContainsKey("integration_type"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -47,12 +52,15 @@ public class EntitlementListParamsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             IntegrationType = null,
+            Locale = null,
             PageNumber = null,
             PageSize = null,
         };
 
         Assert.Null(parameters.IntegrationType);
         Assert.False(parameters.RawQueryData.ContainsKey("integration_type"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -65,6 +73,7 @@ public class EntitlementListParamsTest : TestBase
         EntitlementListParams parameters = new()
         {
             IntegrationType = IntegrationType.Discord,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
@@ -74,7 +83,7 @@ public class EntitlementListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/entitlements?integration_type=discord&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/entitlements?integration_type=discord&locale=locale&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -87,6 +96,7 @@ public class EntitlementListParamsTest : TestBase
         var parameters = new EntitlementListParams
         {
             IntegrationType = IntegrationType.Discord,
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };

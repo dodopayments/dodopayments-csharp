@@ -33,9 +33,16 @@ public sealed class ProductService : IProductService
         _client = client;
 
         _withRawResponse = new(() => new ProductServiceWithRawResponse(client.WithRawResponse));
+        _translations = new(() => new TranslationService(client));
         _images = new(() => new ImageService(client));
         _shortLinks = new(() => new ShortLinkService(client));
         _localizedPrices = new(() => new LocalizedPriceService(client));
+    }
+
+    readonly Lazy<ITranslationService> _translations;
+    public ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IImageService> _images;
@@ -205,9 +212,16 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     {
         _client = client;
 
+        _translations = new(() => new TranslationServiceWithRawResponse(client));
         _images = new(() => new ImageServiceWithRawResponse(client));
         _shortLinks = new(() => new ShortLinkServiceWithRawResponse(client));
         _localizedPrices = new(() => new LocalizedPriceServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
+    public ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IImageServiceWithRawResponse> _images;

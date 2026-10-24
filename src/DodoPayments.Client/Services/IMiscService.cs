@@ -28,6 +28,14 @@ public interface IMiscService
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
+    /// Lists the locales that a translation can have.
+    /// </summary>
+    Task<List<LocaleInfo>> ListLocales(
+        MiscListLocalesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>get /checkout/supported_countries</c>.
     /// </summary>
     Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
@@ -48,6 +56,15 @@ public interface IMiscServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IMiscServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /locales</c>, but is otherwise the
+    /// same as <see cref="IMiscService.ListLocales(MiscListLocalesParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<List<LocaleInfo>>> ListLocales(
+        MiscListLocalesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /checkout/supported_countries</c>, but is otherwise the

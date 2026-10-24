@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Meters;
+using DodoPayments.Client.Services.Meters;
 
 namespace DodoPayments.Client.Services;
 
@@ -26,6 +27,8 @@ public interface IMeterService
     /// </summary>
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ITranslationService Translations { get; }
+
     /// <summary>
     /// Sends a request to <c>post /meters</c>.
     /// </summary>
@@ -43,6 +46,18 @@ public interface IMeterService
     Task<Meter> Retrieve(
         string id,
         MeterRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Sends a request to <c>patch /meters/{id}</c>.
+    /// </summary>
+    Task<Meter> Update(MeterUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Update(MeterUpdateParams, CancellationToken)"/>
+    Task<Meter> Update(
+        string id,
+        MeterUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -92,6 +107,8 @@ public interface IMeterServiceWithRawResponse
     /// </summary>
     IMeterServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ITranslationServiceWithRawResponse Translations { get; }
+
     /// <summary>
     /// Returns a raw HTTP response for <c>post /meters</c>, but is otherwise the
     /// same as <see cref="IMeterService.Create(MeterCreateParams, CancellationToken)"/>.
@@ -114,6 +131,22 @@ public interface IMeterServiceWithRawResponse
     Task<HttpResponse<Meter>> Retrieve(
         string id,
         MeterRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>patch /meters/{id}</c>, but is otherwise the
+    /// same as <see cref="IMeterService.Update(MeterUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Meter>> Update(
+        MeterUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(MeterUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<Meter>> Update(
+        string id,
+        MeterUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

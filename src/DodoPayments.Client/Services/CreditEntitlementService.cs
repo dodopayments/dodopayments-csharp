@@ -35,7 +35,14 @@ public sealed class CreditEntitlementService : ICreditEntitlementService
         _withRawResponse = new(() =>
             new CreditEntitlementServiceWithRawResponse(client.WithRawResponse)
         );
+        _translations = new(() => new CreditEntitlements::TranslationService(client));
         _balances = new(() => new CreditEntitlements::BalanceService(client));
+    }
+
+    readonly Lazy<CreditEntitlements::ITranslationService> _translations;
+    public CreditEntitlements::ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<CreditEntitlements::IBalanceService> _balances;
@@ -174,7 +181,16 @@ public sealed class CreditEntitlementServiceWithRawResponse
     {
         _client = client;
 
+        _translations = new(() =>
+            new CreditEntitlements::TranslationServiceWithRawResponse(client)
+        );
         _balances = new(() => new CreditEntitlements::BalanceServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<CreditEntitlements::ITranslationServiceWithRawResponse> _translations;
+    public CreditEntitlements::ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<CreditEntitlements::IBalanceServiceWithRawResponse> _balances;
