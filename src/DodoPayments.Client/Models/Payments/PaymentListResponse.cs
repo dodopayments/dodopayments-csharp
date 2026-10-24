@@ -427,6 +427,51 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("subscription_id", value); }
     }
 
+    /// <summary>
+    /// How the cardholder completed the 3DS authentication. The value is null when
+    /// the processor does not report it.
+    /// </summary>
+    public ApiEnum<string, ThreeDSFlow>? ThreeDSFlow
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, ThreeDSFlow>>("three_ds_flow");
+        }
+        init { this._rawData.Set("three_ds_flow", value); }
+    }
+
+    /// <summary>
+    /// The result of the 3DS authentication, as the processor reports it. The value
+    /// is null when the processor reports no 3DS data, for example when the payment
+    /// did not use 3DS.
+    /// </summary>
+    public ApiEnum<string, ThreeDSStatus>? ThreeDSStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, ThreeDSStatus>>(
+                "three_ds_status"
+            );
+        }
+        init { this._rawData.Set("three_ds_status", value); }
+    }
+
+    /// <summary>
+    /// The 3DS protocol version, for example `2.2.0`. The value is null when the
+    /// processor does not report it.
+    /// </summary>
+    public string? ThreeDSVersion
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("three_ds_version");
+        }
+        init { this._rawData.Set("three_ds_version", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -466,6 +511,9 @@ public sealed record class PaymentListResponse : JsonModel
         this.RefundStatus?.Validate();
         this.Status?.Validate();
         _ = this.SubscriptionID;
+        this.ThreeDSFlow?.Validate();
+        this.ThreeDSStatus?.Validate();
+        _ = this.ThreeDSVersion;
     }
 
     public PaymentListResponse() { }

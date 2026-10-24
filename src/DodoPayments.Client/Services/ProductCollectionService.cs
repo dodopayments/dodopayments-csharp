@@ -35,7 +35,14 @@ public sealed class ProductCollectionService : IProductCollectionService
         _withRawResponse = new(() =>
             new ProductCollectionServiceWithRawResponse(client.WithRawResponse)
         );
+        _translations = new(() => new TranslationService(client));
         _groups = new(() => new GroupService(client));
+    }
+
+    readonly Lazy<ITranslationService> _translations;
+    public ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IGroupService> _groups;
@@ -201,7 +208,14 @@ public sealed class ProductCollectionServiceWithRawResponse
     {
         _client = client;
 
+        _translations = new(() => new TranslationServiceWithRawResponse(client));
         _groups = new(() => new GroupServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
+    public ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IGroupServiceWithRawResponse> _groups;

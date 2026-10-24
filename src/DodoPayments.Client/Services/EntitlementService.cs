@@ -33,8 +33,15 @@ public sealed class EntitlementService : IEntitlementService
         _client = client;
 
         _withRawResponse = new(() => new EntitlementServiceWithRawResponse(client.WithRawResponse));
+        _translations = new(() => new TranslationService(client));
         _files = new(() => new FileService(client));
         _grants = new(() => new GrantService(client));
+    }
+
+    readonly Lazy<ITranslationService> _translations;
+    public ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IFileService> _files;
@@ -160,8 +167,15 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     {
         _client = client;
 
+        _translations = new(() => new TranslationServiceWithRawResponse(client));
         _files = new(() => new FileServiceWithRawResponse(client));
         _grants = new(() => new GrantServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
+    public ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     readonly Lazy<IFileServiceWithRawResponse> _files;

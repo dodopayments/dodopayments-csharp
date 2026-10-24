@@ -8,11 +8,21 @@ public class AddonListParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new AddonListParams { PageNumber = 0, PageSize = 0 };
+        var parameters = new AddonListParams
+        {
+            Archived = true,
+            Locale = "locale",
+            PageNumber = 0,
+            PageSize = 0,
+        };
 
+        bool expectedArchived = true;
+        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
+        Assert.Equal(expectedArchived, parameters.Archived);
+        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
     }
@@ -22,6 +32,10 @@ public class AddonListParamsTest : TestBase
     {
         var parameters = new AddonListParams { };
 
+        Assert.Null(parameters.Archived);
+        Assert.False(parameters.RawQueryData.ContainsKey("archived"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -34,10 +48,16 @@ public class AddonListParamsTest : TestBase
         var parameters = new AddonListParams
         {
             // Null should be interpreted as omitted for these properties
+            Archived = null,
+            Locale = null,
             PageNumber = null,
             PageSize = null,
         };
 
+        Assert.Null(parameters.Archived);
+        Assert.False(parameters.RawQueryData.ContainsKey("archived"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -47,13 +67,21 @@ public class AddonListParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        AddonListParams parameters = new() { PageNumber = 0, PageSize = 0 };
+        AddonListParams parameters = new()
+        {
+            Archived = true,
+            Locale = "locale",
+            PageNumber = 0,
+            PageSize = 0,
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/addons?page_number=0&page_size=0"),
+                new Uri(
+                    "https://live.dodopayments.com/addons?archived=true&locale=locale&page_number=0&page_size=0"
+                ),
                 url
             )
         );
@@ -62,7 +90,13 @@ public class AddonListParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new AddonListParams { PageNumber = 0, PageSize = 0 };
+        var parameters = new AddonListParams
+        {
+            Archived = true,
+            Locale = "locale",
+            PageNumber = 0,
+            PageSize = 0,
+        };
 
         AddonListParams copied = new(parameters);
 

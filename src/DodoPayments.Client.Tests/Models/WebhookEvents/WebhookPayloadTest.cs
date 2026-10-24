@@ -155,6 +155,9 @@ public class WebhookPayloadTest : TestBase
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -288,6 +291,9 @@ public class WebhookPayloadTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -433,6 +439,9 @@ public class WebhookPayloadTest : TestBase
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -582,6 +591,9 @@ public class WebhookPayloadTest : TestBase
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -722,6 +734,9 @@ public class WebhookPayloadTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -867,6 +882,9 @@ public class WebhookPayloadTest : TestBase
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1010,6 +1028,9 @@ public class WebhookPayloadTest : TestBase
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1153,6 +1174,9 @@ public class DataTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         value.Validate();
@@ -1681,6 +1705,9 @@ public class DataTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -2245,6 +2272,9 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2379,6 +2409,11 @@ public class PaymentTest : TestBase
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
+        ApiEnum<string, Payments::ThreeDSFlow> expectedThreeDSFlow =
+            Payments::ThreeDSFlow.Challenge;
+        ApiEnum<string, Payments::ThreeDSStatus> expectedThreeDSStatus =
+            Payments::ThreeDSStatus.Authenticated;
+        string expectedThreeDSVersion = "three_ds_version";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payment");
 
@@ -2466,6 +2501,9 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedTax, model.Tax);
+        Assert.Equal(expectedThreeDSFlow, model.ThreeDSFlow);
+        Assert.Equal(expectedThreeDSStatus, model.ThreeDSStatus);
+        Assert.Equal(expectedThreeDSVersion, model.ThreeDSVersion);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
@@ -2599,6 +2637,9 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2737,6 +2778,9 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2878,6 +2922,11 @@ public class PaymentTest : TestBase
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
+        ApiEnum<string, Payments::ThreeDSFlow> expectedThreeDSFlow =
+            Payments::ThreeDSFlow.Challenge;
+        ApiEnum<string, Payments::ThreeDSStatus> expectedThreeDSStatus =
+            Payments::ThreeDSStatus.Authenticated;
+        string expectedThreeDSVersion = "three_ds_version";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payment");
 
@@ -2965,6 +3014,9 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedTax, deserialized.Tax);
+        Assert.Equal(expectedThreeDSFlow, deserialized.ThreeDSFlow);
+        Assert.Equal(expectedThreeDSStatus, deserialized.ThreeDSStatus);
+        Assert.Equal(expectedThreeDSVersion, deserialized.ThreeDSVersion);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
@@ -3098,6 +3150,9 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3229,6 +3284,7 @@ public class PaymentTest : TestBase
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3240,6 +3296,10 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
         Assert.False(model.RawData.ContainsKey("status"));
+        Assert.Null(model.ThreeDSFlow);
+        Assert.False(model.RawData.ContainsKey("three_ds_flow"));
+        Assert.Null(model.ThreeDSStatus);
+        Assert.False(model.RawData.ContainsKey("three_ds_status"));
     }
 
     [Fact]
@@ -3367,6 +3427,7 @@ public class PaymentTest : TestBase
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3498,6 +3559,7 @@ public class PaymentTest : TestBase
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -3505,6 +3567,8 @@ public class PaymentTest : TestBase
             ChargeType = null,
             RefundStatus = null,
             Status = null,
+            ThreeDSFlow = null,
+            ThreeDSStatus = null,
         };
 
         Assert.Null(model.CardIssuingCountry);
@@ -3515,6 +3579,10 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
         Assert.False(model.RawData.ContainsKey("status"));
+        Assert.Null(model.ThreeDSFlow);
+        Assert.False(model.RawData.ContainsKey("three_ds_flow"));
+        Assert.Null(model.ThreeDSStatus);
+        Assert.False(model.RawData.ContainsKey("three_ds_status"));
     }
 
     [Fact]
@@ -3642,6 +3710,7 @@ public class PaymentTest : TestBase
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -3649,6 +3718,8 @@ public class PaymentTest : TestBase
             ChargeType = null,
             RefundStatus = null,
             Status = null,
+            ThreeDSFlow = null,
+            ThreeDSStatus = null,
         };
 
         model.Validate();
@@ -3740,6 +3811,8 @@ public class PaymentTest : TestBase
             ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
         };
 
         Assert.Null(model.CardExpMonth);
@@ -3786,6 +3859,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("subscription_id"));
         Assert.Null(model.Tax);
         Assert.False(model.RawData.ContainsKey("tax"));
+        Assert.Null(model.ThreeDSVersion);
+        Assert.False(model.RawData.ContainsKey("three_ds_version"));
         Assert.Null(model.UpdatedAt);
         Assert.False(model.RawData.ContainsKey("updated_at"));
     }
@@ -3876,6 +3951,8 @@ public class PaymentTest : TestBase
             ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
         };
 
         model.Validate();
@@ -3967,6 +4044,8 @@ public class PaymentTest : TestBase
             ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
 
             CardExpMonth = null,
             CardExpYear = null,
@@ -3990,6 +4069,7 @@ public class PaymentTest : TestBase
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
+            ThreeDSVersion = null,
             UpdatedAt = null,
         };
 
@@ -4037,6 +4117,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("subscription_id"));
         Assert.Null(model.Tax);
         Assert.True(model.RawData.ContainsKey("tax"));
+        Assert.Null(model.ThreeDSVersion);
+        Assert.True(model.RawData.ContainsKey("three_ds_version"));
         Assert.Null(model.UpdatedAt);
         Assert.True(model.RawData.ContainsKey("updated_at"));
     }
@@ -4127,6 +4209,8 @@ public class PaymentTest : TestBase
             ChargeType = Payments::ChargeType.New,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
 
             CardExpMonth = null,
             CardExpYear = null,
@@ -4150,6 +4234,7 @@ public class PaymentTest : TestBase
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
+            ThreeDSVersion = null,
             UpdatedAt = null,
         };
 
@@ -4285,6 +4370,9 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
+            ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+            ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+            ThreeDSVersion = "three_ds_version",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 

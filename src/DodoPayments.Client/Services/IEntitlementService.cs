@@ -27,6 +27,8 @@ public interface IEntitlementService
     /// </summary>
     IEntitlementService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ITranslationService Translations { get; }
+
     IFileService Files { get; }
 
     IGrantService Grants { get; }
@@ -102,6 +104,8 @@ public interface IEntitlementServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IEntitlementServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ITranslationServiceWithRawResponse Translations { get; }
 
     IFileServiceWithRawResponse Files { get; }
 

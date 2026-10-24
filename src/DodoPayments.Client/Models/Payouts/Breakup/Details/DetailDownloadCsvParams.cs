@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Payouts.Breakup.Details;
 /// Downloads the complete payout breakup as a CSV file. Each row represents a balance
 /// ledger entry with columns: Ledger ID, Event Type, Original Amount, Original Currency,
 /// Reference Object ID, Description, Created At, USD Equivalent Amount, and Payout
-/// Currency Amount.
+/// Currency Amount. A settlement batch payout shows its rows in native amounts.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

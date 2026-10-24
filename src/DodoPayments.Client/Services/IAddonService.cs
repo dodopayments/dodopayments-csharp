@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Addons;
+using DodoPayments.Client.Services.Addons;
 
 namespace DodoPayments.Client.Services;
 
@@ -25,6 +26,8 @@ public interface IAddonService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ITranslationService Translations { get; }
 
     /// <summary>
     /// Sends a request to <c>post /addons</c>.
@@ -73,6 +76,30 @@ public interface IAddonService
     );
 
     /// <summary>
+    /// Sends a request to <c>delete /addons/{id}</c>.
+    /// </summary>
+    Task Delete(AddonDeleteParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Delete(AddonDeleteParams, CancellationToken)"/>
+    Task Delete(
+        string id,
+        AddonDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Sends a request to <c>post /addons/{id}/unarchive</c>.
+    /// </summary>
+    Task Unarchive(AddonUnarchiveParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Unarchive(AddonUnarchiveParams, CancellationToken)"/>
+    Task Unarchive(
+        string id,
+        AddonUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>put /addons/{id}/images</c>.
     /// </summary>
     Task<AddonUpdateImagesResponse> UpdateImages(
@@ -100,6 +127,8 @@ public interface IAddonServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IAddonServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ITranslationServiceWithRawResponse Translations { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /addons</c>, but is otherwise the
@@ -148,6 +177,38 @@ public interface IAddonServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<AddonListPage>> List(
         AddonListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>delete /addons/{id}</c>, but is otherwise the
+    /// same as <see cref="IAddonService.Delete(AddonDeleteParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Delete(
+        AddonDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Delete(AddonDeleteParams, CancellationToken)"/>
+    Task<HttpResponse> Delete(
+        string id,
+        AddonDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /addons/{id}/unarchive</c>, but is otherwise the
+    /// same as <see cref="IAddonService.Unarchive(AddonUnarchiveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Unarchive(
+        AddonUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Unarchive(AddonUnarchiveParams, CancellationToken)"/>
+    Task<HttpResponse> Unarchive(
+        string id,
+        AddonUnarchiveParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
