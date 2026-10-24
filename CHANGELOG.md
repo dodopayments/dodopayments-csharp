@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.41.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.40.0...v6.41.0) (2026-10-24)
+
+
+### Features
+
+* **api:** translations and locales, addon delete/unarchive, meter update, 3DS payment details ([1800bd5](https://github.com/dodopayments/dodopayments-csharp/commit/1800bd5e06b62ac8f9313579ded32ecad0817eee))
+* **api:** translations and locales, addon delete/unarchive, meter update, 3DS payment details ([3a3a2e8](https://github.com/dodopayments/dodopayments-csharp/commit/3a3a2e89f61ed0d68dc738cc5bcf346ea33713fa))
+
 ## [6.40.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.39.0...v6.40.0) (2026-10-21)
 
 
