@@ -51,6 +51,26 @@ public class AddonServiceTest : TestBase
     }
 
     [Fact]
+    public async Task Delete_Works()
+    {
+        await this.client.Addons.Delete(
+            "adn_NX1zdqW4Hbivsqz8vI9dc",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+    }
+
+    [Fact]
+    public async Task Unarchive_Works()
+    {
+        await this.client.Addons.Unarchive(
+            "adn_NX1zdqW4Hbivsqz8vI9dc",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+    }
+
+    [Fact]
     public async Task UpdateImages_Works()
     {
         var response = await this.client.Addons.UpdateImages(

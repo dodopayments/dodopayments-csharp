@@ -2102,6 +2102,66 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// How the cardholder completed the 3DS authentication.
+    /// </summary>
+    public ApiEnum<string, Payments::ThreeDSFlow>? ThreeDSFlow
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::ThreeDSFlow>>(
+                "three_ds_flow"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("three_ds_flow", value);
+        }
+    }
+
+    /// <summary>
+    /// The result of the 3DS authentication of a card payment, as the processor reports it.
+    /// </summary>
+    public ApiEnum<string, Payments::ThreeDSStatus>? ThreeDSStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::ThreeDSStatus>>(
+                "three_ds_status"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("three_ds_status", value);
+        }
+    }
+
+    /// <summary>
+    /// The 3DS protocol version, for example `2.2.0`. The value is null when the
+    /// processor does not report it.
+    /// </summary>
+    public string? ThreeDSVersion
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("three_ds_version");
+        }
+        init { this._rawData.Set("three_ds_version", value); }
+    }
+
+    /// <summary>
     /// Timestamp when the payment was last updated
     /// </summary>
     public DateTimeOffset? UpdatedAt
@@ -2174,6 +2234,9 @@ public sealed record class Payment : JsonModel
             Status = payment.Status,
             SubscriptionID = payment.SubscriptionID,
             Tax = payment.Tax,
+            ThreeDSFlow = payment.ThreeDSFlow,
+            ThreeDSStatus = payment.ThreeDSStatus,
+            ThreeDSVersion = payment.ThreeDSVersion,
             UpdatedAt = payment.UpdatedAt,
         };
 
@@ -2248,6 +2311,9 @@ public sealed record class Payment : JsonModel
         this.Status?.Validate();
         _ = this.SubscriptionID;
         _ = this.Tax;
+        this.ThreeDSFlow?.Validate();
+        this.ThreeDSStatus?.Validate();
+        _ = this.ThreeDSVersion;
         _ = this.UpdatedAt;
         if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Payment")))
         {

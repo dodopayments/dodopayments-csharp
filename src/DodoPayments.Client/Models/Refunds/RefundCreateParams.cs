@@ -39,6 +39,20 @@ public record class RefundCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// The currency of every `items[].amount`. It must be the currency the customer
+    /// paid in. Without it, the amounts are in the settlement currency.
+    /// </summary>
+    public ApiEnum<string, Currency>? Currency
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawBodyData.Set("currency", value); }
+    }
+
+    /// <summary>
     /// Partially Refund an Individual Item
     /// </summary>
     public IReadOnlyList<Item>? Items

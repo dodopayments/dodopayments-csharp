@@ -35,6 +35,18 @@ public sealed class MiscService : IMiscService
     }
 
     /// <inheritdoc/>
+    public async Task<List<LocaleInfo>> ListLocales(
+        MiscListLocalesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListLocales(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -61,6 +73,39 @@ public sealed class MiscServiceWithRawResponse : IMiscServiceWithRawResponse
     public MiscServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<List<LocaleInfo>>> ListLocales(
+        MiscListLocalesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        HttpRequest<MiscListLocalesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var localeInfos = await response
+                    .Deserialize<List<LocaleInfo>>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    foreach (var item in localeInfos)
+                    {
+                        item.Validate();
+                    }
+                }
+                return localeInfos;
+            }
+        );
     }
 
     /// <inheritdoc/>

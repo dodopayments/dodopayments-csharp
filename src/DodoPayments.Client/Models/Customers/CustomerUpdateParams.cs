@@ -76,6 +76,21 @@ public record class CustomerUpdateParams : ParamsBase
         init { this._rawBodyData.Set("phone_number", value); }
     }
 
+    /// <summary>
+    /// The language of the customer emails, a code from `GET /locales`. A value replaces
+    /// the current language, and `null` removes it. Send this field only to change
+    /// the language on purpose. With no language, the emails are in English.
+    /// </summary>
+    public ApiEnum<string, Locale>? PreferredLocale
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Locale>>("preferred_locale");
+        }
+        init { this._rawBodyData.Set("preferred_locale", value); }
+    }
+
     public CustomerUpdateParams() { }
 
 #pragma warning disable CS8618
