@@ -26,6 +26,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                     Name = "name",
                 },
             ],
+            PartialRefundAllowed = true,
         };
 
         ApiEnum<string, Misc::Currency> expectedCurrency = Misc::Currency.Aed;
@@ -41,6 +42,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                 Name = "name",
             },
         ];
+        bool expectedPartialRefundAllowed = true;
 
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedItems.Count, model.Items.Count);
@@ -48,6 +50,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
         {
             Assert.Equal(expectedItems[i], model.Items[i]);
         }
+        Assert.Equal(expectedPartialRefundAllowed, model.PartialRefundAllowed);
     }
 
     [Fact]
@@ -68,6 +71,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                     Name = "name",
                 },
             ],
+            PartialRefundAllowed = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -97,6 +101,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                     Name = "name",
                 },
             ],
+            PartialRefundAllowed = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -119,6 +124,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                 Name = "name",
             },
         ];
+        bool expectedPartialRefundAllowed = true;
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedItems.Count, deserialized.Items.Count);
@@ -126,6 +132,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
         {
             Assert.Equal(expectedItems[i], deserialized.Items[i]);
         }
+        Assert.Equal(expectedPartialRefundAllowed, deserialized.PartialRefundAllowed);
     }
 
     [Fact]
@@ -146,6 +153,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                     Name = "name",
                 },
             ],
+            PartialRefundAllowed = true,
         };
 
         model.Validate();
@@ -169,6 +177,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
                     Name = "name",
                 },
             ],
+            PartialRefundAllowed = true,
         };
 
         PaymentRetrieveLineItemsResponse copied = new(model);

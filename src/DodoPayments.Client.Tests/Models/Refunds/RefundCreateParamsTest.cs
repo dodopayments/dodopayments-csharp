@@ -15,6 +15,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
+            Currency = Currency.Aed,
             Items =
             [
                 new()
@@ -29,6 +30,7 @@ public class RefundCreateParamsTest : TestBase
         };
 
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         List<Item> expectedItems =
         [
             new()
@@ -42,6 +44,7 @@ public class RefundCreateParamsTest : TestBase
         string expectedReason = "reason";
 
         Assert.Equal(expectedPaymentID, parameters.PaymentID);
+        Assert.Equal(expectedCurrency, parameters.Currency);
         Assert.NotNull(parameters.Items);
         Assert.Equal(expectedItems.Count, parameters.Items.Count);
         for (int i = 0; i < expectedItems.Count; i++)
@@ -65,6 +68,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
+            Currency = Currency.Aed,
             Items =
             [
                 new()
@@ -87,6 +91,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
+            Currency = Currency.Aed,
             Items =
             [
                 new()
@@ -115,6 +120,8 @@ public class RefundCreateParamsTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
+        Assert.Null(parameters.Currency);
+        Assert.False(parameters.RawBodyData.ContainsKey("currency"));
         Assert.Null(parameters.Items);
         Assert.False(parameters.RawBodyData.ContainsKey("items"));
         Assert.Null(parameters.Reason);
@@ -129,10 +136,13 @@ public class RefundCreateParamsTest : TestBase
             PaymentID = "payment_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
+            Currency = null,
             Items = null,
             Reason = null,
         };
 
+        Assert.Null(parameters.Currency);
+        Assert.True(parameters.RawBodyData.ContainsKey("currency"));
         Assert.Null(parameters.Items);
         Assert.True(parameters.RawBodyData.ContainsKey("items"));
         Assert.Null(parameters.Reason);
@@ -155,6 +165,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
+            Currency = Currency.Aed,
             Items =
             [
                 new()

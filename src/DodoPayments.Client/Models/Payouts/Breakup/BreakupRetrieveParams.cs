@@ -11,7 +11,11 @@ namespace DodoPayments.Client.Models.Payouts.Breakup;
 /// <summary>
 /// Returns the breakdown of a payout by event type (payments, refunds, disputes,
 /// fees, etc.) in the payout's currency. Each amount is proportionally allocated
-/// based on USD equivalent values, ensuring the total sums exactly to the payout amount.
+/// based on USD equivalent values, ensuring the total sums exactly to the payout
+/// amount. A settlement batch payout shows its rows in native amounts. The `carried_over`
+/// line holds the opening balance from the switch to settlement batches and the
+/// rows dated before that opening balance. The `unattributed` line shows the payout
+/// amount that the rows do not account for.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

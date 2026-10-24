@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters;
+using DodoPayments.Client.Services.Meters;
 
 namespace DodoPayments.Client.Services;
 
@@ -32,6 +33,13 @@ public sealed class MeterService : IMeterService
         _client = client;
 
         _withRawResponse = new(() => new MeterServiceWithRawResponse(client.WithRawResponse));
+        _translations = new(() => new TranslationService(client));
+    }
+
+    readonly Lazy<ITranslationService> _translations;
+    public ITranslationService Translations
+    {
+        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -68,6 +76,30 @@ public sealed class MeterService : IMeterService
         parameters ??= new();
 
         return this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Meter> Update(
+        MeterUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Update(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Meter> Update(
+        string id,
+        MeterUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -139,6 +171,14 @@ public sealed class MeterServiceWithRawResponse : IMeterServiceWithRawResponse
     public MeterServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
+
+        _translations = new(() => new TranslationServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
+    public ITranslationServiceWithRawResponse Translations
+    {
+        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -208,6 +248,49 @@ public sealed class MeterServiceWithRawResponse : IMeterServiceWithRawResponse
         parameters ??= new();
 
         return this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<Meter>> Update(
+        MeterUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<MeterUpdateParams> request = new()
+        {
+            Method = DodoPaymentsClientWithRawResponse.PatchMethod,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var meter = await response.Deserialize<Meter>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    meter.Validate();
+                }
+                return meter;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<Meter>> Update(
+        string id,
+        MeterUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

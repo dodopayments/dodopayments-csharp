@@ -65,6 +65,9 @@ public class PaymentListPageResponseTest : TestBase
                     RefundStatus = Payments::PaymentRefundStatus.Partial,
                     Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
+                    ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                    ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                    ThreeDSVersion = "three_ds_version",
                 },
             ],
         };
@@ -119,6 +122,9 @@ public class PaymentListPageResponseTest : TestBase
                 RefundStatus = Payments::PaymentRefundStatus.Partial,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
             },
         ];
 
@@ -184,6 +190,9 @@ public class PaymentListPageResponseTest : TestBase
                     RefundStatus = Payments::PaymentRefundStatus.Partial,
                     Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
+                    ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                    ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                    ThreeDSVersion = "three_ds_version",
                 },
             ],
         };
@@ -252,6 +261,9 @@ public class PaymentListPageResponseTest : TestBase
                     RefundStatus = Payments::PaymentRefundStatus.Partial,
                     Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
+                    ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                    ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                    ThreeDSVersion = "three_ds_version",
                 },
             ],
         };
@@ -313,6 +325,9 @@ public class PaymentListPageResponseTest : TestBase
                 RefundStatus = Payments::PaymentRefundStatus.Partial,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
+                ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                ThreeDSVersion = "three_ds_version",
             },
         ];
 
@@ -378,6 +393,9 @@ public class PaymentListPageResponseTest : TestBase
                     RefundStatus = Payments::PaymentRefundStatus.Partial,
                     Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
+                    ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                    ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                    ThreeDSVersion = "three_ds_version",
                 },
             ],
         };
@@ -440,6 +458,9 @@ public class PaymentListPageResponseTest : TestBase
                     RefundStatus = Payments::PaymentRefundStatus.Partial,
                     Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
+                    ThreeDSFlow = Payments::ThreeDSFlow.Challenge,
+                    ThreeDSStatus = Payments::ThreeDSStatus.Authenticated,
+                    ThreeDSVersion = "three_ds_version",
                 },
             ],
         };

@@ -55,6 +55,32 @@ public record class CreditEntitlementListParams : ParamsBase
     }
 
     /// <summary>
+    /// Shows the translated name, description and unit of the catalog entities in
+    /// this locale. The value must be a code from `GET /locales`, for example `fr`.
+    /// A field with no translation, an unknown code, or no code shows the base text.
+    ///
+    /// <para>Do not send a text from a localized response back in a create or update
+    /// request. The base text then changes to the translated text.</para>
+    /// </summary>
+    public string? Locale
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("locale");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("locale", value);
+        }
+    }
+
+    /// <summary>
     /// Page number default is 0
     /// </summary>
     public int? PageNumber

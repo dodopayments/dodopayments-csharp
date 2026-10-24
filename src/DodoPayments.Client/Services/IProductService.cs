@@ -27,6 +27,8 @@ public interface IProductService
     /// </summary>
     IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ITranslationService Translations { get; }
+
     IImageService Images { get; }
 
     IShortLinkService ShortLinks { get; }
@@ -131,6 +133,8 @@ public interface IProductServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IProductServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ITranslationServiceWithRawResponse Translations { get; }
 
     IImageServiceWithRawResponse Images { get; }
 

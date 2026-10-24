@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -63,6 +64,22 @@ public sealed record class CreateNewCustomer : JsonModel
         init { this._rawData.Set("phone_number", value); }
     }
 
+    /// <summary>
+    /// The language of the customer emails, a code from `GET /locales`. A value replaces
+    /// the stored language of the customer, also for an existing customer. Send
+    /// a value only to change that language on purpose. With no value, the stored
+    /// language stays.
+    /// </summary>
+    public ApiEnum<string, Locale>? PreferredLocale
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Locale>>("preferred_locale");
+        }
+        init { this._rawData.Set("preferred_locale", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -70,6 +87,7 @@ public sealed record class CreateNewCustomer : JsonModel
         _ = this.Name;
         _ = this.CreateNewCustomerValue;
         _ = this.PhoneNumber;
+        this.PreferredLocale?.Validate();
     }
 
     public CreateNewCustomer() { }

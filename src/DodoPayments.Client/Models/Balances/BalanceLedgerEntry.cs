@@ -237,6 +237,7 @@ public enum BalanceLedgerEntryEventType
     DodoFixedFee,
     InterchangeFee,
     SchemeFee,
+    OpeningBalance,
 }
 
 sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerEntryEventType>
@@ -283,6 +284,7 @@ sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerE
             "dodo_fixed_fee" => BalanceLedgerEntryEventType.DodoFixedFee,
             "interchange_fee" => BalanceLedgerEntryEventType.InterchangeFee,
             "scheme_fee" => BalanceLedgerEntryEventType.SchemeFee,
+            "opening_balance" => BalanceLedgerEntryEventType.OpeningBalance,
             _ => (BalanceLedgerEntryEventType)(-1),
         };
     }
@@ -332,6 +334,7 @@ sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerE
                 BalanceLedgerEntryEventType.DodoFixedFee => "dodo_fixed_fee",
                 BalanceLedgerEntryEventType.InterchangeFee => "interchange_fee",
                 BalanceLedgerEntryEventType.SchemeFee => "scheme_fee",
+                BalanceLedgerEntryEventType.OpeningBalance => "opening_balance",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

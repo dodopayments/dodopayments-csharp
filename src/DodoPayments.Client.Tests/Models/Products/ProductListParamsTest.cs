@@ -12,6 +12,7 @@ public class ProductListParamsTest : TestBase
         {
             Archived = true,
             BrandID = "brand_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             Recurring = true,
@@ -19,12 +20,14 @@ public class ProductListParamsTest : TestBase
 
         bool expectedArchived = true;
         string expectedBrandID = "brand_id";
+        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         bool expectedRecurring = true;
 
         Assert.Equal(expectedArchived, parameters.Archived);
         Assert.Equal(expectedBrandID, parameters.BrandID);
+        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
         Assert.Equal(expectedRecurring, parameters.Recurring);
@@ -39,6 +42,8 @@ public class ProductListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("archived"));
         Assert.Null(parameters.BrandID);
         Assert.False(parameters.RawQueryData.ContainsKey("brand_id"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -55,6 +60,7 @@ public class ProductListParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             Archived = null,
             BrandID = null,
+            Locale = null,
             PageNumber = null,
             PageSize = null,
             Recurring = null,
@@ -64,6 +70,8 @@ public class ProductListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("archived"));
         Assert.Null(parameters.BrandID);
         Assert.False(parameters.RawQueryData.ContainsKey("brand_id"));
+        Assert.Null(parameters.Locale);
+        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -79,6 +87,7 @@ public class ProductListParamsTest : TestBase
         {
             Archived = true,
             BrandID = "brand_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             Recurring = true,
@@ -89,7 +98,7 @@ public class ProductListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/products?archived=true&brand_id=brand_id&page_number=0&page_size=0&recurring=true"
+                    "https://live.dodopayments.com/products?archived=true&brand_id=brand_id&locale=locale&page_number=0&page_size=0&recurring=true"
                 ),
                 url
             )
@@ -103,6 +112,7 @@ public class ProductListParamsTest : TestBase
         {
             Archived = true,
             BrandID = "brand_id",
+            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
             Recurring = true,

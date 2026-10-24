@@ -333,6 +333,7 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.DodoFixedFee)]
     [InlineData(BalanceLedgerEntryEventType.InterchangeFee)]
     [InlineData(BalanceLedgerEntryEventType.SchemeFee)]
+    [InlineData(BalanceLedgerEntryEventType.OpeningBalance)]
     public void Validation_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -387,6 +388,7 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.DodoFixedFee)]
     [InlineData(BalanceLedgerEntryEventType.InterchangeFee)]
     [InlineData(BalanceLedgerEntryEventType.SchemeFee)]
+    [InlineData(BalanceLedgerEntryEventType.OpeningBalance)]
     public void SerializationRoundtrip_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

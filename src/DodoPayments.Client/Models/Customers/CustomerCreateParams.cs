@@ -79,6 +79,20 @@ public record class CustomerCreateParams : ParamsBase
         init { this._rawBodyData.Set("phone_number", value); }
     }
 
+    /// <summary>
+    /// The language of the customer emails, a code from `GET /locales`. With no value,
+    /// the emails are in English until a checkout or the customer portal sets a language.
+    /// </summary>
+    public ApiEnum<string, Locale>? PreferredLocale
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Locale>>("preferred_locale");
+        }
+        init { this._rawBodyData.Set("preferred_locale", value); }
+    }
+
     public CustomerCreateParams() { }
 
 #pragma warning disable CS8618

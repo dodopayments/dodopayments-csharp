@@ -43,6 +43,19 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
         }
     }
 
+    /// <summary>
+    /// False when the payment method does not allow a partial refund of this payment.
+    /// </summary>
+    public required bool PartialRefundAllowed
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("partial_refund_allowed");
+        }
+        init { this._rawData.Set("partial_refund_allowed", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -51,6 +64,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
         {
             item.Validate();
         }
+        _ = this.PartialRefundAllowed;
     }
 
     public PaymentRetrieveLineItemsResponse() { }
