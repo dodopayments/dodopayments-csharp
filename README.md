@@ -97,6 +97,38 @@ Using a [`with` expression](https://learn.microsoft.com/en-us/dotnet/csharp/lang
 
 The `WithOptions` method does not affect the original client or service.
 
+## Workload identity
+
+Instead of an API key, the client can use a JWT from your CI or cloud platform. The client exchanges the JWT for a short-lived access token and keeps the access token in a cache:
+
+```csharp
+using DodoPayments.Client;
+using DodoPayments.Client.Core;
+
+DodoPaymentsClient client = new()
+{
+    BaseUrl = EnvironmentUrl.TestMode,
+    WorkloadIdentity = new()
+    {
+        IdentityProviderID = "wip_...",
+        Provider = WorkloadIdentityProviders.GitHubActions(),
+    },
+};
+```
+
+- `IdentityProviderID` defaults to the `DODO_PAYMENTS_IDENTITY_PROVIDER_ID` environment variable.
+- `Provider` defaults to `WorkloadIdentityProviders.Auto()`. Other providers are `GitLab()`, `TerraformCloud()`, `Gcp()`, `Vercel()`, `Kubernetes()`, `File()`, `Aws(getToken)` and `Static(token)`. A provider can also be your own `SubjectTokenProvider` function.
+- If `BearerToken`, `WorkloadIdentity` and `DODO_PAYMENTS_API_KEY` are not set, and `DODO_PAYMENTS_IDENTITY_PROVIDER_ID` is set, the client uses `WorkloadIdentityProviders.Auto()`.
+- You cannot set `BearerToken` and `WorkloadIdentity` together.
+
+The client gets a new access token when 5 minutes or less remain. If the API returns 401, the client gets a new access token and sends the request again one time.
+
+To revoke the cached access token:
+
+```csharp
+await client.RevokeWorkloadIdentityToken();
+```
+
 ## Requests and responses
 
 To send a request to the Dodo Payments API, build an instance of some `Params` class and pass it to the corresponding client method. When the response is received, it will be deserialized into an instance of a C# class.
