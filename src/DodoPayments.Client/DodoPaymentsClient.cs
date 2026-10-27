@@ -65,6 +65,13 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         init { this._options.WebhookKey = value; }
     }
 
+    /// <inheritdoc/>
+    public WorkloadIdentityOptions? WorkloadIdentity
+    {
+        get { return this._options.WorkloadIdentity; }
+        init { this._options.WorkloadIdentity = value; }
+    }
+
     readonly Lazy<IDodoPaymentsClientWithRawResponse> _withRawResponse;
 
     /// <inheritdoc/>
@@ -235,6 +242,14 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _moderation.Value; }
     }
 
+    /// <inheritdoc/>
+    public Task RevokeWorkloadIdentityToken(CancellationToken cancellationToken = default)
+    {
+        return new DodoPaymentsClientWithRawResponse(this._options).RevokeWorkloadIdentityToken(
+            cancellationToken
+        );
+    }
+
     public void Dispose() => this.HttpClient.Dispose();
 
     public DodoPaymentsClient()
@@ -342,6 +357,13 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     {
         get { return this._options.WebhookKey; }
         init { this._options.WebhookKey = value; }
+    }
+
+    /// <inheritdoc/>
+    public WorkloadIdentityOptions? WorkloadIdentity
+    {
+        get { return this._options.WorkloadIdentity; }
+        init { this._options.WorkloadIdentity = value; }
     }
 
     /// <inheritdoc/>
@@ -515,6 +537,41 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     )
         where T : ParamsBase
     {
+        var workloadIdentity = this._options.ResolvedWorkloadIdentity;
+        if (workloadIdentity == null)
+        {
+            return await this.ExecuteWithRetries(request, null, true, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        var accessToken = await workloadIdentity
+            .Cache.GetAccessToken(workloadIdentity, this._options, cancellationToken)
+            .ConfigureAwait(false);
+        try
+        {
+            return await this.ExecuteWithRetries(request, accessToken, true, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        catch (DodoPaymentsUnauthorizedException)
+        {
+            // The access token can stop working before it expires. Exchange again and retry once.
+            workloadIdentity.Cache.Invalidate(accessToken);
+        }
+        accessToken = await workloadIdentity
+            .Cache.GetAccessToken(workloadIdentity, this._options, cancellationToken)
+            .ConfigureAwait(false);
+        return await this.ExecuteWithRetries(request, accessToken, true, cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    internal async Task<HttpResponse> ExecuteWithRetries<T>(
+        HttpRequest<T> request,
+        string? accessToken,
+        bool retryClientErrors,
+        CancellationToken cancellationToken = default
+    )
+        where T : ParamsBase
+    {
         var maxRetries = this.MaxRetries ?? ClientOptions.DefaultMaxRetries;
         var retries = 0;
         while (true)
@@ -522,7 +579,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
             HttpResponse? response = null;
             try
             {
-                response = await ExecuteOnce(request, retries, cancellationToken)
+                response = await ExecuteOnce(request, retries, accessToken, cancellationToken)
                     .ConfigureAwait(false);
             }
             catch (Exception e)
@@ -533,7 +590,14 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
                 }
             }
 
-            if (response != null && (++retries > maxRetries || !ShouldRetry(response)))
+            if (
+                response != null
+                && (
+                    ++retries > maxRetries
+                    || !ShouldRetry(response)
+                    || (!retryClientErrors && (int)response.StatusCode < 500)
+                )
+            )
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -566,6 +630,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     async Task<HttpResponse> ExecuteOnce<T>(
         HttpRequest<T> request,
         int retryCount,
+        string? accessToken,
         CancellationToken cancellationToken = default
     )
         where T : ParamsBase
@@ -578,6 +643,11 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
             Content = request.Params.BodyContent(),
         };
         request.Params.AddHeadersToRequest(requestMessage, this._options);
+        if (accessToken != null)
+        {
+            requestMessage.Headers.Remove("Authorization");
+            requestMessage.Headers.Add("Authorization", string.Format("Bearer {0}", accessToken));
+        }
         if (!requestMessage.Headers.Contains("x-stainless-retry-count"))
         {
             requestMessage.Headers.Add("x-stainless-retry-count", retryCount.ToString());
@@ -693,6 +763,35 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
             >= 500 => true,
             _ => false,
         };
+    }
+
+    internal async Task RevokeWorkloadIdentityToken(CancellationToken cancellationToken = default)
+    {
+        var workloadIdentity = this._options.ResolvedWorkloadIdentity;
+        var accessToken = workloadIdentity?.Cache.CachedAccessToken;
+        if (workloadIdentity == null || accessToken == null)
+        {
+            return;
+        }
+
+        try
+        {
+            using var response = await this.ExecuteWithRetries(
+                    new HttpRequest<WorkloadIdentityParams>
+                    {
+                        Method = HttpMethod.Post,
+                        Params = new() { Path = WorkloadIdentityOptions.RevokePath },
+                    },
+                    accessToken,
+                    false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+        }
+        finally
+        {
+            workloadIdentity.Cache.Invalidate(accessToken);
+        }
     }
 
     static bool ShouldRetry(Exception e)
