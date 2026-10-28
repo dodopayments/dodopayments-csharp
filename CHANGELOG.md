@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.42.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.41.0...v6.42.0) (2026-10-28)
+
+
+### Features
+
+* **api:** workload identity federation ([#126](https://github.com/dodopayments/dodopayments-csharp/issues/126)) ([a162ea1](https://github.com/dodopayments/dodopayments-csharp/commit/a162ea15b94b05e76f16e19832c7099d48c8fdb2))
+
 ## [6.41.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.40.0...v6.41.0) (2026-10-24)
 
 
