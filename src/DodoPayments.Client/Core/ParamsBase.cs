@@ -211,7 +211,7 @@ public abstract record class ParamsBase
             request.Headers.Add(header.Key, header.Value);
         }
 
-        if (options.BearerToken != null)
+        if (options.ResolvedWorkloadIdentity == null && options.BearerToken != null)
         {
             request.Headers.Add("Authorization", string.Format("Bearer {0}", options.BearerToken));
         }

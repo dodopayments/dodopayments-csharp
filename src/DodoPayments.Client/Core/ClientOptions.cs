@@ -115,7 +115,53 @@ public record struct ClientOptions()
     public string BearerToken
     {
         readonly get { return _bearerToken.Value; }
-        set { _bearerToken = new(() => value); }
+        set
+        {
+            if (_workloadIdentity != null)
+            {
+                throw WorkloadIdentityOptions.ConflictException();
+            }
+            _bearerToken = new(() => value);
+            _bearerTokenSet = true;
+        }
+    }
+
+    bool _bearerTokenSet = false;
+
+    WorkloadIdentityOptions? _workloadIdentity = null;
+
+    /// <summary>
+    /// Workload identity configuration. The client exchanges a subject token for a short-lived
+    /// access token and sends the access token instead of <see cref="BearerToken"/>.
+    ///
+    /// <para>You cannot set this option and <see cref="BearerToken"/> together. If you set
+    /// neither option and <c>DODO_PAYMENTS_API_KEY</c> is not set, the client uses workload identity
+    /// when <c>DODO_PAYMENTS_IDENTITY_PROVIDER_ID</c> is set and a subject token source is found.</para>
+    /// </summary>
+    public WorkloadIdentityOptions? WorkloadIdentity
+    {
+        readonly get { return _workloadIdentity; }
+        set
+        {
+            if (value != null && _bearerTokenSet)
+            {
+                throw WorkloadIdentityOptions.ConflictException();
+            }
+            _workloadIdentity = value;
+        }
+    }
+
+    readonly Lazy<WorkloadIdentityOptions?> _environmentWorkloadIdentity = new(() =>
+        WorkloadIdentityOptions.FromEnvironment()
+    );
+
+    internal readonly WorkloadIdentityOptions? ResolvedWorkloadIdentity
+    {
+        get
+        {
+            return _workloadIdentity
+                ?? (_bearerTokenSet ? null : _environmentWorkloadIdentity.Value);
+        }
     }
 
     Lazy<string?> _webhookKey = new(() =>
