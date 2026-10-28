@@ -118,6 +118,7 @@ DodoPaymentsClient client = new()
 
 - `IdentityProviderID` defaults to the `DODO_PAYMENTS_IDENTITY_PROVIDER_ID` environment variable.
 - `Provider` defaults to `WorkloadIdentityProviders.Auto()`. Other providers are `GitLab()`, `TerraformCloud()`, `Gcp()`, `Vercel()`, `Kubernetes()`, `File()`, `Aws(getToken)` and `Static(token)`. A provider can also be your own `SubjectTokenProvider` function.
+- `Vercel()` reads `VERCEL_OIDC_TOKEN_FILE` or `VERCEL_OIDC_TOKEN`. It exchanges that token at Vercel for a token with the Dodo Payments audience. The Dodo Payments API accepts only that audience. `Vercel(audience)` uses the audience that you supply.
 - If `BearerToken`, `WorkloadIdentity` and `DODO_PAYMENTS_API_KEY` are not set, and `DODO_PAYMENTS_IDENTITY_PROVIDER_ID` is set, the client uses `WorkloadIdentityProviders.Auto()`.
 - You cannot set `BearerToken` and `WorkloadIdentity` together.
 
