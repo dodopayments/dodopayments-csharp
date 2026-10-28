@@ -43,6 +43,9 @@ public interface IDodoPaymentsClient : IDisposable
 
     string? WebhookKey { get; init; }
 
+    /// <inheritdoc cref="ClientOptions.WorkloadIdentity" />
+    WorkloadIdentityOptions? WorkloadIdentity { get; init; }
+
     /// <summary>
     /// Returns a view of this service that provides access to raw HTTP responses
     /// for each method.
@@ -55,6 +58,13 @@ public interface IDodoPaymentsClient : IDisposable
     /// <para>The original service is not modified.</para>
     /// </summary>
     IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Revokes the cached workload identity access token and clears the cache.
+    ///
+    /// <para>The method does nothing if no access token is cached.</para>
+    /// </summary>
+    Task RevokeWorkloadIdentityToken(CancellationToken cancellationToken = default);
 
     ICheckoutSessionService CheckoutSessions { get; }
 
@@ -135,6 +145,9 @@ public interface IDodoPaymentsClientWithRawResponse : IDisposable
     string BearerToken { get; init; }
 
     string? WebhookKey { get; init; }
+
+    /// <inheritdoc cref="ClientOptions.WorkloadIdentity" />
+    WorkloadIdentityOptions? WorkloadIdentity { get; init; }
 
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
