@@ -205,12 +205,121 @@ public static class WorkloadIdentityProviders
         };
     }
 
+    internal static string VercelTokenExchangeUrl = "https://oidc.vercel.com/~token";
+
     /// <summary>
-    /// Reads the Vercel OIDC token from <c>VERCEL_OIDC_TOKEN</c>.
+    /// Exchanges the Vercel OIDC token for a token with the Dodo Payments audience, for each
+    /// exchange.
+    ///
+    /// <para>Reads the token from the file in <c>VERCEL_OIDC_TOKEN_FILE</c> or from
+    /// <c>VERCEL_OIDC_TOKEN</c>. The audience is the origin of the client base URL.</para>
     /// </summary>
     public static SubjectTokenProvider Vercel()
     {
-        return (_context, _cancellationToken) => Task.FromResult(RequireEnv("VERCEL_OIDC_TOKEN"));
+        return Vercel(null);
+    }
+
+    /// <summary>
+    /// Is the same as <see cref="Vercel()"/>, but uses <paramref name="audience"/> when it is
+    /// not null.
+    /// </summary>
+    public static SubjectTokenProvider Vercel(string? audience)
+    {
+        return async (context, cancellationToken) =>
+        {
+            var baseToken = VercelBaseToken();
+            var body = JsonSerializer.Serialize(
+                new Dictionary<string, string>
+                {
+                    ["token"] = baseToken,
+                    ["aud"] = audience ?? DefaultAudience(context.BaseUrl),
+                }
+            );
+            using HttpRequestMessage request = new(HttpMethod.Post, VercelTokenExchangeUrl)
+            {
+                Content = new StringContent(body, Encoding.UTF8),
+            };
+            request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
+                "application/json"
+            );
+            request.Headers.TryAddWithoutValidation("Accept", "application/json");
+            using CancellationTokenSource timeoutCts = new(TimeSpan.FromSeconds(10));
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                timeoutCts.Token,
+                cancellationToken
+            );
+            int status;
+            string responseBody;
+            try
+            {
+                using var response = await context
+                    .HttpClient.SendAsync(request, cts.Token)
+                    .ConfigureAwait(false);
+                status = (int)response.StatusCode;
+#if NET
+                responseBody = await response
+                    .Content.ReadAsStringAsync(cts.Token)
+                    .ConfigureAwait(false);
+#else
+                responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#endif
+            }
+            catch (HttpRequestException e)
+            {
+                throw new DodoPaymentsIOException("I/O exception", e);
+            }
+            if (status < 200 || status > 299)
+            {
+                var excerpt = responseBody.Trim().Replace(baseToken, "[redacted]");
+                throw new DodoPaymentsInvalidDataException(
+                    string.Format(
+                        "The Vercel OIDC token exchange failed with status code {0}: {1}",
+                        status,
+                        excerpt.Length > 200 ? excerpt.Substring(0, 200) : excerpt
+                    )
+                );
+            }
+            string? token = null;
+            try
+            {
+                using var document = JsonDocument.Parse(responseBody);
+                if (
+                    document.RootElement.ValueKind == JsonValueKind.Object
+                    && document.RootElement.TryGetProperty("token", out var value)
+                    && value.ValueKind == JsonValueKind.String
+                )
+                {
+                    token = value.GetString()?.Trim();
+                }
+            }
+            catch (JsonException) { }
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new DodoPaymentsInvalidDataException(
+                    string.Format(
+                        "The Vercel OIDC token exchange response with status code {0} has no token.",
+                        status
+                    )
+                );
+            }
+            return token!;
+        };
+    }
+
+    static string VercelBaseToken()
+    {
+        var tokenFile = Env("VERCEL_OIDC_TOKEN_FILE");
+        var token =
+            tokenFile != null
+                ? IOFile.ReadAllText(tokenFile).Trim()
+                : Env("VERCEL_OIDC_TOKEN")?.Trim();
+        if (string.IsNullOrEmpty(token))
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Set VERCEL_OIDC_TOKEN_FILE or VERCEL_OIDC_TOKEN to the Vercel OIDC token."
+            );
+        }
+        return token!;
     }
 
     /// <summary>
