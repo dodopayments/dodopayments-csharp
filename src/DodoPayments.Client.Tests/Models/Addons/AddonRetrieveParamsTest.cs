@@ -8,59 +8,23 @@ public class AddonRetrieveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new AddonRetrieveParams
-        {
-            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
-            Locale = "locale",
-        };
-
-        string expectedID = "adn_NX1zdqW4Hbivsqz8vI9dc";
-        string expectedLocale = "locale";
-
-        Assert.Equal(expectedID, parameters.ID);
-        Assert.Equal(expectedLocale, parameters.Locale);
-    }
-
-    [Fact]
-    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
-    {
         var parameters = new AddonRetrieveParams { ID = "adn_NX1zdqW4Hbivsqz8vI9dc" };
 
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
-    }
+        string expectedID = "adn_NX1zdqW4Hbivsqz8vI9dc";
 
-    [Fact]
-    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
-    {
-        var parameters = new AddonRetrieveParams
-        {
-            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
-
-            // Null should be interpreted as omitted for these properties
-            Locale = null,
-        };
-
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
+        Assert.Equal(expectedID, parameters.ID);
     }
 
     [Fact]
     public void Url_Works()
     {
-        AddonRetrieveParams parameters = new()
-        {
-            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
-            Locale = "locale",
-        };
+        AddonRetrieveParams parameters = new() { ID = "adn_NX1zdqW4Hbivsqz8vI9dc" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri(
-                    "https://live.dodopayments.com/addons/adn_NX1zdqW4Hbivsqz8vI9dc?locale=locale"
-                ),
+                new Uri("https://live.dodopayments.com/addons/adn_NX1zdqW4Hbivsqz8vI9dc"),
                 url
             )
         );
@@ -69,11 +33,7 @@ public class AddonRetrieveParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new AddonRetrieveParams
-        {
-            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
-            Locale = "locale",
-        };
+        var parameters = new AddonRetrieveParams { ID = "adn_NX1zdqW4Hbivsqz8vI9dc" };
 
         AddonRetrieveParams copied = new(parameters);
 

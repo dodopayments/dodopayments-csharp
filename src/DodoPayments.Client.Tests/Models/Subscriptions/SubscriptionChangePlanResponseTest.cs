@@ -14,19 +14,25 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = "client_secret",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoice_id",
             PaymentID = "payment_id",
             PaymentLink = "payment_link",
+            RefundID = "refund_id",
         };
 
         string expectedClientSecret = "client_secret";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedInvoiceID = "invoice_id";
         string expectedPaymentID = "payment_id";
         string expectedPaymentLink = "payment_link";
+        string expectedRefundID = "refund_id";
 
         Assert.Equal(expectedClientSecret, model.ClientSecret);
         Assert.Equal(expectedExpiresOn, model.ExpiresOn);
+        Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
+        Assert.Equal(expectedRefundID, model.RefundID);
     }
 
     [Fact]
@@ -36,8 +42,10 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = "client_secret",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoice_id",
             PaymentID = "payment_id",
             PaymentLink = "payment_link",
+            RefundID = "refund_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -56,8 +64,10 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = "client_secret",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoice_id",
             PaymentID = "payment_id",
             PaymentLink = "payment_link",
+            RefundID = "refund_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -69,13 +79,17 @@ public class SubscriptionChangePlanResponseTest : TestBase
 
         string expectedClientSecret = "client_secret";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedInvoiceID = "invoice_id";
         string expectedPaymentID = "payment_id";
         string expectedPaymentLink = "payment_link";
+        string expectedRefundID = "refund_id";
 
         Assert.Equal(expectedClientSecret, deserialized.ClientSecret);
         Assert.Equal(expectedExpiresOn, deserialized.ExpiresOn);
+        Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
+        Assert.Equal(expectedRefundID, deserialized.RefundID);
     }
 
     [Fact]
@@ -85,8 +99,10 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = "client_secret",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoice_id",
             PaymentID = "payment_id",
             PaymentLink = "payment_link",
+            RefundID = "refund_id",
         };
 
         model.Validate();
@@ -101,10 +117,14 @@ public class SubscriptionChangePlanResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("client_secret"));
         Assert.Null(model.ExpiresOn);
         Assert.False(model.RawData.ContainsKey("expires_on"));
+        Assert.Null(model.InvoiceID);
+        Assert.False(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.PaymentID);
         Assert.False(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.PaymentLink);
         Assert.False(model.RawData.ContainsKey("payment_link"));
+        Assert.Null(model.RefundID);
+        Assert.False(model.RawData.ContainsKey("refund_id"));
     }
 
     [Fact]
@@ -122,18 +142,24 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = null,
             ExpiresOn = null,
+            InvoiceID = null,
             PaymentID = null,
             PaymentLink = null,
+            RefundID = null,
         };
 
         Assert.Null(model.ClientSecret);
         Assert.True(model.RawData.ContainsKey("client_secret"));
         Assert.Null(model.ExpiresOn);
         Assert.True(model.RawData.ContainsKey("expires_on"));
+        Assert.Null(model.InvoiceID);
+        Assert.True(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.PaymentID);
         Assert.True(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.PaymentLink);
         Assert.True(model.RawData.ContainsKey("payment_link"));
+        Assert.Null(model.RefundID);
+        Assert.True(model.RawData.ContainsKey("refund_id"));
     }
 
     [Fact]
@@ -143,8 +169,10 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = null,
             ExpiresOn = null,
+            InvoiceID = null,
             PaymentID = null,
             PaymentLink = null,
+            RefundID = null,
         };
 
         model.Validate();
@@ -157,8 +185,10 @@ public class SubscriptionChangePlanResponseTest : TestBase
         {
             ClientSecret = "client_secret",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoice_id",
             PaymentID = "payment_id",
             PaymentLink = "payment_link",
+            RefundID = "refund_id",
         };
 
         SubscriptionChangePlanResponse copied = new(model);

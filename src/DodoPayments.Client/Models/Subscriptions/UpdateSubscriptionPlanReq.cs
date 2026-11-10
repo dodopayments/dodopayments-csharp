@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -185,6 +186,22 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     }
 
     /// <summary>
+    /// Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+    /// default is `customer_balance`.
+    /// </summary>
+    public ApiEnum<string, UpdateSubscriptionPlanReqCredit>? Credit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, UpdateSubscriptionPlanReqCredit>>(
+                "credit"
+            );
+        }
+        init { this._rawData.Set("credit", value); }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
     [Obsolete("Use `discount_id` instead.")]
@@ -243,6 +260,19 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
 
             this._rawData.Set("effective_at", value);
         }
+    }
+
+    /// <summary>
+    /// The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+    /// </summary>
+    public UpdateSubscriptionPlanReqInvoice? Invoice
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<UpdateSubscriptionPlanReqInvoice>("invoice");
+        }
+        init { this._rawData.Set("invoice", value); }
     }
 
     /// <summary>
@@ -327,9 +357,11 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
         _ = this.CancelOlderPaymentLink;
         _ = this.CancelScheduledChangePlan;
         _ = this.CollectViaPaymentLink;
+        this.Credit?.Validate();
         _ = this.DiscountCode;
         _ = this.DiscountCodes;
         this.EffectiveAt?.Validate();
+        this.Invoice?.Validate();
         if (this.Metadata != null)
         {
             foreach (var item in this.Metadata.Values)
@@ -443,6 +475,55 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
 }
 
 /// <summary>
+/// Where a downgrade credit goes. Only invoice-led subscriptions read it. The default
+/// is `customer_balance`.
+/// </summary>
+[JsonConverter(typeof(UpdateSubscriptionPlanReqCreditConverter))]
+public enum UpdateSubscriptionPlanReqCredit
+{
+    CustomerBalance,
+    Refund,
+}
+
+sealed class UpdateSubscriptionPlanReqCreditConverter
+    : JsonConverter<UpdateSubscriptionPlanReqCredit>
+{
+    public override UpdateSubscriptionPlanReqCredit Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "customer_balance" => UpdateSubscriptionPlanReqCredit.CustomerBalance,
+            "refund" => UpdateSubscriptionPlanReqCredit.Refund,
+            _ => (UpdateSubscriptionPlanReqCredit)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpdateSubscriptionPlanReqCredit value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                UpdateSubscriptionPlanReqCredit.CustomerBalance => "customer_balance",
+                UpdateSubscriptionPlanReqCredit.Refund => "refund",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
 /// When to apply the plan change. - `immediately` (default): Apply the plan change
 /// right away - `next_billing_date`: Schedule the change for the next billing date
 /// </summary>
@@ -489,6 +570,590 @@ sealed class UpdateSubscriptionPlanReqEffectiveAtConverter
             options
         );
     }
+}
+
+/// <summary>
+/// The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        UpdateSubscriptionPlanReqInvoice,
+        UpdateSubscriptionPlanReqInvoiceFromRaw
+    >)
+)]
+public sealed record class UpdateSubscriptionPlanReqInvoice : JsonModel
+{
+    /// <summary>
+    /// The collection method of the invoice. The subscription value applies when absent.
+    /// </summary>
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init { this._rawData.Set("collection_method", value); }
+    }
+
+    /// <summary>
+    /// `false` keeps the invoice as a draft for review. Default `true`.
+    /// </summary>
+    public bool? Finalize
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("finalize");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("finalize", value);
+        }
+    }
+
+    /// <summary>
+    /// The terms of the plan-change invoice. The subscription terms apply when absent.
+    /// </summary>
+    public UpdateSubscriptionPlanReqInvoicePaymentTerms? PaymentTerms
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<UpdateSubscriptionPlanReqInvoicePaymentTerms>(
+                "payment_terms"
+            );
+        }
+        init { this._rawData.Set("payment_terms", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.CollectionMethod?.Validate();
+        _ = this.Finalize;
+        this.PaymentTerms?.Validate();
+    }
+
+    public UpdateSubscriptionPlanReqInvoice() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public UpdateSubscriptionPlanReqInvoice(
+        UpdateSubscriptionPlanReqInvoice updateSubscriptionPlanReqInvoice
+    )
+        : base(updateSubscriptionPlanReqInvoice) { }
+#pragma warning restore CS8618
+
+    public UpdateSubscriptionPlanReqInvoice(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    UpdateSubscriptionPlanReqInvoice(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="UpdateSubscriptionPlanReqInvoiceFromRaw.FromRawUnchecked"/>
+    public static UpdateSubscriptionPlanReqInvoice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class UpdateSubscriptionPlanReqInvoiceFromRaw : IFromRawJson<UpdateSubscriptionPlanReqInvoice>
+{
+    /// <inheritdoc/>
+    public UpdateSubscriptionPlanReqInvoice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UpdateSubscriptionPlanReqInvoice.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The terms of the plan-change invoice. The subscription terms apply when absent.
+/// </summary>
+[JsonConverter(typeof(UpdateSubscriptionPlanReqInvoicePaymentTermsConverter))]
+public record class UpdateSubscriptionPlanReqInvoicePaymentTerms : ModelBase
+{
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
+    {
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTerms(
+        UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTerms(
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNet value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTerms(JsonElement element)
+    {
+        this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickDueOnReceipt(
+        [NotNullWhen(true)] out UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt? value
+    )
+    {
+        value = this.Value as UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="UpdateSubscriptionPlanReqInvoicePaymentTermsNet"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `UpdateSubscriptionPlanReqInvoicePaymentTermsNet`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickNet(
+        [NotNullWhen(true)] out UpdateSubscriptionPlanReqInvoicePaymentTermsNet? value
+    )
+    {
+        value = this.Value as UpdateSubscriptionPlanReqInvoicePaymentTermsNet;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (UpdateSubscriptionPlanReqInvoicePaymentTermsNet value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(
+        Action<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt> dueOnReceipt,
+        Action<UpdateSubscriptionPlanReqInvoicePaymentTermsNet> net
+    )
+    {
+        switch (this.Value)
+        {
+            case UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value:
+                dueOnReceipt(value);
+                break;
+            case UpdateSubscriptionPlanReqInvoicePaymentTermsNet value:
+                net(value);
+                break;
+            default:
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of UpdateSubscriptionPlanReqInvoicePaymentTerms"
+                );
+        }
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (UpdateSubscriptionPlanReqInvoicePaymentTermsNet value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public T Match<T>(
+        Func<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt, T> dueOnReceipt,
+        Func<UpdateSubscriptionPlanReqInvoicePaymentTermsNet, T> net
+    )
+    {
+        return this.Value switch
+        {
+            UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value => dueOnReceipt(value),
+            UpdateSubscriptionPlanReqInvoicePaymentTermsNet value => net(value),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of UpdateSubscriptionPlanReqInvoicePaymentTerms"
+            ),
+        };
+    }
+
+    public static implicit operator UpdateSubscriptionPlanReqInvoicePaymentTerms(
+        UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value
+    ) => new(value);
+
+    public static implicit operator UpdateSubscriptionPlanReqInvoicePaymentTerms(
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNet value
+    ) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
+    public override void Validate()
+    {
+        if (this.Value == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of UpdateSubscriptionPlanReqInvoicePaymentTerms"
+            );
+        }
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
+    }
+
+    public virtual bool Equals(UpdateSubscriptionPlanReqInvoicePaymentTerms? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt _ => 0,
+            UpdateSubscriptionPlanReqInvoicePaymentTermsNet _ => 1,
+            _ => -1,
+        };
+    }
+}
+
+sealed class UpdateSubscriptionPlanReqInvoicePaymentTermsConverter
+    : JsonConverter<UpdateSubscriptionPlanReqInvoicePaymentTerms?>
+{
+    public override UpdateSubscriptionPlanReqInvoicePaymentTerms? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
+        {
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "due_on_receipt":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsNet>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new UpdateSubscriptionPlanReqInvoicePaymentTerms(element);
+            }
+        }
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpdateSubscriptionPlanReqInvoicePaymentTerms? value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(writer, value?.Json, options);
+    }
+}
+
+[JsonConverter(typeof(UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceiptConverter))]
+public record class UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt
+{
+    public JsonElement Element { get; private init; }
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt()
+    {
+        Element = JsonSerializer.Deserialize<JsonElement>(
+            """
+            {
+              "type": "due_on_receipt"
+            }
+            """
+        );
+    }
+
+    internal UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(JsonElement element)
+    {
+        Element = element;
+    }
+
+    /// <summary>
+    /// Validates that the instance's underlying value is the expected constant.
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
+    public void Validate()
+    {
+        if (this != new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt())
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Invalid value given for 'UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt'"
+            );
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+
+    public virtual bool Equals(UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        return JsonElement.DeepEquals(this.Element, other.Element);
+    }
+}
+
+class UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceiptConverter
+    : JsonConverter<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>
+{
+    public override UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return new(JsonSerializer.Deserialize<JsonElement>(ref reader, options));
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(writer, value.Element, options);
+    }
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNet,
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNetFromRaw
+    >)
+)]
+public sealed record class UpdateSubscriptionPlanReqInvoicePaymentTermsNet : JsonModel
+{
+    public required int Days
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("days");
+        }
+        init { this._rawData.Set("days", value); }
+    }
+
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Days;
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("net")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsNet()
+    {
+        this.Type = JsonSerializer.SerializeToElement("net");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsNet(
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNet updateSubscriptionPlanReqInvoicePaymentTermsNet
+    )
+        : base(updateSubscriptionPlanReqInvoicePaymentTermsNet) { }
+#pragma warning restore CS8618
+
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsNet(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("net");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    UpdateSubscriptionPlanReqInvoicePaymentTermsNet(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="UpdateSubscriptionPlanReqInvoicePaymentTermsNetFromRaw.FromRawUnchecked"/>
+    public static UpdateSubscriptionPlanReqInvoicePaymentTermsNet FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsNet(int days)
+        : this()
+    {
+        this.Days = days;
+    }
+}
+
+class UpdateSubscriptionPlanReqInvoicePaymentTermsNetFromRaw
+    : IFromRawJson<UpdateSubscriptionPlanReqInvoicePaymentTermsNet>
+{
+    /// <inheritdoc/>
+    public UpdateSubscriptionPlanReqInvoicePaymentTermsNet FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UpdateSubscriptionPlanReqInvoicePaymentTermsNet.FromRawUnchecked(rawData);
 }
 
 /// <summary>

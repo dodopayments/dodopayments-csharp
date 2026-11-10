@@ -61,6 +61,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -213,6 +214,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -572,6 +574,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -715,6 +718,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -932,6 +936,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,

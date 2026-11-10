@@ -10,6 +10,7 @@ using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Webhooks;
@@ -176,6 +177,19 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
             return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
         }
         init { this._rawData.Set("billing", value); }
+    }
+
+    /// <summary>
+    /// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+    /// </summary>
+    public required ApiEnum<string, BillingMode> BillingMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, BillingMode>>("billing_mode");
+        }
+        init { this._rawData.Set("billing_mode", value); }
     }
 
     /// <summary>
@@ -584,6 +598,26 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
         }
     }
 
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("collection_method", value);
+        }
+    }
+
     /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
@@ -704,6 +738,19 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
         init { this._rawData.Set("payment_method_id", value); }
     }
 
+    /// <summary>
+    /// Days from the invoice date to the due date. `null` for `normal`.
+    /// </summary>
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("payment_terms_days");
+        }
+        init { this._rawData.Set("payment_terms_days", value); }
+    }
+
     public ScheduledPlanChange? ScheduledChange
     {
         get
@@ -790,6 +837,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
         {
             Addons = subscriptionUnpausedWebhookEventData.Addons,
             Billing = subscriptionUnpausedWebhookEventData.Billing,
+            BillingMode = subscriptionUnpausedWebhookEventData.BillingMode,
             BrandID = subscriptionUnpausedWebhookEventData.BrandID,
             CancelAtNextBillingDate = subscriptionUnpausedWebhookEventData.CancelAtNextBillingDate,
             CreatedAt = subscriptionUnpausedWebhookEventData.CreatedAt,
@@ -821,6 +869,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
             CancellationFeedback = subscriptionUnpausedWebhookEventData.CancellationFeedback,
             CancelledAt = subscriptionUnpausedWebhookEventData.CancelledAt,
             CancelledBy = subscriptionUnpausedWebhookEventData.CancelledBy,
+            CollectionMethod = subscriptionUnpausedWebhookEventData.CollectionMethod,
             CustomFieldResponses = subscriptionUnpausedWebhookEventData.CustomFieldResponses,
             CustomerBusinessName = subscriptionUnpausedWebhookEventData.CustomerBusinessName,
             DiscountCyclesRemaining = subscriptionUnpausedWebhookEventData.DiscountCyclesRemaining,
@@ -829,6 +878,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
             ExpiresAt = subscriptionUnpausedWebhookEventData.ExpiresAt,
             PausedAt = subscriptionUnpausedWebhookEventData.PausedAt,
             PaymentMethodID = subscriptionUnpausedWebhookEventData.PaymentMethodID,
+            PaymentTermsDays = subscriptionUnpausedWebhookEventData.PaymentTermsDays,
             ScheduledChange = subscriptionUnpausedWebhookEventData.ScheduledChange,
             TaxID = subscriptionUnpausedWebhookEventData.TaxID,
             TrialAmount = subscriptionUnpausedWebhookEventData.TrialAmount,
@@ -842,6 +892,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        this.BillingMode.Validate();
         _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
@@ -882,6 +933,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         this.CancelledBy?.Validate();
+        this.CollectionMethod?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
@@ -896,6 +948,7 @@ public sealed record class SubscriptionUnpausedWebhookEventData : JsonModel
         _ = this.ExpiresAt;
         _ = this.PausedAt;
         _ = this.PaymentMethodID;
+        _ = this.PaymentTermsDays;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
         _ = this.TrialAmount;

@@ -1009,6 +1009,20 @@ public sealed record class Addon : JsonModel
         init { this._rawData.Set("discounted_price", value); }
     }
 
+    /// <summary>
+    /// True when one more unit of this addon puts the cart above the cart value limit
+    /// of the business. False when the limit does not apply to the business.
+    /// </summary>
+    public required bool MaxQuantityReached
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("max_quantity_reached");
+        }
+        init { this._rawData.Set("max_quantity_reached", value); }
+    }
+
     public required string Name
     {
         get
@@ -1139,6 +1153,7 @@ public sealed record class Addon : JsonModel
         _ = this.AddonID;
         this.Currency.Validate();
         _ = this.DiscountedPrice;
+        _ = this.MaxQuantityReached;
         _ = this.Name;
         this.OgCurrency.Validate();
         _ = this.OgPrice;

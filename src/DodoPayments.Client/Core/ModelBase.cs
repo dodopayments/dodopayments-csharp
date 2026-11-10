@@ -17,6 +17,7 @@ using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Customers = DodoPayments.Client.Models.Customers;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
 using ProductCollections = DodoPayments.Client.Models.ProductCollections;
@@ -57,15 +58,23 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CancelReason>(),
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, ProrationBillingMode>(),
+            new ApiEnumConverter<string, Credit>(),
             new ApiEnumConverter<string, EffectiveAt>(),
             new ApiEnumConverter<string, OnPaymentFailure>(),
             new ApiEnumConverter<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>(),
+            new ApiEnumConverter<string, SubscriptionPreviewChangePlanParamsCredit>(),
             new ApiEnumConverter<string, SubscriptionPreviewChangePlanParamsEffectiveAt>(),
             new ApiEnumConverter<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>(),
+            new ApiEnumConverter<string, Invoices::InvoiceCollectionMethod>(),
+            new ApiEnumConverter<string, Invoices::DunningState>(),
+            new ApiEnumConverter<string, Invoices::InvoiceStatus>(),
+            new ApiEnumConverter<string, Invoices::CollectionMethod>(),
+            new ApiEnumConverter<string, Invoices::Format>(),
+            new ApiEnumConverter<string, Invoices::InvoicePreviewExistingParamsFormat>(),
+            new ApiEnumConverter<string, Invoices::Action>(),
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
             new ApiEnumConverter<string, LicenseKeys::Source>(),
             new ApiEnumConverter<string, LicenseKeys::Status>(),
-            new ApiEnumConverter<string, Locale>(),
             new ApiEnumConverter<string, Customers::IntegrationType>(),
             new ApiEnumConverter<string, Customers::Status>(),
             new ApiEnumConverter<string, EntryType>(),
