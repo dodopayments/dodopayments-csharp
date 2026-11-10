@@ -34,7 +34,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+                PaymentTerms =
+                    new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
@@ -64,7 +65,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
@@ -132,7 +133,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+                PaymentTerms =
+                    new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
@@ -168,7 +170,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+                PaymentTerms =
+                    new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
@@ -320,7 +323,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+                PaymentTerms =
+                    new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
@@ -518,14 +522,14 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
             InvoiceCollectionMethod.AutoCharge;
         bool expectedFinalize = true;
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms expectedPaymentTerms =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
 
         Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
         Assert.Equal(expectedFinalize, model.Finalize);
@@ -539,7 +543,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -558,7 +562,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -572,7 +576,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
             InvoiceCollectionMethod.AutoCharge;
         bool expectedFinalize = true;
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms expectedPaymentTerms =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
 
         Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
         Assert.Equal(expectedFinalize, deserialized.Finalize);
@@ -586,7 +590,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         model.Validate();
@@ -598,7 +602,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         var model = new SubscriptionPreviewChangePlanParamsInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         Assert.Null(model.Finalize);
@@ -611,7 +615,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         var model = new SubscriptionPreviewChangePlanParamsInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         model.Validate();
@@ -623,7 +627,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         var model = new SubscriptionPreviewChangePlanParamsInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
 
             // Null should be interpreted as omitted for these properties
             Finalize = null,
@@ -639,7 +643,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         var model = new SubscriptionPreviewChangePlanParamsInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
 
             // Null should be interpreted as omitted for these properties
             Finalize = null,
@@ -705,7 +709,7 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(),
+            PaymentTerms = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(),
         };
 
         SubscriptionPreviewChangePlanParamsInvoice copied = new(model);
@@ -717,26 +721,26 @@ public class SubscriptionPreviewChangePlanParamsInvoiceTest : TestBase
 public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTest : TestBase
 {
     [Fact]
-    public void ObjectValidationWorks()
+    public void DueOnReceiptValidationWorks()
     {
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms value =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
         value.Validate();
     }
 
     [Fact]
-    public void SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1ValidationWorks()
+    public void NetValidationWorks()
     {
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms value =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(0);
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(0);
         value.Validate();
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks()
+    public void DueOnReceiptSerializationRoundtripWorks()
     {
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms value =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
             JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTerms>(
@@ -748,10 +752,10 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTest : TestBa
     }
 
     [Fact]
-    public void SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1SerializationRoundtripWorks()
+    public void NetSerializationRoundtripWorks()
     {
         SubscriptionPreviewChangePlanParamsInvoicePaymentTerms value =
-            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(0);
+            new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(0);
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
             JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTerms>(
@@ -763,12 +767,12 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTest : TestBa
     }
 }
 
-public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : TestBase
+public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceiptTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+        var constant = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
         constant.Validate();
     }
 
@@ -776,7 +780,7 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     public void ValidConstantValidation_Works()
     {
         var constant =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 JsonSerializer.Deserialize<JsonElement>(
                     """
                     {
@@ -795,7 +799,7 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     public void InvalidConstantValidationThrows_Works()
     {
         var constant =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 JsonSerializer.SerializeToElement("invalid value"),
                 ModelBase.SerializerOptions
             );
@@ -807,10 +811,10 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType();
+        var constant = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -822,7 +826,7 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     public void ValidConstantRoundtrip_Works()
     {
         var constant =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 JsonSerializer.Deserialize<JsonElement>(
                     """
                     {
@@ -834,7 +838,7 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
             );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -846,13 +850,13 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     public void InvalidConstantRoundtrip_Works()
     {
         var constant =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 JsonSerializer.SerializeToElement("invalid value"),
                 ModelBase.SerializerOptions
             );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -861,15 +865,12 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeTest : Te
     }
 }
 
-public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1Test : TestBase
+public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNetTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-        {
-            Days = 0,
-        };
+        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet { Days = 0 };
 
         int expectedDays = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("net");
@@ -881,14 +882,11 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1T
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-        {
-            Days = 0,
-        };
+        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet { Days = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -899,14 +897,11 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1T
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-        {
-            Days = 0,
-        };
+        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet { Days = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1>(
+            JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -922,10 +917,7 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1T
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-        {
-            Days = 0,
-        };
+        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet { Days = 0 };
 
         model.Validate();
     }
@@ -933,12 +925,9 @@ public class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1T
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-        {
-            Days = 0,
-        };
+        var model = new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet { Days = 0 };
 
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 copied = new(model);
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet copied = new(model);
 
         Assert.Equal(model, copied);
     }

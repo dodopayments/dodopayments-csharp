@@ -1054,13 +1054,13 @@ public record class PaymentTerms : ModelBase
         }
     }
 
-    public PaymentTerms(Type value, JsonElement? element = null)
+    public PaymentTerms(DueOnReceipt value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public PaymentTerms(UnionMember1 value, JsonElement? element = null)
+    public PaymentTerms(Net value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -1073,43 +1073,43 @@ public record class PaymentTerms : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="Type"/>.
+    /// type <see cref="DueOnReceipt"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject(out var value)) {
-    ///     // `value` is of type `Type`
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `DueOnReceipt`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject([NotNullWhen(true)] out Type? value)
+    public bool TryPickDueOnReceipt([NotNullWhen(true)] out DueOnReceipt? value)
     {
-        value = this.Value as Type;
+        value = this.Value as DueOnReceipt;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember1"/>.
+    /// type <see cref="Net"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember1(out var value)) {
-    ///     // `value` is of type `UnionMember1`
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `Net`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember1([NotNullWhen(true)] out UnionMember1? value)
+    public bool TryPickNet([NotNullWhen(true)] out Net? value)
     {
-        value = this.Value as UnionMember1;
+        value = this.Value as Net;
         return value != null;
     }
 
@@ -1127,21 +1127,21 @@ public record class PaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (Type value) =&gt; {...},
-    ///     (UnionMember1 value) =&gt; {...}
+    ///     (DueOnReceipt value) =&gt; {...},
+    ///     (Net value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(System::Action<Type> object_, System::Action<UnionMember1> unionMember1)
+    public void Switch(System::Action<DueOnReceipt> dueOnReceipt, System::Action<Net> net)
     {
         switch (this.Value)
         {
-            case Type value:
-                object_(value);
+            case DueOnReceipt value:
+                dueOnReceipt(value);
                 break;
-            case UnionMember1 value:
-                unionMember1(value);
+            case Net value:
+                net(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -1165,27 +1165,27 @@ public record class PaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (Type value) =&gt; {...},
-    ///     (UnionMember1 value) =&gt; {...}
+    ///     (DueOnReceipt value) =&gt; {...},
+    ///     (Net value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(System::Func<Type, T> object_, System::Func<UnionMember1, T> unionMember1)
+    public T Match<T>(System::Func<DueOnReceipt, T> dueOnReceipt, System::Func<Net, T> net)
     {
         return this.Value switch
         {
-            Type value => object_(value),
-            UnionMember1 value => unionMember1(value),
+            DueOnReceipt value => dueOnReceipt(value),
+            Net value => net(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of PaymentTerms"
             ),
         };
     }
 
-    public static implicit operator PaymentTerms(Type value) => new(value);
+    public static implicit operator PaymentTerms(DueOnReceipt value) => new(value);
 
-    public static implicit operator PaymentTerms(UnionMember1 value) => new(value);
+    public static implicit operator PaymentTerms(Net value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -1205,7 +1205,7 @@ public record class PaymentTerms : ModelBase
                 "Data did not match any variant of PaymentTerms"
             );
         }
-        this.Switch((object_) => object_.Validate(), (unionMember1) => unionMember1.Validate());
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
     }
 
     public virtual bool Equals(PaymentTerms? other) =>
@@ -1228,8 +1228,8 @@ public record class PaymentTerms : ModelBase
     {
         return this.Value switch
         {
-            Type _ => 0,
-            UnionMember1 _ => 1,
+            DueOnReceipt _ => 0,
+            Net _ => 1,
             _ => -1,
         };
     }
@@ -1244,37 +1244,57 @@ sealed class PaymentTermsConverter : JsonConverter<PaymentTerms?>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Type>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember1>(element, options);
-            if (deserialized != null)
+            case "due_on_receipt":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DueOnReceipt>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Net>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new PaymentTerms(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -1287,12 +1307,12 @@ sealed class PaymentTermsConverter : JsonConverter<PaymentTerms?>
     }
 }
 
-[JsonConverter(typeof(TypeConverter))]
-public record class Type
+[JsonConverter(typeof(DueOnReceiptConverter))]
+public record class DueOnReceipt
 {
     public JsonElement Element { get; private init; }
 
-    public Type()
+    public DueOnReceipt()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1303,7 +1323,7 @@ public record class Type
         );
     }
 
-    internal Type(JsonElement element)
+    internal DueOnReceipt(JsonElement element)
     {
         Element = element;
     }
@@ -1319,9 +1339,9 @@ public record class Type
     /// </summary>
     public void Validate()
     {
-        if (this != new Type())
+        if (this != new DueOnReceipt())
         {
-            throw new DodoPaymentsInvalidDataException("Invalid value given for 'Type'");
+            throw new DodoPaymentsInvalidDataException("Invalid value given for 'DueOnReceipt'");
         }
     }
 
@@ -1330,7 +1350,7 @@ public record class Type
         return 0;
     }
 
-    public virtual bool Equals(Type? other)
+    public virtual bool Equals(DueOnReceipt? other)
     {
         if (other == null)
         {
@@ -1341,9 +1361,9 @@ public record class Type
     }
 }
 
-class TypeConverter : JsonConverter<Type>
+class DueOnReceiptConverter : JsonConverter<DueOnReceipt>
 {
-    public override Type? Read(
+    public override DueOnReceipt? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1352,14 +1372,18 @@ class TypeConverter : JsonConverter<Type>
         return new(JsonSerializer.Deserialize<JsonElement>(ref reader, options));
     }
 
-    public override void Write(Utf8JsonWriter writer, Type value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DueOnReceipt value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value.Element, options);
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<UnionMember1, UnionMember1FromRaw>))]
-public sealed record class UnionMember1 : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Net, NetFromRaw>))]
+public sealed record class Net : JsonModel
 {
     public required int Days
     {
@@ -1391,18 +1415,18 @@ public sealed record class UnionMember1 : JsonModel
         }
     }
 
-    public UnionMember1()
+    public Net()
     {
         this.Type = JsonSerializer.SerializeToElement("net");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UnionMember1(UnionMember1 unionMember1)
-        : base(unionMember1) { }
+    public Net(Net net)
+        : base(net) { }
 #pragma warning restore CS8618
 
-    public UnionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Net(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -1411,29 +1435,29 @@ public sealed record class UnionMember1 : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    Net(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember1FromRaw.FromRawUnchecked"/>
-    public static UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="NetFromRaw.FromRawUnchecked"/>
+    public static Net FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
-    public UnionMember1(int days)
+    public Net(int days)
         : this()
     {
         this.Days = days;
     }
 }
 
-class UnionMember1FromRaw : IFromRawJson<UnionMember1>
+class NetFromRaw : IFromRawJson<Net>
 {
     /// <inheritdoc/>
-    public UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember1.FromRawUnchecked(rawData);
+    public Net FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Net.FromRawUnchecked(rawData);
 }

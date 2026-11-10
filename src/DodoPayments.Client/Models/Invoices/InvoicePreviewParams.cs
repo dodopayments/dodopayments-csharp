@@ -1176,7 +1176,7 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     }
 
     public InvoicePreviewParamsPaymentTerms(
-        InvoicePreviewParamsPaymentTermsType value,
+        InvoicePreviewParamsPaymentTermsDueOnReceipt value,
         JsonElement? element = null
     )
     {
@@ -1185,7 +1185,7 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     }
 
     public InvoicePreviewParamsPaymentTerms(
-        InvoicePreviewParamsPaymentTermsUnionMember1 value,
+        InvoicePreviewParamsPaymentTermsNet value,
         JsonElement? element = null
     )
     {
@@ -1200,45 +1200,45 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="InvoicePreviewParamsPaymentTermsType"/>.
+    /// type <see cref="InvoicePreviewParamsPaymentTermsDueOnReceipt"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject(out var value)) {
-    ///     // `value` is of type `InvoicePreviewParamsPaymentTermsType`
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `InvoicePreviewParamsPaymentTermsDueOnReceipt`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject([NotNullWhen(true)] out InvoicePreviewParamsPaymentTermsType? value)
+    public bool TryPickDueOnReceipt(
+        [NotNullWhen(true)] out InvoicePreviewParamsPaymentTermsDueOnReceipt? value
+    )
     {
-        value = this.Value as InvoicePreviewParamsPaymentTermsType;
+        value = this.Value as InvoicePreviewParamsPaymentTermsDueOnReceipt;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="InvoicePreviewParamsPaymentTermsUnionMember1"/>.
+    /// type <see cref="InvoicePreviewParamsPaymentTermsNet"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickInvoicePreviewParamsPaymentTermsUnionMember1(out var value)) {
-    ///     // `value` is of type `InvoicePreviewParamsPaymentTermsUnionMember1`
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `InvoicePreviewParamsPaymentTermsNet`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickInvoicePreviewParamsPaymentTermsUnionMember1(
-        [NotNullWhen(true)] out InvoicePreviewParamsPaymentTermsUnionMember1? value
-    )
+    public bool TryPickNet([NotNullWhen(true)] out InvoicePreviewParamsPaymentTermsNet? value)
     {
-        value = this.Value as InvoicePreviewParamsPaymentTermsUnionMember1;
+        value = this.Value as InvoicePreviewParamsPaymentTermsNet;
         return value != null;
     }
 
@@ -1256,24 +1256,24 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (InvoicePreviewParamsPaymentTermsType value) =&gt; {...},
-    ///     (InvoicePreviewParamsPaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (InvoicePreviewParamsPaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (InvoicePreviewParamsPaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<InvoicePreviewParamsPaymentTermsType> object_,
-        System::Action<InvoicePreviewParamsPaymentTermsUnionMember1> invoicePreviewParamsPaymentTermsUnionMember1
+        System::Action<InvoicePreviewParamsPaymentTermsDueOnReceipt> dueOnReceipt,
+        System::Action<InvoicePreviewParamsPaymentTermsNet> net
     )
     {
         switch (this.Value)
         {
-            case InvoicePreviewParamsPaymentTermsType value:
-                object_(value);
+            case InvoicePreviewParamsPaymentTermsDueOnReceipt value:
+                dueOnReceipt(value);
                 break;
-            case InvoicePreviewParamsPaymentTermsUnionMember1 value:
-                invoicePreviewParamsPaymentTermsUnionMember1(value);
+            case InvoicePreviewParamsPaymentTermsNet value:
+                net(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -1297,25 +1297,21 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (InvoicePreviewParamsPaymentTermsType value) =&gt; {...},
-    ///     (InvoicePreviewParamsPaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (InvoicePreviewParamsPaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (InvoicePreviewParamsPaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<InvoicePreviewParamsPaymentTermsType, T> object_,
-        System::Func<
-            InvoicePreviewParamsPaymentTermsUnionMember1,
-            T
-        > invoicePreviewParamsPaymentTermsUnionMember1
+        System::Func<InvoicePreviewParamsPaymentTermsDueOnReceipt, T> dueOnReceipt,
+        System::Func<InvoicePreviewParamsPaymentTermsNet, T> net
     )
     {
         return this.Value switch
         {
-            InvoicePreviewParamsPaymentTermsType value => object_(value),
-            InvoicePreviewParamsPaymentTermsUnionMember1 value =>
-                invoicePreviewParamsPaymentTermsUnionMember1(value),
+            InvoicePreviewParamsPaymentTermsDueOnReceipt value => dueOnReceipt(value),
+            InvoicePreviewParamsPaymentTermsNet value => net(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of InvoicePreviewParamsPaymentTerms"
             ),
@@ -1323,11 +1319,11 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     }
 
     public static implicit operator InvoicePreviewParamsPaymentTerms(
-        InvoicePreviewParamsPaymentTermsType value
+        InvoicePreviewParamsPaymentTermsDueOnReceipt value
     ) => new(value);
 
     public static implicit operator InvoicePreviewParamsPaymentTerms(
-        InvoicePreviewParamsPaymentTermsUnionMember1 value
+        InvoicePreviewParamsPaymentTermsNet value
     ) => new(value);
 
     /// <summary>
@@ -1348,11 +1344,7 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
                 "Data did not match any variant of InvoicePreviewParamsPaymentTerms"
             );
         }
-        this.Switch(
-            (object_) => object_.Validate(),
-            (invoicePreviewParamsPaymentTermsUnionMember1) =>
-                invoicePreviewParamsPaymentTermsUnionMember1.Validate()
-        );
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
     }
 
     public virtual bool Equals(InvoicePreviewParamsPaymentTerms? other) =>
@@ -1375,8 +1367,8 @@ public record class InvoicePreviewParamsPaymentTerms : ModelBase
     {
         return this.Value switch
         {
-            InvoicePreviewParamsPaymentTermsType _ => 0,
-            InvoicePreviewParamsPaymentTermsUnionMember1 _ => 1,
+            InvoicePreviewParamsPaymentTermsDueOnReceipt _ => 0,
+            InvoicePreviewParamsPaymentTermsNet _ => 1,
             _ => -1,
         };
     }
@@ -1392,44 +1384,65 @@ sealed class InvoicePreviewParamsPaymentTermsConverter
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<InvoicePreviewParamsPaymentTermsType>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized =
-                JsonSerializer.Deserialize<InvoicePreviewParamsPaymentTermsUnionMember1>(
-                    element,
-                    options
-                );
-            if (deserialized != null)
+            case "due_on_receipt":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<InvoicePreviewParamsPaymentTermsDueOnReceipt>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<InvoicePreviewParamsPaymentTermsNet>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new InvoicePreviewParamsPaymentTerms(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -1442,12 +1455,12 @@ sealed class InvoicePreviewParamsPaymentTermsConverter
     }
 }
 
-[JsonConverter(typeof(InvoicePreviewParamsPaymentTermsTypeConverter))]
-public record class InvoicePreviewParamsPaymentTermsType
+[JsonConverter(typeof(InvoicePreviewParamsPaymentTermsDueOnReceiptConverter))]
+public record class InvoicePreviewParamsPaymentTermsDueOnReceipt
 {
     public JsonElement Element { get; private init; }
 
-    public InvoicePreviewParamsPaymentTermsType()
+    public InvoicePreviewParamsPaymentTermsDueOnReceipt()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1458,7 +1471,7 @@ public record class InvoicePreviewParamsPaymentTermsType
         );
     }
 
-    internal InvoicePreviewParamsPaymentTermsType(JsonElement element)
+    internal InvoicePreviewParamsPaymentTermsDueOnReceipt(JsonElement element)
     {
         Element = element;
     }
@@ -1474,10 +1487,10 @@ public record class InvoicePreviewParamsPaymentTermsType
     /// </summary>
     public void Validate()
     {
-        if (this != new InvoicePreviewParamsPaymentTermsType())
+        if (this != new InvoicePreviewParamsPaymentTermsDueOnReceipt())
         {
             throw new DodoPaymentsInvalidDataException(
-                "Invalid value given for 'InvoicePreviewParamsPaymentTermsType'"
+                "Invalid value given for 'InvoicePreviewParamsPaymentTermsDueOnReceipt'"
             );
         }
     }
@@ -1487,7 +1500,7 @@ public record class InvoicePreviewParamsPaymentTermsType
         return 0;
     }
 
-    public virtual bool Equals(InvoicePreviewParamsPaymentTermsType? other)
+    public virtual bool Equals(InvoicePreviewParamsPaymentTermsDueOnReceipt? other)
     {
         if (other == null)
         {
@@ -1498,10 +1511,10 @@ public record class InvoicePreviewParamsPaymentTermsType
     }
 }
 
-class InvoicePreviewParamsPaymentTermsTypeConverter
-    : JsonConverter<InvoicePreviewParamsPaymentTermsType>
+class InvoicePreviewParamsPaymentTermsDueOnReceiptConverter
+    : JsonConverter<InvoicePreviewParamsPaymentTermsDueOnReceipt>
 {
-    public override InvoicePreviewParamsPaymentTermsType? Read(
+    public override InvoicePreviewParamsPaymentTermsDueOnReceipt? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1512,7 +1525,7 @@ class InvoicePreviewParamsPaymentTermsTypeConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        InvoicePreviewParamsPaymentTermsType value,
+        InvoicePreviewParamsPaymentTermsDueOnReceipt value,
         JsonSerializerOptions options
     )
     {
@@ -1522,11 +1535,11 @@ class InvoicePreviewParamsPaymentTermsTypeConverter
 
 [JsonConverter(
     typeof(JsonModelConverter<
-        InvoicePreviewParamsPaymentTermsUnionMember1,
-        InvoicePreviewParamsPaymentTermsUnionMember1FromRaw
+        InvoicePreviewParamsPaymentTermsNet,
+        InvoicePreviewParamsPaymentTermsNetFromRaw
     >)
 )]
-public sealed record class InvoicePreviewParamsPaymentTermsUnionMember1 : JsonModel
+public sealed record class InvoicePreviewParamsPaymentTermsNet : JsonModel
 {
     public required int Days
     {
@@ -1558,22 +1571,20 @@ public sealed record class InvoicePreviewParamsPaymentTermsUnionMember1 : JsonMo
         }
     }
 
-    public InvoicePreviewParamsPaymentTermsUnionMember1()
+    public InvoicePreviewParamsPaymentTermsNet()
     {
         this.Type = JsonSerializer.SerializeToElement("net");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public InvoicePreviewParamsPaymentTermsUnionMember1(
-        InvoicePreviewParamsPaymentTermsUnionMember1 invoicePreviewParamsPaymentTermsUnionMember1
+    public InvoicePreviewParamsPaymentTermsNet(
+        InvoicePreviewParamsPaymentTermsNet invoicePreviewParamsPaymentTermsNet
     )
-        : base(invoicePreviewParamsPaymentTermsUnionMember1) { }
+        : base(invoicePreviewParamsPaymentTermsNet) { }
 #pragma warning restore CS8618
 
-    public InvoicePreviewParamsPaymentTermsUnionMember1(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public InvoicePreviewParamsPaymentTermsNet(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -1582,14 +1593,14 @@ public sealed record class InvoicePreviewParamsPaymentTermsUnionMember1 : JsonMo
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    InvoicePreviewParamsPaymentTermsUnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    InvoicePreviewParamsPaymentTermsNet(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="InvoicePreviewParamsPaymentTermsUnionMember1FromRaw.FromRawUnchecked"/>
-    public static InvoicePreviewParamsPaymentTermsUnionMember1 FromRawUnchecked(
+    /// <inheritdoc cref="InvoicePreviewParamsPaymentTermsNetFromRaw.FromRawUnchecked"/>
+    public static InvoicePreviewParamsPaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1597,18 +1608,17 @@ public sealed record class InvoicePreviewParamsPaymentTermsUnionMember1 : JsonMo
     }
 
     [SetsRequiredMembers]
-    public InvoicePreviewParamsPaymentTermsUnionMember1(int days)
+    public InvoicePreviewParamsPaymentTermsNet(int days)
         : this()
     {
         this.Days = days;
     }
 }
 
-class InvoicePreviewParamsPaymentTermsUnionMember1FromRaw
-    : IFromRawJson<InvoicePreviewParamsPaymentTermsUnionMember1>
+class InvoicePreviewParamsPaymentTermsNetFromRaw : IFromRawJson<InvoicePreviewParamsPaymentTermsNet>
 {
     /// <inheritdoc/>
-    public InvoicePreviewParamsPaymentTermsUnionMember1 FromRawUnchecked(
+    public InvoicePreviewParamsPaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => InvoicePreviewParamsPaymentTermsUnionMember1.FromRawUnchecked(rawData);
+    ) => InvoicePreviewParamsPaymentTermsNet.FromRawUnchecked(rawData);
 }

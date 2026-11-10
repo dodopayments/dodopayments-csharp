@@ -32,7 +32,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -61,7 +61,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
@@ -125,7 +125,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -163,7 +163,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -199,7 +199,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
@@ -266,7 +266,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -294,7 +294,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -329,7 +329,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -357,7 +357,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -398,7 +398,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -562,7 +562,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             {
                 CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 Finalize = true,
-                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+                PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
             },
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -754,14 +754,14 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
             InvoiceCollectionMethod.AutoCharge;
         bool expectedFinalize = true;
         UpdateSubscriptionPlanReqInvoicePaymentTerms expectedPaymentTerms =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
 
         Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
         Assert.Equal(expectedFinalize, model.Finalize);
@@ -775,7 +775,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -794,7 +794,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -808,7 +808,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
             InvoiceCollectionMethod.AutoCharge;
         bool expectedFinalize = true;
         UpdateSubscriptionPlanReqInvoicePaymentTerms expectedPaymentTerms =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
 
         Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
         Assert.Equal(expectedFinalize, deserialized.Finalize);
@@ -822,7 +822,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         model.Validate();
@@ -834,7 +834,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         var model = new UpdateSubscriptionPlanReqInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         Assert.Null(model.Finalize);
@@ -847,7 +847,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         var model = new UpdateSubscriptionPlanReqInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         model.Validate();
@@ -859,7 +859,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         var model = new UpdateSubscriptionPlanReqInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
 
             // Null should be interpreted as omitted for these properties
             Finalize = null,
@@ -875,7 +875,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         var model = new UpdateSubscriptionPlanReqInvoice
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
 
             // Null should be interpreted as omitted for these properties
             Finalize = null,
@@ -941,7 +941,7 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
         {
             CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Finalize = true,
-            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsType(),
+            PaymentTerms = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt(),
         };
 
         UpdateSubscriptionPlanReqInvoice copied = new(model);
@@ -953,26 +953,26 @@ public class UpdateSubscriptionPlanReqInvoiceTest : TestBase
 public class UpdateSubscriptionPlanReqInvoicePaymentTermsTest : TestBase
 {
     [Fact]
-    public void ObjectValidationWorks()
+    public void DueOnReceiptValidationWorks()
     {
         UpdateSubscriptionPlanReqInvoicePaymentTerms value =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
         value.Validate();
     }
 
     [Fact]
-    public void UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1ValidationWorks()
+    public void NetValidationWorks()
     {
         UpdateSubscriptionPlanReqInvoicePaymentTerms value =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1(0);
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsNet(0);
         value.Validate();
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks()
+    public void DueOnReceiptSerializationRoundtripWorks()
     {
         UpdateSubscriptionPlanReqInvoicePaymentTerms value =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTerms>(
             element,
@@ -983,10 +983,10 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTest : TestBase
     }
 
     [Fact]
-    public void UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1SerializationRoundtripWorks()
+    public void NetSerializationRoundtripWorks()
     {
         UpdateSubscriptionPlanReqInvoicePaymentTerms value =
-            new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1(0);
+            new UpdateSubscriptionPlanReqInvoicePaymentTermsNet(0);
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTerms>(
             element,
@@ -997,28 +997,29 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTest : TestBase
     }
 }
 
-public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
+public class UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceiptTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+        var constant = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
         constant.Validate();
     }
 
     [Fact]
     public void ValidConstantValidation_Works()
     {
-        var constant = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
-            JsonSerializer.Deserialize<JsonElement>(
-                """
-                {
-                  "type": "due_on_receipt"
-                }
-                """
-            ),
-            ModelBase.SerializerOptions
-        );
+        var constant =
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
+                JsonSerializer.Deserialize<JsonElement>(
+                    """
+                    {
+                      "type": "due_on_receipt"
+                    }
+                    """
+                ),
+                ModelBase.SerializerOptions
+            );
 
         Assert.NotNull(constant);
         constant.Validate();
@@ -1027,10 +1028,11 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
     [Fact]
     public void InvalidConstantValidationThrows_Works()
     {
-        var constant = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var constant =
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
+                JsonSerializer.SerializeToElement("invalid value"),
+                ModelBase.SerializerOptions
+            );
 
         Assert.NotNull(constant);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => constant.Validate());
@@ -1039,10 +1041,10 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new UpdateSubscriptionPlanReqInvoicePaymentTermsType();
+        var constant = new UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1053,19 +1055,20 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
     [Fact]
     public void ValidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
-            JsonSerializer.Deserialize<JsonElement>(
-                """
-                {
-                  "type": "due_on_receipt"
-                }
-                """
-            ),
-            ModelBase.SerializerOptions
-        );
+        var constant =
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
+                JsonSerializer.Deserialize<JsonElement>(
+                    """
+                    {
+                      "type": "due_on_receipt"
+                    }
+                    """
+                ),
+                ModelBase.SerializerOptions
+            );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1076,13 +1079,14 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
     [Fact]
     public void InvalidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var constant =
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
+                JsonSerializer.SerializeToElement("invalid value"),
+                ModelBase.SerializerOptions
+            );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsType>(
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsDueOnReceipt>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1091,12 +1095,12 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsTypeTest : TestBase
     }
 }
 
-public class UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1Test : TestBase
+public class UpdateSubscriptionPlanReqInvoicePaymentTermsNetTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 { Days = 0 };
+        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsNet { Days = 0 };
 
         int expectedDays = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("net");
@@ -1108,11 +1112,11 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1Test : Test
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 { Days = 0 };
+        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsNet { Days = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1>(
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsNet>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -1123,11 +1127,11 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1Test : Test
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 { Days = 0 };
+        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsNet { Days = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1>(
+            JsonSerializer.Deserialize<UpdateSubscriptionPlanReqInvoicePaymentTermsNet>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1143,7 +1147,7 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1Test : Test
     [Fact]
     public void Validation_Works()
     {
-        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 { Days = 0 };
+        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsNet { Days = 0 };
 
         model.Validate();
     }
@@ -1151,9 +1155,9 @@ public class UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1Test : Test
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 { Days = 0 };
+        var model = new UpdateSubscriptionPlanReqInvoicePaymentTermsNet { Days = 0 };
 
-        UpdateSubscriptionPlanReqInvoicePaymentTermsUnionMember1 copied = new(model);
+        UpdateSubscriptionPlanReqInvoicePaymentTermsNet copied = new(model);
 
         Assert.Equal(model, copied);
     }

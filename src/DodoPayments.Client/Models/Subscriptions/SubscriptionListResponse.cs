@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -9,7 +10,6 @@ using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
 using Payments = DodoPayments.Client.Models.Payments;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -65,12 +65,12 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -158,12 +158,12 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required System::DateTimeOffset NextBillingDate
+    public required DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -212,12 +212,12 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required System::DateTimeOffset PreviousBillingDate
+    public required DateTimeOffset PreviousBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("previous_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
         }
         init { this._rawData.Set("previous_billing_date", value); }
     }
@@ -345,12 +345,12 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public System::DateTimeOffset? CancelledAt
+    public DateTimeOffset? CancelledAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("cancelled_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
         }
         init { this._rawData.Set("cancelled_at", value); }
     }
@@ -428,12 +428,12 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// Timestamp when the subscription was paused, if it currently is (or is `OnHold`
     /// due to an unresolved pause settlement). `null` otherwise.
     /// </summary>
-    public System::DateTimeOffset? PausedAt
+    public DateTimeOffset? PausedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("paused_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("paused_at");
         }
         init { this._rawData.Set("paused_at", value); }
     }
@@ -618,7 +618,7 @@ sealed class SubscriptionListResponseBillingModeConverter
 {
     public override SubscriptionListResponseBillingMode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

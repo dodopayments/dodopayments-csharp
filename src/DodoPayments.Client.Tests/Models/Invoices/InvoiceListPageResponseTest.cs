@@ -45,7 +45,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                     DiscountIds = ["string"],
                     EditableFields = [EditableField.Customer],
-                    Frequency = new FrequencyType(),
+                    Frequency = new OneTime(),
                     InvoiceID = "invoice_id",
                     Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                     RefundIds = ["string"],
@@ -97,7 +97,7 @@ public class InvoiceListPageResponseTest : TestBase
                         },
                     ],
                     PdfUrl = "pdf_url",
-                    ReminderSettings = new UnionMember0()
+                    ReminderSettings = new Snapshot()
                     {
                         OffsetsMinutes = [0],
                         Paused = true,
@@ -139,7 +139,7 @@ public class InvoiceListPageResponseTest : TestBase
                 },
                 DiscountIds = ["string"],
                 EditableFields = [EditableField.Customer],
-                Frequency = new FrequencyType(),
+                Frequency = new OneTime(),
                 InvoiceID = "invoice_id",
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
@@ -191,7 +191,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                 ],
                 PdfUrl = "pdf_url",
-                ReminderSettings = new UnionMember0()
+                ReminderSettings = new Snapshot()
                 {
                     OffsetsMinutes = [0],
                     Paused = true,
@@ -244,7 +244,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                     DiscountIds = ["string"],
                     EditableFields = [EditableField.Customer],
-                    Frequency = new FrequencyType(),
+                    Frequency = new OneTime(),
                     InvoiceID = "invoice_id",
                     Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                     RefundIds = ["string"],
@@ -296,7 +296,7 @@ public class InvoiceListPageResponseTest : TestBase
                         },
                     ],
                     PdfUrl = "pdf_url",
-                    ReminderSettings = new UnionMember0()
+                    ReminderSettings = new Snapshot()
                     {
                         OffsetsMinutes = [0],
                         Paused = true,
@@ -352,7 +352,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                     DiscountIds = ["string"],
                     EditableFields = [EditableField.Customer],
-                    Frequency = new FrequencyType(),
+                    Frequency = new OneTime(),
                     InvoiceID = "invoice_id",
                     Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                     RefundIds = ["string"],
@@ -404,7 +404,7 @@ public class InvoiceListPageResponseTest : TestBase
                         },
                     ],
                     PdfUrl = "pdf_url",
-                    ReminderSettings = new UnionMember0()
+                    ReminderSettings = new Snapshot()
                     {
                         OffsetsMinutes = [0],
                         Paused = true,
@@ -453,7 +453,7 @@ public class InvoiceListPageResponseTest : TestBase
                 },
                 DiscountIds = ["string"],
                 EditableFields = [EditableField.Customer],
-                Frequency = new FrequencyType(),
+                Frequency = new OneTime(),
                 InvoiceID = "invoice_id",
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
@@ -505,7 +505,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                 ],
                 PdfUrl = "pdf_url",
-                ReminderSettings = new UnionMember0()
+                ReminderSettings = new Snapshot()
                 {
                     OffsetsMinutes = [0],
                     Paused = true,
@@ -558,7 +558,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                     DiscountIds = ["string"],
                     EditableFields = [EditableField.Customer],
-                    Frequency = new FrequencyType(),
+                    Frequency = new OneTime(),
                     InvoiceID = "invoice_id",
                     Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                     RefundIds = ["string"],
@@ -610,7 +610,7 @@ public class InvoiceListPageResponseTest : TestBase
                         },
                     ],
                     PdfUrl = "pdf_url",
-                    ReminderSettings = new UnionMember0()
+                    ReminderSettings = new Snapshot()
                     {
                         OffsetsMinutes = [0],
                         Paused = true,
@@ -660,7 +660,7 @@ public class InvoiceListPageResponseTest : TestBase
                     },
                     DiscountIds = ["string"],
                     EditableFields = [EditableField.Customer],
-                    Frequency = new FrequencyType(),
+                    Frequency = new OneTime(),
                     InvoiceID = "invoice_id",
                     Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                     RefundIds = ["string"],
@@ -712,7 +712,7 @@ public class InvoiceListPageResponseTest : TestBase
                         },
                     ],
                     PdfUrl = "pdf_url",
-                    ReminderSettings = new UnionMember0()
+                    ReminderSettings = new Snapshot()
                     {
                         OffsetsMinutes = [0],
                         Paused = true,

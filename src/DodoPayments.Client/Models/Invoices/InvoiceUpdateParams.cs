@@ -1099,7 +1099,7 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     }
 
     public InvoiceUpdateParamsPaymentTerms(
-        InvoiceUpdateParamsPaymentTermsType value,
+        InvoiceUpdateParamsPaymentTermsDueOnReceipt value,
         JsonElement? element = null
     )
     {
@@ -1108,7 +1108,7 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     }
 
     public InvoiceUpdateParamsPaymentTerms(
-        InvoiceUpdateParamsPaymentTermsUnionMember1 value,
+        InvoiceUpdateParamsPaymentTermsNet value,
         JsonElement? element = null
     )
     {
@@ -1123,45 +1123,45 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="InvoiceUpdateParamsPaymentTermsType"/>.
+    /// type <see cref="InvoiceUpdateParamsPaymentTermsDueOnReceipt"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject(out var value)) {
-    ///     // `value` is of type `InvoiceUpdateParamsPaymentTermsType`
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `InvoiceUpdateParamsPaymentTermsDueOnReceipt`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject([NotNullWhen(true)] out InvoiceUpdateParamsPaymentTermsType? value)
+    public bool TryPickDueOnReceipt(
+        [NotNullWhen(true)] out InvoiceUpdateParamsPaymentTermsDueOnReceipt? value
+    )
     {
-        value = this.Value as InvoiceUpdateParamsPaymentTermsType;
+        value = this.Value as InvoiceUpdateParamsPaymentTermsDueOnReceipt;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="InvoiceUpdateParamsPaymentTermsUnionMember1"/>.
+    /// type <see cref="InvoiceUpdateParamsPaymentTermsNet"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickInvoiceUpdateParamsPaymentTermsUnionMember1(out var value)) {
-    ///     // `value` is of type `InvoiceUpdateParamsPaymentTermsUnionMember1`
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `InvoiceUpdateParamsPaymentTermsNet`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickInvoiceUpdateParamsPaymentTermsUnionMember1(
-        [NotNullWhen(true)] out InvoiceUpdateParamsPaymentTermsUnionMember1? value
-    )
+    public bool TryPickNet([NotNullWhen(true)] out InvoiceUpdateParamsPaymentTermsNet? value)
     {
-        value = this.Value as InvoiceUpdateParamsPaymentTermsUnionMember1;
+        value = this.Value as InvoiceUpdateParamsPaymentTermsNet;
         return value != null;
     }
 
@@ -1179,24 +1179,24 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (InvoiceUpdateParamsPaymentTermsType value) =&gt; {...},
-    ///     (InvoiceUpdateParamsPaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (InvoiceUpdateParamsPaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (InvoiceUpdateParamsPaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<InvoiceUpdateParamsPaymentTermsType> object_,
-        System::Action<InvoiceUpdateParamsPaymentTermsUnionMember1> invoiceUpdateParamsPaymentTermsUnionMember1
+        System::Action<InvoiceUpdateParamsPaymentTermsDueOnReceipt> dueOnReceipt,
+        System::Action<InvoiceUpdateParamsPaymentTermsNet> net
     )
     {
         switch (this.Value)
         {
-            case InvoiceUpdateParamsPaymentTermsType value:
-                object_(value);
+            case InvoiceUpdateParamsPaymentTermsDueOnReceipt value:
+                dueOnReceipt(value);
                 break;
-            case InvoiceUpdateParamsPaymentTermsUnionMember1 value:
-                invoiceUpdateParamsPaymentTermsUnionMember1(value);
+            case InvoiceUpdateParamsPaymentTermsNet value:
+                net(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -1220,25 +1220,21 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (InvoiceUpdateParamsPaymentTermsType value) =&gt; {...},
-    ///     (InvoiceUpdateParamsPaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (InvoiceUpdateParamsPaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (InvoiceUpdateParamsPaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<InvoiceUpdateParamsPaymentTermsType, T> object_,
-        System::Func<
-            InvoiceUpdateParamsPaymentTermsUnionMember1,
-            T
-        > invoiceUpdateParamsPaymentTermsUnionMember1
+        System::Func<InvoiceUpdateParamsPaymentTermsDueOnReceipt, T> dueOnReceipt,
+        System::Func<InvoiceUpdateParamsPaymentTermsNet, T> net
     )
     {
         return this.Value switch
         {
-            InvoiceUpdateParamsPaymentTermsType value => object_(value),
-            InvoiceUpdateParamsPaymentTermsUnionMember1 value =>
-                invoiceUpdateParamsPaymentTermsUnionMember1(value),
+            InvoiceUpdateParamsPaymentTermsDueOnReceipt value => dueOnReceipt(value),
+            InvoiceUpdateParamsPaymentTermsNet value => net(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of InvoiceUpdateParamsPaymentTerms"
             ),
@@ -1246,11 +1242,11 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     }
 
     public static implicit operator InvoiceUpdateParamsPaymentTerms(
-        InvoiceUpdateParamsPaymentTermsType value
+        InvoiceUpdateParamsPaymentTermsDueOnReceipt value
     ) => new(value);
 
     public static implicit operator InvoiceUpdateParamsPaymentTerms(
-        InvoiceUpdateParamsPaymentTermsUnionMember1 value
+        InvoiceUpdateParamsPaymentTermsNet value
     ) => new(value);
 
     /// <summary>
@@ -1271,11 +1267,7 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
                 "Data did not match any variant of InvoiceUpdateParamsPaymentTerms"
             );
         }
-        this.Switch(
-            (object_) => object_.Validate(),
-            (invoiceUpdateParamsPaymentTermsUnionMember1) =>
-                invoiceUpdateParamsPaymentTermsUnionMember1.Validate()
-        );
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
     }
 
     public virtual bool Equals(InvoiceUpdateParamsPaymentTerms? other) =>
@@ -1298,8 +1290,8 @@ public record class InvoiceUpdateParamsPaymentTerms : ModelBase
     {
         return this.Value switch
         {
-            InvoiceUpdateParamsPaymentTermsType _ => 0,
-            InvoiceUpdateParamsPaymentTermsUnionMember1 _ => 1,
+            InvoiceUpdateParamsPaymentTermsDueOnReceipt _ => 0,
+            InvoiceUpdateParamsPaymentTermsNet _ => 1,
             _ => -1,
         };
     }
@@ -1315,44 +1307,65 @@ sealed class InvoiceUpdateParamsPaymentTermsConverter
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized =
-                JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsUnionMember1>(
-                    element,
-                    options
-                );
-            if (deserialized != null)
+            case "due_on_receipt":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsNet>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new InvoiceUpdateParamsPaymentTerms(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -1365,12 +1378,12 @@ sealed class InvoiceUpdateParamsPaymentTermsConverter
     }
 }
 
-[JsonConverter(typeof(InvoiceUpdateParamsPaymentTermsTypeConverter))]
-public record class InvoiceUpdateParamsPaymentTermsType
+[JsonConverter(typeof(InvoiceUpdateParamsPaymentTermsDueOnReceiptConverter))]
+public record class InvoiceUpdateParamsPaymentTermsDueOnReceipt
 {
     public JsonElement Element { get; private init; }
 
-    public InvoiceUpdateParamsPaymentTermsType()
+    public InvoiceUpdateParamsPaymentTermsDueOnReceipt()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1381,7 +1394,7 @@ public record class InvoiceUpdateParamsPaymentTermsType
         );
     }
 
-    internal InvoiceUpdateParamsPaymentTermsType(JsonElement element)
+    internal InvoiceUpdateParamsPaymentTermsDueOnReceipt(JsonElement element)
     {
         Element = element;
     }
@@ -1397,10 +1410,10 @@ public record class InvoiceUpdateParamsPaymentTermsType
     /// </summary>
     public void Validate()
     {
-        if (this != new InvoiceUpdateParamsPaymentTermsType())
+        if (this != new InvoiceUpdateParamsPaymentTermsDueOnReceipt())
         {
             throw new DodoPaymentsInvalidDataException(
-                "Invalid value given for 'InvoiceUpdateParamsPaymentTermsType'"
+                "Invalid value given for 'InvoiceUpdateParamsPaymentTermsDueOnReceipt'"
             );
         }
     }
@@ -1410,7 +1423,7 @@ public record class InvoiceUpdateParamsPaymentTermsType
         return 0;
     }
 
-    public virtual bool Equals(InvoiceUpdateParamsPaymentTermsType? other)
+    public virtual bool Equals(InvoiceUpdateParamsPaymentTermsDueOnReceipt? other)
     {
         if (other == null)
         {
@@ -1421,10 +1434,10 @@ public record class InvoiceUpdateParamsPaymentTermsType
     }
 }
 
-class InvoiceUpdateParamsPaymentTermsTypeConverter
-    : JsonConverter<InvoiceUpdateParamsPaymentTermsType>
+class InvoiceUpdateParamsPaymentTermsDueOnReceiptConverter
+    : JsonConverter<InvoiceUpdateParamsPaymentTermsDueOnReceipt>
 {
-    public override InvoiceUpdateParamsPaymentTermsType? Read(
+    public override InvoiceUpdateParamsPaymentTermsDueOnReceipt? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1435,7 +1448,7 @@ class InvoiceUpdateParamsPaymentTermsTypeConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        InvoiceUpdateParamsPaymentTermsType value,
+        InvoiceUpdateParamsPaymentTermsDueOnReceipt value,
         JsonSerializerOptions options
     )
     {
@@ -1445,11 +1458,11 @@ class InvoiceUpdateParamsPaymentTermsTypeConverter
 
 [JsonConverter(
     typeof(JsonModelConverter<
-        InvoiceUpdateParamsPaymentTermsUnionMember1,
-        InvoiceUpdateParamsPaymentTermsUnionMember1FromRaw
+        InvoiceUpdateParamsPaymentTermsNet,
+        InvoiceUpdateParamsPaymentTermsNetFromRaw
     >)
 )]
-public sealed record class InvoiceUpdateParamsPaymentTermsUnionMember1 : JsonModel
+public sealed record class InvoiceUpdateParamsPaymentTermsNet : JsonModel
 {
     public required int Days
     {
@@ -1481,22 +1494,20 @@ public sealed record class InvoiceUpdateParamsPaymentTermsUnionMember1 : JsonMod
         }
     }
 
-    public InvoiceUpdateParamsPaymentTermsUnionMember1()
+    public InvoiceUpdateParamsPaymentTermsNet()
     {
         this.Type = JsonSerializer.SerializeToElement("net");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public InvoiceUpdateParamsPaymentTermsUnionMember1(
-        InvoiceUpdateParamsPaymentTermsUnionMember1 invoiceUpdateParamsPaymentTermsUnionMember1
+    public InvoiceUpdateParamsPaymentTermsNet(
+        InvoiceUpdateParamsPaymentTermsNet invoiceUpdateParamsPaymentTermsNet
     )
-        : base(invoiceUpdateParamsPaymentTermsUnionMember1) { }
+        : base(invoiceUpdateParamsPaymentTermsNet) { }
 #pragma warning restore CS8618
 
-    public InvoiceUpdateParamsPaymentTermsUnionMember1(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public InvoiceUpdateParamsPaymentTermsNet(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -1505,14 +1516,14 @@ public sealed record class InvoiceUpdateParamsPaymentTermsUnionMember1 : JsonMod
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    InvoiceUpdateParamsPaymentTermsUnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    InvoiceUpdateParamsPaymentTermsNet(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="InvoiceUpdateParamsPaymentTermsUnionMember1FromRaw.FromRawUnchecked"/>
-    public static InvoiceUpdateParamsPaymentTermsUnionMember1 FromRawUnchecked(
+    /// <inheritdoc cref="InvoiceUpdateParamsPaymentTermsNetFromRaw.FromRawUnchecked"/>
+    public static InvoiceUpdateParamsPaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1520,18 +1531,17 @@ public sealed record class InvoiceUpdateParamsPaymentTermsUnionMember1 : JsonMod
     }
 
     [SetsRequiredMembers]
-    public InvoiceUpdateParamsPaymentTermsUnionMember1(int days)
+    public InvoiceUpdateParamsPaymentTermsNet(int days)
         : this()
     {
         this.Days = days;
     }
 }
 
-class InvoiceUpdateParamsPaymentTermsUnionMember1FromRaw
-    : IFromRawJson<InvoiceUpdateParamsPaymentTermsUnionMember1>
+class InvoiceUpdateParamsPaymentTermsNetFromRaw : IFromRawJson<InvoiceUpdateParamsPaymentTermsNet>
 {
     /// <inheritdoc/>
-    public InvoiceUpdateParamsPaymentTermsUnionMember1 FromRawUnchecked(
+    public InvoiceUpdateParamsPaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => InvoiceUpdateParamsPaymentTermsUnionMember1.FromRawUnchecked(rawData);
+    ) => InvoiceUpdateParamsPaymentTermsNet.FromRawUnchecked(rawData);
 }

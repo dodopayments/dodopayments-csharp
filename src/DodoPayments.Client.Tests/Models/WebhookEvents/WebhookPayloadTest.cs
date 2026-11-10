@@ -1611,7 +1611,7 @@ public class DataTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -1663,7 +1663,7 @@ public class DataTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -2273,7 +2273,7 @@ public class DataTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -2325,7 +2325,7 @@ public class DataTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -10785,7 +10785,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -10837,7 +10837,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -10879,7 +10879,7 @@ public class InvoiceTest : TestBase
         [
             Invoices::EditableField.Customer,
         ];
-        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        Invoices::Frequency expectedFrequency = new Invoices::OneTime();
         string expectedInvoiceID = "invoice_id";
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
@@ -10933,7 +10933,7 @@ public class InvoiceTest : TestBase
             },
         ];
         string expectedPdfUrl = "pdf_url";
-        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        Invoices::ReminderSettings expectedReminderSettings = new Invoices::Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -11049,7 +11049,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11101,7 +11101,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11148,7 +11148,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11200,7 +11200,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11249,7 +11249,7 @@ public class InvoiceTest : TestBase
         [
             Invoices::EditableField.Customer,
         ];
-        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        Invoices::Frequency expectedFrequency = new Invoices::OneTime();
         string expectedInvoiceID = "invoice_id";
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
@@ -11303,7 +11303,7 @@ public class InvoiceTest : TestBase
             },
         ];
         string expectedPdfUrl = "pdf_url";
-        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        Invoices::ReminderSettings expectedReminderSettings = new Invoices::Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -11419,7 +11419,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11471,7 +11471,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11515,7 +11515,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11565,7 +11565,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11612,7 +11612,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11662,7 +11662,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11706,7 +11706,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11756,7 +11756,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11807,7 +11807,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11857,7 +11857,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -11905,7 +11905,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -11979,7 +11979,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -12028,7 +12028,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -12116,7 +12116,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -12179,7 +12179,7 @@ public class InvoiceTest : TestBase
             },
             DiscountIds = ["string"],
             EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            Frequency = new Invoices::OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
@@ -12231,7 +12231,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Invoices::Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,

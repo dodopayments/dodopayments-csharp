@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Invoices;
 
@@ -122,9 +122,9 @@ public record class InvoicePreviewExistingParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/billing/invoices/{0}/preview", this.InvoiceID)
         )
@@ -165,7 +165,7 @@ sealed class InvoicePreviewExistingParamsFormatConverter
 {
     public override InvoicePreviewExistingParamsFormat Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

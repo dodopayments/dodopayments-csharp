@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -129,11 +129,11 @@ public record class Price : ModelBase
         }
     }
 
-    public ApiEnum<string, Subscriptions::TimeInterval>? PaymentFrequencyInterval
+    public ApiEnum<string, TimeInterval>? PaymentFrequencyInterval
     {
         get
         {
-            return Match<ApiEnum<string, Subscriptions::TimeInterval>?>(
+            return Match<ApiEnum<string, TimeInterval>?>(
                 oneTime: (_) => null,
                 recurring: (x) => x.PaymentFrequencyInterval,
                 usageBased: (x) => x.PaymentFrequencyInterval
@@ -153,11 +153,11 @@ public record class Price : ModelBase
         }
     }
 
-    public ApiEnum<string, Subscriptions::TimeInterval>? SubscriptionPeriodInterval
+    public ApiEnum<string, TimeInterval>? SubscriptionPeriodInterval
     {
         get
         {
-            return Match<ApiEnum<string, Subscriptions::TimeInterval>?>(
+            return Match<ApiEnum<string, TimeInterval>?>(
                 oneTime: (_) => null,
                 recurring: (x) => x.SubscriptionPeriodInterval,
                 usageBased: (x) => x.SubscriptionPeriodInterval
@@ -734,12 +734,12 @@ public sealed record class RecurringPrice : JsonModel
     /// <summary>
     /// The time unit of the billing cycle (e.g., day, month, year). Use it with `payment_frequency_count`.
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> PaymentFrequencyInterval
+    public required ApiEnum<string, TimeInterval> PaymentFrequencyInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "payment_frequency_interval"
             );
         }
@@ -792,12 +792,12 @@ public sealed record class RecurringPrice : JsonModel
     /// Use it with `subscription_period_count`. The recommended value is `year`,
     /// with a `subscription_period_count` of `20`.
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> SubscriptionPeriodInterval
+    public required ApiEnum<string, TimeInterval> SubscriptionPeriodInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "subscription_period_interval"
             );
         }
@@ -1101,12 +1101,12 @@ public sealed record class UsageBasedPrice : JsonModel
     /// <summary>
     /// The time unit of the billing cycle (e.g., day, month, year). Use it with `payment_frequency_count`.
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> PaymentFrequencyInterval
+    public required ApiEnum<string, TimeInterval> PaymentFrequencyInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "payment_frequency_interval"
             );
         }
@@ -1145,12 +1145,12 @@ public sealed record class UsageBasedPrice : JsonModel
     /// Use it with `subscription_period_count`. The recommended value is `year`,
     /// with a `subscription_period_count` of `20`.
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> SubscriptionPeriodInterval
+    public required ApiEnum<string, TimeInterval> SubscriptionPeriodInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "subscription_period_interval"
             );
         }

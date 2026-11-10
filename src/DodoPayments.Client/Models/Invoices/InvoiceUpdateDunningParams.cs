@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,7 +9,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Invoices;
 
@@ -29,12 +29,14 @@ public record class InvoiceUpdateDunningParams : ParamsBase
 
     public string? InvoiceID { get; init; }
 
-    public required ApiEnum<string, Action> Action
+    public required ApiEnum<string, global::DodoPayments.Client.Models.Invoices.Action> Action
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<ApiEnum<string, Action>>("action");
+            return this._rawBodyData.GetNotNullClass<
+                ApiEnum<string, global::DodoPayments.Client.Models.Invoices.Action>
+            >("action");
         }
         init { this._rawBodyData.Set("action", value); }
     }
@@ -154,9 +156,9 @@ public record class InvoiceUpdateDunningParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/billing/invoices/{0}/dunning", this.InvoiceID)
         )
@@ -197,32 +199,36 @@ public enum Action
     Reschedule,
 }
 
-sealed class ActionConverter : JsonConverter<Action>
+sealed class ActionConverter : JsonConverter<global::DodoPayments.Client.Models.Invoices.Action>
 {
-    public override Action Read(
+    public override global::DodoPayments.Client.Models.Invoices.Action Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "pause" => Action.Pause,
-            "resume" => Action.Resume,
-            "reschedule" => Action.Reschedule,
-            _ => (Action)(-1),
+            "pause" => global::DodoPayments.Client.Models.Invoices.Action.Pause,
+            "resume" => global::DodoPayments.Client.Models.Invoices.Action.Resume,
+            "reschedule" => global::DodoPayments.Client.Models.Invoices.Action.Reschedule,
+            _ => (global::DodoPayments.Client.Models.Invoices.Action)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Action value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        global::DodoPayments.Client.Models.Invoices.Action value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Action.Pause => "pause",
-                Action.Resume => "resume",
-                Action.Reschedule => "reschedule",
+                global::DodoPayments.Client.Models.Invoices.Action.Pause => "pause",
+                global::DodoPayments.Client.Models.Invoices.Action.Resume => "resume",
+                global::DodoPayments.Client.Models.Invoices.Action.Reschedule => "reschedule",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

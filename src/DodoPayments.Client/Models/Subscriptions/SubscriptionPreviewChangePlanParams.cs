@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,9 +9,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
-using System = System;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -216,7 +216,7 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
     /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
-    [System::Obsolete("Use `discount_id` instead.")]
+    [Obsolete("Use `discount_id` instead.")]
     public string? DiscountCode
     {
         get
@@ -445,9 +445,9 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}/change-plan/preview", this.SubscriptionID)
         )
@@ -498,7 +498,7 @@ sealed class SubscriptionPreviewChangePlanParamsProrationBillingModeConverter
 {
     public override SubscriptionPreviewChangePlanParamsProrationBillingMode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -561,7 +561,7 @@ sealed class SubscriptionPreviewChangePlanParamsCreditConverter
 {
     public override SubscriptionPreviewChangePlanParamsCredit Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -610,7 +610,7 @@ sealed class SubscriptionPreviewChangePlanParamsEffectiveAtConverter
 {
     public override SubscriptionPreviewChangePlanParamsEffectiveAt Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -658,14 +658,14 @@ public sealed record class SubscriptionPreviewChangePlanParamsInvoice : JsonMode
     /// <summary>
     /// The collection method of the invoice. The subscription value applies when absent.
     /// </summary>
-    public ApiEnum<string, InvoiceCollectionMethod>? CollectionMethod
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, InvoiceCollectionMethod>>(
-                "collection_method"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
         }
         init { this._rawData.Set("collection_method", value); }
     }
@@ -779,7 +779,7 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     }
 
     public SubscriptionPreviewChangePlanParamsInvoicePaymentTerms(
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value,
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value,
         JsonElement? element = null
     )
     {
@@ -788,7 +788,7 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     }
 
     public SubscriptionPreviewChangePlanParamsInvoicePaymentTerms(
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value,
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value,
         JsonElement? element = null
     )
     {
@@ -803,48 +803,48 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType"/>.
+    /// type <see cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject(out var value)) {
-    ///     // `value` is of type `SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType`
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject(
-        [NotNullWhen(true)] out SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType? value
+    public bool TryPickDueOnReceipt(
+        [NotNullWhen(true)]
+            out SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt? value
     )
     {
-        value = this.Value as SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType;
+        value = this.Value as SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1"/>.
+    /// type <see cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickSubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(out var value)) {
-    ///     // `value` is of type `SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1`
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickSubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(
-        [NotNullWhen(true)]
-            out SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1? value
+    public bool TryPickNet(
+        [NotNullWhen(true)] out SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet? value
     )
     {
-        value = this.Value as SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1;
+        value = this.Value as SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet;
         return value != null;
     }
 
@@ -862,24 +862,24 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value) =&gt; {...},
-    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType> object_,
-        System::Action<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1> subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
+        Action<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt> dueOnReceipt,
+        Action<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet> net
     )
     {
         switch (this.Value)
         {
-            case SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value:
-                object_(value);
+            case SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value:
+                dueOnReceipt(value);
                 break;
-            case SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value:
-                subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(value);
+            case SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value:
+                net(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -903,25 +903,22 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value) =&gt; {...},
-    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value) =&gt; {...}
+    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value) =&gt; {...},
+    ///     (SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType, T> object_,
-        System::Func<
-            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1,
-            T
-        > subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
+        Func<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt, T> dueOnReceipt,
+        Func<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet, T> net
     )
     {
         return this.Value switch
         {
-            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value => object_(value),
-            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value =>
-                subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(value),
+            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value =>
+                dueOnReceipt(value),
+            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value => net(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of SubscriptionPreviewChangePlanParamsInvoicePaymentTerms"
             ),
@@ -929,11 +926,11 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     }
 
     public static implicit operator SubscriptionPreviewChangePlanParamsInvoicePaymentTerms(
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value
     ) => new(value);
 
     public static implicit operator SubscriptionPreviewChangePlanParamsInvoicePaymentTerms(
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 value
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet value
     ) => new(value);
 
     /// <summary>
@@ -954,11 +951,7 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
                 "Data did not match any variant of SubscriptionPreviewChangePlanParamsInvoicePaymentTerms"
             );
         }
-        this.Switch(
-            (object_) => object_.Validate(),
-            (subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1) =>
-                subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1.Validate()
-        );
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
     }
 
     public virtual bool Equals(SubscriptionPreviewChangePlanParamsInvoicePaymentTerms? other) =>
@@ -981,8 +974,8 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerms : Mod
     {
         return this.Value switch
         {
-            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType _ => 0,
-            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 _ => 1,
+            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt _ => 0,
+            SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet _ => 1,
             _ => -1,
         };
     }
@@ -993,50 +986,70 @@ sealed class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsConverter
 {
     public override SubscriptionPreviewChangePlanParamsInvoicePaymentTerms? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>(
-                    element,
-                    options
-                );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized =
-                JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1>(
-                    element,
-                    options
-                );
-            if (deserialized != null)
+            case "due_on_receipt":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new SubscriptionPreviewChangePlanParamsInvoicePaymentTerms(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -1049,12 +1062,12 @@ sealed class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsConverter
     }
 }
 
-[JsonConverter(typeof(SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeConverter))]
-public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType
+[JsonConverter(typeof(SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceiptConverter))]
+public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt
 {
     public JsonElement Element { get; private init; }
 
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType()
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1065,7 +1078,7 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType
         );
     }
 
-    internal SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType(JsonElement element)
+    internal SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt(JsonElement element)
     {
         Element = element;
     }
@@ -1081,10 +1094,10 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType
     /// </summary>
     public void Validate()
     {
-        if (this != new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType())
+        if (this != new SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt())
         {
             throw new DodoPaymentsInvalidDataException(
-                "Invalid value given for 'SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType'"
+                "Invalid value given for 'SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt'"
             );
         }
     }
@@ -1094,7 +1107,9 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType
         return 0;
     }
 
-    public virtual bool Equals(SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType? other)
+    public virtual bool Equals(
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt? other
+    )
     {
         if (other == null)
         {
@@ -1105,12 +1120,12 @@ public record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType
     }
 }
 
-class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeConverter
-    : JsonConverter<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType>
+class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceiptConverter
+    : JsonConverter<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt>
 {
-    public override SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType? Read(
+    public override SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -1119,7 +1134,7 @@ class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsType value,
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsDueOnReceipt value,
         JsonSerializerOptions options
     )
     {
@@ -1129,12 +1144,11 @@ class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsTypeConverter
 
 [JsonConverter(
     typeof(JsonModelConverter<
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1,
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1FromRaw
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet,
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNetFromRaw
     >)
 )]
-public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
-    : JsonModel
+public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet : JsonModel
 {
     public required int Days
     {
@@ -1166,20 +1180,20 @@ public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerm
         }
     }
 
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1()
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet()
     {
         this.Type = JsonSerializer.SerializeToElement("net");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(
+        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet subscriptionPreviewChangePlanParamsInvoicePaymentTermsNet
     )
-        : base(subscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1) { }
+        : base(subscriptionPreviewChangePlanParamsInvoicePaymentTermsNet) { }
 #pragma warning restore CS8618
 
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1190,7 +1204,7 @@ public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerm
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(
+    SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(
         FrozenDictionary<string, JsonElement> rawData
     )
     {
@@ -1198,8 +1212,8 @@ public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerm
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1FromRaw.FromRawUnchecked"/>
-    public static SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNetFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1207,23 +1221,20 @@ public sealed record class SubscriptionPreviewChangePlanParamsInvoicePaymentTerm
     }
 
     [SetsRequiredMembers]
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1(int days)
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet(int days)
         : this()
     {
         this.Days = days;
     }
 }
 
-class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1FromRaw
-    : IFromRawJson<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1>
+class SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNetFromRaw
+    : IFromRawJson<SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet>
 {
     /// <inheritdoc/>
-    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1 FromRawUnchecked(
+    public SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) =>
-        SubscriptionPreviewChangePlanParamsInvoicePaymentTermsUnionMember1.FromRawUnchecked(
-            rawData
-        );
+    ) => SubscriptionPreviewChangePlanParamsInvoicePaymentTermsNet.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -1250,7 +1261,7 @@ sealed class SubscriptionPreviewChangePlanParamsOnPaymentFailureConverter
 {
     public override SubscriptionPreviewChangePlanParamsOnPaymentFailure Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

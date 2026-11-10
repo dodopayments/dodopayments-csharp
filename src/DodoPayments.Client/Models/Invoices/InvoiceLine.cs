@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Invoices;
 
@@ -111,22 +111,22 @@ public sealed record class InvoiceLine : JsonModel
         init { this._rawData.Set("name", value); }
     }
 
-    public System::DateTimeOffset? PeriodEnd
+    public DateTimeOffset? PeriodEnd
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("period_end");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("period_end");
         }
         init { this._rawData.Set("period_end", value); }
     }
 
-    public System::DateTimeOffset? PeriodStart
+    public DateTimeOffset? PeriodStart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("period_start");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("period_start");
         }
         init { this._rawData.Set("period_start", value); }
     }
@@ -232,7 +232,7 @@ sealed class KindConverter : JsonConverter<Kind>
 {
     public override Kind Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

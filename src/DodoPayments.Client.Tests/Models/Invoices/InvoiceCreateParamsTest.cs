@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Subscriptions;
-using Invoices = DodoPayments.Client.Models.Invoices;
+using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Invoices;
 
@@ -15,14 +15,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -45,19 +45,19 @@ public class InvoiceCreateParamsTest : TestBase
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
-            PaymentTerms = new Invoices::Type(),
+            PaymentTerms = new DueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
             IdempotencyKey = "Idempotency-Key",
         };
 
-        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
-            Invoices::InvoiceCollectionMethod.AutoCharge;
+        ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
+            InvoiceCollectionMethod.AutoCharge;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedCustomerID = "customer_id";
-        List<Invoices::Item> expectedItems =
+        List<Item> expectedItems =
         [
-            new Invoices::CustomItem()
+            new CustomItem()
             {
                 Description = "description",
                 TaxCategory = TaxCategory.DigitalProducts,
@@ -65,7 +65,7 @@ public class InvoiceCreateParamsTest : TestBase
                 Quantity = 0,
             },
         ];
-        Invoices::BillingAddress expectedBillingAddress = new()
+        BillingAddress expectedBillingAddress = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -77,10 +77,10 @@ public class InvoiceCreateParamsTest : TestBase
         string expectedCustomerEmail = "customer_email";
         List<string> expectedDiscountIds = ["string"];
         DateTimeOffset expectedDueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Invoices::Dunning expectedDunning = new() { RemindersEnabled = true, OffsetsDays = [0] };
+        Dunning expectedDunning = new() { RemindersEnabled = true, OffsetsDays = [0] };
         string expectedMemo = "memo";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
-        Invoices::PaymentTerms expectedPaymentTerms = new Invoices::Type();
+        PaymentTerms expectedPaymentTerms = new DueOnReceipt();
         bool expectedReviewRequired = true;
         string expectedTaxID = "tax_id";
         string expectedIdempotencyKey = "Idempotency-Key";
@@ -127,14 +127,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -156,7 +156,7 @@ public class InvoiceCreateParamsTest : TestBase
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
-            PaymentTerms = new Invoices::Type(),
+            PaymentTerms = new DueOnReceipt(),
             TaxID = "tax_id",
         };
 
@@ -171,14 +171,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -200,7 +200,7 @@ public class InvoiceCreateParamsTest : TestBase
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
-            PaymentTerms = new Invoices::Type(),
+            PaymentTerms = new DueOnReceipt(),
             TaxID = "tax_id",
 
             // Null should be interpreted as omitted for these properties
@@ -220,14 +220,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -263,14 +263,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -316,14 +316,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        Invoices::InvoiceCreateParams parameters = new()
+        InvoiceCreateParams parameters = new()
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -344,14 +344,14 @@ public class InvoiceCreateParamsTest : TestBase
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        Invoices::InvoiceCreateParams parameters = new()
+        InvoiceCreateParams parameters = new()
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -370,14 +370,14 @@ public class InvoiceCreateParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new Invoices::InvoiceCreateParams
+        var parameters = new InvoiceCreateParams
         {
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             Currency = Currency.Aed,
             CustomerID = "customer_id",
             Items =
             [
-                new Invoices::CustomItem()
+                new CustomItem()
                 {
                     Description = "description",
                     TaxCategory = TaxCategory.DigitalProducts,
@@ -400,13 +400,13 @@ public class InvoiceCreateParamsTest : TestBase
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
-            PaymentTerms = new Invoices::Type(),
+            PaymentTerms = new DueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
             IdempotencyKey = "Idempotency-Key",
         };
 
-        Invoices::InvoiceCreateParams copied = new(parameters);
+        InvoiceCreateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }
@@ -417,7 +417,7 @@ public class ItemTest : TestBase
     [Fact]
     public void CustomValidationWorks()
     {
-        Invoices::Item value = new Invoices::CustomItem()
+        Item value = new CustomItem()
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -430,7 +430,7 @@ public class ItemTest : TestBase
     [Fact]
     public void ProductValidationWorks()
     {
-        Invoices::Item value = new Invoices::ProductItem()
+        Item value = new ProductItem()
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -442,7 +442,7 @@ public class ItemTest : TestBase
     [Fact]
     public void CustomSerializationRoundtripWorks()
     {
-        Invoices::Item value = new Invoices::CustomItem()
+        Item value = new CustomItem()
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -450,10 +450,7 @@ public class ItemTest : TestBase
             Quantity = 0,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Item>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Item>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -461,17 +458,14 @@ public class ItemTest : TestBase
     [Fact]
     public void ProductSerializationRoundtripWorks()
     {
-        Invoices::Item value = new Invoices::ProductItem()
+        Item value = new ProductItem()
         {
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Item>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Item>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -482,7 +476,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -506,7 +500,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -515,7 +509,7 @@ public class CustomItemTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::CustomItem>(
+        var deserialized = JsonSerializer.Deserialize<CustomItem>(
             json,
             ModelBase.SerializerOptions
         );
@@ -526,7 +520,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -535,7 +529,7 @@ public class CustomItemTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::CustomItem>(
+        var deserialized = JsonSerializer.Deserialize<CustomItem>(
             element,
             ModelBase.SerializerOptions
         );
@@ -557,7 +551,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -571,7 +565,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -585,7 +579,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -598,7 +592,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -614,7 +608,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -629,7 +623,7 @@ public class CustomItemTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::CustomItem
+        var model = new CustomItem
         {
             Description = "description",
             TaxCategory = TaxCategory.DigitalProducts,
@@ -637,7 +631,7 @@ public class CustomItemTest : TestBase
             Quantity = 0,
         };
 
-        Invoices::CustomItem copied = new(model);
+        CustomItem copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -648,7 +642,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -657,7 +651,10 @@ public class ProductItemTest : TestBase
 
         string expectedProductID = "product_id";
         int expectedQuantity = 0;
-        List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        List<Subscriptions::AttachAddon> expectedAddons =
+        [
+            new() { AddonID = "addon_id", Quantity = 0 },
+        ];
 
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedQuantity, model.Quantity);
@@ -672,7 +669,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -680,7 +677,7 @@ public class ProductItemTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ProductItem>(
+        var deserialized = JsonSerializer.Deserialize<ProductItem>(
             json,
             ModelBase.SerializerOptions
         );
@@ -691,7 +688,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -699,7 +696,7 @@ public class ProductItemTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ProductItem>(
+        var deserialized = JsonSerializer.Deserialize<ProductItem>(
             element,
             ModelBase.SerializerOptions
         );
@@ -707,7 +704,10 @@ public class ProductItemTest : TestBase
 
         string expectedProductID = "product_id";
         int expectedQuantity = 0;
-        List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        List<Subscriptions::AttachAddon> expectedAddons =
+        [
+            new() { AddonID = "addon_id", Quantity = 0 },
+        ];
 
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
@@ -722,7 +722,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -735,7 +735,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::ProductItem { ProductID = "product_id", Quantity = 0 };
+        var model = new ProductItem { ProductID = "product_id", Quantity = 0 };
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
@@ -744,7 +744,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::ProductItem { ProductID = "product_id", Quantity = 0 };
+        var model = new ProductItem { ProductID = "product_id", Quantity = 0 };
 
         model.Validate();
     }
@@ -752,7 +752,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -767,7 +767,7 @@ public class ProductItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -781,14 +781,14 @@ public class ProductItemTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::ProductItem
+        var model = new ProductItem
         {
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
         };
 
-        Invoices::ProductItem copied = new(model);
+        ProductItem copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -799,7 +799,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -824,7 +824,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -834,7 +834,7 @@ public class BillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::BillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(
             json,
             ModelBase.SerializerOptions
         );
@@ -845,7 +845,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -855,7 +855,7 @@ public class BillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::BillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(
             element,
             ModelBase.SerializerOptions
         );
@@ -877,7 +877,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -892,7 +892,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::BillingAddress { Country = CountryCode.Af };
+        var model = new BillingAddress { Country = CountryCode.Af };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -907,7 +907,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::BillingAddress { Country = CountryCode.Af };
+        var model = new BillingAddress { Country = CountryCode.Af };
 
         model.Validate();
     }
@@ -915,7 +915,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
 
@@ -938,7 +938,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
 
@@ -954,7 +954,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::BillingAddress
+        var model = new BillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -963,7 +963,7 @@ public class BillingAddressTest : TestBase
             Zipcode = "zipcode",
         };
 
-        Invoices::BillingAddress copied = new(model);
+        BillingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -974,7 +974,7 @@ public class DunningTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true, OffsetsDays = [0] };
+        var model = new Dunning { RemindersEnabled = true, OffsetsDays = [0] };
 
         bool expectedRemindersEnabled = true;
         List<int> expectedOffsetsDays = [0];
@@ -991,13 +991,10 @@ public class DunningTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true, OffsetsDays = [0] };
+        var model = new Dunning { RemindersEnabled = true, OffsetsDays = [0] };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Dunning>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Dunning>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -1005,10 +1002,10 @@ public class DunningTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true, OffsetsDays = [0] };
+        var model = new Dunning { RemindersEnabled = true, OffsetsDays = [0] };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Dunning>(
+        var deserialized = JsonSerializer.Deserialize<Dunning>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1029,7 +1026,7 @@ public class DunningTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true, OffsetsDays = [0] };
+        var model = new Dunning { RemindersEnabled = true, OffsetsDays = [0] };
 
         model.Validate();
     }
@@ -1037,7 +1034,7 @@ public class DunningTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true };
+        var model = new Dunning { RemindersEnabled = true };
 
         Assert.Null(model.OffsetsDays);
         Assert.False(model.RawData.ContainsKey("offsets_days"));
@@ -1046,7 +1043,7 @@ public class DunningTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true };
+        var model = new Dunning { RemindersEnabled = true };
 
         model.Validate();
     }
@@ -1054,7 +1051,7 @@ public class DunningTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::Dunning
+        var model = new Dunning
         {
             RemindersEnabled = true,
 
@@ -1068,7 +1065,7 @@ public class DunningTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::Dunning
+        var model = new Dunning
         {
             RemindersEnabled = true,
 
@@ -1081,9 +1078,9 @@ public class DunningTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::Dunning { RemindersEnabled = true, OffsetsDays = [0] };
+        var model = new Dunning { RemindersEnabled = true, OffsetsDays = [0] };
 
-        Invoices::Dunning copied = new(model);
+        Dunning copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1092,25 +1089,25 @@ public class DunningTest : TestBase
 public class PaymentTermsTest : TestBase
 {
     [Fact]
-    public void ObjectValidationWorks()
+    public void DueOnReceiptValidationWorks()
     {
-        Invoices::PaymentTerms value = new Invoices::Type();
+        PaymentTerms value = new DueOnReceipt();
         value.Validate();
     }
 
     [Fact]
-    public void UnionMember1ValidationWorks()
+    public void NetValidationWorks()
     {
-        Invoices::PaymentTerms value = new Invoices::UnionMember1(0);
+        PaymentTerms value = new Net(0);
         value.Validate();
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks()
+    public void DueOnReceiptSerializationRoundtripWorks()
     {
-        Invoices::PaymentTerms value = new Invoices::Type();
+        PaymentTerms value = new DueOnReceipt();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::PaymentTerms>(
+        var deserialized = JsonSerializer.Deserialize<PaymentTerms>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1119,11 +1116,11 @@ public class PaymentTermsTest : TestBase
     }
 
     [Fact]
-    public void UnionMember1SerializationRoundtripWorks()
+    public void NetSerializationRoundtripWorks()
     {
-        Invoices::PaymentTerms value = new Invoices::UnionMember1(0);
+        PaymentTerms value = new Net(0);
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::PaymentTerms>(
+        var deserialized = JsonSerializer.Deserialize<PaymentTerms>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1132,19 +1129,19 @@ public class PaymentTermsTest : TestBase
     }
 }
 
-public class TypeTest : TestBase
+public class DueOnReceiptTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new Invoices::Type();
+        var constant = new DueOnReceipt();
         constant.Validate();
     }
 
     [Fact]
     public void ValidConstantValidation_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::Type>(
+        var constant = JsonSerializer.Deserialize<DueOnReceipt>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1162,7 +1159,7 @@ public class TypeTest : TestBase
     [Fact]
     public void InvalidConstantValidationThrows_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::Type>(
+        var constant = JsonSerializer.Deserialize<DueOnReceipt>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1174,9 +1171,9 @@ public class TypeTest : TestBase
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new Invoices::Type();
+        var constant = new DueOnReceipt();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Type>(
+        var deserialized = JsonSerializer.Deserialize<DueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1187,7 +1184,7 @@ public class TypeTest : TestBase
     [Fact]
     public void ValidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::Type>(
+        var constant = JsonSerializer.Deserialize<DueOnReceipt>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1198,7 +1195,7 @@ public class TypeTest : TestBase
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Type>(
+        var deserialized = JsonSerializer.Deserialize<DueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1209,12 +1206,12 @@ public class TypeTest : TestBase
     [Fact]
     public void InvalidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::Type>(
+        var constant = JsonSerializer.Deserialize<DueOnReceipt>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Type>(
+        var deserialized = JsonSerializer.Deserialize<DueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1223,12 +1220,12 @@ public class TypeTest : TestBase
     }
 }
 
-public class UnionMember1Test : TestBase
+public class NetTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::UnionMember1 { Days = 0 };
+        var model = new Net { Days = 0 };
 
         int expectedDays = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("net");
@@ -1240,13 +1237,10 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::UnionMember1 { Days = 0 };
+        var model = new Net { Days = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::UnionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Net>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -1254,13 +1248,10 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::UnionMember1 { Days = 0 };
+        var model = new Net { Days = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::UnionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Net>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         int expectedDays = 0;
@@ -1273,7 +1264,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::UnionMember1 { Days = 0 };
+        var model = new Net { Days = 0 };
 
         model.Validate();
     }
@@ -1281,9 +1272,9 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::UnionMember1 { Days = 0 };
+        var model = new Net { Days = 0 };
 
-        Invoices::UnionMember1 copied = new(model);
+        Net copied = new(model);
 
         Assert.Equal(model, copied);
     }

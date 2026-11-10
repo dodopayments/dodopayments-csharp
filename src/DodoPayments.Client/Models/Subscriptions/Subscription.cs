@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -10,7 +11,6 @@ using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -94,12 +94,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -229,12 +229,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required System::DateTimeOffset NextBillingDate
+    public required DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -283,12 +283,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required System::DateTimeOffset PreviousBillingDate
+    public required DateTimeOffset PreviousBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("previous_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
         }
         init { this._rawData.Set("previous_billing_date", value); }
     }
@@ -444,12 +444,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public System::DateTimeOffset? CancelledAt
+    public DateTimeOffset? CancelledAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("cancelled_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
         }
         init { this._rawData.Set("cancelled_at", value); }
     }
@@ -566,12 +566,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public System::DateTimeOffset? ExpiresAt
+    public DateTimeOffset? ExpiresAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("expires_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
         }
         init { this._rawData.Set("expires_at", value); }
     }
@@ -580,12 +580,12 @@ public sealed record class Subscription : JsonModel
     /// Timestamp when the subscription was paused, if it currently is (or is `OnHold`
     /// due to an unresolved pause settlement). `null` otherwise.
     /// </summary>
-    public System::DateTimeOffset? PausedAt
+    public DateTimeOffset? PausedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("paused_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("paused_at");
         }
         init { this._rawData.Set("paused_at", value); }
     }
@@ -776,7 +776,7 @@ sealed class BillingModeConverter : JsonConverter<BillingMode>
 {
     public override BillingMode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

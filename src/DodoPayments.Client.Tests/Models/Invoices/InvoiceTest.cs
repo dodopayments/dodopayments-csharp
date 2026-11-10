@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Subscriptions;
-using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
+using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Invoices;
 
@@ -15,13 +15,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -42,21 +42,21 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DunningState = Invoices::DunningState.NotStarted,
+            DunningState = DunningState.NotStarted,
             FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             HostedUrl = "hosted_url",
             Lines =
@@ -64,7 +64,7 @@ public class InvoiceTest : TestBase
                 new()
                 {
                     Amount = 0,
-                    Kind = Invoices::Kind.Subscription,
+                    Kind = Kind.Subscription,
                     Quantity = 0,
                     Tax = 0,
                     TaxInclusive = true,
@@ -95,7 +95,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -105,19 +105,16 @@ public class InvoiceTest : TestBase
             SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        List<ApiEnum<string, Invoices::AllowedAction>> expectedAllowedActions =
-        [
-            Invoices::AllowedAction.Edit,
-        ];
+        List<ApiEnum<string, AllowedAction>> expectedAllowedActions = [AllowedAction.Edit];
         long expectedAmountDue = 0;
         long expectedAmountPaid = 0;
         long expectedAmountRefunded = 0;
-        ApiEnum<string, Invoices::BillingMode> expectedBillingMode = Invoices::BillingMode.Normal;
+        ApiEnum<string, BillingMode> expectedBillingMode = BillingMode.Normal;
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         long expectedCredits = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        Invoices::Customer expectedCustomer = new()
+        Customer expectedCustomer = new()
         {
             BillingAddress = new()
             {
@@ -133,34 +130,30 @@ public class InvoiceTest : TestBase
             TaxID = "tax_id",
         };
         List<string> expectedDiscountIds = ["string"];
-        List<ApiEnum<string, Invoices::EditableField>> expectedEditableFields =
-        [
-            Invoices::EditableField.Customer,
-        ];
-        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        List<ApiEnum<string, EditableField>> expectedEditableFields = [EditableField.Customer];
+        Frequency expectedFrequency = new OneTime();
         string expectedInvoiceID = "invoice_id";
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
         int expectedRetryCount = 0;
         long expectedRowVersion = 0;
-        ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
+        ApiEnum<string, InvoiceStatus> expectedStatus = InvoiceStatus.Open;
         List<string> expectedSubscriptionIds = ["string"];
-        List<ApiEnum<string, Invoices::InvoiceTag>> expectedTags = [Invoices::InvoiceTag.Refunded];
+        List<ApiEnum<string, InvoiceTag>> expectedTags = [InvoiceTag.Refunded];
         int expectedTax = 0;
         int expectedTotalAmount = 0;
-        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
-            Invoices::InvoiceCollectionMethod.AutoCharge;
+        ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
+            InvoiceCollectionMethod.AutoCharge;
         DateTimeOffset expectedDueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Invoices::DunningState> expectedDunningState =
-            Invoices::DunningState.NotStarted;
+        ApiEnum<string, DunningState> expectedDunningState = DunningState.NotStarted;
         DateTimeOffset expectedFinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedHostedUrl = "hosted_url";
-        List<Invoices::InvoiceLine> expectedLines =
+        List<InvoiceLine> expectedLines =
         [
             new()
             {
                 Amount = 0,
-                Kind = Invoices::Kind.Subscription,
+                Kind = Kind.Subscription,
                 Quantity = 0,
                 Tax = 0,
                 TaxInclusive = true,
@@ -179,7 +172,7 @@ public class InvoiceTest : TestBase
         DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         int expectedPaymentTermsDays = 0;
-        List<Invoices::Payment> expectedPayments =
+        List<Payment> expectedPayments =
         [
             new()
             {
@@ -191,7 +184,7 @@ public class InvoiceTest : TestBase
             },
         ];
         string expectedPdfUrl = "pdf_url";
-        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        ReminderSettings expectedReminderSettings = new Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -277,13 +270,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -304,21 +297,21 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DunningState = Invoices::DunningState.NotStarted,
+            DunningState = DunningState.NotStarted,
             FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             HostedUrl = "hosted_url",
             Lines =
@@ -326,7 +319,7 @@ public class InvoiceTest : TestBase
                 new()
                 {
                     Amount = 0,
-                    Kind = Invoices::Kind.Subscription,
+                    Kind = Kind.Subscription,
                     Quantity = 0,
                     Tax = 0,
                     TaxInclusive = true,
@@ -357,7 +350,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -368,10 +361,7 @@ public class InvoiceTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Invoice>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Invoice>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -379,13 +369,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -406,21 +396,21 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DunningState = Invoices::DunningState.NotStarted,
+            DunningState = DunningState.NotStarted,
             FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             HostedUrl = "hosted_url",
             Lines =
@@ -428,7 +418,7 @@ public class InvoiceTest : TestBase
                 new()
                 {
                     Amount = 0,
-                    Kind = Invoices::Kind.Subscription,
+                    Kind = Kind.Subscription,
                     Quantity = 0,
                     Tax = 0,
                     TaxInclusive = true,
@@ -459,7 +449,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -470,25 +460,22 @@ public class InvoiceTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Invoice>(
+        var deserialized = JsonSerializer.Deserialize<Invoice>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        List<ApiEnum<string, Invoices::AllowedAction>> expectedAllowedActions =
-        [
-            Invoices::AllowedAction.Edit,
-        ];
+        List<ApiEnum<string, AllowedAction>> expectedAllowedActions = [AllowedAction.Edit];
         long expectedAmountDue = 0;
         long expectedAmountPaid = 0;
         long expectedAmountRefunded = 0;
-        ApiEnum<string, Invoices::BillingMode> expectedBillingMode = Invoices::BillingMode.Normal;
+        ApiEnum<string, BillingMode> expectedBillingMode = BillingMode.Normal;
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         long expectedCredits = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        Invoices::Customer expectedCustomer = new()
+        Customer expectedCustomer = new()
         {
             BillingAddress = new()
             {
@@ -504,34 +491,30 @@ public class InvoiceTest : TestBase
             TaxID = "tax_id",
         };
         List<string> expectedDiscountIds = ["string"];
-        List<ApiEnum<string, Invoices::EditableField>> expectedEditableFields =
-        [
-            Invoices::EditableField.Customer,
-        ];
-        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        List<ApiEnum<string, EditableField>> expectedEditableFields = [EditableField.Customer];
+        Frequency expectedFrequency = new OneTime();
         string expectedInvoiceID = "invoice_id";
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
         int expectedRetryCount = 0;
         long expectedRowVersion = 0;
-        ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
+        ApiEnum<string, InvoiceStatus> expectedStatus = InvoiceStatus.Open;
         List<string> expectedSubscriptionIds = ["string"];
-        List<ApiEnum<string, Invoices::InvoiceTag>> expectedTags = [Invoices::InvoiceTag.Refunded];
+        List<ApiEnum<string, InvoiceTag>> expectedTags = [InvoiceTag.Refunded];
         int expectedTax = 0;
         int expectedTotalAmount = 0;
-        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
-            Invoices::InvoiceCollectionMethod.AutoCharge;
+        ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
+            InvoiceCollectionMethod.AutoCharge;
         DateTimeOffset expectedDueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Invoices::DunningState> expectedDunningState =
-            Invoices::DunningState.NotStarted;
+        ApiEnum<string, DunningState> expectedDunningState = DunningState.NotStarted;
         DateTimeOffset expectedFinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedHostedUrl = "hosted_url";
-        List<Invoices::InvoiceLine> expectedLines =
+        List<InvoiceLine> expectedLines =
         [
             new()
             {
                 Amount = 0,
-                Kind = Invoices::Kind.Subscription,
+                Kind = Kind.Subscription,
                 Quantity = 0,
                 Tax = 0,
                 TaxInclusive = true,
@@ -550,7 +533,7 @@ public class InvoiceTest : TestBase
         DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         int expectedPaymentTermsDays = 0;
-        List<Invoices::Payment> expectedPayments =
+        List<Payment> expectedPayments =
         [
             new()
             {
@@ -562,7 +545,7 @@ public class InvoiceTest : TestBase
             },
         ];
         string expectedPdfUrl = "pdf_url";
-        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        ReminderSettings expectedReminderSettings = new Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -648,13 +631,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -675,21 +658,21 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DunningState = Invoices::DunningState.NotStarted,
+            DunningState = DunningState.NotStarted,
             FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             HostedUrl = "hosted_url",
             Lines =
@@ -697,7 +680,7 @@ public class InvoiceTest : TestBase
                 new()
                 {
                     Amount = 0,
-                    Kind = Invoices::Kind.Subscription,
+                    Kind = Kind.Subscription,
                     Quantity = 0,
                     Tax = 0,
                     TaxInclusive = true,
@@ -728,7 +711,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -744,13 +727,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -771,16 +754,16 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
         };
@@ -820,13 +803,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -847,16 +830,16 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
         };
@@ -867,13 +850,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -894,16 +877,16 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
 
@@ -959,13 +942,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -986,16 +969,16 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
 
@@ -1022,13 +1005,13 @@ public class InvoiceTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::Invoice
+        var model = new Invoice
         {
-            AllowedActions = [Invoices::AllowedAction.Edit],
+            AllowedActions = [AllowedAction.Edit],
             AmountDue = 0,
             AmountPaid = 0,
             AmountRefunded = 0,
-            BillingMode = Invoices::BillingMode.Normal,
+            BillingMode = BillingMode.Normal,
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Credits = 0,
@@ -1049,21 +1032,21 @@ public class InvoiceTest : TestBase
                 TaxID = "tax_id",
             },
             DiscountIds = ["string"],
-            EditableFields = [Invoices::EditableField.Customer],
-            Frequency = new Invoices::FrequencyType(),
+            EditableFields = [EditableField.Customer],
+            Frequency = new OneTime(),
             InvoiceID = "invoice_id",
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
             RowVersion = 0,
-            Status = Invoices::InvoiceStatus.Open,
+            Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
-            Tags = [Invoices::InvoiceTag.Refunded],
+            Tags = [InvoiceTag.Refunded],
             Tax = 0,
             TotalAmount = 0,
-            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DunningState = Invoices::DunningState.NotStarted,
+            DunningState = DunningState.NotStarted,
             FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             HostedUrl = "hosted_url",
             Lines =
@@ -1071,7 +1054,7 @@ public class InvoiceTest : TestBase
                 new()
                 {
                     Amount = 0,
-                    Kind = Invoices::Kind.Subscription,
+                    Kind = Kind.Subscription,
                     Quantity = 0,
                     Tax = 0,
                     TaxInclusive = true,
@@ -1102,7 +1085,7 @@ public class InvoiceTest : TestBase
                 },
             ],
             PdfUrl = "pdf_url",
-            ReminderSettings = new Invoices::UnionMember0()
+            ReminderSettings = new Snapshot()
             {
                 OffsetsMinutes = [0],
                 Paused = true,
@@ -1112,7 +1095,7 @@ public class InvoiceTest : TestBase
             SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Invoices::Invoice copied = new(model);
+        Invoice copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1121,27 +1104,27 @@ public class InvoiceTest : TestBase
 public class AllowedActionTest : TestBase
 {
     [Theory]
-    [InlineData(Invoices::AllowedAction.Edit)]
-    [InlineData(Invoices::AllowedAction.Finalize)]
-    [InlineData(Invoices::AllowedAction.Delete)]
-    [InlineData(Invoices::AllowedAction.Send)]
-    [InlineData(Invoices::AllowedAction.Retry)]
-    [InlineData(Invoices::AllowedAction.Void)]
-    [InlineData(Invoices::AllowedAction.MarkUncollectable)]
-    [InlineData(Invoices::AllowedAction.ChangeDunning)]
-    [InlineData(Invoices::AllowedAction.AddNote)]
-    [InlineData(Invoices::AllowedAction.Duplicate)]
-    public void Validation_Works(Invoices::AllowedAction rawValue)
+    [InlineData(AllowedAction.Edit)]
+    [InlineData(AllowedAction.Finalize)]
+    [InlineData(AllowedAction.Delete)]
+    [InlineData(AllowedAction.Send)]
+    [InlineData(AllowedAction.Retry)]
+    [InlineData(AllowedAction.Void)]
+    [InlineData(AllowedAction.MarkUncollectable)]
+    [InlineData(AllowedAction.ChangeDunning)]
+    [InlineData(AllowedAction.AddNote)]
+    [InlineData(AllowedAction.Duplicate)]
+    public void Validation_Works(AllowedAction rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::AllowedAction> value = rawValue;
+        ApiEnum<string, AllowedAction> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::AllowedAction>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AllowedAction>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1151,23 +1134,23 @@ public class AllowedActionTest : TestBase
     }
 
     [Theory]
-    [InlineData(Invoices::AllowedAction.Edit)]
-    [InlineData(Invoices::AllowedAction.Finalize)]
-    [InlineData(Invoices::AllowedAction.Delete)]
-    [InlineData(Invoices::AllowedAction.Send)]
-    [InlineData(Invoices::AllowedAction.Retry)]
-    [InlineData(Invoices::AllowedAction.Void)]
-    [InlineData(Invoices::AllowedAction.MarkUncollectable)]
-    [InlineData(Invoices::AllowedAction.ChangeDunning)]
-    [InlineData(Invoices::AllowedAction.AddNote)]
-    [InlineData(Invoices::AllowedAction.Duplicate)]
-    public void SerializationRoundtrip_Works(Invoices::AllowedAction rawValue)
+    [InlineData(AllowedAction.Edit)]
+    [InlineData(AllowedAction.Finalize)]
+    [InlineData(AllowedAction.Delete)]
+    [InlineData(AllowedAction.Send)]
+    [InlineData(AllowedAction.Retry)]
+    [InlineData(AllowedAction.Void)]
+    [InlineData(AllowedAction.MarkUncollectable)]
+    [InlineData(AllowedAction.ChangeDunning)]
+    [InlineData(AllowedAction.AddNote)]
+    [InlineData(AllowedAction.Duplicate)]
+    public void SerializationRoundtrip_Works(AllowedAction rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::AllowedAction> value = rawValue;
+        ApiEnum<string, AllowedAction> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::AllowedAction>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AllowedAction>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1178,12 +1161,12 @@ public class AllowedActionTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::AllowedAction>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AllowedAction>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::AllowedAction>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AllowedAction>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1195,19 +1178,19 @@ public class AllowedActionTest : TestBase
 public class BillingModeTest : TestBase
 {
     [Theory]
-    [InlineData(Invoices::BillingMode.Normal)]
-    [InlineData(Invoices::BillingMode.InvoiceLed)]
-    public void Validation_Works(Invoices::BillingMode rawValue)
+    [InlineData(BillingMode.Normal)]
+    [InlineData(BillingMode.InvoiceLed)]
+    public void Validation_Works(BillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::BillingMode> value = rawValue;
+        ApiEnum<string, BillingMode> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::BillingMode>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingMode>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1217,15 +1200,15 @@ public class BillingModeTest : TestBase
     }
 
     [Theory]
-    [InlineData(Invoices::BillingMode.Normal)]
-    [InlineData(Invoices::BillingMode.InvoiceLed)]
-    public void SerializationRoundtrip_Works(Invoices::BillingMode rawValue)
+    [InlineData(BillingMode.Normal)]
+    [InlineData(BillingMode.InvoiceLed)]
+    public void SerializationRoundtrip_Works(BillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::BillingMode> value = rawValue;
+        ApiEnum<string, BillingMode> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::BillingMode>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingMode>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1236,12 +1219,12 @@ public class BillingModeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::BillingMode>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingMode>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::BillingMode>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingMode>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1255,7 +1238,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1271,7 +1254,7 @@ public class CustomerTest : TestBase
             TaxID = "tax_id",
         };
 
-        Invoices::CustomerBillingAddress expectedBillingAddress = new()
+        CustomerBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1298,7 +1281,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1315,10 +1298,7 @@ public class CustomerTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Customer>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Customer>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -1326,7 +1306,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1343,13 +1323,13 @@ public class CustomerTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Customer>(
+        var deserialized = JsonSerializer.Deserialize<Customer>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        Invoices::CustomerBillingAddress expectedBillingAddress = new()
+        CustomerBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1376,7 +1356,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1398,7 +1378,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1421,7 +1401,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1441,7 +1421,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1467,7 +1447,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1490,7 +1470,7 @@ public class CustomerTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::Customer
+        var model = new Customer
         {
             BillingAddress = new()
             {
@@ -1506,7 +1486,7 @@ public class CustomerTest : TestBase
             TaxID = "tax_id",
         };
 
-        Invoices::Customer copied = new(model);
+        Customer copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1517,7 +1497,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1542,7 +1522,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1552,7 +1532,7 @@ public class CustomerBillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::CustomerBillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<CustomerBillingAddress>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1563,7 +1543,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1573,7 +1553,7 @@ public class CustomerBillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::CustomerBillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<CustomerBillingAddress>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1595,7 +1575,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1610,7 +1590,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::CustomerBillingAddress { };
+        var model = new CustomerBillingAddress { };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -1627,7 +1607,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::CustomerBillingAddress { };
+        var model = new CustomerBillingAddress { };
 
         model.Validate();
     }
@@ -1635,7 +1615,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = null,
             Country = null,
@@ -1659,7 +1639,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = null,
             Country = null,
@@ -1674,7 +1654,7 @@ public class CustomerBillingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::CustomerBillingAddress
+        var model = new CustomerBillingAddress
         {
             City = "city",
             Country = CountryCode.Af,
@@ -1683,7 +1663,7 @@ public class CustomerBillingAddressTest : TestBase
             Zipcode = "zipcode",
         };
 
-        Invoices::CustomerBillingAddress copied = new(model);
+        CustomerBillingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1692,31 +1672,31 @@ public class CustomerBillingAddressTest : TestBase
 public class EditableFieldTest : TestBase
 {
     [Theory]
-    [InlineData(Invoices::EditableField.Customer)]
-    [InlineData(Invoices::EditableField.Items)]
-    [InlineData(Invoices::EditableField.Discounts)]
-    [InlineData(Invoices::EditableField.Currency)]
-    [InlineData(Invoices::EditableField.BillingAddress)]
-    [InlineData(Invoices::EditableField.TaxID)]
-    [InlineData(Invoices::EditableField.ReviewRequired)]
-    [InlineData(Invoices::EditableField.DueAt)]
-    [InlineData(Invoices::EditableField.CollectionMethod)]
-    [InlineData(Invoices::EditableField.Memo)]
-    [InlineData(Invoices::EditableField.CustomerEmail)]
-    [InlineData(Invoices::EditableField.CcEmails)]
-    [InlineData(Invoices::EditableField.Dunning)]
-    [InlineData(Invoices::EditableField.Metadata)]
-    public void Validation_Works(Invoices::EditableField rawValue)
+    [InlineData(EditableField.Customer)]
+    [InlineData(EditableField.Items)]
+    [InlineData(EditableField.Discounts)]
+    [InlineData(EditableField.Currency)]
+    [InlineData(EditableField.BillingAddress)]
+    [InlineData(EditableField.TaxID)]
+    [InlineData(EditableField.ReviewRequired)]
+    [InlineData(EditableField.DueAt)]
+    [InlineData(EditableField.CollectionMethod)]
+    [InlineData(EditableField.Memo)]
+    [InlineData(EditableField.CustomerEmail)]
+    [InlineData(EditableField.CcEmails)]
+    [InlineData(EditableField.Dunning)]
+    [InlineData(EditableField.Metadata)]
+    public void Validation_Works(EditableField rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::EditableField> value = rawValue;
+        ApiEnum<string, EditableField> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::EditableField>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EditableField>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1726,27 +1706,27 @@ public class EditableFieldTest : TestBase
     }
 
     [Theory]
-    [InlineData(Invoices::EditableField.Customer)]
-    [InlineData(Invoices::EditableField.Items)]
-    [InlineData(Invoices::EditableField.Discounts)]
-    [InlineData(Invoices::EditableField.Currency)]
-    [InlineData(Invoices::EditableField.BillingAddress)]
-    [InlineData(Invoices::EditableField.TaxID)]
-    [InlineData(Invoices::EditableField.ReviewRequired)]
-    [InlineData(Invoices::EditableField.DueAt)]
-    [InlineData(Invoices::EditableField.CollectionMethod)]
-    [InlineData(Invoices::EditableField.Memo)]
-    [InlineData(Invoices::EditableField.CustomerEmail)]
-    [InlineData(Invoices::EditableField.CcEmails)]
-    [InlineData(Invoices::EditableField.Dunning)]
-    [InlineData(Invoices::EditableField.Metadata)]
-    public void SerializationRoundtrip_Works(Invoices::EditableField rawValue)
+    [InlineData(EditableField.Customer)]
+    [InlineData(EditableField.Items)]
+    [InlineData(EditableField.Discounts)]
+    [InlineData(EditableField.Currency)]
+    [InlineData(EditableField.BillingAddress)]
+    [InlineData(EditableField.TaxID)]
+    [InlineData(EditableField.ReviewRequired)]
+    [InlineData(EditableField.DueAt)]
+    [InlineData(EditableField.CollectionMethod)]
+    [InlineData(EditableField.Memo)]
+    [InlineData(EditableField.CustomerEmail)]
+    [InlineData(EditableField.CcEmails)]
+    [InlineData(EditableField.Dunning)]
+    [InlineData(EditableField.Metadata)]
+    public void SerializationRoundtrip_Works(EditableField rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::EditableField> value = rawValue;
+        ApiEnum<string, EditableField> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::EditableField>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EditableField>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1757,12 +1737,12 @@ public class EditableFieldTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::EditableField>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EditableField>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::EditableField>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EditableField>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1774,36 +1754,32 @@ public class EditableFieldTest : TestBase
 public class FrequencyTest : TestBase
 {
     [Fact]
-    public void ObjectValidationWorks()
+    public void OneTimeValidationWorks()
     {
-        Invoices::Frequency value = new Invoices::FrequencyType();
+        Frequency value = new OneTime();
         value.Validate();
     }
 
     [Fact]
-    public void FrequencyUnionMember1ValidationWorks()
+    public void RecurringValidationWorks()
     {
-        Invoices::Frequency value = new Invoices::FrequencyUnionMember1()
-        {
-            Count = 0,
-            Interval = TimeInterval.Day,
-        };
+        Frequency value = new Recurring() { Count = 0, Interval = Subscriptions::TimeInterval.Day };
         value.Validate();
     }
 
     [Fact]
-    public void ObjectValidationWorks1()
+    public void MixedValidationWorks()
     {
-        Invoices::Frequency value = new Invoices::TypeModel();
+        Frequency value = new Mixed();
         value.Validate();
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks()
+    public void OneTimeSerializationRoundtripWorks()
     {
-        Invoices::Frequency value = new Invoices::FrequencyType();
+        Frequency value = new OneTime();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Frequency>(
+        var deserialized = JsonSerializer.Deserialize<Frequency>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1812,15 +1788,11 @@ public class FrequencyTest : TestBase
     }
 
     [Fact]
-    public void FrequencyUnionMember1SerializationRoundtripWorks()
+    public void RecurringSerializationRoundtripWorks()
     {
-        Invoices::Frequency value = new Invoices::FrequencyUnionMember1()
-        {
-            Count = 0,
-            Interval = TimeInterval.Day,
-        };
+        Frequency value = new Recurring() { Count = 0, Interval = Subscriptions::TimeInterval.Day };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Frequency>(
+        var deserialized = JsonSerializer.Deserialize<Frequency>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1829,11 +1801,11 @@ public class FrequencyTest : TestBase
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks1()
+    public void MixedSerializationRoundtripWorks()
     {
-        Invoices::Frequency value = new Invoices::TypeModel();
+        Frequency value = new Mixed();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Frequency>(
+        var deserialized = JsonSerializer.Deserialize<Frequency>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1842,19 +1814,19 @@ public class FrequencyTest : TestBase
     }
 }
 
-public class FrequencyTypeTest : TestBase
+public class OneTimeTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new Invoices::FrequencyType();
+        var constant = new OneTime();
         constant.Validate();
     }
 
     [Fact]
     public void ValidConstantValidation_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var constant = JsonSerializer.Deserialize<OneTime>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1872,7 +1844,7 @@ public class FrequencyTypeTest : TestBase
     [Fact]
     public void InvalidConstantValidationThrows_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var constant = JsonSerializer.Deserialize<OneTime>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1884,9 +1856,9 @@ public class FrequencyTypeTest : TestBase
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new Invoices::FrequencyType();
+        var constant = new OneTime();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var deserialized = JsonSerializer.Deserialize<OneTime>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1897,7 +1869,7 @@ public class FrequencyTypeTest : TestBase
     [Fact]
     public void ValidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var constant = JsonSerializer.Deserialize<OneTime>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1908,7 +1880,7 @@ public class FrequencyTypeTest : TestBase
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var deserialized = JsonSerializer.Deserialize<OneTime>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1919,12 +1891,12 @@ public class FrequencyTypeTest : TestBase
     [Fact]
     public void InvalidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var constant = JsonSerializer.Deserialize<OneTime>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::FrequencyType>(
+        var deserialized = JsonSerializer.Deserialize<OneTime>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1933,15 +1905,16 @@ public class FrequencyTypeTest : TestBase
     }
 }
 
-public class FrequencyUnionMember1Test : TestBase
+public class RecurringTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::FrequencyUnionMember1 { Count = 0, Interval = TimeInterval.Day };
+        var model = new Recurring { Count = 0, Interval = Subscriptions::TimeInterval.Day };
 
         int expectedCount = 0;
-        ApiEnum<string, TimeInterval> expectedInterval = TimeInterval.Day;
+        ApiEnum<string, Subscriptions::TimeInterval> expectedInterval =
+            Subscriptions::TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring");
 
         Assert.Equal(expectedCount, model.Count);
@@ -1952,13 +1925,10 @@ public class FrequencyUnionMember1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::FrequencyUnionMember1 { Count = 0, Interval = TimeInterval.Day };
+        var model = new Recurring { Count = 0, Interval = Subscriptions::TimeInterval.Day };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::FrequencyUnionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Recurring>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -1966,17 +1936,18 @@ public class FrequencyUnionMember1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::FrequencyUnionMember1 { Count = 0, Interval = TimeInterval.Day };
+        var model = new Recurring { Count = 0, Interval = Subscriptions::TimeInterval.Day };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::FrequencyUnionMember1>(
+        var deserialized = JsonSerializer.Deserialize<Recurring>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         int expectedCount = 0;
-        ApiEnum<string, TimeInterval> expectedInterval = TimeInterval.Day;
+        ApiEnum<string, Subscriptions::TimeInterval> expectedInterval =
+            Subscriptions::TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring");
 
         Assert.Equal(expectedCount, deserialized.Count);
@@ -1987,7 +1958,7 @@ public class FrequencyUnionMember1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::FrequencyUnionMember1 { Count = 0, Interval = TimeInterval.Day };
+        var model = new Recurring { Count = 0, Interval = Subscriptions::TimeInterval.Day };
 
         model.Validate();
     }
@@ -1995,27 +1966,27 @@ public class FrequencyUnionMember1Test : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::FrequencyUnionMember1 { Count = 0, Interval = TimeInterval.Day };
+        var model = new Recurring { Count = 0, Interval = Subscriptions::TimeInterval.Day };
 
-        Invoices::FrequencyUnionMember1 copied = new(model);
+        Recurring copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class TypeModelTest : TestBase
+public class MixedTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new Invoices::TypeModel();
+        var constant = new Mixed();
         constant.Validate();
     }
 
     [Fact]
     public void ValidConstantValidation_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::TypeModel>(
+        var constant = JsonSerializer.Deserialize<Mixed>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -2033,7 +2004,7 @@ public class TypeModelTest : TestBase
     [Fact]
     public void InvalidConstantValidationThrows_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::TypeModel>(
+        var constant = JsonSerializer.Deserialize<Mixed>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2045,12 +2016,9 @@ public class TypeModelTest : TestBase
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new Invoices::TypeModel();
+        var constant = new Mixed();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::TypeModel>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Mixed>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(constant, deserialized);
     }
@@ -2058,7 +2026,7 @@ public class TypeModelTest : TestBase
     [Fact]
     public void ValidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::TypeModel>(
+        var constant = JsonSerializer.Deserialize<Mixed>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -2069,10 +2037,7 @@ public class TypeModelTest : TestBase
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::TypeModel>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Mixed>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(constant, deserialized);
     }
@@ -2080,15 +2045,12 @@ public class TypeModelTest : TestBase
     [Fact]
     public void InvalidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<Invoices::TypeModel>(
+        var constant = JsonSerializer.Deserialize<Mixed>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::TypeModel>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Mixed>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(constant, deserialized);
     }
@@ -2097,21 +2059,21 @@ public class TypeModelTest : TestBase
 public class InvoiceTagTest : TestBase
 {
     [Theory]
-    [InlineData(Invoices::InvoiceTag.Refunded)]
-    [InlineData(Invoices::InvoiceTag.PartiallyRefunded)]
-    [InlineData(Invoices::InvoiceTag.Disputed)]
-    [InlineData(Invoices::InvoiceTag.PaymentReversed)]
-    public void Validation_Works(Invoices::InvoiceTag rawValue)
+    [InlineData(InvoiceTag.Refunded)]
+    [InlineData(InvoiceTag.PartiallyRefunded)]
+    [InlineData(InvoiceTag.Disputed)]
+    [InlineData(InvoiceTag.PaymentReversed)]
+    public void Validation_Works(InvoiceTag rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::InvoiceTag> value = rawValue;
+        ApiEnum<string, InvoiceTag> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::InvoiceTag>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, InvoiceTag>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2121,17 +2083,17 @@ public class InvoiceTagTest : TestBase
     }
 
     [Theory]
-    [InlineData(Invoices::InvoiceTag.Refunded)]
-    [InlineData(Invoices::InvoiceTag.PartiallyRefunded)]
-    [InlineData(Invoices::InvoiceTag.Disputed)]
-    [InlineData(Invoices::InvoiceTag.PaymentReversed)]
-    public void SerializationRoundtrip_Works(Invoices::InvoiceTag rawValue)
+    [InlineData(InvoiceTag.Refunded)]
+    [InlineData(InvoiceTag.PartiallyRefunded)]
+    [InlineData(InvoiceTag.Disputed)]
+    [InlineData(InvoiceTag.PaymentReversed)]
+    public void SerializationRoundtrip_Works(InvoiceTag rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Invoices::InvoiceTag> value = rawValue;
+        ApiEnum<string, InvoiceTag> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::InvoiceTag>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, InvoiceTag>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2142,12 +2104,12 @@ public class InvoiceTagTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Invoices::InvoiceTag>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, InvoiceTag>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Invoices::InvoiceTag>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, InvoiceTag>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2161,7 +2123,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2186,7 +2148,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2196,10 +2158,7 @@ public class PaymentTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Payment>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Payment>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -2207,7 +2166,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2217,7 +2176,7 @@ public class PaymentTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::Payment>(
+        var deserialized = JsonSerializer.Deserialize<Payment>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2239,7 +2198,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2254,7 +2213,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2270,7 +2229,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2283,7 +2242,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2302,7 +2261,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2318,7 +2277,7 @@ public class PaymentTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::Payment
+        var model = new Payment
         {
             Amount = 0,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2327,7 +2286,7 @@ public class PaymentTest : TestBase
             Status = Payments::IntentStatus.Succeeded,
         };
 
-        Invoices::Payment copied = new(model);
+        Payment copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -2336,9 +2295,9 @@ public class PaymentTest : TestBase
 public class ReminderSettingsTest : TestBase
 {
     [Fact]
-    public void UnionMember0ValidationWorks()
+    public void SnapshotValidationWorks()
     {
-        Invoices::ReminderSettings value = new Invoices::UnionMember0()
+        ReminderSettings value = new Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2348,9 +2307,9 @@ public class ReminderSettingsTest : TestBase
     }
 
     [Fact]
-    public void ReminderSettingsUnionMember1ValidationWorks()
+    public void OverrideValidationWorks()
     {
-        Invoices::ReminderSettings value = new Invoices::ReminderSettingsUnionMember1()
+        ReminderSettings value = new Override()
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2360,16 +2319,16 @@ public class ReminderSettingsTest : TestBase
     }
 
     [Fact]
-    public void UnionMember0SerializationRoundtripWorks()
+    public void SnapshotSerializationRoundtripWorks()
     {
-        Invoices::ReminderSettings value = new Invoices::UnionMember0()
+        ReminderSettings value = new Snapshot()
         {
             OffsetsMinutes = [0],
             Paused = true,
             RemindersEnabled = true,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ReminderSettings>(
+        var deserialized = JsonSerializer.Deserialize<ReminderSettings>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2378,16 +2337,16 @@ public class ReminderSettingsTest : TestBase
     }
 
     [Fact]
-    public void ReminderSettingsUnionMember1SerializationRoundtripWorks()
+    public void OverrideSerializationRoundtripWorks()
     {
-        Invoices::ReminderSettings value = new Invoices::ReminderSettingsUnionMember1()
+        ReminderSettings value = new Override()
         {
             OffsetsMinutes = [0],
             Paused = true,
             RemindersEnabled = true,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ReminderSettings>(
+        var deserialized = JsonSerializer.Deserialize<ReminderSettings>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2396,12 +2355,12 @@ public class ReminderSettingsTest : TestBase
     }
 }
 
-public class UnionMember0Test : TestBase
+public class SnapshotTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::UnionMember0
+        var model = new Snapshot
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2426,7 +2385,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::UnionMember0
+        var model = new Snapshot
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2434,10 +2393,7 @@ public class UnionMember0Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::UnionMember0>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Snapshot>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -2445,7 +2401,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::UnionMember0
+        var model = new Snapshot
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2453,7 +2409,7 @@ public class UnionMember0Test : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::UnionMember0>(
+        var deserialized = JsonSerializer.Deserialize<Snapshot>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2477,7 +2433,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::UnionMember0
+        var model = new Snapshot
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2490,25 +2446,25 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::UnionMember0
+        var model = new Snapshot
         {
             OffsetsMinutes = [0],
             Paused = true,
             RemindersEnabled = true,
         };
 
-        Invoices::UnionMember0 copied = new(model);
+        Snapshot copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class ReminderSettingsUnionMember1Test : TestBase
+public class OverrideTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2534,7 +2490,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2542,10 +2498,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ReminderSettingsUnionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Override>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -2553,7 +2506,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2561,7 +2514,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Invoices::ReminderSettingsUnionMember1>(
+        var deserialized = JsonSerializer.Deserialize<Override>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2586,7 +2539,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = [0],
             Paused = true,
@@ -2599,7 +2552,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1 { };
+        var model = new Override { };
 
         Assert.Null(model.OffsetsMinutes);
         Assert.False(model.RawData.ContainsKey("offsets_minutes"));
@@ -2612,7 +2565,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1 { };
+        var model = new Override { };
 
         model.Validate();
     }
@@ -2620,7 +2573,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = null,
             Paused = null,
@@ -2638,7 +2591,7 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = null,
             Paused = null,
@@ -2651,14 +2604,14 @@ public class ReminderSettingsUnionMember1Test : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Invoices::ReminderSettingsUnionMember1
+        var model = new Override
         {
             OffsetsMinutes = [0],
             Paused = true,
             RemindersEnabled = true,
         };
 
-        Invoices::ReminderSettingsUnionMember1 copied = new(model);
+        Override copied = new(model);
 
         Assert.Equal(model, copied);
     }

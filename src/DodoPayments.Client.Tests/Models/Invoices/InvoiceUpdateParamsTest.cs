@@ -47,7 +47,7 @@ public class InvoiceUpdateParamsTest : TestBase
             ],
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
-            PaymentTerms = new InvoiceUpdateParamsPaymentTermsType(),
+            PaymentTerms = new InvoiceUpdateParamsPaymentTermsDueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
         };
@@ -88,7 +88,7 @@ public class InvoiceUpdateParamsTest : TestBase
         string expectedMemo = "memo";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         InvoiceUpdateParamsPaymentTerms expectedPaymentTerms =
-            new InvoiceUpdateParamsPaymentTermsType();
+            new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         bool expectedReviewRequired = true;
         string expectedTaxID = "tax_id";
 
@@ -288,7 +288,7 @@ public class InvoiceUpdateParamsTest : TestBase
             ],
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
-            PaymentTerms = new InvoiceUpdateParamsPaymentTermsType(),
+            PaymentTerms = new InvoiceUpdateParamsPaymentTermsDueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
         };
@@ -987,23 +987,23 @@ public class InvoiceUpdateParamsItemProductItemTest : TestBase
 public class InvoiceUpdateParamsPaymentTermsTest : TestBase
 {
     [Fact]
-    public void ObjectValidationWorks()
+    public void DueOnReceiptValidationWorks()
     {
-        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsType();
+        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         value.Validate();
     }
 
     [Fact]
-    public void InvoiceUpdateParamsPaymentTermsUnionMember1ValidationWorks()
+    public void NetValidationWorks()
     {
-        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsUnionMember1(0);
+        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsNet(0);
         value.Validate();
     }
 
     [Fact]
-    public void ObjectSerializationRoundtripWorks()
+    public void DueOnReceiptSerializationRoundtripWorks()
     {
-        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsType();
+        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTerms>(
             element,
@@ -1014,9 +1014,9 @@ public class InvoiceUpdateParamsPaymentTermsTest : TestBase
     }
 
     [Fact]
-    public void InvoiceUpdateParamsPaymentTermsUnionMember1SerializationRoundtripWorks()
+    public void NetSerializationRoundtripWorks()
     {
-        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsUnionMember1(0);
+        InvoiceUpdateParamsPaymentTerms value = new InvoiceUpdateParamsPaymentTermsNet(0);
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTerms>(
             element,
@@ -1027,19 +1027,19 @@ public class InvoiceUpdateParamsPaymentTermsTest : TestBase
     }
 }
 
-public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
+public class InvoiceUpdateParamsPaymentTermsDueOnReceiptTest : TestBase
 {
     [Fact]
     public void DefaultValidation_Works()
     {
-        var constant = new InvoiceUpdateParamsPaymentTermsType();
+        var constant = new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         constant.Validate();
     }
 
     [Fact]
     public void ValidConstantValidation_Works()
     {
-        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1057,7 +1057,7 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
     [Fact]
     public void InvalidConstantValidationThrows_Works()
     {
-        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1069,9 +1069,9 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
     [Fact]
     public void DefaultRoundtrip_Works()
     {
-        var constant = new InvoiceUpdateParamsPaymentTermsType();
+        var constant = new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1082,7 +1082,7 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
     [Fact]
     public void ValidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             JsonSerializer.Deserialize<JsonElement>(
                 """
                 {
@@ -1093,7 +1093,7 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1104,12 +1104,12 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
     [Fact]
     public void InvalidConstantRoundtrip_Works()
     {
-        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var constant = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string element = JsonSerializer.Serialize(constant, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsType>(
+        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsDueOnReceipt>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1118,12 +1118,12 @@ public class InvoiceUpdateParamsPaymentTermsTypeTest : TestBase
     }
 }
 
-public class InvoiceUpdateParamsPaymentTermsUnionMember1Test : TestBase
+public class InvoiceUpdateParamsPaymentTermsNetTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new InvoiceUpdateParamsPaymentTermsUnionMember1 { Days = 0 };
+        var model = new InvoiceUpdateParamsPaymentTermsNet { Days = 0 };
 
         int expectedDays = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("net");
@@ -1135,10 +1135,10 @@ public class InvoiceUpdateParamsPaymentTermsUnionMember1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new InvoiceUpdateParamsPaymentTermsUnionMember1 { Days = 0 };
+        var model = new InvoiceUpdateParamsPaymentTermsNet { Days = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsUnionMember1>(
+        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsNet>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1149,10 +1149,10 @@ public class InvoiceUpdateParamsPaymentTermsUnionMember1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new InvoiceUpdateParamsPaymentTermsUnionMember1 { Days = 0 };
+        var model = new InvoiceUpdateParamsPaymentTermsNet { Days = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsUnionMember1>(
+        var deserialized = JsonSerializer.Deserialize<InvoiceUpdateParamsPaymentTermsNet>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1168,7 +1168,7 @@ public class InvoiceUpdateParamsPaymentTermsUnionMember1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new InvoiceUpdateParamsPaymentTermsUnionMember1 { Days = 0 };
+        var model = new InvoiceUpdateParamsPaymentTermsNet { Days = 0 };
 
         model.Validate();
     }
@@ -1176,9 +1176,9 @@ public class InvoiceUpdateParamsPaymentTermsUnionMember1Test : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new InvoiceUpdateParamsPaymentTermsUnionMember1 { Days = 0 };
+        var model = new InvoiceUpdateParamsPaymentTermsNet { Days = 0 };
 
-        InvoiceUpdateParamsPaymentTermsUnionMember1 copied = new(model);
+        InvoiceUpdateParamsPaymentTermsNet copied = new(model);
 
         Assert.Equal(model, copied);
     }

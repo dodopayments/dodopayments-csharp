@@ -1049,19 +1049,19 @@ public record class Frequency : ModelBase
         }
     }
 
-    public Frequency(FrequencyType value, JsonElement? element = null)
+    public Frequency(OneTime value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Frequency(FrequencyUnionMember1 value, JsonElement? element = null)
+    public Frequency(Recurring value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Frequency(TypeModel value, JsonElement? element = null)
+    public Frequency(Mixed value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -1074,64 +1074,64 @@ public record class Frequency : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="FrequencyType"/>.
+    /// type <see cref="OneTime"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject(out var value)) {
-    ///     // `value` is of type `FrequencyType`
+    /// if (instance.TryPickOneTime(out var value)) {
+    ///     // `value` is of type `OneTime`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject([NotNullWhen(true)] out FrequencyType? value)
+    public bool TryPickOneTime([NotNullWhen(true)] out OneTime? value)
     {
-        value = this.Value as FrequencyType;
+        value = this.Value as OneTime;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="FrequencyUnionMember1"/>.
+    /// type <see cref="Recurring"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickFrequencyUnionMember1(out var value)) {
-    ///     // `value` is of type `FrequencyUnionMember1`
+    /// if (instance.TryPickRecurring(out var value)) {
+    ///     // `value` is of type `Recurring`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickFrequencyUnionMember1([NotNullWhen(true)] out FrequencyUnionMember1? value)
+    public bool TryPickRecurring([NotNullWhen(true)] out Recurring? value)
     {
-        value = this.Value as FrequencyUnionMember1;
+        value = this.Value as Recurring;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="TypeModel"/>.
+    /// type <see cref="Mixed"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickObject1(out var value)) {
-    ///     // `value` is of type `TypeModel`
+    /// if (instance.TryPickMixed(out var value)) {
+    ///     // `value` is of type `Mixed`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickObject1([NotNullWhen(true)] out TypeModel? value)
+    public bool TryPickMixed([NotNullWhen(true)] out Mixed? value)
     {
-        value = this.Value as TypeModel;
+        value = this.Value as Mixed;
         return value != null;
     }
 
@@ -1149,29 +1149,29 @@ public record class Frequency : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (FrequencyType value) =&gt; {...},
-    ///     (FrequencyUnionMember1 value) =&gt; {...},
-    ///     (TypeModel value) =&gt; {...}
+    ///     (OneTime value) =&gt; {...},
+    ///     (Recurring value) =&gt; {...},
+    ///     (Mixed value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<FrequencyType> object_,
-        System::Action<FrequencyUnionMember1> frequencyUnionMember1,
-        System::Action<TypeModel> object1
+        System::Action<OneTime> oneTime,
+        System::Action<Recurring> recurring,
+        System::Action<Mixed> mixed
     )
     {
         switch (this.Value)
         {
-            case FrequencyType value:
-                object_(value);
+            case OneTime value:
+                oneTime(value);
                 break;
-            case FrequencyUnionMember1 value:
-                frequencyUnionMember1(value);
+            case Recurring value:
+                recurring(value);
                 break;
-            case TypeModel value:
-                object1(value);
+            case Mixed value:
+                mixed(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -1195,35 +1195,35 @@ public record class Frequency : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (FrequencyType value) =&gt; {...},
-    ///     (FrequencyUnionMember1 value) =&gt; {...},
-    ///     (TypeModel value) =&gt; {...}
+    ///     (OneTime value) =&gt; {...},
+    ///     (Recurring value) =&gt; {...},
+    ///     (Mixed value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<FrequencyType, T> object_,
-        System::Func<FrequencyUnionMember1, T> frequencyUnionMember1,
-        System::Func<TypeModel, T> object1
+        System::Func<OneTime, T> oneTime,
+        System::Func<Recurring, T> recurring,
+        System::Func<Mixed, T> mixed
     )
     {
         return this.Value switch
         {
-            FrequencyType value => object_(value),
-            FrequencyUnionMember1 value => frequencyUnionMember1(value),
-            TypeModel value => object1(value),
+            OneTime value => oneTime(value),
+            Recurring value => recurring(value),
+            Mixed value => mixed(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Frequency"
             ),
         };
     }
 
-    public static implicit operator Frequency(FrequencyType value) => new(value);
+    public static implicit operator Frequency(OneTime value) => new(value);
 
-    public static implicit operator Frequency(FrequencyUnionMember1 value) => new(value);
+    public static implicit operator Frequency(Recurring value) => new(value);
 
-    public static implicit operator Frequency(TypeModel value) => new(value);
+    public static implicit operator Frequency(Mixed value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -1244,9 +1244,9 @@ public record class Frequency : ModelBase
             );
         }
         this.Switch(
-            (object_) => object_.Validate(),
-            (frequencyUnionMember1) => frequencyUnionMember1.Validate(),
-            (object1) => object1.Validate()
+            (oneTime) => oneTime.Validate(),
+            (recurring) => recurring.Validate(),
+            (mixed) => mixed.Validate()
         );
     }
 
@@ -1270,9 +1270,9 @@ public record class Frequency : ModelBase
     {
         return this.Value switch
         {
-            FrequencyType _ => 0,
-            FrequencyUnionMember1 _ => 1,
-            TypeModel _ => 2,
+            OneTime _ => 0,
+            Recurring _ => 1,
+            Mixed _ => 2,
             _ => -1,
         };
     }
@@ -1287,52 +1287,74 @@ sealed class FrequencyConverter : JsonConverter<Frequency>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<FrequencyType>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<TypeModel>(element, options);
-            if (deserialized != null)
+            case "one_time":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<OneTime>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "recurring":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Recurring>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "mixed":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Mixed>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Frequency(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<FrequencyUnionMember1>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -1345,12 +1367,12 @@ sealed class FrequencyConverter : JsonConverter<Frequency>
     }
 }
 
-[JsonConverter(typeof(FrequencyTypeConverter))]
-public record class FrequencyType
+[JsonConverter(typeof(OneTimeConverter))]
+public record class OneTime
 {
     public JsonElement Element { get; private init; }
 
-    public FrequencyType()
+    public OneTime()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1361,7 +1383,7 @@ public record class FrequencyType
         );
     }
 
-    internal FrequencyType(JsonElement element)
+    internal OneTime(JsonElement element)
     {
         Element = element;
     }
@@ -1377,9 +1399,9 @@ public record class FrequencyType
     /// </summary>
     public void Validate()
     {
-        if (this != new FrequencyType())
+        if (this != new OneTime())
         {
-            throw new DodoPaymentsInvalidDataException("Invalid value given for 'FrequencyType'");
+            throw new DodoPaymentsInvalidDataException("Invalid value given for 'OneTime'");
         }
     }
 
@@ -1388,7 +1410,7 @@ public record class FrequencyType
         return 0;
     }
 
-    public virtual bool Equals(FrequencyType? other)
+    public virtual bool Equals(OneTime? other)
     {
         if (other == null)
         {
@@ -1399,9 +1421,9 @@ public record class FrequencyType
     }
 }
 
-class FrequencyTypeConverter : JsonConverter<FrequencyType>
+class OneTimeConverter : JsonConverter<OneTime>
 {
-    public override FrequencyType? Read(
+    public override OneTime? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1410,18 +1432,14 @@ class FrequencyTypeConverter : JsonConverter<FrequencyType>
         return new(JsonSerializer.Deserialize<JsonElement>(ref reader, options));
     }
 
-    public override void Write(
-        Utf8JsonWriter writer,
-        FrequencyType value,
-        JsonSerializerOptions options
-    )
+    public override void Write(Utf8JsonWriter writer, OneTime value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value.Element, options);
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<FrequencyUnionMember1, FrequencyUnionMember1FromRaw>))]
-public sealed record class FrequencyUnionMember1 : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Recurring, RecurringFromRaw>))]
+public sealed record class Recurring : JsonModel
 {
     public required int Count
     {
@@ -1469,18 +1487,18 @@ public sealed record class FrequencyUnionMember1 : JsonModel
         }
     }
 
-    public FrequencyUnionMember1()
+    public Recurring()
     {
         this.Type = JsonSerializer.SerializeToElement("recurring");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public FrequencyUnionMember1(FrequencyUnionMember1 frequencyUnionMember1)
-        : base(frequencyUnionMember1) { }
+    public Recurring(Recurring recurring)
+        : base(recurring) { }
 #pragma warning restore CS8618
 
-    public FrequencyUnionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Recurring(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -1489,35 +1507,32 @@ public sealed record class FrequencyUnionMember1 : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    FrequencyUnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    Recurring(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="FrequencyUnionMember1FromRaw.FromRawUnchecked"/>
-    public static FrequencyUnionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="RecurringFromRaw.FromRawUnchecked"/>
+    public static Recurring FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class FrequencyUnionMember1FromRaw : IFromRawJson<FrequencyUnionMember1>
+class RecurringFromRaw : IFromRawJson<Recurring>
 {
     /// <inheritdoc/>
-    public FrequencyUnionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => FrequencyUnionMember1.FromRawUnchecked(rawData);
+    public Recurring FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Recurring.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(TypeModelConverter))]
-public record class TypeModel
+[JsonConverter(typeof(MixedConverter))]
+public record class Mixed
 {
     public JsonElement Element { get; private init; }
 
-    public TypeModel()
+    public Mixed()
     {
         Element = JsonSerializer.Deserialize<JsonElement>(
             """
@@ -1528,7 +1543,7 @@ public record class TypeModel
         );
     }
 
-    internal TypeModel(JsonElement element)
+    internal Mixed(JsonElement element)
     {
         Element = element;
     }
@@ -1544,9 +1559,9 @@ public record class TypeModel
     /// </summary>
     public void Validate()
     {
-        if (this != new TypeModel())
+        if (this != new Mixed())
         {
-            throw new DodoPaymentsInvalidDataException("Invalid value given for 'TypeModel'");
+            throw new DodoPaymentsInvalidDataException("Invalid value given for 'Mixed'");
         }
     }
 
@@ -1555,7 +1570,7 @@ public record class TypeModel
         return 0;
     }
 
-    public virtual bool Equals(TypeModel? other)
+    public virtual bool Equals(Mixed? other)
     {
         if (other == null)
         {
@@ -1566,9 +1581,9 @@ public record class TypeModel
     }
 }
 
-class TypeModelConverter : JsonConverter<TypeModel>
+class MixedConverter : JsonConverter<Mixed>
 {
-    public override TypeModel? Read(
+    public override Mixed? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1577,11 +1592,7 @@ class TypeModelConverter : JsonConverter<TypeModel>
         return new(JsonSerializer.Deserialize<JsonElement>(ref reader, options));
     }
 
-    public override void Write(
-        Utf8JsonWriter writer,
-        TypeModel value,
-        JsonSerializerOptions options
-    )
+    public override void Write(Utf8JsonWriter writer, Mixed value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value.Element, options);
     }
@@ -1766,21 +1777,12 @@ public record class ReminderSettings : ModelBase
 
     public JsonElement Kind
     {
-        get
-        {
-            return Match(unionMember0: (x) => x.Kind, reminderSettingsUnionMember1: (x) => x.Kind);
-        }
+        get { return Match(snapshot: (x) => x.Kind, override_: (x) => x.Kind); }
     }
 
     public bool? Paused
     {
-        get
-        {
-            return Match<bool?>(
-                unionMember0: (x) => x.Paused,
-                reminderSettingsUnionMember1: (x) => x.Paused
-            );
-        }
+        get { return Match<bool?>(snapshot: (x) => x.Paused, override_: (x) => x.Paused); }
     }
 
     public bool? RemindersEnabled
@@ -1788,19 +1790,19 @@ public record class ReminderSettings : ModelBase
         get
         {
             return Match<bool?>(
-                unionMember0: (x) => x.RemindersEnabled,
-                reminderSettingsUnionMember1: (x) => x.RemindersEnabled
+                snapshot: (x) => x.RemindersEnabled,
+                override_: (x) => x.RemindersEnabled
             );
         }
     }
 
-    public ReminderSettings(UnionMember0 value, JsonElement? element = null)
+    public ReminderSettings(Snapshot value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public ReminderSettings(ReminderSettingsUnionMember1 value, JsonElement? element = null)
+    public ReminderSettings(Override value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -1813,45 +1815,43 @@ public record class ReminderSettings : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember0"/>.
+    /// type <see cref="Snapshot"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember0(out var value)) {
-    ///     // `value` is of type `UnionMember0`
+    /// if (instance.TryPickSnapshot(out var value)) {
+    ///     // `value` is of type `Snapshot`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember0([NotNullWhen(true)] out UnionMember0? value)
+    public bool TryPickSnapshot([NotNullWhen(true)] out Snapshot? value)
     {
-        value = this.Value as UnionMember0;
+        value = this.Value as Snapshot;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="ReminderSettingsUnionMember1"/>.
+    /// type <see cref="Override"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickReminderSettingsUnionMember1(out var value)) {
-    ///     // `value` is of type `ReminderSettingsUnionMember1`
+    /// if (instance.TryPickOverride(out var value)) {
+    ///     // `value` is of type `Override`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickReminderSettingsUnionMember1(
-        [NotNullWhen(true)] out ReminderSettingsUnionMember1? value
-    )
+    public bool TryPickOverride([NotNullWhen(true)] out Override? value)
     {
-        value = this.Value as ReminderSettingsUnionMember1;
+        value = this.Value as Override;
         return value != null;
     }
 
@@ -1869,24 +1869,21 @@ public record class ReminderSettings : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (UnionMember0 value) =&gt; {...},
-    ///     (ReminderSettingsUnionMember1 value) =&gt; {...}
+    ///     (Snapshot value) =&gt; {...},
+    ///     (Override value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(
-        System::Action<UnionMember0> unionMember0,
-        System::Action<ReminderSettingsUnionMember1> reminderSettingsUnionMember1
-    )
+    public void Switch(System::Action<Snapshot> snapshot, System::Action<Override> override_)
     {
         switch (this.Value)
         {
-            case UnionMember0 value:
-                unionMember0(value);
+            case Snapshot value:
+                snapshot(value);
                 break;
-            case ReminderSettingsUnionMember1 value:
-                reminderSettingsUnionMember1(value);
+            case Override value:
+                override_(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -1910,31 +1907,27 @@ public record class ReminderSettings : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (UnionMember0 value) =&gt; {...},
-    ///     (ReminderSettingsUnionMember1 value) =&gt; {...}
+    ///     (Snapshot value) =&gt; {...},
+    ///     (Override value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(
-        System::Func<UnionMember0, T> unionMember0,
-        System::Func<ReminderSettingsUnionMember1, T> reminderSettingsUnionMember1
-    )
+    public T Match<T>(System::Func<Snapshot, T> snapshot, System::Func<Override, T> override_)
     {
         return this.Value switch
         {
-            UnionMember0 value => unionMember0(value),
-            ReminderSettingsUnionMember1 value => reminderSettingsUnionMember1(value),
+            Snapshot value => snapshot(value),
+            Override value => override_(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of ReminderSettings"
             ),
         };
     }
 
-    public static implicit operator ReminderSettings(UnionMember0 value) => new(value);
+    public static implicit operator ReminderSettings(Snapshot value) => new(value);
 
-    public static implicit operator ReminderSettings(ReminderSettingsUnionMember1 value) =>
-        new(value);
+    public static implicit operator ReminderSettings(Override value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -1954,10 +1947,7 @@ public record class ReminderSettings : ModelBase
                 "Data did not match any variant of ReminderSettings"
             );
         }
-        this.Switch(
-            (unionMember0) => unionMember0.Validate(),
-            (reminderSettingsUnionMember1) => reminderSettingsUnionMember1.Validate()
-        );
+        this.Switch((snapshot) => snapshot.Validate(), (override_) => override_.Validate());
     }
 
     public virtual bool Equals(ReminderSettings? other) =>
@@ -1980,8 +1970,8 @@ public record class ReminderSettings : ModelBase
     {
         return this.Value switch
         {
-            UnionMember0 _ => 0,
-            ReminderSettingsUnionMember1 _ => 1,
+            Snapshot _ => 0,
+            Override _ => 1,
             _ => -1,
         };
     }
@@ -1996,40 +1986,57 @@ sealed class ReminderSettingsConverter : JsonConverter<ReminderSettings?>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? kind;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember0>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            kind = element.GetProperty("kind").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            kind = null;
         }
 
-        try
+        switch (kind)
         {
-            var deserialized = JsonSerializer.Deserialize<ReminderSettingsUnionMember1>(
-                element,
-                options
-            );
-            if (deserialized != null)
+            case "snapshot":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Snapshot>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "override":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Override>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new ReminderSettings(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
@@ -2045,8 +2052,8 @@ sealed class ReminderSettingsConverter : JsonConverter<ReminderSettings?>
 /// <summary>
 /// The settings that finalise froze. The reminders run on them.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<UnionMember0, UnionMember0FromRaw>))]
-public sealed record class UnionMember0 : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Snapshot, SnapshotFromRaw>))]
+public sealed record class Snapshot : JsonModel
 {
     public JsonElement Kind
     {
@@ -2106,18 +2113,18 @@ public sealed record class UnionMember0 : JsonModel
         _ = this.RemindersEnabled;
     }
 
-    public UnionMember0()
+    public Snapshot()
     {
         this.Kind = JsonSerializer.SerializeToElement("snapshot");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UnionMember0(UnionMember0 unionMember0)
-        : base(unionMember0) { }
+    public Snapshot(Snapshot snapshot)
+        : base(snapshot) { }
 #pragma warning restore CS8618
 
-    public UnionMember0(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Snapshot(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -2126,33 +2133,31 @@ public sealed record class UnionMember0 : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember0(FrozenDictionary<string, JsonElement> rawData)
+    Snapshot(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember0FromRaw.FromRawUnchecked"/>
-    public static UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SnapshotFromRaw.FromRawUnchecked"/>
+    public static Snapshot FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember0FromRaw : IFromRawJson<UnionMember0>
+class SnapshotFromRaw : IFromRawJson<Snapshot>
 {
     /// <inheritdoc/>
-    public UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember0.FromRawUnchecked(rawData);
+    public Snapshot FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Snapshot.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The changes of a draft. A `null` field keeps the business value at finalise.
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<ReminderSettingsUnionMember1, ReminderSettingsUnionMember1FromRaw>)
-)]
-public sealed record class ReminderSettingsUnionMember1 : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Override, OverrideFromRaw>))]
+public sealed record class Override : JsonModel
 {
     public JsonElement Kind
     {
@@ -2212,18 +2217,18 @@ public sealed record class ReminderSettingsUnionMember1 : JsonModel
         _ = this.RemindersEnabled;
     }
 
-    public ReminderSettingsUnionMember1()
+    public Override()
     {
         this.Kind = JsonSerializer.SerializeToElement("override");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public ReminderSettingsUnionMember1(ReminderSettingsUnionMember1 reminderSettingsUnionMember1)
-        : base(reminderSettingsUnionMember1) { }
+    public Override(Override override_)
+        : base(override_) { }
 #pragma warning restore CS8618
 
-    public ReminderSettingsUnionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Override(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -2232,25 +2237,22 @@ public sealed record class ReminderSettingsUnionMember1 : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ReminderSettingsUnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    Override(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ReminderSettingsUnionMember1FromRaw.FromRawUnchecked"/>
-    public static ReminderSettingsUnionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="OverrideFromRaw.FromRawUnchecked"/>
+    public static Override FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ReminderSettingsUnionMember1FromRaw : IFromRawJson<ReminderSettingsUnionMember1>
+class OverrideFromRaw : IFromRawJson<Override>
 {
     /// <inheritdoc/>
-    public ReminderSettingsUnionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => ReminderSettingsUnionMember1.FromRawUnchecked(rawData);
+    public Override FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Override.FromRawUnchecked(rawData);
 }

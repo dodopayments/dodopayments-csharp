@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +8,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Invoices;
 
@@ -40,12 +40,12 @@ public record class InvoiceListParams : ParamsBase
         }
     }
 
-    public System::DateTimeOffset? CreatedAtGte
+    public DateTimeOffset? CreatedAtGte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_gte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
         }
         init
         {
@@ -58,12 +58,12 @@ public record class InvoiceListParams : ParamsBase
         }
     }
 
-    public System::DateTimeOffset? CreatedAtLte
+    public DateTimeOffset? CreatedAtLte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_lte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
         }
         init
         {
@@ -94,12 +94,12 @@ public record class InvoiceListParams : ParamsBase
         }
     }
 
-    public System::DateTimeOffset? DueAtGte
+    public DateTimeOffset? DueAtGte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("due_at_gte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("due_at_gte");
         }
         init
         {
@@ -112,12 +112,12 @@ public record class InvoiceListParams : ParamsBase
         }
     }
 
-    public System::DateTimeOffset? DueAtLte
+    public DateTimeOffset? DueAtLte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("due_at_lte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("due_at_lte");
         }
         init
         {
@@ -345,9 +345,9 @@ public record class InvoiceListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/billing/invoices")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/billing/invoices")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -379,7 +379,7 @@ sealed class CollectionMethodConverter : JsonConverter<CollectionMethod>
 {
     public override CollectionMethod Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -430,7 +430,7 @@ sealed class StatusConverter : JsonConverter<Status>
 {
     public override Status Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -480,7 +480,7 @@ sealed class TagConverter : JsonConverter<Tag>
 {
     public override Tag Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
