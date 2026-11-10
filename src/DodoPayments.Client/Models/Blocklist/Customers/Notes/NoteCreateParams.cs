@@ -24,14 +24,14 @@ public record class NoteCreateParams : ParamsBase
 
     public string? EntryID { get; init; }
 
-    public required string Note
+    public required string Text
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<string>("note");
+            return this._rawBodyData.GetNotNullClass<string>("text");
         }
-        init { this._rawBodyData.Set("note", value); }
+        init { this._rawBodyData.Set("text", value); }
     }
 
     public NoteCreateParams() { }

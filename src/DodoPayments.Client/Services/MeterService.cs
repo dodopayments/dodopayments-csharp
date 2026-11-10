@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters;
-using DodoPayments.Client.Services.Meters;
 
 namespace DodoPayments.Client.Services;
 
@@ -33,13 +32,6 @@ public sealed class MeterService : IMeterService
         _client = client;
 
         _withRawResponse = new(() => new MeterServiceWithRawResponse(client.WithRawResponse));
-        _translations = new(() => new TranslationService(client));
-    }
-
-    readonly Lazy<ITranslationService> _translations;
-    public ITranslationService Translations
-    {
-        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -171,14 +163,6 @@ public sealed class MeterServiceWithRawResponse : IMeterServiceWithRawResponse
     public MeterServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
-
-        _translations = new(() => new TranslationServiceWithRawResponse(client));
-    }
-
-    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
-    public ITranslationServiceWithRawResponse Translations
-    {
-        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>

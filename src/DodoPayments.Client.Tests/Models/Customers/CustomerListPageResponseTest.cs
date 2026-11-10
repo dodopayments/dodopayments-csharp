@@ -27,7 +27,6 @@ public class CustomerListPageResponseTest : TestBase
                     BlocklistEntryID = "blocklist_entry_id",
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
-                    PreferredLocale = Locale.Ar,
                 },
             ],
         };
@@ -45,7 +44,6 @@ public class CustomerListPageResponseTest : TestBase
                 BlocklistEntryID = "blocklist_entry_id",
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
-                PreferredLocale = Locale.Ar,
             },
         ];
 
@@ -74,7 +72,6 @@ public class CustomerListPageResponseTest : TestBase
                     BlocklistEntryID = "blocklist_entry_id",
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
-                    PreferredLocale = Locale.Ar,
                 },
             ],
         };
@@ -106,7 +103,6 @@ public class CustomerListPageResponseTest : TestBase
                     BlocklistEntryID = "blocklist_entry_id",
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
-                    PreferredLocale = Locale.Ar,
                 },
             ],
         };
@@ -131,7 +127,6 @@ public class CustomerListPageResponseTest : TestBase
                 BlocklistEntryID = "blocklist_entry_id",
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
-                PreferredLocale = Locale.Ar,
             },
         ];
 
@@ -160,7 +155,6 @@ public class CustomerListPageResponseTest : TestBase
                     BlocklistEntryID = "blocklist_entry_id",
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
-                    PreferredLocale = Locale.Ar,
                 },
             ],
         };
@@ -186,7 +180,6 @@ public class CustomerListPageResponseTest : TestBase
                     BlocklistEntryID = "blocklist_entry_id",
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
-                    PreferredLocale = Locale.Ar,
                 },
             ],
         };
