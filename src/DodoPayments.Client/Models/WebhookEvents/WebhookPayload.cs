@@ -14,6 +14,7 @@ using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
 using Refunds = DodoPayments.Client.Models.Refunds;
@@ -154,7 +155,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -174,7 +176,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (x) => x.BrandID,
                 abandonedCheckout: (x) => x.BrandID,
                 dunningAttempt: (x) => x.BrandID,
-                entitlementGrant: (x) => x.BrandID
+                entitlementGrant: (x) => x.BrandID,
+                invoice: (_) => null
             );
         }
     }
@@ -194,7 +197,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.BusinessID
+                entitlementGrant: (x) => x.BusinessID,
+                invoice: (x) => x.BusinessID
             );
         }
     }
@@ -214,47 +218,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (x) => x.CreatedAt,
-                entitlementGrant: (x) => x.CreatedAt
-            );
-        }
-    }
-
-    public Payments::CustomerLimitedDetails? Customer
-    {
-        get
-        {
-            return Match<Payments::CustomerLimitedDetails?>(
-                payment: (x) => x.Customer,
-                subscription: (x) => x.Customer,
-                refund: (x) => x.Customer,
-                dispute: (x) => x.Customer,
-                licenseKey: (_) => null,
-                payout: (_) => null,
-                creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null,
-                abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
-            );
-        }
-    }
-
-    public IReadOnlyDictionary<string, MetadataItem>? Metadata
-    {
-        get
-        {
-            return Match<IReadOnlyDictionary<string, MetadataItem>?>(
-                payment: (x) => x.Metadata,
-                subscription: (x) => x.Metadata,
-                refund: (x) => x.Metadata,
-                dispute: (_) => null,
-                licenseKey: (_) => null,
-                payout: (_) => null,
-                creditLedgerEntry: (x) => x.Metadata,
-                creditBalanceLow: (_) => null,
-                abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.Metadata
+                entitlementGrant: (x) => x.CreatedAt,
+                invoice: (x) => x.CreatedAt
             );
         }
     }
@@ -274,7 +239,29 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (x) => x.PaymentID,
                 dunningAttempt: (x) => x.PaymentID,
-                entitlementGrant: (x) => x.PaymentID
+                entitlementGrant: (x) => x.PaymentID,
+                invoice: (_) => null
+            );
+        }
+    }
+
+    public int? TotalAmount
+    {
+        get
+        {
+            return Match<int?>(
+                payment: (x) => x.TotalAmount,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                payout: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null,
+                invoice: (x) => x.TotalAmount
             );
         }
     }
@@ -294,7 +281,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -314,7 +302,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.ErrorCode
+                entitlementGrant: (x) => x.ErrorCode,
+                invoice: (_) => null
             );
         }
     }
@@ -334,7 +323,29 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.ErrorMessage
+                entitlementGrant: (x) => x.ErrorMessage,
+                invoice: (_) => null
+            );
+        }
+    }
+
+    public string? InvoiceID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.InvoiceID,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                payout: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null,
+                invoice: (x) => x.InvoiceID
             );
         }
     }
@@ -354,7 +365,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -374,7 +386,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -394,7 +407,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (x) => x.SubscriptionID,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (x) => x.SubscriptionID,
-                entitlementGrant: (x) => x.SubscriptionID
+                entitlementGrant: (x) => x.SubscriptionID,
+                invoice: (_) => null
             );
         }
     }
@@ -414,7 +428,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.UpdatedAt
+                entitlementGrant: (x) => x.UpdatedAt,
+                invoice: (_) => null
             );
         }
     }
@@ -434,7 +449,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (x) => x.PayloadType,
                 abandonedCheckout: (x) => x.PayloadType,
                 dunningAttempt: (x) => x.PayloadType,
-                entitlementGrant: (x) => x.PayloadType
+                entitlementGrant: (x) => x.PayloadType,
+                invoice: (x) => x.PayloadType
             );
         }
     }
@@ -454,7 +470,29 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
+            );
+        }
+    }
+
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            return Match<ApiEnum<string, Invoices::InvoiceCollectionMethod>?>(
+                payment: (_) => null,
+                subscription: (x) => x.CollectionMethod,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                payout: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null,
+                invoice: (x) => x.CollectionMethod
             );
         }
     }
@@ -474,7 +512,29 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
+            );
+        }
+    }
+
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            return Match<int?>(
+                payment: (_) => null,
+                subscription: (x) => x.PaymentTermsDays,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                payout: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null,
+                invoice: (x) => x.PaymentTermsDays
             );
         }
     }
@@ -494,7 +554,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -514,7 +575,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -534,7 +596,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (x) => x.ID
+                entitlementGrant: (x) => x.ID,
+                invoice: (_) => null
             );
         }
     }
@@ -554,7 +617,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (x) => x.CustomerID,
                 abandonedCheckout: (x) => x.CustomerID,
                 dunningAttempt: (x) => x.CustomerID,
-                entitlementGrant: (x) => x.CustomerID
+                entitlementGrant: (x) => x.CustomerID,
+                invoice: (_) => null
             );
         }
     }
@@ -574,7 +638,8 @@ public record class Data : ModelBase
                 creditBalanceLow: (x) => x.CreditEntitlementID,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
-                entitlementGrant: (_) => null
+                entitlementGrant: (_) => null,
+                invoice: (_) => null
             );
         }
     }
@@ -640,6 +705,12 @@ public record class Data : ModelBase
     }
 
     public Data(EntitlementGrant value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(Invoice value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -882,6 +953,27 @@ public record class Data : ModelBase
     }
 
     /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Invoice"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickInvoice(out var value)) {
+    ///     // `value` is of type `Invoice`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickInvoice([NotNullWhen(true)] out Invoice? value)
+    {
+        value = this.Value as Invoice;
+        return value != null;
+    }
+
+    /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
     /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
@@ -905,7 +997,8 @@ public record class Data : ModelBase
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
     ///     (DunningAttempt value) =&gt; {...},
-    ///     (EntitlementGrant value) =&gt; {...}
+    ///     (EntitlementGrant value) =&gt; {...},
+    ///     (Invoice value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -921,7 +1014,8 @@ public record class Data : ModelBase
         Action<CreditBalanceLow> creditBalanceLow,
         Action<AbandonedCheckout> abandonedCheckout,
         Action<DunningAttempt> dunningAttempt,
-        Action<EntitlementGrant> entitlementGrant
+        Action<EntitlementGrant> entitlementGrant,
+        Action<Invoice> invoice
     )
     {
         switch (this.Value)
@@ -959,6 +1053,9 @@ public record class Data : ModelBase
             case EntitlementGrant value:
                 entitlementGrant(value);
                 break;
+            case Invoice value:
+                invoice(value);
+                break;
             default:
                 throw new DodoPaymentsInvalidDataException(
                     "Data did not match any variant of Data"
@@ -991,7 +1088,8 @@ public record class Data : ModelBase
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
     ///     (DunningAttempt value) =&gt; {...},
-    ///     (EntitlementGrant value) =&gt; {...}
+    ///     (EntitlementGrant value) =&gt; {...},
+    ///     (Invoice value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1007,7 +1105,8 @@ public record class Data : ModelBase
         Func<CreditBalanceLow, T> creditBalanceLow,
         Func<AbandonedCheckout, T> abandonedCheckout,
         Func<DunningAttempt, T> dunningAttempt,
-        Func<EntitlementGrant, T> entitlementGrant
+        Func<EntitlementGrant, T> entitlementGrant,
+        Func<Invoice, T> invoice
     )
     {
         return this.Value switch
@@ -1023,6 +1122,7 @@ public record class Data : ModelBase
             AbandonedCheckout value => abandonedCheckout(value),
             DunningAttempt value => dunningAttempt(value),
             EntitlementGrant value => entitlementGrant(value),
+            Invoice value => invoice(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Data"
             ),
@@ -1051,6 +1151,8 @@ public record class Data : ModelBase
 
     public static implicit operator Data(EntitlementGrant value) => new(value);
 
+    public static implicit operator Data(Invoice value) => new(value);
+
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
     /// (based on its own <c>Validate</c> method).
@@ -1078,7 +1180,8 @@ public record class Data : ModelBase
             (creditBalanceLow) => creditBalanceLow.Validate(),
             (abandonedCheckout) => abandonedCheckout.Validate(),
             (dunningAttempt) => dunningAttempt.Validate(),
-            (entitlementGrant) => entitlementGrant.Validate()
+            (entitlementGrant) => entitlementGrant.Validate(),
+            (invoice) => invoice.Validate()
         );
     }
 
@@ -1113,6 +1216,7 @@ public record class Data : ModelBase
             AbandonedCheckout _ => 8,
             DunningAttempt _ => 9,
             EntitlementGrant _ => 10,
+            Invoice _ => 11,
             _ => -1,
         };
     }
@@ -1326,6 +1430,23 @@ sealed class DataConverter : JsonConverter<Data>
                         element,
                         options
                     );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "Invoice":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Invoice>(element, options);
                     if (deserialized != null)
                     {
                         return new(deserialized, element);
@@ -2399,6 +2520,21 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+    /// </summary>
+    public required ApiEnum<string, Subscriptions::BillingMode> BillingMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::BillingMode>>(
+                "billing_mode"
+            );
+        }
+        init { this._rawData.Set("billing_mode", value); }
+    }
+
+    /// <summary>
     /// Brand id this subscription belongs to
     /// </summary>
     public required string BrandID
@@ -2810,6 +2946,26 @@ public sealed record class Subscription : JsonModel
         }
     }
 
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("collection_method", value);
+        }
+    }
+
     /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
@@ -2930,6 +3086,19 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("payment_method_id", value); }
     }
 
+    /// <summary>
+    /// Days from the invoice date to the due date. `null` for `normal`.
+    /// </summary>
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("payment_terms_days");
+        }
+        init { this._rawData.Set("payment_terms_days", value); }
+    }
+
     public Subscriptions::ScheduledPlanChange? ScheduledChange
     {
         get
@@ -3026,6 +3195,7 @@ public sealed record class Subscription : JsonModel
         {
             Addons = subscription.Addons,
             Billing = subscription.Billing,
+            BillingMode = subscription.BillingMode,
             BrandID = subscription.BrandID,
             CancelAtNextBillingDate = subscription.CancelAtNextBillingDate,
             CreatedAt = subscription.CreatedAt,
@@ -3054,6 +3224,7 @@ public sealed record class Subscription : JsonModel
             CancellationFeedback = subscription.CancellationFeedback,
             CancelledAt = subscription.CancelledAt,
             CancelledBy = subscription.CancelledBy,
+            CollectionMethod = subscription.CollectionMethod,
             CustomFieldResponses = subscription.CustomFieldResponses,
             CustomerBusinessName = subscription.CustomerBusinessName,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
@@ -3062,6 +3233,7 @@ public sealed record class Subscription : JsonModel
             ExpiresAt = subscription.ExpiresAt,
             PausedAt = subscription.PausedAt,
             PaymentMethodID = subscription.PaymentMethodID,
+            PaymentTermsDays = subscription.PaymentTermsDays,
             ScheduledChange = subscription.ScheduledChange,
             TaxID = subscription.TaxID,
             TrialAmount = subscription.TrialAmount,
@@ -3075,6 +3247,7 @@ public sealed record class Subscription : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        this.BillingMode.Validate();
         _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
@@ -3115,6 +3288,7 @@ public sealed record class Subscription : JsonModel
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         this.CancelledBy?.Validate();
+        this.CollectionMethod?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
@@ -3129,6 +3303,7 @@ public sealed record class Subscription : JsonModel
         _ = this.ExpiresAt;
         _ = this.PausedAt;
         _ = this.PaymentMethodID;
+        _ = this.PaymentTermsDays;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
         _ = this.TrialAmount;
@@ -3734,8 +3909,8 @@ public sealed record class Dispute : JsonModel
 
     /// <summary>
     /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-    /// routes (the merchant's own payment connector); `dodo` for everything Dodo
-    /// processed itself.
+    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
+    /// Dodo processed itself.
     /// </summary>
     public required ApiEnum<string, Disputes::PaymentProvider> PaymentProvider
     {
@@ -5920,4 +6095,690 @@ class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
     /// <inheritdoc/>
     public EntitlementGrant FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         EntitlementGrant.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// An invoice-led invoice. Every read and every `invoice.*` webhook uses this schema.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Invoice, InvoiceFromRaw>))]
+public sealed record class Invoice : JsonModel
+{
+    /// <summary>
+    /// The actions that the current status accepts.
+    /// </summary>
+    public required IReadOnlyList<ApiEnum<string, Invoices::AllowedAction>> AllowedActions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<ApiEnum<string, Invoices::AllowedAction>>
+            >("allowed_actions");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ApiEnum<string, Invoices::AllowedAction>>>(
+                "allowed_actions",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// The amount that the customer must pay. Zero unless the invoice is open or
+    /// past due.
+    /// </summary>
+    public required long AmountDue
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("amount_due");
+        }
+        init { this._rawData.Set("amount_due", value); }
+    }
+
+    /// <summary>
+    /// The sum of the succeeded payments, in the smallest currency unit. A late payment
+    /// is not included after its late refund.
+    /// </summary>
+    public required long AmountPaid
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("amount_paid");
+        }
+        init { this._rawData.Set("amount_paid", value); }
+    }
+
+    /// <summary>
+    /// The sum of the succeeded refunds, in the currency of each payment. The late
+    /// refund of a late payment is not included.
+    /// </summary>
+    public required long AmountRefunded
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("amount_refunded");
+        }
+        init { this._rawData.Set("amount_refunded", value); }
+    }
+
+    public required ApiEnum<string, Invoices::BillingMode> BillingMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Invoices::BillingMode>>(
+                "billing_mode"
+            );
+        }
+        init { this._rawData.Set("billing_mode", value); }
+    }
+
+    public required string BusinessID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
+        init { this._rawData.Set("business_id", value); }
+    }
+
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
+        init { this._rawData.Set("created_at", value); }
+    }
+
+    /// <summary>
+    /// Customer credits applied at finalise, in the smallest currency unit. Zero
+    /// or less.
+    /// </summary>
+    public required long Credits
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("credits");
+        }
+        init { this._rawData.Set("credits", value); }
+    }
+
+    public required ApiEnum<string, Currency> Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    public required Invoices::Customer Customer
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Invoices::Customer>("customer");
+        }
+        init { this._rawData.Set("customer", value); }
+    }
+
+    /// <summary>
+    /// The discount codes of the invoice.
+    /// </summary>
+    public required IReadOnlyList<string> DiscountIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("discount_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "discount_ids",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// The fields that `PATCH` can change in the current status.
+    /// </summary>
+    public required IReadOnlyList<ApiEnum<string, Invoices::EditableField>> EditableFields
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<ApiEnum<string, Invoices::EditableField>>
+            >("editable_fields");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ApiEnum<string, Invoices::EditableField>>>(
+                "editable_fields",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// How often the invoice lines bill. `mixed` covers several intervals, or one-time
+    /// lines next to a plan.
+    /// </summary>
+    public required Invoices::Frequency Frequency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Invoices::Frequency>("frequency");
+        }
+        init { this._rawData.Set("frequency", value); }
+    }
+
+    public required string InvoiceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("invoice_id");
+        }
+        init { this._rawData.Set("invoice_id", value); }
+    }
+
+    public required JsonElement Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("metadata");
+        }
+        init { this._rawData.Set("metadata", value); }
+    }
+
+    public required IReadOnlyList<string> RefundIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("refund_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "refund_ids",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// The number of failed automatic charges.
+    /// </summary>
+    public required int RetryCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("retry_count");
+        }
+        init { this._rawData.Set("retry_count", value); }
+    }
+
+    /// <summary>
+    /// Goes up by one on each change. Use it to ignore an older webhook delivery.
+    /// </summary>
+    public required long RowVersion
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("row_version");
+        }
+        init { this._rawData.Set("row_version", value); }
+    }
+
+    /// <summary>
+    /// The `message` of each variant is the label of the invoice document.
+    /// </summary>
+    public required ApiEnum<string, Invoices::InvoiceStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Invoices::InvoiceStatus>>(
+                "status"
+            );
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    public required IReadOnlyList<string> SubscriptionIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("subscription_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "subscription_ids",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    public required IReadOnlyList<ApiEnum<string, Invoices::InvoiceTag>> Tags
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<ApiEnum<string, Invoices::InvoiceTag>>
+            >("tags");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ApiEnum<string, Invoices::InvoiceTag>>>(
+                "tags",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Tax in the smallest currency unit.
+    /// </summary>
+    public required int Tax
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("tax");
+        }
+        init { this._rawData.Set("tax", value); }
+    }
+
+    /// <summary>
+    /// Total with tax, before credits, in the smallest currency unit.
+    /// </summary>
+    public required int TotalAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("total_amount");
+        }
+        init { this._rawData.Set("total_amount", value); }
+    }
+
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("collection_method", value);
+        }
+    }
+
+    public DateTimeOffset? DueAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("due_at");
+        }
+        init { this._rawData.Set("due_at", value); }
+    }
+
+    public ApiEnum<string, Invoices::DunningState>? DunningState
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Invoices::DunningState>>(
+                "dunning_state"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("dunning_state", value);
+        }
+    }
+
+    public DateTimeOffset? FinalizedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("finalized_at");
+        }
+        init { this._rawData.Set("finalized_at", value); }
+    }
+
+    /// <summary>
+    /// The page where the customer pays. `null` until the invoice is sent.
+    /// </summary>
+    public string? HostedUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("hosted_url");
+        }
+        init { this._rawData.Set("hosted_url", value); }
+    }
+
+    /// <summary>
+    /// Only on a single invoice. A list leaves it out.
+    /// </summary>
+    public IReadOnlyList<Invoices::InvoiceLine>? Lines
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Invoices::InvoiceLine>>("lines");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Invoices::InvoiceLine>?>(
+                "lines",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    public string? Memo
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("memo");
+        }
+        init { this._rawData.Set("memo", value); }
+    }
+
+    /// <summary>
+    /// The time of the next reminder email to the customer, before or after the
+    /// due date. `null` when no reminder email will go out.
+    /// </summary>
+    public DateTimeOffset? NextReminderAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("next_reminder_at");
+        }
+        init { this._rawData.Set("next_reminder_at", value); }
+    }
+
+    public DateTimeOffset? NextRetryAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("next_retry_at");
+        }
+        init { this._rawData.Set("next_retry_at", value); }
+    }
+
+    /// <summary>
+    /// Days from finalise to the due date. `null` when the invoice has a custom
+    /// due date.
+    /// </summary>
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("payment_terms_days");
+        }
+        init { this._rawData.Set("payment_terms_days", value); }
+    }
+
+    /// <summary>
+    /// Only on a single invoice. A list leaves it out.
+    /// </summary>
+    public IReadOnlyList<Invoices::Payment>? Payments
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Invoices::Payment>>("payments");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Invoices::Payment>?>(
+                "payments",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    public string? PdfUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("pdf_url");
+        }
+        init { this._rawData.Set("pdf_url", value); }
+    }
+
+    /// <summary>
+    /// `null` on a draft that keeps all reminder settings of the business.
+    /// </summary>
+    public Invoices::ReminderSettings? ReminderSettings
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Invoices::ReminderSettings>("reminder_settings");
+        }
+        init { this._rawData.Set("reminder_settings", value); }
+    }
+
+    /// <summary>
+    /// The time at which a draft that waits for review finalises.
+    /// </summary>
+    public DateTimeOffset? ReviewDeadline
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("review_deadline");
+        }
+        init { this._rawData.Set("review_deadline", value); }
+    }
+
+    public DateTimeOffset? SentAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("sent_at");
+        }
+        init { this._rawData.Set("sent_at", value); }
+    }
+
+    public JsonElement PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public static implicit operator Invoices::Invoice(Invoice invoice) =>
+        new()
+        {
+            AllowedActions = invoice.AllowedActions,
+            AmountDue = invoice.AmountDue,
+            AmountPaid = invoice.AmountPaid,
+            AmountRefunded = invoice.AmountRefunded,
+            BillingMode = invoice.BillingMode,
+            BusinessID = invoice.BusinessID,
+            CreatedAt = invoice.CreatedAt,
+            Credits = invoice.Credits,
+            Currency = invoice.Currency,
+            Customer = invoice.Customer,
+            DiscountIds = invoice.DiscountIds,
+            EditableFields = invoice.EditableFields,
+            Frequency = invoice.Frequency,
+            InvoiceID = invoice.InvoiceID,
+            Metadata = invoice.Metadata,
+            RefundIds = invoice.RefundIds,
+            RetryCount = invoice.RetryCount,
+            RowVersion = invoice.RowVersion,
+            Status = invoice.Status,
+            SubscriptionIds = invoice.SubscriptionIds,
+            Tags = invoice.Tags,
+            Tax = invoice.Tax,
+            TotalAmount = invoice.TotalAmount,
+            CollectionMethod = invoice.CollectionMethod,
+            DueAt = invoice.DueAt,
+            DunningState = invoice.DunningState,
+            FinalizedAt = invoice.FinalizedAt,
+            HostedUrl = invoice.HostedUrl,
+            Lines = invoice.Lines,
+            Memo = invoice.Memo,
+            NextReminderAt = invoice.NextReminderAt,
+            NextRetryAt = invoice.NextRetryAt,
+            PaymentTermsDays = invoice.PaymentTermsDays,
+            Payments = invoice.Payments,
+            PdfUrl = invoice.PdfUrl,
+            ReminderSettings = invoice.ReminderSettings,
+            ReviewDeadline = invoice.ReviewDeadline,
+            SentAt = invoice.SentAt,
+        };
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        foreach (var item in this.AllowedActions)
+        {
+            item.Validate();
+        }
+        _ = this.AmountDue;
+        _ = this.AmountPaid;
+        _ = this.AmountRefunded;
+        this.BillingMode.Validate();
+        _ = this.BusinessID;
+        _ = this.CreatedAt;
+        _ = this.Credits;
+        this.Currency.Validate();
+        this.Customer.Validate();
+        _ = this.DiscountIds;
+        foreach (var item in this.EditableFields)
+        {
+            item.Validate();
+        }
+        this.Frequency.Validate();
+        _ = this.InvoiceID;
+        _ = this.Metadata;
+        _ = this.RefundIds;
+        _ = this.RetryCount;
+        _ = this.RowVersion;
+        this.Status.Validate();
+        _ = this.SubscriptionIds;
+        foreach (var item in this.Tags)
+        {
+            item.Validate();
+        }
+        _ = this.Tax;
+        _ = this.TotalAmount;
+        this.CollectionMethod?.Validate();
+        _ = this.DueAt;
+        this.DunningState?.Validate();
+        _ = this.FinalizedAt;
+        _ = this.HostedUrl;
+        foreach (var item in this.Lines ?? [])
+        {
+            item.Validate();
+        }
+        _ = this.Memo;
+        _ = this.NextReminderAt;
+        _ = this.NextRetryAt;
+        _ = this.PaymentTermsDays;
+        foreach (var item in this.Payments ?? [])
+        {
+            item.Validate();
+        }
+        _ = this.PdfUrl;
+        this.ReminderSettings?.Validate();
+        _ = this.ReviewDeadline;
+        _ = this.SentAt;
+        if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Invoice")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public Invoice()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Invoice");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Invoice(Invoice invoice)
+        : base(invoice) { }
+#pragma warning restore CS8618
+
+    public Invoice(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Invoice");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Invoice(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="InvoiceFromRaw.FromRawUnchecked"/>
+    public static Invoice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class InvoiceFromRaw : IFromRawJson<Invoice>
+{
+    /// <inheritdoc/>
+    public Invoice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Invoice.FromRawUnchecked(rawData);
 }

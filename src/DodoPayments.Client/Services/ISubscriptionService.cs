@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Services;
 
@@ -149,6 +150,23 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Prices the next cycle invoice of an invoice-led subscription. The invoice ID in
+    /// the response is not stored, so the response has no allowed actions and no
+    /// editable fields.
+    /// </summary>
+    Task<Invoices::Invoice> RetrieveUpcomingInvoice(
+        SubscriptionRetrieveUpcomingInvoiceParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveUpcomingInvoice(SubscriptionRetrieveUpcomingInvoiceParams, CancellationToken)"/>
+    Task<Invoices::Invoice> RetrieveUpcomingInvoice(
+        string subscriptionID,
+        SubscriptionRetrieveUpcomingInvoiceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Get detailed usage history for a subscription that includes usage-based billing
     /// (metered components). This endpoint provides insights into customer usage
     /// patterns and billing calculations over time.
@@ -195,7 +213,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions/{subscription_id}/update-payment-method</c>.
+    /// For an invoice-led subscription, billing charges the open invoices after the
+    /// change, so the response has no payment.
     /// </summary>
     Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
         SubscriptionUpdatePaymentMethodParams parameters,
@@ -351,6 +370,22 @@ public interface ISubscriptionServiceWithRawResponse
     Task<HttpResponse<SubscriptionRetrieveCreditUsageResponse>> RetrieveCreditUsage(
         string subscriptionID,
         SubscriptionRetrieveCreditUsageParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /subscriptions/{subscription_id}/upcoming-invoice</c>, but is otherwise the
+    /// same as <see cref="ISubscriptionService.RetrieveUpcomingInvoice(SubscriptionRetrieveUpcomingInvoiceParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Invoices::Invoice>> RetrieveUpcomingInvoice(
+        SubscriptionRetrieveUpcomingInvoiceParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveUpcomingInvoice(SubscriptionRetrieveUpcomingInvoiceParams, CancellationToken)"/>
+    Task<HttpResponse<Invoices::Invoice>> RetrieveUpcomingInvoice(
+        string subscriptionID,
+        SubscriptionRetrieveUpcomingInvoiceParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
