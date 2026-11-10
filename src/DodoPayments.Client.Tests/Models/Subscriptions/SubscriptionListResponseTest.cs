@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 using Payments = DodoPayments.Client.Models.Payments;
@@ -23,6 +25,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -58,11 +61,13 @@ public class SubscriptionListResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ProductName = "product_name",
             ScheduledChange = new()
             {
@@ -95,6 +100,8 @@ public class SubscriptionListResponseTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, SubscriptionListResponseBillingMode> expectedBillingMode =
+            SubscriptionListResponseBillingMode.Normal;
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -135,11 +142,14 @@ public class SubscriptionListResponseTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
+            InvoiceCollectionMethod.AutoCharge;
         string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         string expectedProductName = "product_name";
         ScheduledPlanChange expectedScheduledChange = new()
         {
@@ -164,6 +174,7 @@ public class SubscriptionListResponseTest : TestBase
         int expectedTrialAmount = 0;
 
         Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBillingMode, model.BillingMode);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -197,11 +208,13 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
         Assert.Equal(expectedCancelledBy, model.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
         Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedPausedAt, model.PausedAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, model.PaymentTermsDays);
         Assert.Equal(expectedProductName, model.ProductName);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
@@ -221,6 +234,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -256,11 +270,13 @@ public class SubscriptionListResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ProductName = "product_name",
             ScheduledChange = new()
             {
@@ -307,6 +323,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -342,11 +359,13 @@ public class SubscriptionListResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ProductName = "product_name",
             ScheduledChange = new()
             {
@@ -386,6 +405,8 @@ public class SubscriptionListResponseTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, SubscriptionListResponseBillingMode> expectedBillingMode =
+            SubscriptionListResponseBillingMode.Normal;
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -426,11 +447,14 @@ public class SubscriptionListResponseTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, InvoiceCollectionMethod> expectedCollectionMethod =
+            InvoiceCollectionMethod.AutoCharge;
         string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         string expectedProductName = "product_name";
         ScheduledPlanChange expectedScheduledChange = new()
         {
@@ -455,6 +479,7 @@ public class SubscriptionListResponseTest : TestBase
         int expectedTrialAmount = 0;
 
         Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBillingMode, deserialized.BillingMode);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -488,11 +513,13 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
         Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
         Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedPausedAt, deserialized.PausedAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, deserialized.PaymentTermsDays);
         Assert.Equal(expectedProductName, deserialized.ProductName);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
@@ -512,6 +539,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -547,11 +575,13 @@ public class SubscriptionListResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ProductName = "product_name",
             ScheduledChange = new()
             {
@@ -592,6 +622,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -626,6 +657,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CancelledBy);
         Assert.False(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.CustomerBusinessName);
         Assert.False(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
@@ -636,6 +669,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.False(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.ProductName);
         Assert.False(model.RawData.ContainsKey("product_name"));
         Assert.Null(model.ScheduledChange);
@@ -659,6 +694,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -705,6 +741,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -736,11 +773,13 @@ public class SubscriptionListResponseTest : TestBase
 
             CancelledAt = null,
             CancelledBy = null,
+            CollectionMethod = null,
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             ProductName = null,
             ScheduledChange = null,
             TaxID = null,
@@ -751,6 +790,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CancelledBy);
         Assert.True(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.True(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.CustomerBusinessName);
         Assert.True(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
@@ -761,6 +802,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.True(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.ProductName);
         Assert.True(model.RawData.ContainsKey("product_name"));
         Assert.Null(model.ScheduledChange);
@@ -784,6 +827,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -815,11 +859,13 @@ public class SubscriptionListResponseTest : TestBase
 
             CancelledAt = null,
             CancelledBy = null,
+            CollectionMethod = null,
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             ProductName = null,
             ScheduledChange = null,
             TaxID = null,
@@ -842,6 +888,7 @@ public class SubscriptionListResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = SubscriptionListResponseBillingMode.Normal,
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = Currency.Aed,
@@ -877,11 +924,13 @@ public class SubscriptionListResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = InvoiceCollectionMethod.AutoCharge,
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ProductName = "product_name",
             ScheduledChange = new()
             {
@@ -909,6 +958,60 @@ public class SubscriptionListResponseTest : TestBase
         SubscriptionListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionListResponseBillingModeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionListResponseBillingMode.Normal)]
+    [InlineData(SubscriptionListResponseBillingMode.InvoiceLed)]
+    public void Validation_Works(SubscriptionListResponseBillingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionListResponseBillingMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionListResponseBillingMode>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionListResponseBillingMode.Normal)]
+    [InlineData(SubscriptionListResponseBillingMode.InvoiceLed)]
+    public void SerializationRoundtrip_Works(SubscriptionListResponseBillingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionListResponseBillingMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionListResponseBillingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionListResponseBillingMode>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionListResponseBillingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 

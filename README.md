@@ -144,16 +144,29 @@ These methods return `HttpResponse`:
 
 ```csharp
 using System;
-using DodoPayments.Client.Models.Invoices.Payments;
+using DodoPayments.Client.Models.Invoices;
+using DodoPayments.Client.Models.Misc;
 
-PaymentRetrieveParams parameters = new()
+InvoicePreviewParams parameters = new()
 {
-    PaymentID = "pay_gr4RizvMOXFJ6xca3y2tU"
+    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
+    Currency = Currency.Aed,
+    CustomerID = "customer_id",
+    Items =
+    [
+        new InvoicePreviewParamsItemCustomItem()
+        {
+            Description = "description",
+            TaxCategory = TaxCategory.DigitalProducts,
+            UnitAmount = 0,
+            Quantity = 0,
+        },
+    ],
 };
 
-var payment = await client.Invoices.Payments.Retrieve(parameters);
+var response = await client.Invoices.Preview(parameters);
 
-Console.WriteLine(payment);
+Console.WriteLine(response);
 ```
 
 To save the response content to a file, or any [`Stream`](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream?view=net-9.0), use the [`CopyToAsync`](<https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.copytoasync?view=net-9.0#system-io-stream-copytoasync(system-io-stream)>) method:
@@ -161,7 +174,7 @@ To save the response content to a file, or any [`Stream`](https://learn.microsof
 ```csharp
 using System.IO;
 
-using var response = await client.Invoices.Payments.Retrieve(parameters);
+using var response = await client.Invoices.Preview(parameters);
 using var contentStream = await response.ReadAsStream();
 using var fileStream = File.Open(path, FileMode.OpenOrCreate);
 await contentStream.CopyToAsync(fileStream); // Or any other Stream

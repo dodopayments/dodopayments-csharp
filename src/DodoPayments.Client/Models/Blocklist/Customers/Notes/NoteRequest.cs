@@ -10,20 +10,20 @@ namespace DodoPayments.Client.Models.Blocklist.Customers.Notes;
 [JsonConverter(typeof(JsonModelConverter<NoteRequest, NoteRequestFromRaw>))]
 public sealed record class NoteRequest : JsonModel
 {
-    public required string Note
+    public required string Text
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("note");
+            return this._rawData.GetNotNullClass<string>("text");
         }
-        init { this._rawData.Set("note", value); }
+        init { this._rawData.Set("text", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.Note;
+        _ = this.Text;
     }
 
     public NoteRequest() { }
@@ -54,10 +54,10 @@ public sealed record class NoteRequest : JsonModel
     }
 
     [SetsRequiredMembers]
-    public NoteRequest(string note)
+    public NoteRequest(string text)
         : this()
     {
-        this.Note = note;
+        this.Text = text;
     }
 }
 

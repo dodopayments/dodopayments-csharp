@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -194,6 +195,20 @@ public record class SubscriptionChangePlanParams : ParamsBase
     }
 
     /// <summary>
+    /// Where a downgrade credit goes. Only invoice-led subscriptions read it. The
+    /// default is `customer_balance`.
+    /// </summary>
+    public ApiEnum<string, Credit>? Credit
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Credit>>("credit");
+        }
+        init { this._rawBodyData.Set("credit", value); }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
     [Obsolete("Use `discount_id` instead.")]
@@ -250,6 +265,19 @@ public record class SubscriptionChangePlanParams : ParamsBase
 
             this._rawBodyData.Set("effective_at", value);
         }
+    }
+
+    /// <summary>
+    /// The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+    /// </summary>
+    public Invoice? Invoice
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<Invoice>("invoice");
+        }
+        init { this._rawBodyData.Set("invoice", value); }
     }
 
     /// <summary>
@@ -499,6 +527,50 @@ sealed class ProrationBillingModeConverter : JsonConverter<ProrationBillingMode>
 }
 
 /// <summary>
+/// Where a downgrade credit goes. Only invoice-led subscriptions read it. The default
+/// is `customer_balance`.
+/// </summary>
+[JsonConverter(typeof(CreditConverter))]
+public enum Credit
+{
+    CustomerBalance,
+    Refund,
+}
+
+sealed class CreditConverter : JsonConverter<Credit>
+{
+    public override Credit Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "customer_balance" => Credit.CustomerBalance,
+            "refund" => Credit.Refund,
+            _ => (Credit)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Credit value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Credit.CustomerBalance => "customer_balance",
+                Credit.Refund => "refund",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
 /// When to apply the plan change. - `immediately` (default): Apply the plan change
 /// right away - `next_billing_date`: Schedule the change for the next billing date
 /// </summary>
@@ -544,6 +616,533 @@ sealed class EffectiveAtConverter : JsonConverter<EffectiveAt>
             options
         );
     }
+}
+
+/// <summary>
+/// The invoice of a plan change billed now. Only invoice-led subscriptions read it.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Invoice, InvoiceFromRaw>))]
+public sealed record class Invoice : JsonModel
+{
+    /// <summary>
+    /// The collection method of the invoice. The subscription value applies when absent.
+    /// </summary>
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init { this._rawData.Set("collection_method", value); }
+    }
+
+    /// <summary>
+    /// `false` keeps the invoice as a draft for review. Default `true`.
+    /// </summary>
+    public bool? Finalize
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("finalize");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("finalize", value);
+        }
+    }
+
+    /// <summary>
+    /// The terms of the plan-change invoice. The subscription terms apply when absent.
+    /// </summary>
+    public PaymentTerms? PaymentTerms
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<PaymentTerms>("payment_terms");
+        }
+        init { this._rawData.Set("payment_terms", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.CollectionMethod?.Validate();
+        _ = this.Finalize;
+        this.PaymentTerms?.Validate();
+    }
+
+    public Invoice() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Invoice(Invoice invoice)
+        : base(invoice) { }
+#pragma warning restore CS8618
+
+    public Invoice(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Invoice(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="InvoiceFromRaw.FromRawUnchecked"/>
+    public static Invoice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class InvoiceFromRaw : IFromRawJson<Invoice>
+{
+    /// <inheritdoc/>
+    public Invoice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Invoice.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The terms of the plan-change invoice. The subscription terms apply when absent.
+/// </summary>
+[JsonConverter(typeof(PaymentTermsConverter))]
+public record class PaymentTerms : ModelBase
+{
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
+    {
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public PaymentTerms(DueOnReceipt value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public PaymentTerms(Net value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public PaymentTerms(JsonElement element)
+    {
+        this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DueOnReceipt"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDueOnReceipt(out var value)) {
+    ///     // `value` is of type `DueOnReceipt`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickDueOnReceipt([NotNullWhen(true)] out DueOnReceipt? value)
+    {
+        value = this.Value as DueOnReceipt;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Net"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickNet(out var value)) {
+    ///     // `value` is of type `Net`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickNet([NotNullWhen(true)] out Net? value)
+    {
+        value = this.Value as Net;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (DueOnReceipt value) =&gt; {...},
+    ///     (Net value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(Action<DueOnReceipt> dueOnReceipt, Action<Net> net)
+    {
+        switch (this.Value)
+        {
+            case DueOnReceipt value:
+                dueOnReceipt(value);
+                break;
+            case Net value:
+                net(value);
+                break;
+            default:
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of PaymentTerms"
+                );
+        }
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (DueOnReceipt value) =&gt; {...},
+    ///     (Net value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public T Match<T>(Func<DueOnReceipt, T> dueOnReceipt, Func<Net, T> net)
+    {
+        return this.Value switch
+        {
+            DueOnReceipt value => dueOnReceipt(value),
+            Net value => net(value),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of PaymentTerms"
+            ),
+        };
+    }
+
+    public static implicit operator PaymentTerms(DueOnReceipt value) => new(value);
+
+    public static implicit operator PaymentTerms(Net value) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
+    public override void Validate()
+    {
+        if (this.Value == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of PaymentTerms"
+            );
+        }
+        this.Switch((dueOnReceipt) => dueOnReceipt.Validate(), (net) => net.Validate());
+    }
+
+    public virtual bool Equals(PaymentTerms? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            DueOnReceipt _ => 0,
+            Net _ => 1,
+            _ => -1,
+        };
+    }
+}
+
+sealed class PaymentTermsConverter : JsonConverter<PaymentTerms?>
+{
+    public override PaymentTerms? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
+        {
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "due_on_receipt":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DueOnReceipt>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "net":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Net>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new PaymentTerms(element);
+            }
+        }
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentTerms? value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(writer, value?.Json, options);
+    }
+}
+
+[JsonConverter(typeof(DueOnReceiptConverter))]
+public record class DueOnReceipt
+{
+    public JsonElement Element { get; private init; }
+
+    public DueOnReceipt()
+    {
+        Element = JsonSerializer.Deserialize<JsonElement>(
+            """
+            {
+              "type": "due_on_receipt"
+            }
+            """
+        );
+    }
+
+    internal DueOnReceipt(JsonElement element)
+    {
+        Element = element;
+    }
+
+    /// <summary>
+    /// Validates that the instance's underlying value is the expected constant.
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
+    public void Validate()
+    {
+        if (this != new DueOnReceipt())
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for 'DueOnReceipt'");
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+
+    public virtual bool Equals(DueOnReceipt? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        return JsonElement.DeepEquals(this.Element, other.Element);
+    }
+}
+
+class DueOnReceiptConverter : JsonConverter<DueOnReceipt>
+{
+    public override DueOnReceipt? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return new(JsonSerializer.Deserialize<JsonElement>(ref reader, options));
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DueOnReceipt value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(writer, value.Element, options);
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<Net, NetFromRaw>))]
+public sealed record class Net : JsonModel
+{
+    public required int Days
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("days");
+        }
+        init { this._rawData.Set("days", value); }
+    }
+
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Days;
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("net")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public Net()
+    {
+        this.Type = JsonSerializer.SerializeToElement("net");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Net(Net net)
+        : base(net) { }
+#pragma warning restore CS8618
+
+    public Net(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("net");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Net(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="NetFromRaw.FromRawUnchecked"/>
+    public static Net FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public Net(int days)
+        : this()
+    {
+        this.Days = days;
+    }
+}
+
+class NetFromRaw : IFromRawJson<Net>
+{
+    /// <inheritdoc/>
+    public Net FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Net.FromRawUnchecked(rawData);
 }
 
 /// <summary>

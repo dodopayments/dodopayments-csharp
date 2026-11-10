@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Addons;
-using DodoPayments.Client.Services.Addons;
 
 namespace DodoPayments.Client.Services;
 
@@ -33,13 +32,6 @@ public sealed class AddonService : IAddonService
         _client = client;
 
         _withRawResponse = new(() => new AddonServiceWithRawResponse(client.WithRawResponse));
-        _translations = new(() => new TranslationService(client));
-    }
-
-    readonly Lazy<ITranslationService> _translations;
-    public ITranslationService Translations
-    {
-        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
@@ -192,14 +184,6 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
     public AddonServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
-
-        _translations = new(() => new TranslationServiceWithRawResponse(client));
-    }
-
-    readonly Lazy<ITranslationServiceWithRawResponse> _translations;
-    public ITranslationServiceWithRawResponse Translations
-    {
-        get { return _translations.Value; }
     }
 
     /// <inheritdoc/>
