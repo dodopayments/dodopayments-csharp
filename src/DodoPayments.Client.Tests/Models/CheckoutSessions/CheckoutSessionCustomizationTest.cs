@@ -13,6 +13,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -66,6 +67,8 @@ public class CheckoutSessionCustomizationTest : TestBase
         };
 
         string expectedForceLanguage = "force_language";
+        ApiEnum<string, PaymentMethodLayout> expectedPaymentMethodLayout =
+            PaymentMethodLayout.Accordion;
         bool expectedShowOnDemandTag = true;
         bool expectedShowOrderDetails = true;
         ApiEnum<string, Theme> expectedTheme = Theme.Dark;
@@ -118,6 +121,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         };
 
         Assert.Equal(expectedForceLanguage, model.ForceLanguage);
+        Assert.Equal(expectedPaymentMethodLayout, model.PaymentMethodLayout);
         Assert.Equal(expectedShowOnDemandTag, model.ShowOnDemandTag);
         Assert.Equal(expectedShowOrderDetails, model.ShowOrderDetails);
         Assert.Equal(expectedTheme, model.Theme);
@@ -130,6 +134,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -197,6 +202,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -257,6 +263,8 @@ public class CheckoutSessionCustomizationTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedForceLanguage = "force_language";
+        ApiEnum<string, PaymentMethodLayout> expectedPaymentMethodLayout =
+            PaymentMethodLayout.Accordion;
         bool expectedShowOnDemandTag = true;
         bool expectedShowOrderDetails = true;
         ApiEnum<string, Theme> expectedTheme = Theme.Dark;
@@ -309,6 +317,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         };
 
         Assert.Equal(expectedForceLanguage, deserialized.ForceLanguage);
+        Assert.Equal(expectedPaymentMethodLayout, deserialized.PaymentMethodLayout);
         Assert.Equal(expectedShowOnDemandTag, deserialized.ShowOnDemandTag);
         Assert.Equal(expectedShowOrderDetails, deserialized.ShowOrderDetails);
         Assert.Equal(expectedTheme, deserialized.Theme);
@@ -321,6 +330,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -382,6 +392,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             Theme = Theme.Dark,
             ThemeConfig = new()
             {
@@ -444,6 +455,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             Theme = Theme.Dark,
             ThemeConfig = new()
             {
@@ -503,6 +515,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             Theme = Theme.Dark,
             ThemeConfig = new()
             {
@@ -569,6 +582,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             Theme = Theme.Dark,
             ThemeConfig = new()
             {
@@ -637,6 +651,8 @@ public class CheckoutSessionCustomizationTest : TestBase
 
         Assert.Null(model.ForceLanguage);
         Assert.False(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.PaymentMethodLayout);
+        Assert.False(model.RawData.ContainsKey("payment_method_layout"));
         Assert.Null(model.Theme);
         Assert.False(model.RawData.ContainsKey("theme"));
         Assert.Null(model.ThemeConfig);
@@ -664,12 +680,15 @@ public class CheckoutSessionCustomizationTest : TestBase
             ShowOrderDetails = true,
 
             ForceLanguage = null,
+            PaymentMethodLayout = null,
             Theme = null,
             ThemeConfig = null,
         };
 
         Assert.Null(model.ForceLanguage);
         Assert.True(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.PaymentMethodLayout);
+        Assert.True(model.RawData.ContainsKey("payment_method_layout"));
         Assert.Null(model.Theme);
         Assert.True(model.RawData.ContainsKey("theme"));
         Assert.Null(model.ThemeConfig);
@@ -685,6 +704,7 @@ public class CheckoutSessionCustomizationTest : TestBase
             ShowOrderDetails = true,
 
             ForceLanguage = null,
+            PaymentMethodLayout = null,
             Theme = null,
             ThemeConfig = null,
         };
@@ -698,6 +718,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -753,6 +774,64 @@ public class CheckoutSessionCustomizationTest : TestBase
         CheckoutSessionCustomization copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PaymentMethodLayoutTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentMethodLayout.Accordion)]
+    [InlineData(PaymentMethodLayout.Tabs)]
+    public void Validation_Works(PaymentMethodLayout rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentMethodLayout> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentMethodLayout>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentMethodLayout.Accordion)]
+    [InlineData(PaymentMethodLayout.Tabs)]
+    public void SerializationRoundtrip_Works(PaymentMethodLayout rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentMethodLayout> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentMethodLayout>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentMethodLayout>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentMethodLayout>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

@@ -11,18 +11,15 @@ public class MeterListParamsTest : TestBase
         var parameters = new MeterListParams
         {
             Archived = true,
-            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
 
         bool expectedArchived = true;
-        string expectedLocale = "locale";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
         Assert.Equal(expectedArchived, parameters.Archived);
-        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
     }
@@ -34,8 +31,6 @@ public class MeterListParamsTest : TestBase
 
         Assert.Null(parameters.Archived);
         Assert.False(parameters.RawQueryData.ContainsKey("archived"));
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -49,15 +44,12 @@ public class MeterListParamsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             Archived = null,
-            Locale = null,
             PageNumber = null,
             PageSize = null,
         };
 
         Assert.Null(parameters.Archived);
         Assert.False(parameters.RawQueryData.ContainsKey("archived"));
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -70,7 +62,6 @@ public class MeterListParamsTest : TestBase
         MeterListParams parameters = new()
         {
             Archived = true,
-            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };
@@ -80,7 +71,7 @@ public class MeterListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/meters?archived=true&locale=locale&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/meters?archived=true&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -93,7 +84,6 @@ public class MeterListParamsTest : TestBase
         var parameters = new MeterListParams
         {
             Archived = true,
-            Locale = "locale",
             PageNumber = 0,
             PageSize = 0,
         };

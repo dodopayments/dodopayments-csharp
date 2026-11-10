@@ -12,16 +12,16 @@ public class NoteUpdateParamsTest : TestBase
         {
             EntryID = "entry_id",
             NoteID = "note_id",
-            Note = "note",
+            Text = "text",
         };
 
         string expectedEntryID = "entry_id";
         string expectedNoteID = "note_id";
-        string expectedNote = "note";
+        string expectedText = "text";
 
         Assert.Equal(expectedEntryID, parameters.EntryID);
         Assert.Equal(expectedNoteID, parameters.NoteID);
-        Assert.Equal(expectedNote, parameters.Note);
+        Assert.Equal(expectedText, parameters.Text);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class NoteUpdateParamsTest : TestBase
         {
             EntryID = "entry_id",
             NoteID = "note_id",
-            Note = "note",
+            Text = "text",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -51,7 +51,7 @@ public class NoteUpdateParamsTest : TestBase
         {
             EntryID = "entry_id",
             NoteID = "note_id",
-            Note = "note",
+            Text = "text",
         };
 
         NoteUpdateParams copied = new(parameters);

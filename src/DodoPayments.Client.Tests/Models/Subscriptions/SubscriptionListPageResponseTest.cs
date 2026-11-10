@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -26,6 +27,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         Street = "street",
                         Zipcode = "zipcode",
                     },
+                    BillingMode = SubscriptionListResponseBillingMode.Normal,
                     CancelAtNextBillingDate = true,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = Currency.Aed,
@@ -61,11 +63,13 @@ public class SubscriptionListPageResponseTest : TestBase
                         Email = "email",
                         Name = "name",
                     },
+                    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
                     PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
+                    PaymentTermsDays = 0,
                     ProductName = "product_name",
                     ScheduledChange = new()
                     {
@@ -104,6 +108,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = SubscriptionListResponseBillingMode.Normal,
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Currency = Currency.Aed,
@@ -139,11 +144,13 @@ public class SubscriptionListPageResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ProductName = "product_name",
                 ScheduledChange = new()
                 {
@@ -193,6 +200,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         Street = "street",
                         Zipcode = "zipcode",
                     },
+                    BillingMode = SubscriptionListResponseBillingMode.Normal,
                     CancelAtNextBillingDate = true,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = Currency.Aed,
@@ -228,11 +236,13 @@ public class SubscriptionListPageResponseTest : TestBase
                         Email = "email",
                         Name = "name",
                     },
+                    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
                     PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
+                    PaymentTermsDays = 0,
                     ProductName = "product_name",
                     ScheduledChange = new()
                     {
@@ -285,6 +295,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         Street = "street",
                         Zipcode = "zipcode",
                     },
+                    BillingMode = SubscriptionListResponseBillingMode.Normal,
                     CancelAtNextBillingDate = true,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = Currency.Aed,
@@ -320,11 +331,13 @@ public class SubscriptionListPageResponseTest : TestBase
                         Email = "email",
                         Name = "name",
                     },
+                    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
                     PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
+                    PaymentTermsDays = 0,
                     ProductName = "product_name",
                     ScheduledChange = new()
                     {
@@ -370,6 +383,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = SubscriptionListResponseBillingMode.Normal,
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Currency = Currency.Aed,
@@ -405,11 +419,13 @@ public class SubscriptionListPageResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ProductName = "product_name",
                 ScheduledChange = new()
                 {
@@ -459,6 +475,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         Street = "street",
                         Zipcode = "zipcode",
                     },
+                    BillingMode = SubscriptionListResponseBillingMode.Normal,
                     CancelAtNextBillingDate = true,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = Currency.Aed,
@@ -494,11 +511,13 @@ public class SubscriptionListPageResponseTest : TestBase
                         Email = "email",
                         Name = "name",
                     },
+                    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
                     PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
+                    PaymentTermsDays = 0,
                     ProductName = "product_name",
                     ScheduledChange = new()
                     {
@@ -545,6 +564,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         Street = "street",
                         Zipcode = "zipcode",
                     },
+                    BillingMode = SubscriptionListResponseBillingMode.Normal,
                     CancelAtNextBillingDate = true,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = Currency.Aed,
@@ -580,11 +600,13 @@ public class SubscriptionListPageResponseTest : TestBase
                         Email = "email",
                         Name = "name",
                     },
+                    CollectionMethod = InvoiceCollectionMethod.AutoCharge,
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
                     PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
+                    PaymentTermsDays = 0,
                     ProductName = "product_name",
                     ScheduledChange = new()
                     {

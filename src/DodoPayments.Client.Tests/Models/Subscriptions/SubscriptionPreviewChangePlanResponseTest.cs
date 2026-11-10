@@ -6,6 +6,7 @@ using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -59,6 +60,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -143,6 +145,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -172,6 +175,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -239,6 +243,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -323,6 +328,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -352,6 +358,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -427,6 +434,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -511,6 +519,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -540,6 +549,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -621,6 +631,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -705,6 +716,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -734,6 +746,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -808,6 +821,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -892,6 +906,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -921,6 +936,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -996,6 +1012,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1080,6 +1097,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1109,6 +1127,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -1184,6 +1203,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1268,6 +1288,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1297,6 +1318,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",

@@ -50,6 +50,19 @@ public sealed record class SubscriptionChangePlanResponse : JsonModel
     }
 
     /// <summary>
+    /// The invoice that bills the plan change. Set only for an invoice-led subscription.
+    /// </summary>
+    public string? InvoiceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoice_id");
+        }
+        init { this._rawData.Set("invoice_id", value); }
+    }
+
+    /// <summary>
     /// Id of the payment that settles the plan change.
     /// </summary>
     public string? PaymentID
@@ -75,13 +88,28 @@ public sealed record class SubscriptionChangePlanResponse : JsonModel
         init { this._rawData.Set("payment_link", value); }
     }
 
+    /// <summary>
+    /// The refund of a downgrade with `credit: refund`.
+    /// </summary>
+    public string? RefundID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("refund_id");
+        }
+        init { this._rawData.Set("refund_id", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ClientSecret;
         _ = this.ExpiresOn;
+        _ = this.InvoiceID;
         _ = this.PaymentID;
         _ = this.PaymentLink;
+        _ = this.RefundID;
     }
 
     public SubscriptionChangePlanResponse() { }

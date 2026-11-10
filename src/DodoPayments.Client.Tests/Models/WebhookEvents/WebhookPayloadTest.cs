@@ -12,6 +12,7 @@ using DodoPayments.Client.Models.WebhookEvents;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
 using Refunds = DodoPayments.Client.Models.Refunds;
@@ -1196,6 +1197,7 @@ public class DataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1280,6 +1282,7 @@ public class DataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1309,6 +1312,7 @@ public class DataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -1577,6 +1581,101 @@ public class DataTest : TestBase
     }
 
     [Fact]
+    public void InvoiceValidationWorks()
+    {
+        Data value = new Invoice()
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void PaymentSerializationRoundtripWorks()
     {
         Data value = new Payment()
@@ -1730,6 +1829,7 @@ public class DataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1814,6 +1914,7 @@ public class DataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1843,6 +1944,7 @@ public class DataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -2133,6 +2235,104 @@ public class DataTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvoiceSerializationRoundtripWorks()
+    {
+        Data value = new Invoice()
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -4398,6 +4598,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -4482,6 +4683,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -4511,6 +4713,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -4548,6 +4751,8 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, Subscriptions::BillingMode> expectedBillingMode =
+            Subscriptions::BillingMode.Normal;
         string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -4638,6 +4843,8 @@ public class SubscriptionTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -4670,6 +4877,7 @@ public class SubscriptionTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
@@ -4701,6 +4909,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
         Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBillingMode, model.BillingMode);
         Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -4753,6 +4962,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
         Assert.Equal(expectedCancelledBy, model.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -4771,6 +4981,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPausedAt, model.PausedAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, model.PaymentTermsDays);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
         Assert.Equal(expectedTrialAmount, model.TrialAmount);
@@ -4793,6 +5004,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -4877,6 +5089,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -4906,6 +5119,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -4954,6 +5168,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5038,6 +5253,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -5067,6 +5283,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -5111,6 +5328,8 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, Subscriptions::BillingMode> expectedBillingMode =
+            Subscriptions::BillingMode.Normal;
         string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -5201,6 +5420,8 @@ public class SubscriptionTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -5233,6 +5454,7 @@ public class SubscriptionTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
@@ -5264,6 +5486,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
         Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBillingMode, deserialized.BillingMode);
         Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -5316,6 +5539,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
         Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -5334,6 +5558,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPausedAt, deserialized.PausedAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, deserialized.PaymentTermsDays);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
         Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
@@ -5356,6 +5581,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5440,6 +5666,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -5469,6 +5696,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -5511,6 +5739,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5617,6 +5846,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5627,6 +5857,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledBy);
         Assert.False(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -5645,6 +5877,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5751,6 +5984,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5774,6 +6008,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5880,6 +6115,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5888,6 +6124,7 @@ public class SubscriptionTest : TestBase
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
             CancelledBy = null,
+            CollectionMethod = null,
             ScheduledChange = null,
         };
 
@@ -5895,6 +6132,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledBy);
         Assert.False(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -5913,6 +6152,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6019,6 +6259,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6027,6 +6268,7 @@ public class SubscriptionTest : TestBase
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
             CancelledBy = null,
+            CollectionMethod = null,
             ScheduledChange = null,
         };
 
@@ -6047,6 +6289,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6129,6 +6372,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -6170,6 +6414,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.False(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
@@ -6194,6 +6440,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6276,6 +6523,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -6314,6 +6562,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6396,6 +6645,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -6426,6 +6676,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
@@ -6452,6 +6703,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.True(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
@@ -6476,6 +6729,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6558,6 +6812,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -6588,6 +6843,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
@@ -6611,6 +6867,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = Subscriptions::BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6695,6 +6952,7 @@ public class SubscriptionTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -6724,6 +6982,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -10488,6 +10747,1501 @@ public class EntitlementGrantTest : TestBase
         };
 
         EntitlementGrant copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class InvoiceTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        List<ApiEnum<string, Invoices::AllowedAction>> expectedAllowedActions =
+        [
+            Invoices::AllowedAction.Edit,
+        ];
+        long expectedAmountDue = 0;
+        long expectedAmountPaid = 0;
+        long expectedAmountRefunded = 0;
+        ApiEnum<string, Invoices::BillingMode> expectedBillingMode = Invoices::BillingMode.Normal;
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        long expectedCredits = 0;
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        Invoices::Customer expectedCustomer = new()
+        {
+            BillingAddress = new()
+            {
+                City = "city",
+                Country = CountryCode.Af,
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CcEmails = ["string"],
+            CustomerID = "customer_id",
+            Email = "email",
+            TaxID = "tax_id",
+        };
+        List<string> expectedDiscountIds = ["string"];
+        List<ApiEnum<string, Invoices::EditableField>> expectedEditableFields =
+        [
+            Invoices::EditableField.Customer,
+        ];
+        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        string expectedInvoiceID = "invoice_id";
+        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        List<string> expectedRefundIds = ["string"];
+        int expectedRetryCount = 0;
+        long expectedRowVersion = 0;
+        ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
+        List<string> expectedSubscriptionIds = ["string"];
+        List<ApiEnum<string, Invoices::InvoiceTag>> expectedTags = [Invoices::InvoiceTag.Refunded];
+        int expectedTax = 0;
+        int expectedTotalAmount = 0;
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
+        DateTimeOffset expectedDueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Invoices::DunningState> expectedDunningState =
+            Invoices::DunningState.NotStarted;
+        DateTimeOffset expectedFinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedHostedUrl = "hosted_url";
+        List<Invoices::InvoiceLine> expectedLines =
+        [
+            new()
+            {
+                Amount = 0,
+                Kind = Invoices::Kind.Subscription,
+                Quantity = 0,
+                Tax = 0,
+                TaxInclusive = true,
+                UnitAmount = 0,
+                AddonID = "addon_id",
+                Description = "description",
+                Name = "name",
+                PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                SubscriptionID = "subscription_id",
+                TaxRate = 0,
+            },
+        ];
+        string expectedMemo = "memo";
+        DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        int expectedPaymentTermsDays = 0;
+        List<Invoices::Payment> expectedPayments =
+        [
+            new()
+            {
+                Amount = 0,
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
+                RetryAttempt = 0,
+                Status = Payments::IntentStatus.Succeeded,
+            },
+        ];
+        string expectedPdfUrl = "pdf_url";
+        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        {
+            OffsetsMinutes = [0],
+            Paused = true,
+            RemindersEnabled = true,
+        };
+        DateTimeOffset expectedReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedSentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Invoice");
+
+        Assert.Equal(expectedAllowedActions.Count, model.AllowedActions.Count);
+        for (int i = 0; i < expectedAllowedActions.Count; i++)
+        {
+            Assert.Equal(expectedAllowedActions[i], model.AllowedActions[i]);
+        }
+        Assert.Equal(expectedAmountDue, model.AmountDue);
+        Assert.Equal(expectedAmountPaid, model.AmountPaid);
+        Assert.Equal(expectedAmountRefunded, model.AmountRefunded);
+        Assert.Equal(expectedBillingMode, model.BillingMode);
+        Assert.Equal(expectedBusinessID, model.BusinessID);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCredits, model.Credits);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedCustomer, model.Customer);
+        Assert.Equal(expectedDiscountIds.Count, model.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], model.DiscountIds[i]);
+        }
+        Assert.Equal(expectedEditableFields.Count, model.EditableFields.Count);
+        for (int i = 0; i < expectedEditableFields.Count; i++)
+        {
+            Assert.Equal(expectedEditableFields[i], model.EditableFields[i]);
+        }
+        Assert.Equal(expectedFrequency, model.Frequency);
+        Assert.Equal(expectedInvoiceID, model.InvoiceID);
+        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata));
+        Assert.Equal(expectedRefundIds.Count, model.RefundIds.Count);
+        for (int i = 0; i < expectedRefundIds.Count; i++)
+        {
+            Assert.Equal(expectedRefundIds[i], model.RefundIds[i]);
+        }
+        Assert.Equal(expectedRetryCount, model.RetryCount);
+        Assert.Equal(expectedRowVersion, model.RowVersion);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], model.SubscriptionIds[i]);
+        }
+        Assert.Equal(expectedTags.Count, model.Tags.Count);
+        for (int i = 0; i < expectedTags.Count; i++)
+        {
+            Assert.Equal(expectedTags[i], model.Tags[i]);
+        }
+        Assert.Equal(expectedTax, model.Tax);
+        Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
+        Assert.Equal(expectedDueAt, model.DueAt);
+        Assert.Equal(expectedDunningState, model.DunningState);
+        Assert.Equal(expectedFinalizedAt, model.FinalizedAt);
+        Assert.Equal(expectedHostedUrl, model.HostedUrl);
+        Assert.NotNull(model.Lines);
+        Assert.Equal(expectedLines.Count, model.Lines.Count);
+        for (int i = 0; i < expectedLines.Count; i++)
+        {
+            Assert.Equal(expectedLines[i], model.Lines[i]);
+        }
+        Assert.Equal(expectedMemo, model.Memo);
+        Assert.Equal(expectedNextReminderAt, model.NextReminderAt);
+        Assert.Equal(expectedNextRetryAt, model.NextRetryAt);
+        Assert.Equal(expectedPaymentTermsDays, model.PaymentTermsDays);
+        Assert.NotNull(model.Payments);
+        Assert.Equal(expectedPayments.Count, model.Payments.Count);
+        for (int i = 0; i < expectedPayments.Count; i++)
+        {
+            Assert.Equal(expectedPayments[i], model.Payments[i]);
+        }
+        Assert.Equal(expectedPdfUrl, model.PdfUrl);
+        Assert.Equal(expectedReminderSettings, model.ReminderSettings);
+        Assert.Equal(expectedReviewDeadline, model.ReviewDeadline);
+        Assert.Equal(expectedSentAt, model.SentAt);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Invoice>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Invoice>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        List<ApiEnum<string, Invoices::AllowedAction>> expectedAllowedActions =
+        [
+            Invoices::AllowedAction.Edit,
+        ];
+        long expectedAmountDue = 0;
+        long expectedAmountPaid = 0;
+        long expectedAmountRefunded = 0;
+        ApiEnum<string, Invoices::BillingMode> expectedBillingMode = Invoices::BillingMode.Normal;
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        long expectedCredits = 0;
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        Invoices::Customer expectedCustomer = new()
+        {
+            BillingAddress = new()
+            {
+                City = "city",
+                Country = CountryCode.Af,
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CcEmails = ["string"],
+            CustomerID = "customer_id",
+            Email = "email",
+            TaxID = "tax_id",
+        };
+        List<string> expectedDiscountIds = ["string"];
+        List<ApiEnum<string, Invoices::EditableField>> expectedEditableFields =
+        [
+            Invoices::EditableField.Customer,
+        ];
+        Invoices::Frequency expectedFrequency = new Invoices::FrequencyType();
+        string expectedInvoiceID = "invoice_id";
+        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        List<string> expectedRefundIds = ["string"];
+        int expectedRetryCount = 0;
+        long expectedRowVersion = 0;
+        ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
+        List<string> expectedSubscriptionIds = ["string"];
+        List<ApiEnum<string, Invoices::InvoiceTag>> expectedTags = [Invoices::InvoiceTag.Refunded];
+        int expectedTax = 0;
+        int expectedTotalAmount = 0;
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
+        DateTimeOffset expectedDueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Invoices::DunningState> expectedDunningState =
+            Invoices::DunningState.NotStarted;
+        DateTimeOffset expectedFinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedHostedUrl = "hosted_url";
+        List<Invoices::InvoiceLine> expectedLines =
+        [
+            new()
+            {
+                Amount = 0,
+                Kind = Invoices::Kind.Subscription,
+                Quantity = 0,
+                Tax = 0,
+                TaxInclusive = true,
+                UnitAmount = 0,
+                AddonID = "addon_id",
+                Description = "description",
+                Name = "name",
+                PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                SubscriptionID = "subscription_id",
+                TaxRate = 0,
+            },
+        ];
+        string expectedMemo = "memo";
+        DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        int expectedPaymentTermsDays = 0;
+        List<Invoices::Payment> expectedPayments =
+        [
+            new()
+            {
+                Amount = 0,
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentID = "payment_id",
+                RetryAttempt = 0,
+                Status = Payments::IntentStatus.Succeeded,
+            },
+        ];
+        string expectedPdfUrl = "pdf_url";
+        Invoices::ReminderSettings expectedReminderSettings = new Invoices::UnionMember0()
+        {
+            OffsetsMinutes = [0],
+            Paused = true,
+            RemindersEnabled = true,
+        };
+        DateTimeOffset expectedReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedSentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Invoice");
+
+        Assert.Equal(expectedAllowedActions.Count, deserialized.AllowedActions.Count);
+        for (int i = 0; i < expectedAllowedActions.Count; i++)
+        {
+            Assert.Equal(expectedAllowedActions[i], deserialized.AllowedActions[i]);
+        }
+        Assert.Equal(expectedAmountDue, deserialized.AmountDue);
+        Assert.Equal(expectedAmountPaid, deserialized.AmountPaid);
+        Assert.Equal(expectedAmountRefunded, deserialized.AmountRefunded);
+        Assert.Equal(expectedBillingMode, deserialized.BillingMode);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCredits, deserialized.Credits);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedDiscountIds.Count, deserialized.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], deserialized.DiscountIds[i]);
+        }
+        Assert.Equal(expectedEditableFields.Count, deserialized.EditableFields.Count);
+        for (int i = 0; i < expectedEditableFields.Count; i++)
+        {
+            Assert.Equal(expectedEditableFields[i], deserialized.EditableFields[i]);
+        }
+        Assert.Equal(expectedFrequency, deserialized.Frequency);
+        Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
+        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata));
+        Assert.Equal(expectedRefundIds.Count, deserialized.RefundIds.Count);
+        for (int i = 0; i < expectedRefundIds.Count; i++)
+        {
+            Assert.Equal(expectedRefundIds[i], deserialized.RefundIds[i]);
+        }
+        Assert.Equal(expectedRetryCount, deserialized.RetryCount);
+        Assert.Equal(expectedRowVersion, deserialized.RowVersion);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
+        for (int i = 0; i < expectedSubscriptionIds.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionIds[i], deserialized.SubscriptionIds[i]);
+        }
+        Assert.Equal(expectedTags.Count, deserialized.Tags.Count);
+        for (int i = 0; i < expectedTags.Count; i++)
+        {
+            Assert.Equal(expectedTags[i], deserialized.Tags[i]);
+        }
+        Assert.Equal(expectedTax, deserialized.Tax);
+        Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
+        Assert.Equal(expectedDueAt, deserialized.DueAt);
+        Assert.Equal(expectedDunningState, deserialized.DunningState);
+        Assert.Equal(expectedFinalizedAt, deserialized.FinalizedAt);
+        Assert.Equal(expectedHostedUrl, deserialized.HostedUrl);
+        Assert.NotNull(deserialized.Lines);
+        Assert.Equal(expectedLines.Count, deserialized.Lines.Count);
+        for (int i = 0; i < expectedLines.Count; i++)
+        {
+            Assert.Equal(expectedLines[i], deserialized.Lines[i]);
+        }
+        Assert.Equal(expectedMemo, deserialized.Memo);
+        Assert.Equal(expectedNextReminderAt, deserialized.NextReminderAt);
+        Assert.Equal(expectedNextRetryAt, deserialized.NextRetryAt);
+        Assert.Equal(expectedPaymentTermsDays, deserialized.PaymentTermsDays);
+        Assert.NotNull(deserialized.Payments);
+        Assert.Equal(expectedPayments.Count, deserialized.Payments.Count);
+        for (int i = 0; i < expectedPayments.Count; i++)
+        {
+            Assert.Equal(expectedPayments[i], deserialized.Payments[i]);
+        }
+        Assert.Equal(expectedPdfUrl, deserialized.PdfUrl);
+        Assert.Equal(expectedReminderSettings, deserialized.ReminderSettings);
+        Assert.Equal(expectedReviewDeadline, deserialized.ReviewDeadline);
+        Assert.Equal(expectedSentAt, deserialized.SentAt);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
+        Assert.Null(model.DunningState);
+        Assert.False(model.RawData.ContainsKey("dunning_state"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            CollectionMethod = null,
+            DunningState = null,
+        };
+
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
+        Assert.Null(model.DunningState);
+        Assert.False(model.RawData.ContainsKey("dunning_state"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            CollectionMethod = null,
+            DunningState = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DunningState = Invoices::DunningState.NotStarted,
+        };
+
+        Assert.Null(model.DueAt);
+        Assert.False(model.RawData.ContainsKey("due_at"));
+        Assert.Null(model.FinalizedAt);
+        Assert.False(model.RawData.ContainsKey("finalized_at"));
+        Assert.Null(model.HostedUrl);
+        Assert.False(model.RawData.ContainsKey("hosted_url"));
+        Assert.Null(model.Lines);
+        Assert.False(model.RawData.ContainsKey("lines"));
+        Assert.Null(model.Memo);
+        Assert.False(model.RawData.ContainsKey("memo"));
+        Assert.Null(model.NextReminderAt);
+        Assert.False(model.RawData.ContainsKey("next_reminder_at"));
+        Assert.Null(model.NextRetryAt);
+        Assert.False(model.RawData.ContainsKey("next_retry_at"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.False(model.RawData.ContainsKey("payment_terms_days"));
+        Assert.Null(model.Payments);
+        Assert.False(model.RawData.ContainsKey("payments"));
+        Assert.Null(model.PdfUrl);
+        Assert.False(model.RawData.ContainsKey("pdf_url"));
+        Assert.Null(model.ReminderSettings);
+        Assert.False(model.RawData.ContainsKey("reminder_settings"));
+        Assert.Null(model.ReviewDeadline);
+        Assert.False(model.RawData.ContainsKey("review_deadline"));
+        Assert.Null(model.SentAt);
+        Assert.False(model.RawData.ContainsKey("sent_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DunningState = Invoices::DunningState.NotStarted,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DunningState = Invoices::DunningState.NotStarted,
+
+            DueAt = null,
+            FinalizedAt = null,
+            HostedUrl = null,
+            Lines = null,
+            Memo = null,
+            NextReminderAt = null,
+            NextRetryAt = null,
+            PaymentTermsDays = null,
+            Payments = null,
+            PdfUrl = null,
+            ReminderSettings = null,
+            ReviewDeadline = null,
+            SentAt = null,
+        };
+
+        Assert.Null(model.DueAt);
+        Assert.True(model.RawData.ContainsKey("due_at"));
+        Assert.Null(model.FinalizedAt);
+        Assert.True(model.RawData.ContainsKey("finalized_at"));
+        Assert.Null(model.HostedUrl);
+        Assert.True(model.RawData.ContainsKey("hosted_url"));
+        Assert.Null(model.Lines);
+        Assert.True(model.RawData.ContainsKey("lines"));
+        Assert.Null(model.Memo);
+        Assert.True(model.RawData.ContainsKey("memo"));
+        Assert.Null(model.NextReminderAt);
+        Assert.True(model.RawData.ContainsKey("next_reminder_at"));
+        Assert.Null(model.NextRetryAt);
+        Assert.True(model.RawData.ContainsKey("next_retry_at"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.True(model.RawData.ContainsKey("payment_terms_days"));
+        Assert.Null(model.Payments);
+        Assert.True(model.RawData.ContainsKey("payments"));
+        Assert.Null(model.PdfUrl);
+        Assert.True(model.RawData.ContainsKey("pdf_url"));
+        Assert.Null(model.ReminderSettings);
+        Assert.True(model.RawData.ContainsKey("reminder_settings"));
+        Assert.Null(model.ReviewDeadline);
+        Assert.True(model.RawData.ContainsKey("review_deadline"));
+        Assert.Null(model.SentAt);
+        Assert.True(model.RawData.ContainsKey("sent_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DunningState = Invoices::DunningState.NotStarted,
+
+            DueAt = null,
+            FinalizedAt = null,
+            HostedUrl = null,
+            Lines = null,
+            Memo = null,
+            NextReminderAt = null,
+            NextRetryAt = null,
+            PaymentTermsDays = null,
+            Payments = null,
+            PdfUrl = null,
+            ReminderSettings = null,
+            ReviewDeadline = null,
+            SentAt = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Invoice
+        {
+            AllowedActions = [Invoices::AllowedAction.Edit],
+            AmountDue = 0,
+            AmountPaid = 0,
+            AmountRefunded = 0,
+            BillingMode = Invoices::BillingMode.Normal,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Credits = 0,
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                BillingAddress = new()
+                {
+                    City = "city",
+                    Country = CountryCode.Af,
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CcEmails = ["string"],
+                CustomerID = "customer_id",
+                Email = "email",
+                TaxID = "tax_id",
+            },
+            DiscountIds = ["string"],
+            EditableFields = [Invoices::EditableField.Customer],
+            Frequency = new Invoices::FrequencyType(),
+            InvoiceID = "invoice_id",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            RefundIds = ["string"],
+            RetryCount = 0,
+            RowVersion = 0,
+            Status = Invoices::InvoiceStatus.Open,
+            SubscriptionIds = ["string"],
+            Tags = [Invoices::InvoiceTag.Refunded],
+            Tax = 0,
+            TotalAmount = 0,
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
+            DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DunningState = Invoices::DunningState.NotStarted,
+            FinalizedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            HostedUrl = "hosted_url",
+            Lines =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Kind = Invoices::Kind.Subscription,
+                    Quantity = 0,
+                    Tax = 0,
+                    TaxInclusive = true,
+                    UnitAmount = 0,
+                    AddonID = "addon_id",
+                    Description = "description",
+                    Name = "name",
+                    PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    SubscriptionID = "subscription_id",
+                    TaxRate = 0,
+                },
+            ],
+            Memo = "memo",
+            NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentTermsDays = 0,
+            Payments =
+            [
+                new()
+                {
+                    Amount = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentID = "payment_id",
+                    RetryAttempt = 0,
+                    Status = Payments::IntentStatus.Succeeded,
+                },
+            ],
+            PdfUrl = "pdf_url",
+            ReminderSettings = new Invoices::UnionMember0()
+            {
+                OffsetsMinutes = [0],
+                Paused = true,
+                RemindersEnabled = true,
+            },
+            ReviewDeadline = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SentAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Invoice copied = new(model);
 
         Assert.Equal(model, copied);
     }

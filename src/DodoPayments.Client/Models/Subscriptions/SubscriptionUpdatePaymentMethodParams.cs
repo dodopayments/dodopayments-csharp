@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -10,13 +9,17 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// For an invoice-led subscription, billing charges the open invoices after the change,
+/// so the response has no payment.
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 {
@@ -124,9 +127,9 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
             && this.RawBodyData.Equals(other.RawBodyData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}/update-payment-method", this.SubscriptionID)
         )
@@ -274,7 +277,7 @@ public record class PaymentMethod : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(Action<New> new_, Action<Existing> existing)
+    public void Switch(System::Action<New> new_, System::Action<Existing> existing)
     {
         switch (this.Value)
         {
@@ -312,7 +315,7 @@ public record class PaymentMethod : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(Func<New, T> new_, Func<Existing, T> existing)
+    public T Match<T>(System::Func<New, T> new_, System::Func<Existing, T> existing)
     {
         return this.Value switch
         {
@@ -380,7 +383,7 @@ sealed class PaymentMethodConverter : JsonConverter<PaymentMethod>
 {
     public override PaymentMethod? Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {

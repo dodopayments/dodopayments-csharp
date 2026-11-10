@@ -61,6 +61,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -213,6 +214,7 @@ public class CheckoutSessionRequestTest : TestBase
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -419,6 +421,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -580,6 +583,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -739,6 +743,7 @@ public class CheckoutSessionRequestTest : TestBase
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -948,6 +953,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -1410,6 +1416,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -1553,6 +1560,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -1661,6 +1669,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -1823,6 +1832,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -1975,6 +1985,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,

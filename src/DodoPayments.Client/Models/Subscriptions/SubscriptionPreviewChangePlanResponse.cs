@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,6 +7,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -96,12 +96,12 @@ public sealed record class ImmediateCharge : JsonModel
     /// <summary>
     /// When the plan change will be effective
     /// </summary>
-    public required DateTimeOffset EffectiveAt
+    public required System::DateTimeOffset EffectiveAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("effective_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("effective_at");
         }
         init { this._rawData.Set("effective_at", value); }
     }
@@ -425,9 +425,9 @@ public record class LineItem : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
-        Action<LineItemSubscription> subscription,
-        Action<LineItemAddon> addon,
-        Action<Meter> meter
+        System::Action<LineItemSubscription> subscription,
+        System::Action<LineItemAddon> addon,
+        System::Action<Meter> meter
     )
     {
         switch (this.Value)
@@ -471,9 +471,9 @@ public record class LineItem : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
-        Func<LineItemSubscription, T> subscription,
-        Func<LineItemAddon, T> addon,
-        Func<Meter, T> meter
+        System::Func<LineItemSubscription, T> subscription,
+        System::Func<LineItemAddon, T> addon,
+        System::Func<Meter, T> meter
     )
     {
         return this.Value switch
@@ -550,7 +550,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 {
     public override LineItem? Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
