@@ -9,7 +9,7 @@ public class NoteServiceTest : TestBase
     {
         var blockedCustomerNote = await this.client.Blocklist.Customers.Notes.Create(
             "entry_id",
-            new() { Note = "note" },
+            new() { Text = "text" },
             TestContext.Current.CancellationToken
         );
         blockedCustomerNote.Validate();
@@ -20,7 +20,7 @@ public class NoteServiceTest : TestBase
     {
         var blockedCustomerNote = await this.client.Blocklist.Customers.Notes.Update(
             "note_id",
-            new() { EntryID = "entry_id", Note = "note" },
+            new() { EntryID = "entry_id", Text = "text" },
             TestContext.Current.CancellationToken
         );
         blockedCustomerNote.Validate();

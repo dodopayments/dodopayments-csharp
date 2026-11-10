@@ -68,6 +68,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -173,6 +174,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                         AddonID = "addon_id",
                         Currency = Currency.Aed,
                         DiscountedPrice = 0,
+                        MaxQuantityReached = true,
                         Name = "name",
                         OgCurrency = Currency.Aed,
                         OgPrice = 0,
@@ -309,6 +311,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -428,6 +431,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -540,6 +544,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                         AddonID = "addon_id",
                         Currency = Currency.Aed,
                         DiscountedPrice = 0,
+                        MaxQuantityReached = true,
                         Name = "name",
                         OgCurrency = Currency.Aed,
                         OgPrice = 0,
@@ -676,6 +681,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -789,6 +795,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -892,6 +899,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -978,6 +986,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -1091,6 +1100,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -1187,6 +1197,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             AddonID = "addon_id",
                             Currency = Currency.Aed,
                             DiscountedPrice = 0,
+                            MaxQuantityReached = true,
                             Name = "name",
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
@@ -1452,6 +1463,7 @@ public class ProductCartTest : TestBase
                     AddonID = "addon_id",
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
+                    MaxQuantityReached = true,
                     Name = "name",
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
@@ -1512,6 +1524,7 @@ public class ProductCartTest : TestBase
                 AddonID = "addon_id",
                 Currency = Currency.Aed,
                 DiscountedPrice = 0,
+                MaxQuantityReached = true,
                 Name = "name",
                 OgCurrency = Currency.Aed,
                 OgPrice = 0,
@@ -1611,6 +1624,7 @@ public class ProductCartTest : TestBase
                     AddonID = "addon_id",
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
+                    MaxQuantityReached = true,
                     Name = "name",
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
@@ -1685,6 +1699,7 @@ public class ProductCartTest : TestBase
                     AddonID = "addon_id",
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
+                    MaxQuantityReached = true,
                     Name = "name",
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
@@ -1752,6 +1767,7 @@ public class ProductCartTest : TestBase
                 AddonID = "addon_id",
                 Currency = Currency.Aed,
                 DiscountedPrice = 0,
+                MaxQuantityReached = true,
                 Name = "name",
                 OgCurrency = Currency.Aed,
                 OgPrice = 0,
@@ -1851,6 +1867,7 @@ public class ProductCartTest : TestBase
                     AddonID = "addon_id",
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
+                    MaxQuantityReached = true,
                     Name = "name",
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
@@ -2129,6 +2146,7 @@ public class ProductCartTest : TestBase
                     AddonID = "addon_id",
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
+                    MaxQuantityReached = true,
                     Name = "name",
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
@@ -2441,6 +2459,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2457,6 +2476,7 @@ public class AddonTest : TestBase
         string expectedAddonID = "addon_id";
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         int expectedDiscountedPrice = 0;
+        bool expectedMaxQuantityReached = true;
         string expectedName = "name";
         ApiEnum<string, Currency> expectedOgCurrency = Currency.Aed;
         int expectedOgPrice = 0;
@@ -2472,6 +2492,7 @@ public class AddonTest : TestBase
         Assert.Equal(expectedAddonID, model.AddonID);
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedDiscountedPrice, model.DiscountedPrice);
+        Assert.Equal(expectedMaxQuantityReached, model.MaxQuantityReached);
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedOgCurrency, model.OgCurrency);
         Assert.Equal(expectedOgPrice, model.OgPrice);
@@ -2493,6 +2514,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2520,6 +2542,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2540,6 +2563,7 @@ public class AddonTest : TestBase
         string expectedAddonID = "addon_id";
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         int expectedDiscountedPrice = 0;
+        bool expectedMaxQuantityReached = true;
         string expectedName = "name";
         ApiEnum<string, Currency> expectedOgCurrency = Currency.Aed;
         int expectedOgPrice = 0;
@@ -2555,6 +2579,7 @@ public class AddonTest : TestBase
         Assert.Equal(expectedAddonID, deserialized.AddonID);
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedDiscountedPrice, deserialized.DiscountedPrice);
+        Assert.Equal(expectedMaxQuantityReached, deserialized.MaxQuantityReached);
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedOgCurrency, deserialized.OgCurrency);
         Assert.Equal(expectedOgPrice, deserialized.OgPrice);
@@ -2576,6 +2601,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2600,6 +2626,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2626,6 +2653,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2647,6 +2675,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2677,6 +2706,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,
@@ -2702,6 +2732,7 @@ public class AddonTest : TestBase
             AddonID = "addon_id",
             Currency = Currency.Aed,
             DiscountedPrice = 0,
+            MaxQuantityReached = true,
             Name = "name",
             OgCurrency = Currency.Aed,
             OgPrice = 0,

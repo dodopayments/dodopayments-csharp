@@ -28,6 +28,24 @@ public sealed record class CheckoutSessionCustomization : JsonModel
     }
 
     /// <summary>
+    /// How a single-page checkout shows the payment methods. You can set it only
+    /// when `feature_flags.single_page` is true.
+    ///
+    /// <para>Default is `accordion`.</para>
+    /// </summary>
+    public ApiEnum<string, PaymentMethodLayout>? PaymentMethodLayout
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, PaymentMethodLayout>>(
+                "payment_method_layout"
+            );
+        }
+        init { this._rawData.Set("payment_method_layout", value); }
+    }
+
+    /// <summary>
     /// Show on demand tag
     ///
     /// <para>Default is true</para>
@@ -105,6 +123,7 @@ public sealed record class CheckoutSessionCustomization : JsonModel
     public override void Validate()
     {
         _ = this.ForceLanguage;
+        this.PaymentMethodLayout?.Validate();
         _ = this.ShowOnDemandTag;
         _ = this.ShowOrderDetails;
         this.Theme?.Validate();
@@ -147,6 +166,56 @@ class CheckoutSessionCustomizationFromRaw : IFromRawJson<CheckoutSessionCustomiz
     public CheckoutSessionCustomization FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionCustomization.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// How a single-page checkout shows the payment methods. You can set it only when
+/// `feature_flags.single_page` is true.
+///
+/// <para>Default is `accordion`.</para>
+/// </summary>
+[JsonConverter(typeof(PaymentMethodLayoutConverter))]
+public enum PaymentMethodLayout
+{
+    Accordion,
+    Tabs,
+}
+
+sealed class PaymentMethodLayoutConverter : JsonConverter<PaymentMethodLayout>
+{
+    public override PaymentMethodLayout Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "accordion" => PaymentMethodLayout.Accordion,
+            "tabs" => PaymentMethodLayout.Tabs,
+            _ => (PaymentMethodLayout)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentMethodLayout value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PaymentMethodLayout.Accordion => "accordion",
+                PaymentMethodLayout.Tabs => "tabs",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

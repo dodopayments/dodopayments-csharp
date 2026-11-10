@@ -18,8 +18,7 @@ public record class PaymentRetrievePayoutParams : ParamsBase
     public string? PayoutID { get; init; }
 
     /// <summary>
-    /// The signed link token. If the business asks for a credential on its invoice
-    /// links, a valid token for this record replaces the credential.
+    /// The signed link token. A valid token for this record replaces the credential.
     /// </summary>
     public string? Token
     {

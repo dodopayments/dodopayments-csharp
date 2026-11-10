@@ -7,6 +7,7 @@ using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 using DodoPayments.Client.Models.Webhooks;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
@@ -30,6 +31,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -114,6 +116,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -143,6 +146,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -182,6 +186,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -266,6 +271,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -295,6 +301,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -345,6 +352,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -429,6 +437,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -458,6 +467,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -511,6 +521,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -595,6 +606,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -624,6 +636,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -670,6 +683,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -754,6 +768,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -783,6 +798,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -833,6 +849,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -917,6 +934,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -946,6 +964,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -993,6 +1012,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BillingMode = BillingMode.Normal,
                 BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1077,6 +1097,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                     Email = "email",
                     Name = "name",
                 },
+                CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
@@ -1106,6 +1127,7 @@ public class SubscriptionOnHoldWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                PaymentTermsDays = 0,
                 ScheduledChange = new()
                 {
                     ID = "id",
@@ -1155,6 +1177,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1239,6 +1262,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1268,6 +1292,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -1302,6 +1327,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, BillingMode> expectedBillingMode = BillingMode.Normal;
         string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1389,6 +1415,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -1421,6 +1449,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
@@ -1451,6 +1480,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
         Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBillingMode, model.BillingMode);
         Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -1503,6 +1533,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
         Assert.Equal(expectedCancelledBy, model.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, model.CollectionMethod);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -1521,6 +1552,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPausedAt, model.PausedAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, model.PaymentTermsDays);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
         Assert.Equal(expectedTrialAmount, model.TrialAmount);
@@ -1542,6 +1574,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1626,6 +1659,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1655,6 +1689,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -1703,6 +1738,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1787,6 +1823,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -1816,6 +1853,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -1857,6 +1895,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        ApiEnum<string, BillingMode> expectedBillingMode = BillingMode.Normal;
         string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1944,6 +1983,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Email = "email",
             Name = "name",
         };
+        ApiEnum<string, Invoices::InvoiceCollectionMethod> expectedCollectionMethod =
+            Invoices::InvoiceCollectionMethod.AutoCharge;
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
@@ -1976,6 +2017,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        int expectedPaymentTermsDays = 0;
         ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
@@ -2006,6 +2048,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
         Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBillingMode, deserialized.BillingMode);
         Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -2058,6 +2101,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
         Assert.Equal(expectedCancelledBy, deserialized.CancelledBy);
+        Assert.Equal(expectedCollectionMethod, deserialized.CollectionMethod);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
         for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
@@ -2076,6 +2120,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPausedAt, deserialized.PausedAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedPaymentTermsDays, deserialized.PaymentTermsDays);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
         Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
@@ -2097,6 +2142,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2181,6 +2227,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -2210,6 +2257,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -2252,6 +2300,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2358,6 +2407,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2368,6 +2418,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledBy);
         Assert.False(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -2386,6 +2438,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2492,6 +2545,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2515,6 +2569,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2621,6 +2676,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2629,6 +2685,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
             CancelledBy = null,
+            CollectionMethod = null,
             ScheduledChange = null,
         };
 
@@ -2636,6 +2693,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledBy);
         Assert.False(model.RawData.ContainsKey("cancelled_by"));
+        Assert.Null(model.CollectionMethod);
+        Assert.False(model.RawData.ContainsKey("collection_method"));
         Assert.Null(model.ScheduledChange);
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
     }
@@ -2654,6 +2713,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2760,6 +2820,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             TaxID = "tax_id",
             TrialAmount = 0,
             PastDueEndsAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2768,6 +2829,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
             CancelledBy = null,
+            CollectionMethod = null,
             ScheduledChange = null,
         };
 
@@ -2788,6 +2850,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2870,6 +2933,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -2911,6 +2975,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.False(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
@@ -2935,6 +3001,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3017,6 +3084,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3055,6 +3123,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3137,6 +3206,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3167,6 +3237,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
@@ -3193,6 +3264,8 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
         Assert.True(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.PaymentTermsDays);
+        Assert.True(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
         Assert.Null(model.TrialAmount);
@@ -3217,6 +3290,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3299,6 +3373,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             ScheduledChange = new()
             {
                 ID = "id",
@@ -3329,6 +3404,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = null,
             PausedAt = null,
             PaymentMethodID = null,
+            PaymentTermsDays = null,
             TaxID = null,
             TrialAmount = null,
             PastDueEndsAt = null,
@@ -3352,6 +3428,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BillingMode = BillingMode.Normal,
             BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3436,6 +3513,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
                 Email = "email",
                 Name = "name",
             },
+            CollectionMethod = Invoices::InvoiceCollectionMethod.AutoCharge,
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
@@ -3465,6 +3543,7 @@ public class SubscriptionOnHoldWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            PaymentTermsDays = 0,
             ScheduledChange = new()
             {
                 ID = "id",

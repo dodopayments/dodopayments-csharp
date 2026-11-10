@@ -1,6 +1,5 @@
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
@@ -16,20 +15,17 @@ public class CreateNewCustomerTest : TestBase
             Name = "name",
             CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string expectedEmail = "email";
         string expectedName = "name";
         bool expectedCreateNewCustomerValue = true;
         string expectedPhoneNumber = "phone_number";
-        ApiEnum<string, Locale> expectedPreferredLocale = Locale.Ar;
 
         Assert.Equal(expectedEmail, model.Email);
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedCreateNewCustomerValue, model.CreateNewCustomerValue);
         Assert.Equal(expectedPhoneNumber, model.PhoneNumber);
-        Assert.Equal(expectedPreferredLocale, model.PreferredLocale);
     }
 
     [Fact]
@@ -41,7 +37,6 @@ public class CreateNewCustomerTest : TestBase
             Name = "name",
             CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -62,7 +57,6 @@ public class CreateNewCustomerTest : TestBase
             Name = "name",
             CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -76,13 +70,11 @@ public class CreateNewCustomerTest : TestBase
         string expectedName = "name";
         bool expectedCreateNewCustomerValue = true;
         string expectedPhoneNumber = "phone_number";
-        ApiEnum<string, Locale> expectedPreferredLocale = Locale.Ar;
 
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedCreateNewCustomerValue, deserialized.CreateNewCustomerValue);
         Assert.Equal(expectedPhoneNumber, deserialized.PhoneNumber);
-        Assert.Equal(expectedPreferredLocale, deserialized.PreferredLocale);
     }
 
     [Fact]
@@ -94,7 +86,6 @@ public class CreateNewCustomerTest : TestBase
             Name = "name",
             CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         model.Validate();
@@ -108,7 +99,6 @@ public class CreateNewCustomerTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         Assert.Null(model.CreateNewCustomerValue);
@@ -123,7 +113,6 @@ public class CreateNewCustomerTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         model.Validate();
@@ -137,7 +126,6 @@ public class CreateNewCustomerTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
 
             // Null should be interpreted as omitted for these properties
             CreateNewCustomerValue = null,
@@ -155,7 +143,6 @@ public class CreateNewCustomerTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
 
             // Null should be interpreted as omitted for these properties
             CreateNewCustomerValue = null,
@@ -176,8 +163,6 @@ public class CreateNewCustomerTest : TestBase
 
         Assert.Null(model.PhoneNumber);
         Assert.False(model.RawData.ContainsKey("phone_number"));
-        Assert.Null(model.PreferredLocale);
-        Assert.False(model.RawData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -203,13 +188,10 @@ public class CreateNewCustomerTest : TestBase
             CreateNewCustomerValue = true,
 
             PhoneNumber = null,
-            PreferredLocale = null,
         };
 
         Assert.Null(model.PhoneNumber);
         Assert.True(model.RawData.ContainsKey("phone_number"));
-        Assert.Null(model.PreferredLocale);
-        Assert.True(model.RawData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -222,7 +204,6 @@ public class CreateNewCustomerTest : TestBase
             CreateNewCustomerValue = true,
 
             PhoneNumber = null,
-            PreferredLocale = null,
         };
 
         model.Validate();
@@ -237,7 +218,6 @@ public class CreateNewCustomerTest : TestBase
             Name = "name",
             CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         CreateNewCustomer copied = new(model);

@@ -231,13 +231,12 @@ public enum BalanceLedgerEntryEventType
     DisputeFeesReversal,
     DeflectionFees,
     DeflectionFeesReversal,
+    ModerationFees,
     ReserveHold,
     ReserveRelease,
-    ModerationFees,
     DodoFixedFee,
     InterchangeFee,
     SchemeFee,
-    OpeningBalance,
 }
 
 sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerEntryEventType>
@@ -278,13 +277,12 @@ sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerE
             "dispute_fees_reversal" => BalanceLedgerEntryEventType.DisputeFeesReversal,
             "deflection_fees" => BalanceLedgerEntryEventType.DeflectionFees,
             "deflection_fees_reversal" => BalanceLedgerEntryEventType.DeflectionFeesReversal,
+            "moderation_fees" => BalanceLedgerEntryEventType.ModerationFees,
             "reserve_hold" => BalanceLedgerEntryEventType.ReserveHold,
             "reserve_release" => BalanceLedgerEntryEventType.ReserveRelease,
-            "moderation_fees" => BalanceLedgerEntryEventType.ModerationFees,
             "dodo_fixed_fee" => BalanceLedgerEntryEventType.DodoFixedFee,
             "interchange_fee" => BalanceLedgerEntryEventType.InterchangeFee,
             "scheme_fee" => BalanceLedgerEntryEventType.SchemeFee,
-            "opening_balance" => BalanceLedgerEntryEventType.OpeningBalance,
             _ => (BalanceLedgerEntryEventType)(-1),
         };
     }
@@ -328,13 +326,12 @@ sealed class BalanceLedgerEntryEventTypeConverter : JsonConverter<BalanceLedgerE
                 BalanceLedgerEntryEventType.DisputeFeesReversal => "dispute_fees_reversal",
                 BalanceLedgerEntryEventType.DeflectionFees => "deflection_fees",
                 BalanceLedgerEntryEventType.DeflectionFeesReversal => "deflection_fees_reversal",
+                BalanceLedgerEntryEventType.ModerationFees => "moderation_fees",
                 BalanceLedgerEntryEventType.ReserveHold => "reserve_hold",
                 BalanceLedgerEntryEventType.ReserveRelease => "reserve_release",
-                BalanceLedgerEntryEventType.ModerationFees => "moderation_fees",
                 BalanceLedgerEntryEventType.DodoFixedFee => "dodo_fixed_fee",
                 BalanceLedgerEntryEventType.InterchangeFee => "interchange_fee",
                 BalanceLedgerEntryEventType.SchemeFee => "scheme_fee",
-                BalanceLedgerEntryEventType.OpeningBalance => "opening_balance",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
