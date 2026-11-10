@@ -271,7 +271,7 @@ public sealed class InvoiceService : IInvoiceService
     }
 
     /// <inheritdoc/>
-    public Task Preview(
+    public Task<HttpResponse> Preview(
         InvoicePreviewParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -280,7 +280,7 @@ public sealed class InvoiceService : IInvoiceService
     }
 
     /// <inheritdoc/>
-    public Task PreviewExisting(
+    public Task<HttpResponse> PreviewExisting(
         InvoicePreviewExistingParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -289,7 +289,7 @@ public sealed class InvoiceService : IInvoiceService
     }
 
     /// <inheritdoc/>
-    public async Task PreviewExisting(
+    public Task<HttpResponse> PreviewExisting(
         string invoiceID,
         InvoicePreviewExistingParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -297,8 +297,7 @@ public sealed class InvoiceService : IInvoiceService
     {
         parameters ??= new();
 
-        await this.PreviewExisting(parameters with { InvoiceID = invoiceID }, cancellationToken)
-            .ConfigureAwait(false);
+        return this.PreviewExisting(parameters with { InvoiceID = invoiceID }, cancellationToken);
     }
 
     /// <inheritdoc/>

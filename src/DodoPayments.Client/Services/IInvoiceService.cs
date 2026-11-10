@@ -184,19 +184,26 @@ public interface IInvoiceService
 
     /// <summary>
     /// Prices the body as a draft and returns it. No row is saved.
+    ///
+    /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
-    Task Preview(InvoicePreviewParams parameters, CancellationToken cancellationToken = default);
+    Task<HttpResponse> Preview(
+        InvoicePreviewParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Preview a draft invoice
+    ///
+    /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
-    Task PreviewExisting(
+    Task<HttpResponse> PreviewExisting(
         InvoicePreviewExistingParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="PreviewExisting(InvoicePreviewExistingParams, CancellationToken)"/>
-    Task PreviewExisting(
+    Task<HttpResponse> PreviewExisting(
         string invoiceID,
         InvoicePreviewExistingParams? parameters = null,
         CancellationToken cancellationToken = default
