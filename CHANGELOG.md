@@ -1,12 +1,5 @@
 # Changelog
 
-## [6.44.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.43.0...v6.44.0) (2026-11-10)
-
-
-### Features
-
-* **api:** billing invoices and upcoming invoice; sync spec to prod 1.122.7 ([#131](https://github.com/dodopayments/dodopayments-csharp/issues/131)) ([c8a2dd8](https://github.com/dodopayments/dodopayments-csharp/commit/c8a2dd8b11cf4434f7441a66e59894c50fa2531e))
-
 ## [6.43.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.42.0...v6.43.0) (2026-10-28)
 
 
