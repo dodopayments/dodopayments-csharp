@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Misc;
 
@@ -17,14 +16,12 @@ public class CustomerCreateParamsTest : TestBase
             Name = "name",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string expectedEmail = "email";
         string expectedName = "name";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
-        ApiEnum<string, Locale> expectedPreferredLocale = Locale.Ar;
 
         Assert.Equal(expectedEmail, parameters.Email);
         Assert.Equal(expectedName, parameters.Name);
@@ -37,7 +34,6 @@ public class CustomerCreateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedPhoneNumber, parameters.PhoneNumber);
-        Assert.Equal(expectedPreferredLocale, parameters.PreferredLocale);
     }
 
     [Fact]
@@ -48,7 +44,6 @@ public class CustomerCreateParamsTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         Assert.Null(parameters.Metadata);
@@ -63,7 +58,6 @@ public class CustomerCreateParamsTest : TestBase
             Email = "email",
             Name = "name",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
@@ -85,8 +79,6 @@ public class CustomerCreateParamsTest : TestBase
 
         Assert.Null(parameters.PhoneNumber);
         Assert.False(parameters.RawBodyData.ContainsKey("phone_number"));
-        Assert.Null(parameters.PreferredLocale);
-        Assert.False(parameters.RawBodyData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -99,13 +91,10 @@ public class CustomerCreateParamsTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             PhoneNumber = null,
-            PreferredLocale = null,
         };
 
         Assert.Null(parameters.PhoneNumber);
         Assert.True(parameters.RawBodyData.ContainsKey("phone_number"));
-        Assert.Null(parameters.PreferredLocale);
-        Assert.True(parameters.RawBodyData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -127,7 +116,6 @@ public class CustomerCreateParamsTest : TestBase
             Name = "name",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         CustomerCreateParams copied = new(parameters);

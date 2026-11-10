@@ -6,8 +6,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -48,6 +50,19 @@ public sealed record class Subscription : JsonModel
             return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
         }
         init { this._rawData.Set("billing", value); }
+    }
+
+    /// <summary>
+    /// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+    /// </summary>
+    public required ApiEnum<string, BillingMode> BillingMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, BillingMode>>("billing_mode");
+        }
+        init { this._rawData.Set("billing_mode", value); }
     }
 
     /// <summary>
@@ -454,6 +469,21 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// How an invoice-led subscription collects each invoice. `null` for `normal`.
+    /// </summary>
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init { this._rawData.Set("collection_method", value); }
+    }
+
+    /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
     public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
@@ -574,6 +604,19 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Days from the invoice date to the due date. `null` for `normal`.
+    /// </summary>
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("payment_terms_days");
+        }
+        init { this._rawData.Set("payment_terms_days", value); }
+    }
+
+    /// <summary>
     /// Scheduled plan change details, if any
     /// </summary>
     public ScheduledPlanChange? ScheduledChange
@@ -622,6 +665,7 @@ public sealed record class Subscription : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        this.BillingMode.Validate();
         _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
@@ -662,6 +706,7 @@ public sealed record class Subscription : JsonModel
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         this.CancelledBy?.Validate();
+        this.CollectionMethod?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
@@ -676,6 +721,7 @@ public sealed record class Subscription : JsonModel
         _ = this.ExpiresAt;
         _ = this.PausedAt;
         _ = this.PaymentMethodID;
+        _ = this.PaymentTermsDays;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
         _ = this.TrialAmount;
@@ -714,4 +760,51 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+/// </summary>
+[JsonConverter(typeof(BillingModeConverter))]
+public enum BillingMode
+{
+    Normal,
+    InvoiceLed,
+}
+
+sealed class BillingModeConverter : JsonConverter<BillingMode>
+{
+    public override BillingMode Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "normal" => BillingMode.Normal,
+            "invoice_led" => BillingMode.InvoiceLed,
+            _ => (BillingMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BillingMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BillingMode.Normal => "normal",
+                BillingMode.InvoiceLed => "invoice_led",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

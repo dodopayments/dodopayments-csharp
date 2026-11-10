@@ -128,6 +128,17 @@ public class SubscriptionServiceTest : TestBase
     }
 
     [Fact]
+    public async Task RetrieveUpcomingInvoice_Works()
+    {
+        var invoice = await this.client.Subscriptions.RetrieveUpcomingInvoice(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        invoice.Validate();
+    }
+
+    [Fact]
     public async Task RetrieveUsageHistory_Works()
     {
         var page = await this.client.Subscriptions.RetrieveUsageHistory(
