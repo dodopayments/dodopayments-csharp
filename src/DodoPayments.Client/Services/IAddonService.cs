@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Addons;
-using DodoPayments.Client.Services.Addons;
 
 namespace DodoPayments.Client.Services;
 
@@ -26,8 +25,6 @@ public interface IAddonService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    ITranslationService Translations { get; }
 
     /// <summary>
     /// Sends a request to <c>post /addons</c>.
@@ -127,8 +124,6 @@ public interface IAddonServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IAddonServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    ITranslationServiceWithRawResponse Translations { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /addons</c>, but is otherwise the

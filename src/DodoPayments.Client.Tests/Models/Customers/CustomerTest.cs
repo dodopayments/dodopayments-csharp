@@ -23,7 +23,6 @@ public class CustomerTest : TestBase
             BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string expectedBusinessID = "business_id";
@@ -35,7 +34,6 @@ public class CustomerTest : TestBase
         string expectedBlocklistEntryID = "blocklist_entry_id";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
-        ApiEnum<string, Locale> expectedPreferredLocale = Locale.Ar;
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -53,7 +51,6 @@ public class CustomerTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPhoneNumber, model.PhoneNumber);
-        Assert.Equal(expectedPreferredLocale, model.PreferredLocale);
     }
 
     [Fact]
@@ -70,7 +67,6 @@ public class CustomerTest : TestBase
             BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -93,7 +89,6 @@ public class CustomerTest : TestBase
             BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -112,7 +107,6 @@ public class CustomerTest : TestBase
         string expectedBlocklistEntryID = "blocklist_entry_id";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
-        ApiEnum<string, Locale> expectedPreferredLocale = Locale.Ar;
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -130,7 +124,6 @@ public class CustomerTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPhoneNumber, deserialized.PhoneNumber);
-        Assert.Equal(expectedPreferredLocale, deserialized.PreferredLocale);
     }
 
     [Fact]
@@ -147,7 +140,6 @@ public class CustomerTest : TestBase
             BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         model.Validate();
@@ -166,7 +158,6 @@ public class CustomerTest : TestBase
             BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         Assert.Null(model.Metadata);
@@ -186,7 +177,6 @@ public class CustomerTest : TestBase
             BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         model.Validate();
@@ -205,7 +195,6 @@ public class CustomerTest : TestBase
             BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
@@ -228,7 +217,6 @@ public class CustomerTest : TestBase
             BlockedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BlocklistEntryID = "blocklist_entry_id",
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
@@ -256,8 +244,6 @@ public class CustomerTest : TestBase
         Assert.False(model.RawData.ContainsKey("blocklist_entry_id"));
         Assert.Null(model.PhoneNumber);
         Assert.False(model.RawData.ContainsKey("phone_number"));
-        Assert.Null(model.PreferredLocale);
-        Assert.False(model.RawData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -291,7 +277,6 @@ public class CustomerTest : TestBase
             BlockedAt = null,
             BlocklistEntryID = null,
             PhoneNumber = null,
-            PreferredLocale = null,
         };
 
         Assert.Null(model.BlockedAt);
@@ -300,8 +285,6 @@ public class CustomerTest : TestBase
         Assert.True(model.RawData.ContainsKey("blocklist_entry_id"));
         Assert.Null(model.PhoneNumber);
         Assert.True(model.RawData.ContainsKey("phone_number"));
-        Assert.Null(model.PreferredLocale);
-        Assert.True(model.RawData.ContainsKey("preferred_locale"));
     }
 
     [Fact]
@@ -319,7 +302,6 @@ public class CustomerTest : TestBase
             BlockedAt = null,
             BlocklistEntryID = null,
             PhoneNumber = null,
-            PreferredLocale = null,
         };
 
         model.Validate();
@@ -339,7 +321,6 @@ public class CustomerTest : TestBase
             BlocklistEntryID = "blocklist_entry_id",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
-            PreferredLocale = Locale.Ar,
         };
 
         Customer copied = new(model);

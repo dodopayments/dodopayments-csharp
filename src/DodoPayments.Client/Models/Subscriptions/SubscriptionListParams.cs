@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -7,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -62,12 +62,12 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public DateTimeOffset? CreatedAtGte
+    public System::DateTimeOffset? CreatedAtGte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
+            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_gte");
         }
         init
         {
@@ -83,12 +83,12 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public DateTimeOffset? CreatedAtLte
+    public System::DateTimeOffset? CreatedAtLte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
+            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_lte");
         }
         init
         {
@@ -119,32 +119,6 @@ public record class SubscriptionListParams : ParamsBase
             }
 
             this._rawQueryData.Set("customer_id", value);
-        }
-    }
-
-    /// <summary>
-    /// Shows the translated name, description and unit of the catalog entities in
-    /// this locale. The value must be a code from `GET /locales`, for example `fr`.
-    /// A field with no translation, an unknown code, or no code shows the base text.
-    ///
-    /// <para>Do not send a text from a localized response back in a create or update
-    /// request. The base text then changes to the translated text.</para>
-    /// </summary>
-    public string? Locale
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("locale");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("locale", value);
         }
     }
 
@@ -299,9 +273,9 @@ public record class SubscriptionListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
+        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -342,7 +316,7 @@ sealed class StatusConverter : JsonConverter<Status>
 {
     public override Status Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {

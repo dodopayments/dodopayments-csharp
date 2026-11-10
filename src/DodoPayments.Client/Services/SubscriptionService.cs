@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Subscriptions;
+using Invoices = DodoPayments.Client.Models.Invoices;
 
 namespace DodoPayments.Client.Services;
 
@@ -243,6 +244,36 @@ public sealed class SubscriptionService : ISubscriptionService
         parameters ??= new();
 
         return this.RetrieveCreditUsage(
+            parameters with
+            {
+                SubscriptionID = subscriptionID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<Invoices::Invoice> RetrieveUpcomingInvoice(
+        SubscriptionRetrieveUpcomingInvoiceParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveUpcomingInvoice(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Invoices::Invoice> RetrieveUpcomingInvoice(
+        string subscriptionID,
+        SubscriptionRetrieveUpcomingInvoiceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveUpcomingInvoice(
             parameters with
             {
                 SubscriptionID = subscriptionID,
@@ -718,6 +749,59 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
         parameters ??= new();
 
         return this.RetrieveCreditUsage(
+            parameters with
+            {
+                SubscriptionID = subscriptionID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<Invoices::Invoice>> RetrieveUpcomingInvoice(
+        SubscriptionRetrieveUpcomingInvoiceParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.SubscriptionID == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "'parameters.SubscriptionID' cannot be null"
+            );
+        }
+
+        HttpRequest<SubscriptionRetrieveUpcomingInvoiceParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var invoice = await response
+                    .Deserialize<Invoices::Invoice>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    invoice.Validate();
+                }
+                return invoice;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<Invoices::Invoice>> RetrieveUpcomingInvoice(
+        string subscriptionID,
+        SubscriptionRetrieveUpcomingInvoiceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveUpcomingInvoice(
             parameters with
             {
                 SubscriptionID = subscriptionID,

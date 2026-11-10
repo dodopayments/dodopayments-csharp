@@ -32,7 +32,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                     ],
                 },
             ],
-            Locale = "locale",
             AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
@@ -62,6 +61,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -180,7 +180,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 ],
             },
         ];
-        string expectedLocale = "locale";
         List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
             Payments::PaymentMethodTypes.Ach,
@@ -215,6 +214,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
+            PaymentMethodLayout = PaymentMethodLayout.Accordion,
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = Theme.Dark,
@@ -319,7 +319,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], parameters.ProductCart[i]);
         }
-        Assert.Equal(expectedLocale, parameters.Locale);
         Assert.NotNull(parameters.AllowedPaymentMethodTypes);
         Assert.Equal(
             expectedAllowedPaymentMethodTypes.Count,
@@ -445,8 +444,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             TaxID = "tax_id",
         };
 
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.Confirm);
         Assert.False(parameters.RawBodyData.ContainsKey("confirm"));
         Assert.Null(parameters.Customization);
@@ -531,7 +528,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             TaxID = "tax_id",
 
             // Null should be interpreted as omitted for these properties
-            Locale = null,
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
@@ -539,8 +535,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             ShowSavedPaymentMethods = null,
         };
 
-        Assert.Null(parameters.Locale);
-        Assert.False(parameters.RawQueryData.ContainsKey("locale"));
         Assert.Null(parameters.Confirm);
         Assert.False(parameters.RawBodyData.ContainsKey("confirm"));
         Assert.Null(parameters.Customization);
@@ -576,11 +570,11 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                     ],
                 },
             ],
-            Locale = "locale",
             Confirm = true,
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -720,11 +714,11 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                     ],
                 },
             ],
-            Locale = "locale",
             Confirm = true,
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,
@@ -883,16 +877,12 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                     ],
                 },
             ],
-            Locale = "locale",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/checkouts/preview?locale=locale"),
-                url
-            )
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/checkouts/preview"), url)
         );
     }
 
@@ -919,7 +909,6 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                     ],
                 },
             ],
-            Locale = "locale",
             AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
@@ -949,6 +938,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             Customization = new()
             {
                 ForceLanguage = "force_language",
+                PaymentMethodLayout = PaymentMethodLayout.Accordion,
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = Theme.Dark,

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,9 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
+using Invoices = DodoPayments.Client.Models.Invoices;
 using Payments = DodoPayments.Client.Models.Payments;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -51,6 +53,19 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+    /// </summary>
+    public required ApiEnum<string, BillingMode> BillingMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, BillingMode>>("billing_mode");
+        }
+        init { this._rawData.Set("billing_mode", value); }
+    }
+
+    /// <summary>
     /// Brand id this subscription belongs to
     /// </summary>
     public required string BrandID
@@ -79,12 +94,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required DateTimeOffset CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -214,12 +229,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required DateTimeOffset NextBillingDate
+    public required System::DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -268,12 +283,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required DateTimeOffset PreviousBillingDate
+    public required System::DateTimeOffset PreviousBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("previous_billing_date");
         }
         init { this._rawData.Set("previous_billing_date", value); }
     }
@@ -429,12 +444,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public DateTimeOffset? CancelledAt
+    public System::DateTimeOffset? CancelledAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("cancelled_at");
         }
         init { this._rawData.Set("cancelled_at", value); }
     }
@@ -451,6 +466,21 @@ public sealed record class Subscription : JsonModel
             return this._rawData.GetNullableClass<SubscriptionCancelledBy>("cancelled_by");
         }
         init { this._rawData.Set("cancelled_by", value); }
+    }
+
+    /// <summary>
+    /// How an invoice-led subscription collects each invoice. `null` for `normal`.
+    /// </summary>
+    public ApiEnum<string, Invoices::InvoiceCollectionMethod>? CollectionMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Invoices::InvoiceCollectionMethod>
+            >("collection_method");
+        }
+        init { this._rawData.Set("collection_method", value); }
     }
 
     /// <summary>
@@ -536,12 +566,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public DateTimeOffset? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("expires_at");
         }
         init { this._rawData.Set("expires_at", value); }
     }
@@ -550,12 +580,12 @@ public sealed record class Subscription : JsonModel
     /// Timestamp when the subscription was paused, if it currently is (or is `OnHold`
     /// due to an unresolved pause settlement). `null` otherwise.
     /// </summary>
-    public DateTimeOffset? PausedAt
+    public System::DateTimeOffset? PausedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("paused_at");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("paused_at");
         }
         init { this._rawData.Set("paused_at", value); }
     }
@@ -571,6 +601,19 @@ public sealed record class Subscription : JsonModel
             return this._rawData.GetNullableClass<string>("payment_method_id");
         }
         init { this._rawData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
+    /// Days from the invoice date to the due date. `null` for `normal`.
+    /// </summary>
+    public int? PaymentTermsDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("payment_terms_days");
+        }
+        init { this._rawData.Set("payment_terms_days", value); }
     }
 
     /// <summary>
@@ -622,6 +665,7 @@ public sealed record class Subscription : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        this.BillingMode.Validate();
         _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
@@ -662,6 +706,7 @@ public sealed record class Subscription : JsonModel
         this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         this.CancelledBy?.Validate();
+        this.CollectionMethod?.Validate();
         foreach (var item in this.CustomFieldResponses ?? [])
         {
             item.Validate();
@@ -676,6 +721,7 @@ public sealed record class Subscription : JsonModel
         _ = this.ExpiresAt;
         _ = this.PausedAt;
         _ = this.PaymentMethodID;
+        _ = this.PaymentTermsDays;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
         _ = this.TrialAmount;
@@ -714,4 +760,51 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// `invoice_led` when invoices bill the subscription. `normal` otherwise.
+/// </summary>
+[JsonConverter(typeof(BillingModeConverter))]
+public enum BillingMode
+{
+    Normal,
+    InvoiceLed,
+}
+
+sealed class BillingModeConverter : JsonConverter<BillingMode>
+{
+    public override BillingMode Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "normal" => BillingMode.Normal,
+            "invoice_led" => BillingMode.InvoiceLed,
+            _ => (BillingMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BillingMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BillingMode.Normal => "normal",
+                BillingMode.InvoiceLed => "invoice_led",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

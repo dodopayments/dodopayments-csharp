@@ -9,17 +9,17 @@ public class NoteRequestTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new NoteRequest { Note = "note" };
+        var model = new NoteRequest { Text = "text" };
 
-        string expectedNote = "note";
+        string expectedText = "text";
 
-        Assert.Equal(expectedNote, model.Note);
+        Assert.Equal(expectedText, model.Text);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new NoteRequest { Note = "note" };
+        var model = new NoteRequest { Text = "text" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<NoteRequest>(
@@ -33,7 +33,7 @@ public class NoteRequestTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new NoteRequest { Note = "note" };
+        var model = new NoteRequest { Text = "text" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<NoteRequest>(
@@ -42,15 +42,15 @@ public class NoteRequestTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedNote = "note";
+        string expectedText = "text";
 
-        Assert.Equal(expectedNote, deserialized.Note);
+        Assert.Equal(expectedText, deserialized.Text);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new NoteRequest { Note = "note" };
+        var model = new NoteRequest { Text = "text" };
 
         model.Validate();
     }
@@ -58,7 +58,7 @@ public class NoteRequestTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new NoteRequest { Note = "note" };
+        var model = new NoteRequest { Text = "text" };
 
         NoteRequest copied = new(model);
 

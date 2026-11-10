@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Meters;
-using DodoPayments.Client.Services.Meters;
 
 namespace DodoPayments.Client.Services;
 
@@ -26,8 +25,6 @@ public interface IMeterService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    ITranslationService Translations { get; }
 
     /// <summary>
     /// Sends a request to <c>post /meters</c>.
@@ -106,8 +103,6 @@ public interface IMeterServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IMeterServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    ITranslationServiceWithRawResponse Translations { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /meters</c>, but is otherwise the
