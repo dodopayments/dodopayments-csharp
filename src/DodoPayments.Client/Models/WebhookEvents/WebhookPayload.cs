@@ -387,7 +387,7 @@ public record class Data : ModelBase
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
                 entitlementGrant: (_) => null,
-                invoice: (_) => null
+                invoice: (x) => x.PaymentMethodID
             );
         }
     }
@@ -6336,6 +6336,21 @@ public sealed record class Invoice : JsonModel
     }
 
     /// <summary>
+    /// `true` when a subscription of the invoice has renewal review on now. The value
+    /// follows the subscription, so it can change after finalise. `review_deadline`
+    /// shows that this draft waits.
+    /// </summary>
+    public required bool ReviewRequired
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("review_required");
+        }
+        init { this._rawData.Set("review_required", value); }
+    }
+
+    /// <summary>
     /// Goes up by one on each change. Use it to ignore an older webhook delivery.
     /// </summary>
     public required long RowVersion
@@ -6550,6 +6565,19 @@ public sealed record class Invoice : JsonModel
     }
 
     /// <summary>
+    /// The saved card that an automatic charge of the invoice uses.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
     /// Days from finalise to the due date. `null` when the invoice has a custom
     /// due date.
     /// </summary>
@@ -6658,6 +6686,7 @@ public sealed record class Invoice : JsonModel
             Metadata = invoice.Metadata,
             RefundIds = invoice.RefundIds,
             RetryCount = invoice.RetryCount,
+            ReviewRequired = invoice.ReviewRequired,
             RowVersion = invoice.RowVersion,
             Status = invoice.Status,
             SubscriptionIds = invoice.SubscriptionIds,
@@ -6673,6 +6702,7 @@ public sealed record class Invoice : JsonModel
             Memo = invoice.Memo,
             NextReminderAt = invoice.NextReminderAt,
             NextRetryAt = invoice.NextRetryAt,
+            PaymentMethodID = invoice.PaymentMethodID,
             PaymentTermsDays = invoice.PaymentTermsDays,
             Payments = invoice.Payments,
             PdfUrl = invoice.PdfUrl,
@@ -6707,6 +6737,7 @@ public sealed record class Invoice : JsonModel
         _ = this.Metadata;
         _ = this.RefundIds;
         _ = this.RetryCount;
+        _ = this.ReviewRequired;
         _ = this.RowVersion;
         this.Status.Validate();
         _ = this.SubscriptionIds;
@@ -6728,6 +6759,7 @@ public sealed record class Invoice : JsonModel
         _ = this.Memo;
         _ = this.NextReminderAt;
         _ = this.NextRetryAt;
+        _ = this.PaymentMethodID;
         _ = this.PaymentTermsDays;
         foreach (var item in this.Payments ?? [])
         {

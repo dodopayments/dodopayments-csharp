@@ -49,6 +49,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
                 RetryCount = 0,
+                ReviewRequired = true,
                 RowVersion = 0,
                 Status = InvoiceStatus.Open,
                 SubscriptionIds = ["string"],
@@ -83,6 +84,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Memo = "memo",
                 NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
                 PaymentTermsDays = 0,
                 Payments =
                 [
@@ -142,6 +144,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -176,6 +179,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -246,6 +250,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
                 RetryCount = 0,
+                ReviewRequired = true,
                 RowVersion = 0,
                 Status = InvoiceStatus.Open,
                 SubscriptionIds = ["string"],
@@ -280,6 +285,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Memo = "memo",
                 NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
                 PaymentTermsDays = 0,
                 Payments =
                 [
@@ -353,6 +359,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
                 RetryCount = 0,
+                ReviewRequired = true,
                 RowVersion = 0,
                 Status = InvoiceStatus.Open,
                 SubscriptionIds = ["string"],
@@ -387,6 +394,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Memo = "memo",
                 NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
                 PaymentTermsDays = 0,
                 Payments =
                 [
@@ -453,6 +461,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -487,6 +496,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -557,6 +567,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
                 RetryCount = 0,
+                ReviewRequired = true,
                 RowVersion = 0,
                 Status = InvoiceStatus.Open,
                 SubscriptionIds = ["string"],
@@ -591,6 +602,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Memo = "memo",
                 NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
                 PaymentTermsDays = 0,
                 Payments =
                 [
@@ -658,6 +670,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 RefundIds = ["string"],
                 RetryCount = 0,
+                ReviewRequired = true,
                 RowVersion = 0,
                 Status = InvoiceStatus.Open,
                 SubscriptionIds = ["string"],
@@ -692,6 +705,7 @@ public class InvoiceVoidedWebhookEventTest : TestBase
                 Memo = "memo",
                 NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
                 PaymentTermsDays = 0,
                 Payments =
                 [
