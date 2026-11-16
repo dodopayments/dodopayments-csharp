@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.45.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.44.0...v6.45.0) (2026-11-16)
+
+
+### Features
+
+* **api:** trial subscriptions and app installation settings; sync spec to prod 1.124.0 ([418b144](https://github.com/dodopayments/dodopayments-csharp/commit/418b1442a896835445b29d4a736b1395ff33a1f1))
+* **api:** trial subscriptions and app installation settings; sync spec to prod 1.124.0 ([d0ddedc](https://github.com/dodopayments/dodopayments-csharp/commit/d0ddedcd9b85e69623892dc71eabbe2bc7b622c4))
+
 ## [6.44.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.43.0...v6.44.0) (2026-11-10)
 
 
