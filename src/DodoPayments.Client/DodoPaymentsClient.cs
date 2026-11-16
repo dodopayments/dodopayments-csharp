@@ -242,6 +242,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _moderation.Value; }
     }
 
+    readonly Lazy<IAppInstallationService> _appInstallation;
+    public IAppInstallationService AppInstallation
+    {
+        get { return _appInstallation.Value; }
+    }
+
     /// <inheritdoc/>
     public Task RevokeWorkloadIdentityToken(CancellationToken cancellationToken = default)
     {
@@ -283,6 +289,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _entitlements = new(() => new EntitlementService(this));
         _productCollections = new(() => new ProductCollectionService(this));
         _moderation = new(() => new ModerationService(this));
+        _appInstallation = new(() => new AppInstallationService(this));
     }
 
     public DodoPaymentsClient(ClientOptions options)
@@ -528,6 +535,12 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     public IModerationServiceWithRawResponse Moderation
     {
         get { return _moderation.Value; }
+    }
+
+    readonly Lazy<IAppInstallationServiceWithRawResponse> _appInstallation;
+    public IAppInstallationServiceWithRawResponse AppInstallation
+    {
+        get { return _appInstallation.Value; }
     }
 
     /// <inheritdoc/>
@@ -831,6 +844,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
         _entitlements = new(() => new EntitlementServiceWithRawResponse(this));
         _productCollections = new(() => new ProductCollectionServiceWithRawResponse(this));
         _moderation = new(() => new ModerationServiceWithRawResponse(this));
+        _appInstallation = new(() => new AppInstallationServiceWithRawResponse(this));
     }
 
     public DodoPaymentsClientWithRawResponse(ClientOptions options)
