@@ -235,6 +235,19 @@ public record class InvoicePreviewParams : ParamsBase
     }
 
     /// <summary>
+    /// A saved card of the customer. The new subscriptions of the invoice charge it.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawBodyData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
     /// Do not send it with `due_at`.
     /// </summary>
     public InvoicePreviewParamsPaymentTerms? PaymentTerms
