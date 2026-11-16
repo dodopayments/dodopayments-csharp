@@ -1616,6 +1616,7 @@ public class DataTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -1650,6 +1651,7 @@ public class DataTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -2278,6 +2280,7 @@ public class DataTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -2312,6 +2315,7 @@ public class DataTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -10790,6 +10794,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -10824,6 +10829,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -10884,6 +10890,7 @@ public class InvoiceTest : TestBase
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
         int expectedRetryCount = 0;
+        bool expectedReviewRequired = true;
         long expectedRowVersion = 0;
         ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
         List<string> expectedSubscriptionIds = ["string"];
@@ -10920,6 +10927,7 @@ public class InvoiceTest : TestBase
         string expectedMemo = "memo";
         DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentMethodID = "payment_method_id";
         int expectedPaymentTermsDays = 0;
         List<Invoices::Payment> expectedPayments =
         [
@@ -10976,6 +10984,7 @@ public class InvoiceTest : TestBase
             Assert.Equal(expectedRefundIds[i], model.RefundIds[i]);
         }
         Assert.Equal(expectedRetryCount, model.RetryCount);
+        Assert.Equal(expectedReviewRequired, model.ReviewRequired);
         Assert.Equal(expectedRowVersion, model.RowVersion);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionIds.Count, model.SubscriptionIds.Count);
@@ -11004,6 +11013,7 @@ public class InvoiceTest : TestBase
         Assert.Equal(expectedMemo, model.Memo);
         Assert.Equal(expectedNextReminderAt, model.NextReminderAt);
         Assert.Equal(expectedNextRetryAt, model.NextRetryAt);
+        Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedPaymentTermsDays, model.PaymentTermsDays);
         Assert.NotNull(model.Payments);
         Assert.Equal(expectedPayments.Count, model.Payments.Count);
@@ -11054,6 +11064,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11088,6 +11099,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11153,6 +11165,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11187,6 +11200,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11254,6 +11268,7 @@ public class InvoiceTest : TestBase
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         List<string> expectedRefundIds = ["string"];
         int expectedRetryCount = 0;
+        bool expectedReviewRequired = true;
         long expectedRowVersion = 0;
         ApiEnum<string, Invoices::InvoiceStatus> expectedStatus = Invoices::InvoiceStatus.Open;
         List<string> expectedSubscriptionIds = ["string"];
@@ -11290,6 +11305,7 @@ public class InvoiceTest : TestBase
         string expectedMemo = "memo";
         DateTimeOffset expectedNextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedNextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedPaymentMethodID = "payment_method_id";
         int expectedPaymentTermsDays = 0;
         List<Invoices::Payment> expectedPayments =
         [
@@ -11346,6 +11362,7 @@ public class InvoiceTest : TestBase
             Assert.Equal(expectedRefundIds[i], deserialized.RefundIds[i]);
         }
         Assert.Equal(expectedRetryCount, deserialized.RetryCount);
+        Assert.Equal(expectedReviewRequired, deserialized.ReviewRequired);
         Assert.Equal(expectedRowVersion, deserialized.RowVersion);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionIds.Count, deserialized.SubscriptionIds.Count);
@@ -11374,6 +11391,7 @@ public class InvoiceTest : TestBase
         Assert.Equal(expectedMemo, deserialized.Memo);
         Assert.Equal(expectedNextReminderAt, deserialized.NextReminderAt);
         Assert.Equal(expectedNextRetryAt, deserialized.NextRetryAt);
+        Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedPaymentTermsDays, deserialized.PaymentTermsDays);
         Assert.NotNull(deserialized.Payments);
         Assert.Equal(expectedPayments.Count, deserialized.Payments.Count);
@@ -11424,6 +11442,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11458,6 +11477,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11520,6 +11540,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11552,6 +11573,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11617,6 +11639,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11649,6 +11672,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11711,6 +11735,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11743,6 +11768,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11812,6 +11838,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11844,6 +11871,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [
@@ -11910,6 +11938,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -11934,6 +11963,8 @@ public class InvoiceTest : TestBase
         Assert.False(model.RawData.ContainsKey("next_reminder_at"));
         Assert.Null(model.NextRetryAt);
         Assert.False(model.RawData.ContainsKey("next_retry_at"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.PaymentTermsDays);
         Assert.False(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.Payments);
@@ -11984,6 +12015,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -12033,6 +12065,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -12049,6 +12082,7 @@ public class InvoiceTest : TestBase
             Memo = null,
             NextReminderAt = null,
             NextRetryAt = null,
+            PaymentMethodID = null,
             PaymentTermsDays = null,
             Payments = null,
             PdfUrl = null,
@@ -12071,6 +12105,8 @@ public class InvoiceTest : TestBase
         Assert.True(model.RawData.ContainsKey("next_reminder_at"));
         Assert.Null(model.NextRetryAt);
         Assert.True(model.RawData.ContainsKey("next_retry_at"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.PaymentTermsDays);
         Assert.True(model.RawData.ContainsKey("payment_terms_days"));
         Assert.Null(model.Payments);
@@ -12121,6 +12157,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -12137,6 +12174,7 @@ public class InvoiceTest : TestBase
             Memo = null,
             NextReminderAt = null,
             NextRetryAt = null,
+            PaymentMethodID = null,
             PaymentTermsDays = null,
             Payments = null,
             PdfUrl = null,
@@ -12184,6 +12222,7 @@ public class InvoiceTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             RefundIds = ["string"],
             RetryCount = 0,
+            ReviewRequired = true,
             RowVersion = 0,
             Status = Invoices::InvoiceStatus.Open,
             SubscriptionIds = ["string"],
@@ -12218,6 +12257,7 @@ public class InvoiceTest : TestBase
             Memo = "memo",
             NextReminderAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             NextRetryAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
             PaymentTermsDays = 0,
             Payments =
             [

@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -29,12 +29,12 @@ public record class SubscriptionUpdateParams : ParamsBase
 
     public string? SubscriptionID { get; init; }
 
-    public BillingAddress? Billing
+    public Payments::BillingAddress? Billing
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<BillingAddress>("billing");
+            return this._rawBodyData.GetNullableClass<Payments::BillingAddress>("billing");
         }
         init { this._rawBodyData.Set("billing", value); }
     }
