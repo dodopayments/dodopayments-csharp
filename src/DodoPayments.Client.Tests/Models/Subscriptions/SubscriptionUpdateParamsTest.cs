@@ -4,8 +4,8 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -59,7 +59,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         };
 
         string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
