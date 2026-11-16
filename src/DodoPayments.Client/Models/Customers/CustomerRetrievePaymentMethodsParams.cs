@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -16,6 +17,47 @@ namespace DodoPayments.Client.Models.Customers;
 public record class CustomerRetrievePaymentMethodsParams : ParamsBase
 {
     public string? CustomerID { get; init; }
+
+    /// <summary>
+    /// ISO country code alpha2 variant
+    /// </summary>
+    public ApiEnum<string, CountryCode>? BillingCountry
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, CountryCode>>(
+                "billing_country"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("billing_country", value);
+        }
+    }
+
+    public ApiEnum<string, Currency>? Currency
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("currency", value);
+        }
+    }
 
     public CustomerRetrievePaymentMethodsParams() { }
 
