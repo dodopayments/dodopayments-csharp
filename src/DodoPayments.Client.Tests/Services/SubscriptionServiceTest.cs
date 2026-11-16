@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
+using DodoPayments.Client.Models.Invoices;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Services;
 
@@ -21,7 +22,7 @@ public class SubscriptionServiceTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
-                Customer = new AttachExistingCustomer("customer_id"),
+                Customer = new Payments::AttachExistingCustomer("customer_id"),
                 ProductID = "product_id",
                 Quantity = 0,
             },
@@ -150,6 +151,22 @@ public class SubscriptionServiceTest : TestBase
     }
 
     [Fact]
+    public async Task StartTrial_Works()
+    {
+        var response = await this.client.Subscriptions.StartTrial(
+            new()
+            {
+                CollectionMethod = InvoiceCollectionMethod.AutoCharge,
+                Currency = Currency.Aed,
+                CustomerID = "customer_id",
+                ProductID = "product_id",
+            },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact]
     public async Task UpdatePaymentMethod_Works()
     {
         var response = await this.client.Subscriptions.UpdatePaymentMethod(
@@ -158,7 +175,7 @@ public class SubscriptionServiceTest : TestBase
             {
                 PaymentMethod = new New()
                 {
-                    AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+                    AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
                     ReturnUrl = "return_url",
                 },
             },

@@ -47,6 +47,7 @@ public class InvoiceUpdateParamsTest : TestBase
             ],
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new InvoiceUpdateParamsPaymentTermsDueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
@@ -87,6 +88,7 @@ public class InvoiceUpdateParamsTest : TestBase
         ];
         string expectedMemo = "memo";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
+        string expectedPaymentMethodID = "payment_method_id";
         InvoiceUpdateParamsPaymentTerms expectedPaymentTerms =
             new InvoiceUpdateParamsPaymentTermsDueOnReceipt();
         bool expectedReviewRequired = true;
@@ -128,6 +130,7 @@ public class InvoiceUpdateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedPaymentTerms, parameters.PaymentTerms);
         Assert.Equal(expectedReviewRequired, parameters.ReviewRequired);
         Assert.Equal(expectedTaxID, parameters.TaxID);
@@ -162,6 +165,8 @@ public class InvoiceUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("memo"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.PaymentTerms);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_terms"));
         Assert.Null(parameters.ReviewRequired);
@@ -190,6 +195,7 @@ public class InvoiceUpdateParamsTest : TestBase
             Items = null,
             Memo = null,
             Metadata = null,
+            PaymentMethodID = null,
             PaymentTerms = null,
             ReviewRequired = null,
             TaxID = null,
@@ -219,6 +225,8 @@ public class InvoiceUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("memo"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.PaymentTerms);
         Assert.True(parameters.RawBodyData.ContainsKey("payment_terms"));
         Assert.Null(parameters.ReviewRequired);
@@ -288,6 +296,7 @@ public class InvoiceUpdateParamsTest : TestBase
             ],
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new InvoiceUpdateParamsPaymentTermsDueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",

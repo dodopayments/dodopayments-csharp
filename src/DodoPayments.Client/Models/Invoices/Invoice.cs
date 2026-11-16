@@ -250,6 +250,21 @@ public sealed record class Invoice : JsonModel
     }
 
     /// <summary>
+    /// `true` when a subscription of the invoice has renewal review on now. The value
+    /// follows the subscription, so it can change after finalise. `review_deadline`
+    /// shows that this draft waits.
+    /// </summary>
+    public required bool ReviewRequired
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("review_required");
+        }
+        init { this._rawData.Set("review_required", value); }
+    }
+
+    /// <summary>
     /// Goes up by one on each change. Use it to ignore an older webhook delivery.
     /// </summary>
     public required long RowVersion
@@ -447,6 +462,19 @@ public sealed record class Invoice : JsonModel
     }
 
     /// <summary>
+    /// The saved card that an automatic charge of the invoice uses.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
     /// Days from finalise to the due date. `null` when the invoice has a custom
     /// due date.
     /// </summary>
@@ -551,6 +579,7 @@ public sealed record class Invoice : JsonModel
         _ = this.Metadata;
         _ = this.RefundIds;
         _ = this.RetryCount;
+        _ = this.ReviewRequired;
         _ = this.RowVersion;
         this.Status.Validate();
         _ = this.SubscriptionIds;
@@ -572,6 +601,7 @@ public sealed record class Invoice : JsonModel
         _ = this.Memo;
         _ = this.NextReminderAt;
         _ = this.NextRetryAt;
+        _ = this.PaymentMethodID;
         _ = this.PaymentTermsDays;
         foreach (var item in this.Payments ?? [])
         {
@@ -957,6 +987,7 @@ public enum EditableField
     BillingAddress,
     TaxID,
     ReviewRequired,
+    PaymentMethod,
     DueAt,
     CollectionMethod,
     Memo,
@@ -983,6 +1014,7 @@ sealed class EditableFieldConverter : JsonConverter<EditableField>
             "billing_address" => EditableField.BillingAddress,
             "tax_id" => EditableField.TaxID,
             "review_required" => EditableField.ReviewRequired,
+            "payment_method" => EditableField.PaymentMethod,
             "due_at" => EditableField.DueAt,
             "collection_method" => EditableField.CollectionMethod,
             "memo" => EditableField.Memo,
@@ -1011,6 +1043,7 @@ sealed class EditableFieldConverter : JsonConverter<EditableField>
                 EditableField.BillingAddress => "billing_address",
                 EditableField.TaxID => "tax_id",
                 EditableField.ReviewRequired => "review_required",
+                EditableField.PaymentMethod => "payment_method",
                 EditableField.DueAt => "due_at",
                 EditableField.CollectionMethod => "collection_method",
                 EditableField.Memo => "memo",

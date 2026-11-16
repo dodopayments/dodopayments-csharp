@@ -212,6 +212,19 @@ public record class InvoiceUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// A saved card of the customer. `null` removes the card from the draft.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawBodyData.Set("payment_method_id", value); }
+    }
+
     public InvoiceUpdateParamsPaymentTerms? PaymentTerms
     {
         get

@@ -213,6 +213,15 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Creates an invoice-led subscription and a paid $0 invoice for the trial. The
+    /// first invoice after the trial bills at `trial_ends_at`.
+    /// </summary>
+    Task<SubscriptionStartTrialResponse> StartTrial(
+        SubscriptionStartTrialParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// For an invoice-led subscription, billing charges the open invoices after the
     /// change, so the response has no payment.
     /// </summary>
@@ -402,6 +411,15 @@ public interface ISubscriptionServiceWithRawResponse
     Task<HttpResponse<SubscriptionRetrieveUsageHistoryPage>> RetrieveUsageHistory(
         string subscriptionID,
         SubscriptionRetrieveUsageHistoryParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /billing/subscriptions</c>, but is otherwise the
+    /// same as <see cref="ISubscriptionService.StartTrial(SubscriptionStartTrialParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionStartTrialResponse>> StartTrial(
+        SubscriptionStartTrialParams parameters,
         CancellationToken cancellationToken = default
     );
 

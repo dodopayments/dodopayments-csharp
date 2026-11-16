@@ -45,6 +45,7 @@ public class InvoiceCreateParamsTest : TestBase
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new DueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
@@ -80,6 +81,7 @@ public class InvoiceCreateParamsTest : TestBase
         Dunning expectedDunning = new() { RemindersEnabled = true, OffsetsDays = [0] };
         string expectedMemo = "memo";
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
+        string expectedPaymentMethodID = "payment_method_id";
         PaymentTerms expectedPaymentTerms = new DueOnReceipt();
         bool expectedReviewRequired = true;
         string expectedTaxID = "tax_id";
@@ -118,6 +120,7 @@ public class InvoiceCreateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedPaymentTerms, parameters.PaymentTerms);
         Assert.Equal(expectedReviewRequired, parameters.ReviewRequired);
         Assert.Equal(expectedTaxID, parameters.TaxID);
@@ -156,6 +159,7 @@ public class InvoiceCreateParamsTest : TestBase
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new DueOnReceipt(),
             TaxID = "tax_id",
         };
@@ -200,6 +204,7 @@ public class InvoiceCreateParamsTest : TestBase
             DueAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new DueOnReceipt(),
             TaxID = "tax_id",
 
@@ -254,6 +259,8 @@ public class InvoiceCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("dunning"));
         Assert.Null(parameters.Memo);
         Assert.False(parameters.RawBodyData.ContainsKey("memo"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.PaymentTerms);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_terms"));
         Assert.Null(parameters.TaxID);
@@ -289,6 +296,7 @@ public class InvoiceCreateParamsTest : TestBase
             DueAt = null,
             Dunning = null,
             Memo = null,
+            PaymentMethodID = null,
             PaymentTerms = null,
             TaxID = null,
         };
@@ -307,6 +315,8 @@ public class InvoiceCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("dunning"));
         Assert.Null(parameters.Memo);
         Assert.True(parameters.RawBodyData.ContainsKey("memo"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.PaymentTerms);
         Assert.True(parameters.RawBodyData.ContainsKey("payment_terms"));
         Assert.Null(parameters.TaxID);
@@ -400,6 +410,7 @@ public class InvoiceCreateParamsTest : TestBase
             Dunning = new() { RemindersEnabled = true, OffsetsDays = [0] },
             Memo = "memo",
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             PaymentTerms = new DueOnReceipt(),
             ReviewRequired = true,
             TaxID = "tax_id",
